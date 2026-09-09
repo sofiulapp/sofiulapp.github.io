@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -24,23 +25,17 @@
             min-height: 100vh; padding-bottom: 80px;
         }
         header {
-            width: 100%; padding: 12px 0; text-align: center;
-            border-bottom: 2px solid rgba(0, 225, 255, 0.4);
+            width: 100%; padding: 10px 0; text-align: center;
             background: #070a12; position: sticky; top: 0; z-index: 10;
         }
-        .logo-box {
-            width: 90%; max-width: 360px; margin: 0 auto;
-            background: linear-gradient(145deg, #0d1b33, #04070d);
-            border: 2px solid var(--accent-cyan);
-            border-radius: 14px; padding: 20px 10px;
-            box-shadow: 0 0 25px rgba(0, 181, 255, 0.4);
-            text-align: center;
+        .image-container {
+            width: 100%; max-width: 380px; margin: 0 auto;
+            border-radius: 12px; overflow: hidden;
+            box-shadow: 0 0 25px rgba(0, 181, 255, 0.3);
+            background: #05080e;
         }
-        .logo-box svg { width: 90px; height: 90px; filter: drop-shadow(0 0 10px var(--accent-cyan)); }
-        .logo-text {
-            font-size: 1.8rem; font-weight: 900; letter-spacing: 3px;
-            color: #fff; margin-top: 8px; text-transform: uppercase;
-            text-shadow: 0 0 10px var(--accent-cyan);
+        .image-container img {
+            width: 100%; height: auto; display: block;
         }
         .container { width: 92%; max-width: 450px; margin: 15px auto; display: flex; flex-direction: column; gap: 15px; }
         .card {
@@ -65,14 +60,31 @@
 </head>
 <body>
     <header>
-        <div class="logo-box">
-            <!-- Escudo Neón Azul Vectorial Oficial -->
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 2Z" fill="#0b1424" stroke="#00b5ff" stroke-width="2"/>
-                <path d="M12 6L17 9V13C17 16.31 14.82 19.38 12 20.25C9.18 19.38 7 16.31 7 13V9L12 6Z" fill="#0088ff" fill-opacity="0.3" stroke="#00b5ff" stroke-width="1.5"/>
-                <path d="M9.5 12C9.5 10.62 10.58 9.5 11.95 9.5C13.32 9.5 14.4 10.62 14.4 12C14.4 13.38 13.32 14.5 11.95 14.5C10.58 14.5 9.5 13.38 9.5 12ZM14.4 12C14.4 13.38 15.48 14.5 16.85 14.5C18.22 14.5 19.3 13.38 19.3 12C19.3 10.62 18.22 9.5 16.85 9.5C15.48 9.5 14.4 10.62 14.4 12Z" stroke="#00ffff" stroke-width="1.5"/>
+        <div class="image-container">
+            <svg viewBox="0 0 800 1000" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#05080e"/><stop offset="100%" stop-color="#020305"/></linearGradient>
+                    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8a99ad"/><stop offset="50%" stop-color="#d1dbe5"/><stop offset="100%" stop-color="#4d5c6b"/></linearGradient>
+                    <linearGradient id="cyan-glow" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#00ffff"/><stop offset="100%" stop-color="#0066ff"/></linearGradient>
+                </defs>
+                <rect width="800" height="1000" fill="url(#bg)"/>
+                <!-- Circuit lines background details -->
+                <path d="M150 200 H300 V250" stroke="#102540" stroke-width="3" fill="none"/>
+                <circle cx="150" cy="200" r="4" fill="#00b5ff"/>
+                <path d="M650 350 H550 V400" stroke="#102540" stroke-width="3" fill="none"/>
+                <circle cx="650" cy="350" r="4" fill="#00b5ff"/>
+                <!-- Central Shield / V Wings -->
+                <polygon points="400,720 170,270 300,270 400,520 500,270 630,270" fill="url(#metal)"/>
+                <polygon points="400,680 230,300 320,300 400,480 480,300 570,300" fill="#040914"/>
+                <polygon points="400,640 280,330 350,330 400,450 450,330 520,330" fill="url(#cyan-glow)" opacity="0.8"/>
+                <!-- Top Infinity Circle -->
+                <circle cx="400" cy="240" r="95" fill="#050b14" stroke="url(#metal)" stroke-width="12"/>
+                <circle cx="400" cy="240" r="75" fill="none" stroke="#00b5ff" stroke-width="4" opacity="0.6"/>
+                <!-- Infinity Symbol inside circle -->
+                <path d="M 370 240 C 340 210, 340 270, 370 270 C 400 270, 400 210, 430 210 C 460 210, 460 270, 430 270 C 400 270, 400 210, 370 240 Z" fill="none" stroke="#ffffff" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="drop-shadow(0 0 10px #00ffff)"/>
+                <!-- SOFIUL Text Branding -->
+                <text x="400" y="810" font-family="system-ui, sans-serif" font-weight="900" font-size="95" fill="#ffffff" letter-spacing="12" text-anchor="middle" filter="drop-shadow(0 0 8px rgba(0,181,255,0.8))">SOFIUL</text>
             </svg>
-            <div class="logo-text">SOFIUL</div>
         </div>
     </header>
 
