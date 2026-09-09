@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOFIUL - Mobile Live System</title>
     <meta name="theme-color" content="#070a12">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SOFIUL">
-    
     <style>
         :root {
             --bg-color: #070a12;
@@ -20,202 +16,92 @@
             --text-main: #ffffff;
             --text-muted: #7b6cbe;
         }
-
         body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding-bottom: 80px;
+            margin: 0; padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color); color: var(--text-main);
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; padding-bottom: 80px;
         }
-
         header {
-            width: 100%;
-            padding: 8px 0;
-            text-align: center;
+            width: 100%; padding: 12px 0; text-align: center;
             border-bottom: 2px solid rgba(0, 225, 255, 0.4);
-            background: #070a12;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            background: #070a12; position: sticky; top: 0; z-index: 10;
         }
-
-        .official-image-container {
-            width: 100%;
-            max-width: 380px;
-            margin: 0 auto;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 2px solid rgba(0, 225, 255, 0.7);
-            box-shadow: 0 0 30px rgba(0, 225, 255, 0.4);
-            background: #0707bd;
+        .logo-box {
+            width: 90%; max-width: 360px; margin: 0 auto;
+            background: linear-gradient(145deg, #0d1b33, #04070d);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 14px; padding: 20px 10px;
+            box-shadow: 0 0 25px rgba(0, 181, 255, 0.4);
+            text-align: center;
         }
-
-        .official-image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .logo-box svg { width: 90px; height: 90px; filter: drop-shadow(0 0 10px var(--accent-cyan)); }
+        .logo-text {
+            font-size: 1.8rem; font-weight: 900; letter-spacing: 3px;
+            color: #fff; margin-top: 8px; text-transform: uppercase;
+            text-shadow: 0 0 10px var(--accent-cyan);
         }
-
-        .container {
-            width: 92%;
-            max-width: 450px;
-            margin: 15px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
+        .container { width: 92%; max-width: 450px; margin: 15px auto; display: flex; flex-direction: column; gap: 15px; }
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid rgba(0, 181, 255, 0.21);
-            border-radius: 12px;
-            padding: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            background-color: var(--card-bg); border: 1px solid rgba(0, 181, 255, 0.2);
+            border-radius: 12px; padding: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-
-        .card-red-accent {
-            border-color: rgba(255, 42, 95, 0.4);
-            box-shadow: 0 0 15px rgba(255, 42, 95, 0.15);
-        }
-
-        .card-title {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-badge {
-            font-size: 0.75rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .badge-live {
-            background: rgba(255, 42, 95, 0.2);
-            color: var(--accent-red);
-            border: 1px solid rgba(255, 42, 95, 0.4);
-        }
-
-        .badge-active {
-            background: rgba(0, 225, 255, 0.15);
-            color: var(--accent-cyan);
-            border: 1px solid rgba(0, 225, 255, 0.3);
-        }
-
-        .card-content {
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
+        .card-red-accent { border-color: rgba(255, 42, 95, 0.4); box-shadow: 0 0 15px rgba(255, 42, 95, 0.15); }
+        .card-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .status-badge { font-size: 0.75rem; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .badge-live { background: rgba(255, 42, 95, 0.2); color: var(--accent-red); border: 1px solid rgba(255, 42, 95, 0.4); }
+        .badge-active { background: rgba(0, 225, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 225, 255, 0.3); }
+        .card-content { font-size: 1rem; font-weight: 500; }
         .action-button {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            padding: 14px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 181, 255, 0.4);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 10px;
+            color: #000; border: none; border-radius: 10px; padding: 14px;
+            font-size: 1rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 10px;
         }
-
-        .tags-container {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .tag {
-            background: rgba(123, 108, 190, 0.2);
-            border: 1px solid rgba(123, 108, 190, 0.4);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #d1c9ff;
-        }
+        .tags-container { display: flex; gap: 8px; margin-top: 8px; }
+        .tag { background: rgba(123, 108, 190, 0.2); border: 1px solid rgba(123, 108, 190, 0.4); padding: 5px 10px; border-radius: 6px; font-size: 0.85rem; color: #d1c9ff; }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="official-image-container">
-            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4QCYRXhpZgAATU0AKgAAAAgABAEAAAQAAAABAAAEOAEBAAQAAAABAAAFLAESAAMAAAABAAEAAIdpAAQAAAABAAAAPgAAAAAAAAAAAAD/4gKISUNDX1BST0ZJTEUAAQEAAAJ4AAAAAAQAAABtbnRyUkdCIFhZWiAH5gAIAAgACAAIAAhhY3NwAAAAAAAAAABYTSAgAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAApkZXNjAAAA/AAAAGVjcHJ0AAABZAAAADZ3dHB0AAABnAAAABRyWFlaAAABsAAAABRnWFlaAAABxAAAABRiWFlaAAAB2AAAABRyVFJDAAAB7AAAACBjaGFkAAACDAAAACxiVFJDAAACOAAAACBnVFJDAAACWAAAACBkZXNjAAAAAAAAACJzUkdCIEVPVEYgd2l0aCBEQ0ktUDMgQ29sb3IgR2FtdXQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHRleHQAAAAAQ29weXJpZ2h0IFhpYW9taSBDb21tdW5pY2F0aW9ucyBDby4sIEx0ZC4gMjAyMgAAWFlaIAAAAAAAAPbVAAEAAAAA0yxYWVogAAAAAAAAg98AAD2/////u1hZWiAAAAAAAABKvwAAsTcAAAq5WFlaIAAAAAAAACg4AAARCwAAyLlwYXJhAAAAAAADAAAAAmZmAADysAAADVAAABO2AAAJ/HNmMzIAAAAAAAEMQgAABd7///MmAAAHkwAA/ZD///ui///9owAAA9wAAMBucGFyYQAAAAAAAwAAAAJmZgAA8rAAAA1QAAATtgAACfxwYXJhAAAAAAADAAAAAmZmAADysAAADVAAABO2AAAJ/P/gABBKRklGAAEBAAABAAEAAP/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/AABEIBSwEOAMBIgACEQEDEQH/xAAfAAABBAIDAQEAAAAAAAAAAAADAAECBAUGBwgJCgv/xABhEAACAQIEBAQDBQYEAwUBASEBAhEDIQAEEjEFBkFRBxMiYQgycRQjgZGhCUKxwdHwFTNS4RYkYgo0Q3Ky8Rclc1OCkrMYGTV0osInRFRVYxomKDZFRmR1hKO00jeDk5X/xAAdAQACAwEBAQEBAAAAAAAAAAABAgADBAUGBwgJ/8QATREAAQMCBAQEAwYDBgYBAgILAQIRIQAxAxJBUQRhcYEFIpGhEzKxBiNCwdHwUuHxBxQzYnKCFUOSorLC0iRTYxZzgyWTo7PiFzTD8v/aAAwDAQACEQMRAD8A/P8A8ZPhf+fU/wDfR/8AWwmJgkjw5l9aF/yTz/v+uDkIJEh5A53l/X8fbi5Jt3gqAALkOAY7N589z197fbi23I/p3xP/9k=" alt="SOFIUL Logo">
+        <div class="logo-box">
+            <!-- Escudo Neón Azul Vectorial Oficial -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 2Z" fill="#0b1424" stroke="#00b5ff" stroke-width="2"/>
+                <path d="M12 6L17 9V13C17 16.31 14.82 19.38 12 20.25C9.18 19.38 7 16.31 7 13V9L12 6Z" fill="#0088ff" fill-opacity="0.3" stroke="#00b5ff" stroke-width="1.5"/>
+                <path d="M9.5 12C9.5 10.62 10.58 9.5 11.95 9.5C13.32 9.5 14.4 10.62 14.4 12C14.4 13.38 13.32 14.5 11.95 14.5C10.58 14.5 9.5 13.38 9.5 12ZM14.4 12C14.4 13.38 15.48 14.5 16.85 14.5C18.22 14.5 19.3 13.38 19.3 12C19.3 10.62 18.22 9.5 16.85 9.5C15.48 9.5 14.4 10.62 14.4 12Z" stroke="#00ffff" stroke-width="1.5"/>
+            </svg>
+            <div class="logo-text">SOFIUL</div>
         </div>
     </header>
 
     <div class="container">
-        
         <div class="card card-red-accent">
-            <div class="card-title">
-                Estado del Vivo
-                <span class="status-badge badge-live">EN DIRECTO</span>
-            </div>
-            <div class="card-content">
-                Sincronización neural con TikTok
-            </div>
+            <div class="card-title">Estado del Vivo <span class="status-badge badge-live">EN DIRECTO</span></div>
+            <div class="card-content">Sincronización neural con TikTok</div>
         </div>
-
         <div class="card">
-            <div class="card-title">
-                Configuración de Cuenta
-            </div>
-            <div class="card-content" style="color: var(--accent-cyan); font-family: monospace; font-size: 1.1rem;">
-                @family_fenix
-            </div>
+            <div class="card-title">Configuración de Cuenta</div>
+            <div class="card-content" style="color: var(--accent-cyan); font-family: monospace; font-size: 1.1rem;">@family_fenix</div>
         </div>
-
         <div class="card">
-            <div class="card-title">
-                Escudo Anti-Ban & Cifrado
-                <span class="status-badge badge-active">ACTIVO</span>
-            </div>
-            <div class="card-content" style="font-size: 0.9rem; color: #a19bc8;">
-                Bloqueo potente de proxy, protegiendo tus cofres.
-            </div>
+            <div class="card-title">Escudo Anti-Ban & Cifrado <span class="status-badge badge-active">ACTIVO</span></div>
+            <div class="card-content" style="font-size: 0.9rem; color: #a19bc8;">Bloqueo potente de proxy, protegiendo tus cofres.</div>
         </div>
-
         <div class="card">
-            <div class="card-title">
-                Elementos de V.S.A
-                <span style="color: var(--accent-purple);">V 3.4</span>
-            </div>
-            <div class="card-content" style="font-size: 0.9rem; color: #a19bc8;">
-                Vía sólida y humana personalizada sobre celular y metas.
-            </div>
+            <div class="card-title">Elementos de V.S.A <span style="color: var(--accent-purple);">V 3.4</span></div>
+            <div class="card-content" style="font-size: 0.9rem; color: #a19bc8;">Vía sólida y humana personalizada sobre celular y metas.</div>
         </div>
-
         <div class="card">
-            <div class="card-title">
-                Cultura de Salida
-            </div>
+            <div class="card-title">Cultura de Salida</div>
             <div class="tags-container">
                 <span class="tag">😊 Rosa</span>
                 <span class="tag">🔥 León</span>
                 <span class="tag">⭐ Level Up</span>
             </div>
         </div>
-
-        <button class="action-button">
-            LANZAR SOFIUL ( MODO NATIVO )
-        </button>
-
+        <button class="action-button">LANZAR SOFIUL ( MODO NATIVO )</button>
     </div>
-
 </body>
 </html>
