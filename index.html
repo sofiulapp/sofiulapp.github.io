@@ -1,108 +1,397 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOFIUL - Mobile Live System</title>
-    <meta name="theme-color" content="#070a12">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <style>
-        :root {
-            --bg-color: #070a12;
-            --card-bg: #0b1424;
-            --accent-cyan: #00b5ff;
-            --accent-blue: #0088ff;
-            --accent-purple: #9a2ba2;
-            --accent-red: #ff2a5f;
-            --text-main: #ffffff;
-            --text-muted: #7b6cbe;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-color); color: var(--text-main);
-            display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh; padding-bottom: 40px;
-        }
-        header {
-            width: 100%; padding: 15px 0; text-align: center;
-            background: #070a12; position: sticky; top: 0; z-index: 10;
-        }
-        .image-container {
-            width: 92%; max-width: 380px; margin: 0 auto;
-            border-radius: 14px; overflow: hidden;
-            border: 2px solid rgba(0, 181, 255, 0.5);
-            box-shadow: 0 0 25px rgba(0, 181, 255, 0.4);
-            background: #000;
-            padding: 10px;
-        }
-        .image-container img {
-            width: 100%; height: auto; display: block;
-        }
-        .container { width: 92%; max-width: 450px; margin: 15px auto; display: flex; flex-direction: column; gap: 12px; }
-        .card {
-            background-color: var(--card-bg); border: 1px solid rgba(0, 181, 255, 0.2);
-            border-radius: 12px; padding: 14px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s ease;
-        }
-        .card:hover { transform: translateY(-2px); }
-        .card-red-accent { border-color: rgba(255, 42, 95, 0.4); box-shadow: 0 0 15px rgba(255, 42, 95, 0.15); }
-        .card-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-        .status-badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-        .badge-live { background: rgba(255, 42, 95, 0.2); color: var(--accent-red); border: 1px solid rgba(255, 42, 95, 0.4); }
-        .badge-active { background: rgba(0, 225, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 225, 255, 0.3); }
-        .card-content { font-size: 0.95rem; font-weight: 500; }
-        .action-button {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000; border: none; border-radius: 10px; padding: 14px;
-            font-size: 0.95rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 5px;
-            transition: all 0.3s ease;
-        }
-        .action-button:hover {
-            box-shadow: 0 0 30px rgba(0, 181, 255, 0.6);
-            transform: scale(1.02);
-        }
-        .tags-container { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
-        .tag { background: rgba(123, 108, 190, 0.2); border: 1px solid rgba(123, 108, 190, 0.4); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; color: #d1c9ff; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="image-container">
-            <!-- Reemplaza "sofiul-logo.png" por el nombre real de tu archivo de logo -->
-            <img src="sofiul-logo.png" alt="SOFIUL - Logo Oficial">
-        </div>
-    </header>
-
-    <div class="container">
-        <div class="card card-red-accent">
-            <div class="card-title">Estado del Vivo <span class="status-badge badge-live">EN DIRECTO</span></div>
-            <div class="card-content">Sincronización neural con TikTok</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Configuración de Cuenta</div>
-            <div class="card-content" style="color: var(--accent-cyan); font-family: monospace; font-size: 1.05rem;">@family_fenix</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Escudo Anti-Ban & Cifrado <span class="status-badge badge-active">ACTIVO</span></div>
-            <div class="card-content" style="font-size: 0.85rem; color: #a19bc8;">Bloqueo potente de proxy, protegiendo tus cofres.</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Elementos de V.S.A <span style="color: var(--accent-purple);">V 3.4</span></div>
-            <div class="card-content" style="font-size: 0.85rem; color: #a19bc8;">Vía sólida y humana personalizada sobre celular y metas.</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Cultura de Salida</div>
-            <div class="tags-container">
-                <span class="tag">😊 Rosa</span>
-                <span class="tag">🔥 León</span>
-                <span class="tag">⭐ Level Up</span>
-            </div>
-        </div>
-        <button class="action-button">LANZAR SOFIUL ( MODO NATIVO )</button>
-    </div>
-</body>
-</html>
+ <html lang="es">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>SOFIUL - Mobile Live System</title>
+     <meta name="theme-color" content="#070a12">
+     <meta name="apple-mobile-web-app-capable" content="yes">
+     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+     <meta name="apple-mobile-web-app-title" content="SOFIUL">
+     
+     <style>
+         :root {
+             --bg-color: #070a12;
+             --card-bg: #0d1424;
+             --accent-cyan: #00e5ff;
+             --accent-blue: #0088ff;
+             --accent-purple: #8a2be2;
+             --accent-red: #ff2a5f;
+             --text-main: #ffffff;
+             --text-muted: #7b8cbe;
+         }
+         body {
+             margin: 0;
+             padding: 0;
+             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+             background-color: var(--bg-color);
+             color: var(--text-main);
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             min-height: 100vh;
+             padding-bottom: 80px;
+         }
+         header {
+             width: 100%;
+             padding: 15px 0;
+             text-align: center;
+             border-bottom: 2px solid rgba(0, 229, 255, 0.4);
+             background: #070a12;
+             position: sticky;
+             top: 0;
+             z-index: 10;
+         }
+         .official-image-container {
+             width: 100%;
+             max-width: 320px;
+             margin: 0 auto;
+             border-radius: 12px;
+             overflow: hidden;
+             border: 2px solid rgba(0, 229, 255, 0.7);
+             box-shadow: 0 0 30px rgba(0, 229, 255, 0.6);
+             background: #05070d;
+             padding: 0;
+         }
+         .official-image-container img {
+             width: 100%;
+             height: auto;
+             display: block;
+         }
+         .container {
+             width: 92%;
+             max-width: 450px;
+             margin: 15px auto;
+             display: flex;
+             flex-direction: column;
+             gap: 15px;
+         }
+         .card {
+             background-color: var(--card-bg);
+             border: 1px solid rgba(0, 229, 255, 0.2);
+             border-radius: 12px;
+             padding: 15px;
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+         }
+         .card-red-accent {
+             border-left: 4px solid var(--accent-red);
+             border-color: rgba(255, 42, 95, 0.4);
+         }
+         .card-purple-accent {
+             border-left: 4px solid var(--accent-purple);
+             border-color: rgba(138, 43, 226, 0.4);
+         }
+         .status-box {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+         .badge {
+             padding: 5px 10px;
+             border-radius: 20px;
+             font-size: 11px;
+             font-weight: bold;
+             background: rgba(255, 42, 95, 0.1);
+             color: var(--accent-red);
+             border: 1px solid rgba(255, 42, 95, 0.3);
+         }
+         .badge.active {
+             background: rgba(0, 255, 100, 0.1);
+             color: #00ff64;
+             border-color: rgba(0, 255, 100, 0.3);
+         }
+         .card h3 {
+             margin: 0 0 5px 0;
+             font-size: 15px;
+             color: var(--accent-cyan);
+         }
+         .card p {
+             margin: 0;
+             font-size: 12px;
+             color: var(--text-muted);
+         }
+         .form-control {
+             width: 100%;
+             padding: 10px;
+             background: rgba(0, 0, 0, 0.4);
+             border: 1px solid rgba(0, 229, 255, 0.3);
+             border-radius: 6px;
+             color: white;
+             font-size: 14px;
+             box-sizing: border-box;
+             margin-top: 8px;
+         }
+         .sound-grid {
+             display: grid;
+             grid-template-columns: 1fr 1fr 1fr;
+             gap: 8px;
+             margin-top: 10px;
+         }
+         .sound-btn {
+             background: rgba(0, 229, 255, 0.1);
+             border: 1px solid rgba(0, 229, 255, 0.3);
+             color: var(--text-main);
+             padding: 10px;
+             border-radius: 8px;
+             font-size: 12px;
+             font-weight: bold;
+             cursor: pointer;
+             text-align: center;
+         }
+         .main-btn {
+             width: 100%;
+             padding: 14px;
+             border: none;
+             border-radius: 10px;
+             background: linear-gradient(135deg, #00e5ff, #0088ff);
+             color: #070a12;
+             font-size: 15px;
+             font-weight: 900;
+             cursor: pointer;
+             box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+             margin-top: 5px;
+             letter-spacing: 1px;
+         }
+         .main-btn.active {
+             background: linear-gradient(135deg, #ff2a5f, #aa0033);
+             color: #fff;
+             box-shadow: 0 0 20px rgba(255, 42, 95, 0.5);
+         }
+         #floating-bubble {
+             position: fixed;
+             right: 20px;
+             bottom: 30px;
+             width: 60px;
+             height: 60px;
+             background: var(--card-bg);
+             border: 2px solid var(--accent-cyan);
+             border-radius: 30px;
+             display: none;
+             align-items: center;
+             justify-content: center;
+             font-size: 20px;
+             font-weight: 900;
+             color: var(--accent-cyan);
+             cursor: pointer;
+             box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+             z-index: 999;
+         }
+         #bubble-modal {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background: rgba(0, 0, 0, 0.8);
+             display: none;
+             justify-content: center;
+             align-items: center;
+             z-index: 1000;
+         }
+         .modal-content {
+             width: 85%;
+             max-width: 320px;
+             background: var(--card-bg);
+             border: 1px solid var(--accent-cyan);
+             border-radius: 14px;
+             padding: 20px;
+             box-sizing: border-box;
+         }
+         .modal-btn {
+             width: 100%;
+             background: rgba(0, 229, 255, 0.15);
+             border: 1px solid rgba(0, 229, 255, 0.4);
+             color: white;
+             padding: 10px;
+             border-radius: 6px;
+             font-weight: bold;
+             margin-top: 10px;
+             cursor: pointer;
+         }
+         .close-modal {
+             width: 100%;
+             background: var(--accent-red);
+             border: none;
+             color: white;
+             padding: 10px;
+             border-radius: 6px;
+             font-weight: bold;
+             margin-top: 15px;
+             cursor: pointer;
+         }
+     </style>
+ </head>
+ <body>
+     <header>
+         <div class="official-image-container">
+             <img src="logo.png" alt="SOFIUL Logo"style="display:block; margin:0 auto; width:180px;">
+         </div>
+     </header>
+     <div class="container">
+         <div class="card">
+             <div class="status-box">
+                 <div>
+                     <h3>Estado del Live</h3>
+                     <p>Sincronización móvil con TikTok</p>
+                 </div>
+                 <div id="status-badge" class="badge">DESCONECTADO</div>
+             </div>
+         </div>
+         <div class="card">
+             <h3>Configuración de Cuenta</h3>
+             <p style="margin-bottom: 5px;">Usuario de TikTok:</p>
+             <input type="text" id="tiktok-username" class="form-control" value="@family_fenix">
+         </div>
+         <div class="card card-red-accent">
+             <div class="status-box">
+                 <h3 style="color: var(--accent-red);">🛡️ Escudo Anti-Bots & Cofres</h3>
+                 <span style="font-size: 12px; color: #00ff64; font-weight: bold;">ACTIVO</span>
+             </div>
+             <p>Bloquea patrones de granjas falsas protegiendo tus cofres.</p>
+         </div>
+         <div class="card card-purple-accent">
+             <div class="status-box">
+                 <h3 style="color: var(--accent-purple);">🧬 Clonación de Voz IA</h3>
+                 <span style="font-size: 12px; color: var(--accent-purple); font-weight: bold;">VOZ ÚNICA</span>
+             </div>
+             <p>Voz cálida y humana personalizada activa para saludos y metas.</p>
+         </div>
+         <div class="card">
+             <h3>🔊 Cabina de Sonidos</h3>
+             <div class="sound-grid">
+                 <button class="sound-btn" onclick="triggerSoundWithVoice('Risas', '¡Qué buena risa en el directo!')">😂 Risas</button>
+                 <button class="sound-btn" onclick="triggerSoundWithVoice('Épico', '¡Momento totalmente épico mi gente!')">🔥 Épico</button>
+                 <button class="sound-btn" onclick="triggerSoundWithVoice('Nivel Up', '¡Subimos de nivel gracias al apoyo!')">⭐ Nivel Up</button>
+             </div>
+         </div>
+         <button id="master-btn" class="main-btn" onclick="toggleSofull()">ENCENDER SOFIUL ( MODO MÓVIL )</button>
+     </div>
+     <div id="floating-bubble" onclick="openBubbleMenu()">⚡</div>
+     <div id="bubble-modal">
+         <div class="modal-content">
+             <h3 style="color: var(--accent-cyan); text-align:center; margin-top:0;">⚡ Control Rápido</h3>
+             <p style="text-align:center; margin-bottom:15px; color: var(--text-muted);">Sistema en Directo</p>
+             
+             <button class="modal-btn" onclick="triggerSoundWithVoice('Meta 1K Taps', '¡Increíble ritmo con esos taps!')">👆 Simular Meta 1K Taps</button>
+             <button class="modal-btn" onclick="triggerSoundWithVoice('Club de Fans', '¡Bienvenido al club de fans oficial!')">⭐ Simular Club de Fans</button>
+             
+             <button class="close-modal" onclick="closeBubbleMenu()">Cerrar Panel Flotante</button>
+         </div>
+     </div>
+     <script>
+         let isLive = false;
+         let sofiulBridge = null;
+         class TikTokLiveConnector {
+             constructor(username) {
+                 this.username = username;
+                 this.isConnected = false;
+             }
+             start() {
+                 console.log(`[SOFIUL] Sintonizando el flujo de datos para: @${this.username}`);
+                 this.isConnected = true;
+                 this.listenToStreamEvents();
+             }
+             listenToStreamEvents() {
+                 if (!this.isConnected) return;
+                 window.liveEventInterval = setTimeout(() => {
+                     if (isLive) {
+                         this.handleTaps(1000, "Community");
+                     }
+                 }, 6000);
+             }
+             handleTaps(tapCount, sender) {
+                 if (tapCount >= 1000) {
+                     sofiulVoice.speak("¡Impresionante ritmo con los taps!");
+                     const bubble = document.getElementById('floating-bubble');
+                     if (bubble) bubble.style.boxShadow = "0 0 25px #00ff64";
+                 }
+             }
+             stop() {
+                 this.isConnected = false;
+                 if (window.liveEventInterval) clearTimeout(window.liveEventInterval);
+                 console.log("[SOFIUL] Desconectado del flujo.");
+             }
+         }
+         class SofiulVoiceSynthesis {
+             constructor() {
+                 this.synth = window.speechSynthesis;
+                 this.isSupported = 'speechSynthesis' in window;
+             }
+             speak(textMessage) {
+                 if (!this.isSupported) {
+                     alert("🔊 (Simulación de voz IA): " + textMessage);
+                     return;
+                 }
+                 this.synth.cancel();
+                 const utterance = new SpeechSynthesisUtterance(textMessage);
+                 utterance.lang = 'es-ES';
+                 utterance.rate = 1.05;
+                 utterance.pitch = 1.0;
+                 
+                 const voices = this.synth.getVoices();
+                 const spanishVoice = voices.find(voice => voice.lang.includes('es'));
+                 if (spanishVoice) {
+                     utterance.voice = spanishVoice;
+                 }
+                 this.synth.speak(utterance);
+             }
+         }
+         const sofiulVoice = new SofiulVoiceSynthesis();
+         function triggerSoundWithVoice(effectName, customMessage) {
+             sofiulVoice.speak(customMessage || ("Efecto " + effectName + " activado"));
+         }
+         function toggleSofull() {
+             isLive = !isLive;
+             const btn = document.getElementById('master-btn');
+             const badge = document.getElementById('status-badge');
+             const bubble = document.getElementById('floating-bubble');
+             const usernameInput = document.getElementById('tiktok-username') ? document.getElementById('tiktok-username').value : 'family_fenix';
+             if (isLive) {
+                 if (btn) {
+                     btn.innerText = "APAGAR SOFIUL";
+                     btn.classList.add('active');
+                 }
+                 if (badge) {
+                     badge.innerText = "CONECTADO";
+                     badge.classList.add('active');
+                 }
+                 if (bubble) bubble.style.display = 'flex';
+                 
+                 sofiulBridge = new TikTokLiveConnector(usernameInput);
+                 sofiulBridge.start();
+                 sofiulVoice.speak("Sofiul encendido. Sistema conectado para " + usernameInput);
+             } else {
+                 if (btn) {
+                     btn.innerText = "ENCENDER SOFIUL ( MODO MÓVIL )";
+                     btn.classList.remove('active');
+                 }
+                 if (badge) {
+                     badge.innerText = "DESCONECTADO";
+                     badge.classList.remove('active');
+                 }
+                 if (bubble) bubble.style.display = 'none';
+                 closeBubbleMenu();
+                 if (sofiulBridge) {
+                     sofiulBridge.stop();
+                 }
+                 sofiulVoice.speak("Sistema apagado.");
+             }
+         }
+         function openBubbleMenu() {
+             const modal = document.getElementById('bubble-modal');
+             if (modal) modal.style.display = 'flex';
+         }
+         function closeBubbleMenu() {
+             const modal = document.getElementById('bubble-modal');
+             if (modal) modal.style.display = 'none';
+         }
+         let deferredPrompt;
+         window.addEventListener('beforeinstallprompt', (e) => {
+             e.preventDefault();
+             deferredPrompt = e;
+             console.log("[SOFIUL PWA] Listo para instalarse en pantalla de inicio.");
+         });
+     </script>
+ </body>
+ </html>
+ 
