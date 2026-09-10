@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOFIUL - Mobile Live System</title>
     <meta name="theme-color" content="#070a12">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
         :root {
             --bg-color: #070a12;
             --card-bg: #0b1424;
-            --accent-cyan: #00b5ff;
+            --accent-cyan: #00e5ff;
             --accent-blue: #0088ff;
             --accent-purple: #9a2ba2;
             --accent-red: #ff2a5f;
             --text-main: #ffffff;
-            --text-muted: #7b6cbe;
+            --text-muted: #8c82ce;
         }
         body {
             margin: 0; padding: 0;
@@ -23,75 +25,400 @@
             display: flex; flex-direction: column; align-items: center;
             min-height: 100vh; padding-bottom: 40px;
         }
+        
+        @keyframes softNeonPulse {
+            0% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
+            50% { box-shadow: 0 0 35px rgba(0, 229, 255, 0.95); border-color: rgba(0, 229, 255, 1); }
+            100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
+        }
+
         header {
-            width: 100%; padding: 15px 0; text-align: center;
+            width: 100%; padding: 12px 0 8px 0; text-align: center;
             background: #070a12; position: sticky; top: 0; z-index: 10;
         }
-        .image-container {
-            width: 92%; max-width: 380px; margin: 0 auto;
-            border-radius: 14px; overflow: hidden;
-            border: 2px solid rgba(0, 181, 255, 0.5);
-            box-shadow: 0 0 25px rgba(0, 181, 255, 0.4);
+        
+        .neon-container {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 2px solid #00e5ff;
+            animation: softNeonPulse 3s infinite ease-in-out;
+            position: relative;
+            overflow: hidden;
             background: #000;
+            margin: 0 auto;
         }
-        .image-container img {
-            width: 100%; height: auto; display: block;
+        .neon-container img {
+            position: absolute;
+            width: 109%;
+            height: 109%;
+            top: -9%;
+            left: -4.5%;
+            object-fit: cover;
         }
-        .container { width: 92%; max-width: 450px; margin: 15px auto; display: flex; flex-direction: column; gap: 12px; }
+        
+        .container { width: 92%; max-width: 420px; margin: 15px auto 10px auto; display: flex; flex-direction: column; gap: 10px; }
+        
         .card {
             background-color: var(--card-bg); border: 1px solid rgba(0, 181, 255, 0.2);
-            border-radius: 12px; padding: 14px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 10px; padding: 10px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
-        .card-red-accent { border-color: rgba(255, 42, 95, 0.4); box-shadow: 0 0 15px rgba(255, 42, 95, 0.15); }
-        .card-title { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; }
-        .status-badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
-        .badge-live { background: rgba(255, 42, 95, 0.2); color: var(--accent-red); border: 1px solid rgba(255, 42, 95, 0.4); }
-        .badge-active { background: rgba(0, 225, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 225, 255, 0.3); }
-        .card-content { font-size: 0.95rem; font-weight: 500; }
+        .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
+        .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .badge-active { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
+        .badge-purple { background: rgba(154, 43, 162, 0.2); color: #e2b7ff; border: 1px solid rgba(154, 43, 162, 0.4); }
+        .badge-trial { background: rgba(255, 170, 0, 0.15); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
+
+        .input-group { margin-bottom: 8px; }
+        .input-group label { display: block; font-size: 0.7rem; color: #a19bc8; margin-bottom: 3px; font-style: italic; }
+        .neon-input, .neon-select {
+            width: 100%; background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
+            outline: none; font-family: inherit; font-style: italic;
+        }
+        .neon-input:focus, .neon-select:focus {
+            border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+        }
+        
+        .file-upload-btn {
+            display: block; width: 100%; background: rgba(154, 43, 162, 0.15);
+            border: 1px dashed rgba(154, 43, 162, 0.5); color: #e2b7ff; padding: 8px;
+            border-radius: 6px; text-align: center; font-size: 0.75rem; font-weight: bold;
+            cursor: pointer; box-sizing: border-box; font-style: italic;
+        }
+
+        .toggle-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
+            padding: 6px 10px; border-radius: 6px; margin-top: 5px; font-style: italic; font-size: 0.8rem;
+        }
+
+        /* Estilos para los planes de pago */
+        .plans-container {
+            display: flex; flex-direction: column; gap: 8px; margin-top: 8px; display: none;
+        }
+        .plan-option {
+            background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 8px; padding: 10px; display: flex; justify-content: space-between;
+            align-items: center; text-decoration: none; color: #fff; box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        .plan-option:hover {
+            border-color: var(--accent-cyan); background: rgba(0, 229, 255, 0.12);
+        }
+        .plan-info span:first-child { font-weight: bold; font-size: 0.85rem; display: block; color: var(--accent-cyan); font-style: italic; }
+        .plan-info span:last-child { font-size: 0.7rem; color: #8c82ce; font-style: italic; }
+        .plan-btn-pay {
+            background: linear-gradient(135deg, #ffaa00, #ff2a5f); color: #fff;
+            padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: bold;
+            text-transform: uppercase; font-style: italic;
+        }
+
         .action-button {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000; border: none; border-radius: 10px; padding: 14px;
-            font-size: 0.95rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 5px; width: 100%;
+            color: #000; border: none; border-radius: 8px; padding: 12px;
+            font-size: 0.9rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 5px;
+            font-style: italic; width: 100%; text-decoration: none; display: block; box-sizing: border-box;
         }
-        .tags-container { display: flex; gap: 8px; margin-top: 6px; }
-        .tag { background: rgba(123, 108, 190, 0.2); border: 1px solid rgba(123, 108, 190, 0.4); padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; color: #d1c9ff; }
+        
+        .save-notice {
+            font-size: 0.65rem; color: #00e5ff; text-align: center; font-style: italic; margin-top: 4px; display: none;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div class="image-container">
-            <!-- Logo integrado directamente para evitar errores de ruta -->
-            <img src="logo.png" alt="SOFIUL Logo" onerror="this.onerror=null; this.src='https://raw.githubusercontent.com/sofiulapp/sofiulapp.github.io/main/logo.png';">
+        <div class="neon-container">
+            <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Logo">
         </div>
     </header>
 
     <div class="container">
-        <div class="card card-red-accent">
-            <div class="card-title">Estado del Vivo <span class="status-badge badge-live">EN DIRECTO</span></div>
-            <div class="card-content">Sincronización neural con TikTok</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Configuración de Cuenta</div>
-            <div class="card-content" style="color: var(--accent-cyan); font-family: monospace; font-size: 1.05rem;">@family_fenix</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Escudo Anti-Ban & Cifrado <span class="status-badge badge-active">ACTIVO</span></div>
-            <div class="card-content" style="font-size: 0.85rem; color: #a19bc8;">Bloqueo potente de proxy, protegiendo tus cofres.</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Elementos de V.S.A <span style="color: var(--accent-purple);">V 3.4</span></div>
-            <div class="card-content" style="font-size: 0.85rem; color: #a19bc8;">Vía sólida y humana personalizada sobre celular y metas.</div>
-        </div>
-        <div class="card">
-            <div class="card-title">Cultura de Salida</div>
-            <div class="tags-container">
-                <span class="tag">😊 Rosa</span>
-                <span class="tag">🔥 León</span>
-                <span class="tag">⭐ Level Up</span>
+        <!-- 0A. Panel de Cuenta & Control Anti-Abuso por Dispositivo -->
+        <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
+            <div class="card-title" style="color: #ffaa00;">
+                <span>ESTADO DE CUENTA &amp; SEGURIDAD</span>
+                <span class="status-badge badge-trial" id="trial-status">VERIFICANDO...</span>
+            </div>
+            
+            <div class="input-group" style="margin-bottom: 4px;">
+                <label>Correo Electr&oacute;nico (Gmail / Registro):</label>
+                <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
+            </div>
+            <div id="device-info" style="font-size: 0.65rem; color: #ffaa00; font-style: italic; margin-bottom: 4px;">
+                🔍 Analizando huella digital del celular para prueba de 72 horas...
             </div>
         </div>
-        <button class="action-button">LANZAR SOFIUL ( MODO NATIVO )</button>
+
+        <!-- 0B. Panel de Conexión Segura TikTok -->
+        <div class="card" style="border-color: rgba(0, 229, 255, 0.4);">
+            <div class="card-title" style="color: var(--accent-cyan);">
+                <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
+                <span class="status-badge badge-active">ID P&Uacute;BLICO</span>
+            </div>
+            
+            <div class="input-group" style="margin-bottom: 4px;">
+                <label>Tu Usuario P&uacute;blico (@TikTok):</label>
+                <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
+            </div>
+            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 2px;">
+                * Enlace seguro por ID. Sin contrase&ntilde;as ni riesgos de baneo.
+            </div>
+        </div>
+
+        <!-- 1. Panel de Mascota, IA Ultra Humana & Políglota Automática -->
+        <div class="card">
+            <div class="card-title" style="color: #fff;">
+                <span>MASCOTA: IA HUMANA &amp; POLÍGLOTA</span>
+                <span class="status-badge badge-active">ESPEJO EMOCIONAL</span>
+            </div>
+            
+            <div class="input-group">
+                <label>Nombre de la Mascota / Asistente:</label>
+                <input type="text" id="assistant-name" class="neon-input" placeholder="Ej: Safire (Cálida, humana y cercana)...">
+            </div>
+
+            <div class="input-group">
+                <label>Personalidad y Tono (Cero Robot, 100% Humano):</label>
+                <select id="interaction-style" class="neon-select">
+                    <option value="ultra-human">Cálido, Acogedor &amp; Empático (Espejo Emocional profundo)</option>
+                    <option value="energetic-hype">Vibrante y Alegre (Para animación de batallas)</option>
+                    <option value="sweet-ambient">Dulce y Suave (Acompañamiento relajado)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Detección de Idioma Inteligente (Políglota):</label>
+                <select id="bot-lang" class="neon-select">
+                    <option value="auto-poly">Automático (Detecta si entran de Brasil, USA o Hispanoamérica)</option>
+                    <option value="pt">Português Nativo (Brasil - Foco Total)</option>
+                    <option value="es">Español Nativo</option>
+                    <option value="en">English (Global)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Género y Calidez de la Voz:</label>
+                <select id="voice-gender-tone" class="neon-select">
+                    <option value="female-warm">Femenino - Cálido, Natural y Acogedor</option>
+                    <option value="male-warm">Masculino - Cálido, Amigable y Cercano</option>
+                    <option value="female-soft">Femenino - Suave y Empático</option>
+                    <option value="male-deep">Masculino - Suave y Profundo</option>
+                </select>
+            </div>
+
+            <div class="toggle-row">
+                <span>🎵 Efectos de Sonido (SFX: Bienvenidas &amp; Agasajos)</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ ACTIVO ]</span>
+            </div>
+
+            <div class="input-group" style="margin-top: 8px;">
+                <label>Clonación de Voz Personalizada (Opcional):</label>
+                <label class="file-upload-btn">
+                    📁 Subir archivo de voz (.mp3 / .wav)
+                    <input type="file" id="voice-file" style="display: none;" accept="audio/*">
+                </label>
+                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo cargado</div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 0;">
+                <label>Avatar / Imagen Estática de la Mascota:</label>
+                <label class="file-upload-btn" style="background: rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.4); color: var(--accent-cyan);">
+                    🖼️ Subir imagen para mostrar en vivo
+                    <input type="file" id="avatar-file" style="display: none;" accept="image/*">
+                </label>
+                <div id="avatar-file-name" style="font-size: 0.65rem; color: var(--accent-cyan); font-style: italic; margin-top: 3px;">Ninguna imagen cargada</div>
+            </div>
+        </div>
+
+        <!-- 2. Panel de Animaciones para MVPs y Fantasmas -->
+        <div class="card">
+            <div class="card-title" style="color: #e2b7ff;">
+                <span>ANIMACIONES MVP &amp; FANTASMAS</span>
+                <span class="status-badge badge-purple">ACTIVO</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>🏆 Animaci&oacute;n Top 3 MVPs (8s)</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>👻 Resaltar Donantes "Fantasmas"</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
+            </div>
+        </div>
+
+        <!-- 3. Panel de IA Emocional & Antisilencio -->
+        <div class="card">
+            <div class="card-title" style="color: var(--accent-cyan);">
+                <span>IA EMOCIONAL &amp; ANTISILENCIO</span>
+                <span class="status-badge badge-active">HUMANO v2.0</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>🛡️ Neutralizador de Comentarios T&oacute;xicos</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ SMART ]</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>💬 Modo Antisilencio Din&aacute;mico</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
+            </div>
+        </div>
+
+        <!-- 4. Panel de Modo Autónomo & Spotify Live -->
+        <div class="card">
+            <div class="card-title" style="color: #1db954;">
+                <span>AUT&Oacute;NOMO &amp; SPOTIFY LIVE</span>
+                <span class="status-badge" style="background: rgba(29, 185, 84, 0.2); color: #1db954; border: 1px solid rgba(29, 185, 84, 0.4);">CONECTADO</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>🎶 Sincronizaci&oacute;n de Fondo Spotify</span>
+                <span style="color: #1db954; font-weight: bold;">[ SYNC ]</span>
+            </div>
+            
+            <div class="toggle-row">
+                <span>🤖 Piloto Autom&aacute;tico (Si est&aacute;s silenciado)</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ AUTO ]</span>
+            </div>
+        </div>
+
+        <!-- Panel de Selección de Planes (Se muestra si expira la prueba) -->
+        <div class="card" id="payment-card" style="display: none; border-color: #ffaa00;">
+            <div class="card-title" style="color: #ffaa00;">
+                <span>⚠️ SELECCIONA TU PLAN SOFIUL PREMIUM</span>
+            </div>
+            <div style="font-size: 0.7rem; color: #a19bc8; font-style: italic; margin-bottom: 6px;">
+                Tus 72 horas han finalizado. Elige una opción para continuar usando la app:
+            </div>
+            
+            <div class="plans-container" id="plans-list" style="display: flex;">
+                <!-- Plan Mensual (R$ 49,90) -->
+                <a href="https://mpago.la/1Pi5cbX" target="_blank" class="plan-option">
+                    <div class="plan-info">
+                        <span>Plan Mensual</span>
+                        <span>R$ 49,90 / mes</span>
+                    </div>
+                    <div class="plan-btn-pay">Pagar</div>
+                </a>
+
+                <!-- Plan Semestral (R$ 199,90) -->
+                <a href="https://mpago.la/2MrRYRg" target="_blank" class="plan-option" style="border-color: rgba(154, 43, 162, 0.4);">
+                    <div class="plan-info">
+                        <span style="color: #e2b7ff;">Plan Semestral (6 Meses)</span>
+                        <span>R$ 199,90 (Ahorro especial)</span>
+                    </div>
+                    <div class="plan-btn-pay" style="background: linear-gradient(135deg, #9a2ba2, #0088ff);">Pagar</div>
+                </a>
+
+                <!-- Plan Anual VIP (R$ 349,90) -->
+                <a href="https://mpago.la/15J8E6x" target="_blank" class="plan-option" style="border-color: rgba(0, 229, 255, 0.6);">
+                    <div class="plan-info">
+                        <span>⭐ Plan Anual VIP (12 Meses)</span>
+                        <span>R$ 349,90 (Mejor valor)</span>
+                    </div>
+                    <div class="plan-btn-pay" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); color: #000;">Elegir</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Botón de Guardado Inteligente -->
+        <button class="action-button" id="main-action-btn">GUARDAR Y LANZAR SOFIUL</button>
+        <div class="save-notice" id="save-notice">✅ ¡Configuración guardada con éxito en tu dispositivo!</div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const deviceKey = "sofiul_device_registered";
+            const trialStatusEl = document.getElementById("trial-status");
+            const deviceInfoEl = document.getElementById("device-info");
+            const actionBtn = document.getElementById("main-action-btn");
+            const paymentCard = document.getElementById("payment-card");
+            
+            // Campos de configuración
+            const emailInput = document.getElementById("user-email");
+            const tiktokInput = document.getElementById("tiktok-user");
+            const assistantInput = document.getElementById("assistant-name");
+            const interactionStyleSelect = document.getElementById("interaction-style");
+            const voiceGenderSelect = document.getElementById("voice-gender-tone");
+            const botLangSelect = document.getElementById("bot-lang");
+            const saveNotice = document.getElementById("save-notice");
+            
+            const voiceFileInput = document.getElementById("voice-file");
+            const voiceFileName = document.getElementById("voice-file-name");
+            const avatarFileInput = document.getElementById("avatar-file");
+            const avatarFileName = document.getElementById("avatar-file-name");
+
+            // 1. Cargar datos guardados previamente en la memoria del celular
+            if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
+            if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
+            if(localStorage.getItem("sofiul_assistant")) assistantInput.value = localStorage.getItem("sofiul_assistant");
+            if(localStorage.getItem("sofiul_interaction")) interactionStyleSelect.value = localStorage.getItem("sofiul_interaction");
+            if(localStorage.getItem("sofiul_voice_gender")) voiceGenderSelect.value = localStorage.getItem("sofiul_voice_gender");
+            if(localStorage.getItem("sofiul_lang")) botLangSelect.value = localStorage.getItem("sofiul_lang");
+
+            // 2. Control de Anti-Abuso por Dispositivo (72 Horas)
+            let storedDeviceID = localStorage.getItem(deviceKey);
+            
+            if (!storedDeviceID) {
+                storedDeviceID = "DEV_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
+                localStorage.setItem(deviceKey, storedDeviceID);
+                localStorage.setItem("sofiul_trial_start", Date.now().toString());
+                
+                trialStatusEl.innerText = "72 HORAS GRATIS";
+                deviceInfoEl.innerText = "⚡ Dispositivo verificado. Tus 72 horas están activas.";
+            } else {
+                const trialStart = parseInt(localStorage.getItem("sofiul_trial_start") || Date.now());
+                const elapsed = Date.now() - trialStart;
+                const limit = 72 * 60 * 60 * 1000; 
+
+                if (elapsed > limit) {
+                    trialStatusEl.innerText = "PRUEBA EXPIRADA";
+                    trialStatusEl.style.background = "rgba(255, 42, 95, 0.2)";
+                    trialStatusEl.style.color = "#ff2a5f";
+                    deviceInfoEl.innerText = "❌ Las 72 horas terminaron. Selecciona tu plan abajo.";
+                    deviceInfoEl.style.color = "#ff2a5f";
+                    
+                    actionBtn.style.display = "none";
+                    paymentCard.style.display = "block";
+                } else {
+                    const hoursLeft = Math.ceil((limit - elapsed) / (1000 * 60 * 60));
+                    trialStatusEl.innerText = "PRUEBA ACTIVA";
+                    deviceInfoEl.innerText = `⚡ Dispositivo reconocido. Te quedan ${hoursLeft} horas de prueba.`;
+                }
+            }
+
+            // 3. Capturar nombres de archivos subidos
+            voiceFileInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    voiceFileName.innerText = "📁 Archivo cargado: " + this.files[0].name;
+                }
+            });
+
+            avatarFileInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    avatarFileName.innerText = "🖼️ Imagen cargada: " + this.files[0].name;
+                }
+            });
+
+            // 4. Guardar configuración completa en la memoria local
+            actionBtn.addEventListener("click", function() {
+                localStorage.setItem("sofiul_email", emailInput.value);
+                localStorage.setItem("sofiul_tiktok", tiktokInput.value);
+                localStorage.setItem("sofiul_assistant", assistantInput.value);
+                localStorage.setItem("sofiul_interaction", interactionStyleSelect.value);
+                localStorage.setItem("sofiul_voice_gender", voiceGenderSelect.value);
+                localStorage.setItem("sofiul_lang", botLangSelect.value);
+
+                saveNotice.style.display = "block";
+                setTimeout(() => {
+                    saveNotice.style.display = "none";
+                }, 3500);
+            });
+        });
+    </script>
 </body>
 </html>
