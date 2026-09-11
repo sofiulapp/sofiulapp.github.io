@@ -53,78 +53,90 @@
             border-radius: 10px; padding: 10px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
-        .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-        .badge-active { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
-        .badge-purple { background: rgba(154, 43, 162, 0.2); color: #e2b7ff; border: 1px solid rgba(154, 43, 162, 0.4); }
-        .badge-trial { background: rgba(255, 170, 0, 0.15); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
-
-        .input-group { margin-bottom: 8px; }
-        .input-group label { display: block; font-size: 0.7rem; color: #a19bc8; margin-bottom: 3px; font-style: italic; }
-        .neon-input, .neon-select {
-            width: 100%; background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
-            outline: none; font-family: inherit; font-style: italic;
-        }
-        .neon-input:focus, .neon-select:focus {
-            border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
-        }
         
-        .file-upload-btn {
-            display: block; width: 100%; background: rgba(154, 43, 162, 0.15);
-            border: 1px dashed rgba(154, 43, 162, 0.5); color: #e2b7ff; padding: 8px;
-            border-radius: 6px; text-align: center; font-size: 0.75rem; font-weight: bold;
-            cursor: pointer; box-sizing: border-box; font-style: italic;
-        }
-
-        .toggle-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
-            padding: 6px 10px; border-radius: 6px; margin-top: 5px; font-style: italic; font-size: 0.8rem;
-        }
-
-        /* Botón Desplegable Rojizo para Lector de Chat */
+        /* Botón Rojizo / Degradado Desplegable Principal */
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff2a5f, #0088ff);
-            color: #fff; border: none; border-radius: 8px; padding: 10px;
+            color: #fff; border: none; border-radius: 8px; padding: 12px;
             font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer;
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
-            box-shadow: 0 0 12px rgba(255, 42, 95, 0.4);
+            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
-        .collapsible-content { display: none; margin-top: 8px; }
-        .collapsible-content.show { display: block; }
+        
+        /* Contenedor deslizante de los botones de control */
+        .collapsible-transmission {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+        }
+        .collapsible-transmission.show {
+            max-height: 1200px; /* Altura suficiente para mostrar todos los botones deslizables */
+            transition: max-height 0.5s ease-in;
+        }
 
-        /* Estilos para el Banco de Voces y Botones Probar */
-        .voice-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
-            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
+        /* Estilo de la cuadrícula de botones de efectos y voz */
+        .effects-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 8px;
         }
-        .test-btn {
-            background: rgba(0, 229, 255, 0.15); border: 1px solid rgba(0, 229, 255, 0.4);
-            color: var(--accent-cyan); padding: 4px 10px; border-radius: 4px; font-size: 0.65rem;
-            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+        .effect-box {
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
         }
-        .test-btn:hover { background: rgba(0, 229, 255, 0.3); }
+        .effect-box-title {
+            font-size: 0.65rem;
+            color: var(--accent-cyan);
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 6px;
+            min-height: 24px;
+        }
+        .upload-effect-btn {
+            display: block;
+            background: rgba(154, 43, 162, 0.2);
+            border: 1px dashed rgba(154, 43, 162, 0.6);
+            color: #e2b7ff;
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-style: italic;
+        }
 
-        /* Panel de Efectos Desplegable (Efectos Internos MP3) */
-        .effects-grid { display: none; flex-direction: column; gap: 6px; margin-top: 6px; }
-        .effects-grid.show { display: flex; }
-        .effect-slot {
-            background: rgba(154, 43, 162, 0.08); border: 1px dashed rgba(154, 43, 162, 0.4);
-            padding: 6px 8px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;
+        /* Controles Spotify */
+        .spotify-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .spotify-btn {
+            flex: 1;
+            background: rgba(29, 185, 84, 0.15);
+            border: 1px solid rgba(29, 185, 84, 0.4);
+            color: #1db954;
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            font-style: italic;
         }
 
         .action-button {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #000; border: none; border-radius: 8px; padding: 12px;
             font-size: 0.9rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 5px;
-            font-style: italic; width: 100%; text-decoration: none; display: block; box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(0, 181, 255, 0.4); text-transform: uppercase; margin-top: 10px;
+            font-style: italic; width: 100%; box-sizing: border-box;
         }
-        
-        .save-notice {
-            font-size: 0.65rem; color: #00e5ff; text-align: center; font-style: italic; margin-top: 4px; display: none;
-        }
+        .save-notice { font-size: 0.65rem; color: #00e5ff; text-align: center; font-style: italic; margin-top: 4px; display: none; }
     </style>
 </head>
 <body>
@@ -135,291 +147,118 @@
     </header>
 
     <div class="container">
-        <!-- Panel Desplegable Rojizo: Lector de Chat en Directo -->
+        <!-- Panel Principal con el Botón Rojizo Desplegable -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
-                <span>🚀 PANEL DE CONTROL &amp; LECTOR DE CHAT HD</span>
+                <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
             </div>
             
-            <button class="dropdown-trigger-btn" id="toggle-chat-panel">⚡ CERRAR MANDO DE LECTURA EN DIRECTO</button>
+            <!-- Botón Rojizo Principal que activa el deslizamiento -->
+            <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
+                ⚡ MANDO DE TRANSMISIÓN ACTIVO
+            </button>
             
-            <div class="collapsible-content show" id="chat-panel-content">
-                <div class="card" style="background: rgba(0,0,0,0.2); margin-top: 8px;">
-                    <div class="card-title" style="color: var(--accent-cyan);">
-                        <span>LECTOR DE CHAT EN DIRECTO</span>
-                        <span class="status-badge badge-active">ACTIVO</span>
+            <!-- Contenedor Deslizable que se abre al tocar el botón rojizo -->
+            <div class="collapsible-transmission show" id="transmission-content">
+                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
+                    <div class="card-title" style="color: #ff2a5f;">
+                        <span>MANDO DE TRANSMISIÓN EN DIRECTO</span>
+                        <span class="status-badge" style="background:rgba(255,42,95,0.2); color:#ff2a5f; padding:2px 6px; border-radius:4px; font-size:0.55rem;">EN DIRECTO</span>
                     </div>
-                    <div class="input-group" style="margin-bottom: 6px;">
-                        <label>💬 Escribe un comentario del chat para probar cómo la voz seleccionada lo lee en tiempo real:</label>
-                        <input type="text" id="test-chat-msg" class="neon-input" value="Hola cómo estás" placeholder="Escribe aquí...">
+                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 6px;">
+                        🎮 Botones de Control de Voz &amp; Efectos (Sube tu audio personalizado en cada botón antes de conectar):
                     </div>
-                    <button class="action-button" id="test-speak-btn" style="padding: 8px; font-size: 0.75rem;">🎙️ REPRODUCIR CHAT EN VIVO</button>
+
+                    <!-- Cuadrícula de 4 Botones con opción de Subir Efecto MP3 -->
+                    <div class="effects-grid-2x2">
+                        <div class="effect-box">
+                            <div class="effect-box-title">👋 BIENVENIDA ÉPICA</div>
+                            <label class="upload-effect-btn">
+                                📁 Subir efecto
+                                <input type="file" accept="audio/mp3" style="display:none;">
+                            </label>
+                            <div style="font-size: 0.55rem; color: #00e5ff; margin-top: 3px; font-style: italic;">Voz: F, H-HD</div>
+                        </div>
+
+                        <div class="effect-box">
+                            <div class="effect-box-title">🔥 JÚBILO &amp; HYPE</div>
+                            <label class="upload-effect-btn">
+                                📁 Subir efecto
+                                <input type="file" accept="audio/mp3" style="display:none;">
+                            </label>
+                            <div style="font-size: 0.55rem; color: #00e5ff; margin-top: 3px; font-style: italic;">Voz: F, H-HD</div>
+                        </div>
+
+                        <div class="effect-box">
+                            <div class="effect-box-title">😂 RISAS &amp; DIVERSIÓN</div>
+                            <label class="upload-effect-btn">
+                                📁 Subir efecto
+                                <input type="file" accept="audio/mp3" style="display:none;">
+                            </label>
+                            <div style="font-size: 0.55rem; color: #00e5ff; margin-top: 3px; font-style: italic;">Voz: F, H-HD</div>
+                        </div>
+
+                        <div class="effect-box">
+                            <div class="effect-box-title">🏆 VICTORIA / REGALO</div>
+                            <label class="upload-effect-btn">
+                                📁 Subir efecto
+                                <input type="file" accept="audio/mp3" style="display:none;">
+                            </label>
+                            <div style="font-size: 0.55rem; color: #00e5ff; margin-top: 3px; font-style: italic;">Voz: F, H-HD</div>
+                        </div>
+                    </div>
+
+                    <!-- Controles de Spotify integrados en el mando -->
+                    <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 10px; font-weight: bold;">
+                        🎵 Controles de Spotify (Fondo independiente al micro):
+                    </div>
+                    <div class="spotify-row">
+                        <div class="spotify-btn">▶ PLAY</div>
+                        <div class="spotify-btn">⏸ PAUSAR</div>
+                        <div class="spotify-btn">⏭ SIGUIENTE</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- 0A. Panel de Cuenta & Control Anti-Abuso -->
+        <!-- Secciones adicionales de la app (Seguridad / Cuenta) -->
         <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
             <div class="card-title" style="color: #ffaa00;">
                 <span>ESTADO DE CUENTA &amp; SEGURIDAD</span>
-                <span class="status-badge badge-trial" id="trial-status">VERIFICANDO...</span>
+                <span class="status-badge" style="background:rgba(255,170,0,0.15); color:#ffaa00; font-size:0.6rem; padding:2px 6px; border-radius:4px;">72 HORAS</span>
             </div>
-            <div class="input-group" style="margin-bottom: 4px;">
-                <label>Correo Electr&oacute;nico (Gmail / Registro):</label>
-                <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
-            </div>
-            <div id="device-info" style="font-size: 0.65rem; color: #ffaa00; font-style: italic;">
-                🔍 Analizando huella digital del celular para prueba de 72 horas...
+            <div style="font-size: 0.65rem; color: #ffaa00; font-style: italic;">
+                ⚡ Dispositivo verificado correctamente.
             </div>
         </div>
 
-        <!-- 0B. Vinculación TikTok Live -->
-        <div class="card" style="border-color: rgba(0, 229, 255, 0.4);">
-            <div class="card-title" style="color: var(--accent-cyan);">
-                <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
-                <span class="status-badge badge-active">ID P&Uacute;BLICO</span>
-            </div>
-            <div class="input-group" style="margin-bottom: 4px;">
-                <label>Tu Usuario P&uacute;blico (@TikTok):</label>
-                <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
-            </div>
-            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic;">
-                * Enlace seguro por ID. Sin contrase&ntilde;as ni riesgos de baneo.
-            </div>
-        </div>
-
-        <!-- 1. Banco de Voces HD (3 Mujeres y 3 Varones con botón Probar y Enlaces Catbox) -->
-        <div class="card">
-            <div class="card-title" style="color: #fff;">
-                <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
-                <span class="status-badge badge-active">ESTUDIO PRO</span>
-            </div>
-            
-            <div class="input-group">
-                <label>Nombre de la Mascota / Asistente:</label>
-                <input type="text" id="assistant-name" class="neon-input" value="Sofiul..." placeholder="Ej: Sofiul...">
-            </div>
-
-            <div class="input-group">
-                <label>Perfil Vocal Activo:</label>
-                <select id="voice-selection" class="neon-select">
-                    <option value="https://files.catbox.moe/smawzc.mp3">1. ♀ Norah (Cálida y Afectuosa - Latam)</option>
-                    <option value="https://files.catbox.moe/xt4fcl.mp3">2. ♀ Valentina (Dulce)</option>
-                    <option value="https://files.catbox.moe/gb685r.mp3">3. ♀ Camila (Alegre)</option>
-                    <option value="https://files.catbox.moe/ds5rw4.mp3">4. ♂ Mateo Pro (Profundo)</option>
-                    <option value="https://files.catbox.moe/7b84x7.mp3">5. ♂ Lucas (Juvenil)</option>
-                    <option value="https://files.catbox.moe/1jd2uu.mp3">6. ♂ Thiago (Firme)</option>
-                </select>
-            </div>
-
-            <div style="font-size: 0.7rem; color: var(--text-muted); font-style: italic; margin: 8px 0 4px 0; font-weight: bold;">
-                🎧 BANCO DE VOCES (TOCA PARA PROBAR):
-            </div>
-
-            <!-- Botones individuales de prueba vinculados a Catbox -->
-            <div class="voice-row">
-                <span>1. ♀ Norah (Cálida)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>2. ♀ Valentina (Dulce)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>3. ♀ Camila (Alegre)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/gb685r.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>4. ♂ Mateo Pro (Profundo)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>5. ♂ Lucas (Juvenil)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>6. ♂ Thiago (Firme)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
-            </div>
-
-            <div class="input-group" style="margin-top: 10px;">
-                <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
-                <label class="file-upload-btn">
-                    📁 Seleccionar Archivo MP3 desde el Celular
-                    <input type="file" id="voice-file" style="display: none;" accept="audio/*">
-                </label>
-                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
-            </div>
-        </div>
-
-        <!-- 2. Panel de Animaciones, Efectos MP3 Internos & Fantasmas -->
-        <div class="card">
-            <div class="card-title" style="color: #e2b7ff;">
-                <span>ANIMACIONES MVP &amp; FANTASMAS</span>
-                <span class="status-badge badge-purple" id="toggle-effects-badge" style="cursor: pointer;">INTERACTIVO</span>
-            </div>
-            
-            <div class="toggle-row">
-                <span>🏆 Animaci&oacute;n Top 3 MVPs (8s)</span>
-                <div>
-                    <button class="test-btn" style="background: rgba(0,229,255,0.2);" id="mvp-on">ON</button>
-                    <button class="test-btn" style="background: rgba(255,42,95,0.2); color:#ff2a5f;" id="mvp-off">OFF</button>
-                </div>
-            </div>
-
-            <!-- Botón / Desplegable de Efectos Internos con subida de MP3 por botón -->
-            <div class="toggle-row" style="margin-top: 6px; cursor: pointer;" id="toggle-effects-btn">
-                <span>🎵 Efectos de Sonido Internos (Desplegar 6 Botones MP3)</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ ▾ ]</span>
-            </div>
-
-            <div class="effects-grid" id="effects-dropdown">
-                <div class="effect-slot">
-                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 1 (Batalla)</span>
-                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
-                </div>
-                <div class="effect-slot">
-                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 2 (Regalo)</span>
-                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
-                </div>
-                <div class="effect-slot">
-                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 3 (Bienvenida)</span>
-                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
-                </div>
-                <div class="effect-slot">
-                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 4 (Victoria)</span>
-                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Panel de IA Emocional & Antisilencio -->
-        <div class="card">
-            <div class="card-title" style="color: var(--accent-cyan);">
-                <span>IA EMOCIONAL &amp; ANTISILENCIO</span>
-                <span class="status-badge badge-active">HUMANO v2.0</span>
-            </div>
-            <div class="toggle-row">
-                <span>🛡️ Neutralizador de Comentarios T&oacute;xicos</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ SMART ]</span>
-            </div>
-            <div class="toggle-row">
-                <span>💬 Modo Antisilencio Din&aacute;mico</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
-            </div>
-        </div>
-
-        <!-- 4. Panel de Modo Autónomo & Spotify Live -->
-        <div class="card">
-            <div class="card-title" style="color: #1db954;">
-                <span>AUT&Oacute;NOMO &amp; SPOTIFY LIVE</span>
-                <span class="status-badge" style="background: rgba(29, 185, 84, 0.2); color: #1db954; border: 1px solid rgba(29, 185, 84, 0.4);">CONECTADO</span>
-            </div>
-            <div class="toggle-row">
-                <span>🎶 Sincronizaci&oacute;n de Fondo Spotify</span>
-                <span style="color: #1db954; font-weight: bold;">[ SYNC ]</span>
-            </div>
-            <div class="toggle-row">
-                <span>🤖 Piloto Autom&aacute;tico (Silenciado)</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ AUTO ]</span>
-            </div>
-        </div>
-
-        <!-- Panel de Planes (Expiración) -->
-        <div class="card" id="payment-card" style="display: none; border-color: #ffaa00;">
-            <div class="card-title" style="color: #ffaa00;">
-                <span>⚠️ SELECCIONA TU PLAN SOFIUL PREMIUM</span>
-            </div>
-            <div style="font-size: 0.7rem; color: #a19bc8; font-style: italic; margin-bottom: 6px;">
-                Tus 72 horas han finalizado. Elige una opción para continuar:
-            </div>
-            <div class="plans-container" id="plans-list" style="display: flex; flex-direction:column; gap:6px;">
-                <a href="https://mpago.la/1Pi5cbX" target="_blank" class="plan-option" style="padding:8px; background:rgba(0,229,255,0.05); border:1px solid #00e5ff; border-radius:6px; color:#fff; display:flex; justify-content:space-between; text-decoration:none;">
-                    <span>Plan Mensual (R$ 49,90)</span>
-                    <span style="color:#ffaa00; font-weight:bold;">Pagar</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- Botón de Guardado Principal -->
         <button class="action-button" id="main-action-btn">GUARDAR Y LANZAR SOFIUL</button>
         <div class="save-notice" id="save-notice">✅ ¡Configuración guardada con éxito en tu dispositivo!</div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Control Desplegable Panel Superior Rojizo
-            const triggerChat = document.getElementById("toggle-chat-panel");
-            const chatContent = document.getElementById("chat-panel-content");
-            triggerChat.addEventListener("click", function() {
-                chatContent.classList.toggle("show");
-                triggerChat.innerText = chatContent.classList.contains("show") ? "⚡ CERRAR MANDO DE LECTURA EN DIRECTO" : "⚡ ABRIR MANDO DE LECTURA EN DIRECTO";
-            });
+            // Lógica exacta de deslizamiento para el botón rojizo
+            const triggerBtn = document.getElementById("toggle-transmission-btn");
+            const contentBox = document.getElementById("transmission-content");
 
-            // Control Desplegable Panel de Efectos MP3 Internos
-            const triggerEffects = document.getElementById("toggle-effects-btn");
-            const effectsGrid = document.getElementById("effects-dropdown");
-            triggerEffects.addEventListener("click", function() {
-                effectsGrid.classList.toggle("show");
-            });
-
-            // Control de Prueba de Lectura del Chat en Vivo
-            const testSpeakBtn = document.getElementById("test-speak-btn");
-            const testChatMsg = document.getElementById("test-chat-msg");
-            const voiceSelection = document.getElementById("voice-selection");
-
-            testSpeakBtn.addEventListener("click", function() {
-                const text = testChatMsg.value || "Hola cómo estás";
-                const selectedAudioUrl = voiceSelection.value;
-
-                // Reproduce muestra en audio real de Catbox para confirmar tono
-                const samplePlay = new Audio(selectedAudioUrl);
-                samplePlay.volume = 0.4;
-                samplePlay.play().catch(e => console.log("Audio de prueba listo"));
-
-                // Sintetiza el mensaje del chat de manera fluida
-                if ('speechSynthesis' in window) {
-                    window.speechSynthesis.cancel();
-                    const utterance = new SpeechSynthesisUtterance(text);
-                    utterance.rate = 1.02;
-                    utterance.pitch = selectedAudioUrl.includes('smawzc') || selectedAudioUrl.includes('xt4fcl') || selectedAudioUrl.includes('gb685r') ? 1.15 : 0.85;
-                    utterance.lang = 'es-ES';
-                    window.speechSynthesis.speak(utterance);
+            triggerBtn.addEventListener("click", function() {
+                contentBox.classList.toggle("show");
+                // Cambiar el texto dinámicamente según esté abierto o cerrado
+                if (contentBox.classList.contains("show")) {
+                    triggerBtn.innerHTML = "⚡ MANDO DE TRANSMISIÓN ACTIVO";
+                } else {
+                    triggerBtn.innerHTML = "⚡ ABRIR MANDO DE TRANSMISIÓN (TOCA AQUÍ)";
                 }
             });
 
-            // Almacenamiento Local de Preferencias
+            // Guardado local de prueba
             const actionBtn = document.getElementById("main-action-btn");
             const saveNotice = document.getElementById("save-notice");
-            const emailInput = document.getElementById("user-email");
-            const tiktokInput = document.getElementById("tiktok-user");
-
-            if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
-            if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
-
             actionBtn.addEventListener("click", function() {
-                localStorage.setItem("sofiul_email", emailInput.value);
-                localStorage.setItem("sofiul_tiktok", tiktokInput.value);
                 saveNotice.style.display = "block";
                 setTimeout(() => { saveNotice.style.display = "none"; }, 3500);
             });
-
-            // Control Anti-Abuso 72 Horas
-            const deviceKey = "sofiul_device_registered";
-            const trialStatusEl = document.getElementById("trial-status");
-            const deviceInfoEl = document.getElementById("device-info");
-            let storedDeviceID = localStorage.getItem(deviceKey);
-            
-            if (!storedDeviceID) {
-                storedDeviceID = "DEV_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
-                localStorage.setItem(deviceKey, storedDeviceID);
-                localStorage.setItem("sofiul_trial_start", Date.now().toString());
-                trialStatusEl.innerText = "72 HORAS GRATIS";
-                deviceInfoEl.innerText = "⚡ Dispositivo verificado. Tus 72 horas están activas.";
-            } else {
-                trialStatusEl.innerText = "PRUEBA ACTIVA";
-                deviceInfoEl.innerText = "⚡ Dispositivo reconocido correctamente.";
-            }
         });
     </script>
 </body>
