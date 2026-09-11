@@ -252,7 +252,7 @@
             </div>
         </div>
 
-        <!-- 4. Banco de Voces HD Desplegable con Botones de Prueba y MP3 -->
+        <!-- 4. Banco de Voces HD Desplegable con Catbox y Subida MP3 Integrada -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
@@ -281,7 +281,7 @@
                 🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)
             </button>
 
-            <!-- Contenedor Deslizable del Banco de Voces con los 6 botones MP3 -->
+            <!-- Contenedor Deslizable del Banco de Voces con los 6 botones MP3 y subida personalizada adentro -->
             <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
                 <div class="voice-row">
                     <span>1. ♀ Norah (Cálida)</span>
@@ -307,15 +307,16 @@
                     <span>6. ♂ Thiago (Firme)</span>
                     <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
                 </div>
-            </div>
 
-            <div class="input-group" style="margin-top: 10px;">
-                <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
-                <label class="file-upload-btn">
-                    📁 Seleccionar Archivo MP3 desde el Celular
-                    <input type="file" id="voice-file" style="display: none;" accept="audio/*">
-                </label>
-                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
+                <!-- Sección de subida de voz personalizada integrada dentro del menú desplegable -->
+                <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
+                    <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
+                    <label class="file-upload-btn">
+                        📁 Seleccionar Archivo MP3 desde el Celular
+                        <input type="file" id="voice-file" style="display: none;" accept="audio/*">
+                    </label>
+                    <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
+                </div>
             </div>
         </div>
 
@@ -342,6 +343,15 @@
             triggerVoice.addEventListener("click", function() {
                 contentVoice.classList.toggle("show");
                 triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)";
+            });
+
+            // Mostrar nombre del archivo MP3 personalizado seleccionado
+            const voiceFileInput = document.getElementById("voice-file");
+            const voiceFileName = document.getElementById("voice-file-name");
+            voiceFileInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    voiceFileName.innerText = "📁 Archivo cargado: " + this.files[0].name;
+                }
             });
 
             // Control Anti-Abuso 72 Horas y Memoria Local
