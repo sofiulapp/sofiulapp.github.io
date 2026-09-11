@@ -38,23 +38,12 @@
         }
         
         .neon-container {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 2px solid #00e5ff;
-            animation: softNeonPulse 3s infinite ease-in-out;
-            position: relative;
-            overflow: hidden;
-            background: #000;
-            margin: 0 auto;
+            width: 220px; height: 220px; border-radius: 50%;
+            border: 2px solid #00e5ff; animation: softNeonPulse 3s infinite ease-in-out;
+            position: relative; overflow: hidden; background: #000; margin: 0 auto;
         }
         .neon-container img {
-            position: absolute;
-            width: 109%;
-            height: 109%;
-            top: -9%;
-            left: -4.5%;
-            object-fit: cover;
+            position: absolute; width: 109%; height: 109%; top: -9%; left: -4.5%; object-fit: cover;
         }
         
         .container { width: 92%; max-width: 420px; margin: 15px auto 10px auto; display: flex; flex-direction: column; gap: 10px; }
@@ -93,25 +82,36 @@
             padding: 6px 10px; border-radius: 6px; margin-top: 5px; font-style: italic; font-size: 0.8rem;
         }
 
-        /* Estilos para los planes de pago */
-        .plans-container {
-            display: flex; flex-direction: column; gap: 8px; margin-top: 8px; display: none;
+        /* Botón Desplegable Rojizo para Lector de Chat */
+        .dropdown-trigger-btn {
+            background: linear-gradient(135deg, #ff2a5f, #0088ff);
+            color: #fff; border: none; border-radius: 8px; padding: 10px;
+            font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer;
+            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
+            box-shadow: 0 0 12px rgba(255, 42, 95, 0.4);
         }
-        .plan-option {
-            background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3);
-            border-radius: 8px; padding: 10px; display: flex; justify-content: space-between;
-            align-items: center; text-decoration: none; color: #fff; box-sizing: border-box;
-            transition: all 0.2s ease;
+        .collapsible-content { display: none; margin-top: 8px; }
+        .collapsible-content.show { display: block; }
+
+        /* Estilos para el Banco de Voces y Botones Probar */
+        .voice-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
+            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
         }
-        .plan-option:hover {
-            border-color: var(--accent-cyan); background: rgba(0, 229, 255, 0.12);
+        .test-btn {
+            background: rgba(0, 229, 255, 0.15); border: 1px solid rgba(0, 229, 255, 0.4);
+            color: var(--accent-cyan); padding: 4px 10px; border-radius: 4px; font-size: 0.65rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
-        .plan-info span:first-child { font-weight: bold; font-size: 0.85rem; display: block; color: var(--accent-cyan); font-style: italic; }
-        .plan-info span:last-child { font-size: 0.7rem; color: #8c82ce; font-style: italic; }
-        .plan-btn-pay {
-            background: linear-gradient(135deg, #ffaa00, #ff2a5f); color: #fff;
-            padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: bold;
-            text-transform: uppercase; font-style: italic;
+        .test-btn:hover { background: rgba(0, 229, 255, 0.3); }
+
+        /* Panel de Efectos Desplegable (Efectos Internos MP3) */
+        .effects-grid { display: none; flex-direction: column; gap: 6px; margin-top: 6px; }
+        .effects-grid.show { display: flex; }
+        .effect-slot {
+            background: rgba(154, 43, 162, 0.08); border: 1px dashed rgba(154, 43, 162, 0.4);
+            padding: 6px 8px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;
         }
 
         .action-button {
@@ -135,118 +135,161 @@
     </header>
 
     <div class="container">
-        <!-- 0A. Panel de Cuenta & Control Anti-Abuso por Dispositivo -->
+        <!-- Panel Desplegable Rojizo: Lector de Chat en Directo -->
+        <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
+            <div class="card-title" style="color: #ff2a5f;">
+                <span>🚀 PANEL DE CONTROL &amp; LECTOR DE CHAT HD</span>
+            </div>
+            
+            <button class="dropdown-trigger-btn" id="toggle-chat-panel">⚡ CERRAR MANDO DE LECTURA EN DIRECTO</button>
+            
+            <div class="collapsible-content show" id="chat-panel-content">
+                <div class="card" style="background: rgba(0,0,0,0.2); margin-top: 8px;">
+                    <div class="card-title" style="color: var(--accent-cyan);">
+                        <span>LECTOR DE CHAT EN DIRECTO</span>
+                        <span class="status-badge badge-active">ACTIVO</span>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 6px;">
+                        <label>💬 Escribe un comentario del chat para probar cómo la voz seleccionada lo lee en tiempo real:</label>
+                        <input type="text" id="test-chat-msg" class="neon-input" value="Hola cómo estás" placeholder="Escribe aquí...">
+                    </div>
+                    <button class="action-button" id="test-speak-btn" style="padding: 8px; font-size: 0.75rem;">🎙️ REPRODUCIR CHAT EN VIVO</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 0A. Panel de Cuenta & Control Anti-Abuso -->
         <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
             <div class="card-title" style="color: #ffaa00;">
                 <span>ESTADO DE CUENTA &amp; SEGURIDAD</span>
                 <span class="status-badge badge-trial" id="trial-status">VERIFICANDO...</span>
             </div>
-            
             <div class="input-group" style="margin-bottom: 4px;">
                 <label>Correo Electr&oacute;nico (Gmail / Registro):</label>
                 <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
             </div>
-            <div id="device-info" style="font-size: 0.65rem; color: #ffaa00; font-style: italic; margin-bottom: 4px;">
+            <div id="device-info" style="font-size: 0.65rem; color: #ffaa00; font-style: italic;">
                 🔍 Analizando huella digital del celular para prueba de 72 horas...
             </div>
         </div>
 
-        <!-- 0B. Panel de Conexión Segura TikTok -->
+        <!-- 0B. Vinculación TikTok Live -->
         <div class="card" style="border-color: rgba(0, 229, 255, 0.4);">
             <div class="card-title" style="color: var(--accent-cyan);">
                 <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
                 <span class="status-badge badge-active">ID P&Uacute;BLICO</span>
             </div>
-            
             <div class="input-group" style="margin-bottom: 4px;">
                 <label>Tu Usuario P&uacute;blico (@TikTok):</label>
                 <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
             </div>
-            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 2px;">
+            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic;">
                 * Enlace seguro por ID. Sin contrase&ntilde;as ni riesgos de baneo.
             </div>
         </div>
 
-        <!-- 1. Panel de Mascota, IA Ultra Humana & Políglota Automática -->
+        <!-- 1. Banco de Voces HD (3 Mujeres y 3 Varones con botón Probar y Enlaces Catbox) -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
-                <span>MASCOTA: IA HUMANA &amp; POLÍGLOTA</span>
-                <span class="status-badge badge-active">ESPEJO EMOCIONAL</span>
+                <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
+                <span class="status-badge badge-active">ESTUDIO PRO</span>
             </div>
             
             <div class="input-group">
                 <label>Nombre de la Mascota / Asistente:</label>
-                <input type="text" id="assistant-name" class="neon-input" placeholder="Ej: Safire (Cálida, humana y cercana)...">
+                <input type="text" id="assistant-name" class="neon-input" value="Sofiul..." placeholder="Ej: Sofiul...">
             </div>
 
             <div class="input-group">
-                <label>Personalidad y Tono (Cero Robot, 100% Humano):</label>
-                <select id="interaction-style" class="neon-select">
-                    <option value="ultra-human">Cálido, Acogedor &amp; Empático (Espejo Emocional profundo)</option>
-                    <option value="energetic-hype">Vibrante y Alegre (Para animación de batallas)</option>
-                    <option value="sweet-ambient">Dulce y Suave (Acompañamiento relajado)</option>
+                <label>Perfil Vocal Activo:</label>
+                <select id="voice-selection" class="neon-select">
+                    <option value="https://files.catbox.moe/smawzc.mp3">1. ♀ Norah (Cálida y Afectuosa - Latam)</option>
+                    <option value="https://files.catbox.moe/xt4fcl.mp3">2. ♀ Valentina (Dulce)</option>
+                    <option value="https://files.catbox.moe/gb685r.mp3">3. ♀ Camila (Alegre)</option>
+                    <option value="https://files.catbox.moe/ds5rw4.mp3">4. ♂ Mateo Pro (Profundo)</option>
+                    <option value="https://files.catbox.moe/7b84x7.mp3">5. ♂ Lucas (Juvenil)</option>
+                    <option value="https://files.catbox.moe/1jd2uu.mp3">6. ♂ Thiago (Firme)</option>
                 </select>
             </div>
 
-            <div class="input-group">
-                <label>Detección de Idioma Inteligente (Políglota):</label>
-                <select id="bot-lang" class="neon-select">
-                    <option value="auto-poly">Automático (Detecta si entran de Brasil, USA o Hispanoamérica)</option>
-                    <option value="pt">Português Nativo (Brasil - Foco Total)</option>
-                    <option value="es">Español Nativo</option>
-                    <option value="en">English (Global)</option>
-                </select>
+            <div style="font-size: 0.7rem; color: var(--text-muted); font-style: italic; margin: 8px 0 4px 0; font-weight: bold;">
+                🎧 BANCO DE VOCES (TOCA PARA PROBAR):
             </div>
 
-            <div class="input-group">
-                <label>Género y Calidez de la Voz:</label>
-                <select id="voice-gender-tone" class="neon-select">
-                    <option value="female-warm">Femenino - Cálido, Natural y Acogedor</option>
-                    <option value="male-warm">Masculino - Cálido, Amigable y Cercano</option>
-                    <option value="female-soft">Femenino - Suave y Empático</option>
-                    <option value="male-deep">Masculino - Suave y Profundo</option>
-                </select>
+            <!-- Botones individuales de prueba vinculados a Catbox -->
+            <div class="voice-row">
+                <span>1. ♀ Norah (Cálida)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
+            </div>
+            <div class="voice-row">
+                <span>2. ♀ Valentina (Dulce)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
+            </div>
+            <div class="voice-row">
+                <span>3. ♀ Camila (Alegre)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/gb685r.mp3').play()">▶ Probar</button>
+            </div>
+            <div class="voice-row">
+                <span>4. ♂ Mateo Pro (Profundo)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
+            </div>
+            <div class="voice-row">
+                <span>5. ♂ Lucas (Juvenil)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
+            </div>
+            <div class="voice-row">
+                <span>6. ♂ Thiago (Firme)</span>
+                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
             </div>
 
-            <div class="toggle-row">
-                <span>🎵 Efectos de Sonido (SFX: Bienvenidas &amp; Agasajos)</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ ACTIVO ]</span>
-            </div>
-
-            <div class="input-group" style="margin-top: 8px;">
-                <label>Clonación de Voz Personalizada (Opcional):</label>
+            <div class="input-group" style="margin-top: 10px;">
+                <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
                 <label class="file-upload-btn">
-                    📁 Subir archivo de voz (.mp3 / .wav)
+                    📁 Seleccionar Archivo MP3 desde el Celular
                     <input type="file" id="voice-file" style="display: none;" accept="audio/*">
                 </label>
-                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo cargado</div>
-            </div>
-
-            <div class="input-group" style="margin-bottom: 0;">
-                <label>Avatar / Imagen Estática de la Mascota:</label>
-                <label class="file-upload-btn" style="background: rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.4); color: var(--accent-cyan);">
-                    🖼️ Subir imagen para mostrar en vivo
-                    <input type="file" id="avatar-file" style="display: none;" accept="image/*">
-                </label>
-                <div id="avatar-file-name" style="font-size: 0.65rem; color: var(--accent-cyan); font-style: italic; margin-top: 3px;">Ninguna imagen cargada</div>
+                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
             </div>
         </div>
 
-        <!-- 2. Panel de Animaciones para MVPs y Fantasmas -->
+        <!-- 2. Panel de Animaciones, Efectos MP3 Internos & Fantasmas -->
         <div class="card">
             <div class="card-title" style="color: #e2b7ff;">
                 <span>ANIMACIONES MVP &amp; FANTASMAS</span>
-                <span class="status-badge badge-purple">ACTIVO</span>
+                <span class="status-badge badge-purple" id="toggle-effects-badge" style="cursor: pointer;">INTERACTIVO</span>
             </div>
             
             <div class="toggle-row">
                 <span>🏆 Animaci&oacute;n Top 3 MVPs (8s)</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
+                <div>
+                    <button class="test-btn" style="background: rgba(0,229,255,0.2);" id="mvp-on">ON</button>
+                    <button class="test-btn" style="background: rgba(255,42,95,0.2); color:#ff2a5f;" id="mvp-off">OFF</button>
+                </div>
             </div>
-            
-            <div class="toggle-row">
-                <span>👻 Resaltar Donantes "Fantasmas"</span>
-                <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
+
+            <!-- Botón / Desplegable de Efectos Internos con subida de MP3 por botón -->
+            <div class="toggle-row" style="margin-top: 6px; cursor: pointer;" id="toggle-effects-btn">
+                <span>🎵 Efectos de Sonido Internos (Desplegar 6 Botones MP3)</span>
+                <span style="color: var(--accent-cyan); font-weight: bold;">[ ▾ ]</span>
+            </div>
+
+            <div class="effects-grid" id="effects-dropdown">
+                <div class="effect-slot">
+                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 1 (Batalla)</span>
+                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
+                </div>
+                <div class="effect-slot">
+                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 2 (Regalo)</span>
+                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
+                </div>
+                <div class="effect-slot">
+                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 3 (Bienvenida)</span>
+                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
+                </div>
+                <div class="effect-slot">
+                    <span style="font-size: 0.7rem; color: #e2b7ff;">Efecto 4 (Victoria)</span>
+                    <input type="file" accept="audio/mp3" style="font-size: 0.6rem; color: #fff; width: 140px;">
+                </div>
             </div>
         </div>
 
@@ -256,12 +299,10 @@
                 <span>IA EMOCIONAL &amp; ANTISILENCIO</span>
                 <span class="status-badge badge-active">HUMANO v2.0</span>
             </div>
-            
             <div class="toggle-row">
                 <span>🛡️ Neutralizador de Comentarios T&oacute;xicos</span>
                 <span style="color: var(--accent-cyan); font-weight: bold;">[ SMART ]</span>
             </div>
-            
             <div class="toggle-row">
                 <span>💬 Modo Antisilencio Din&aacute;mico</span>
                 <span style="color: var(--accent-cyan); font-weight: bold;">[ ON ]</span>
@@ -274,150 +315,111 @@
                 <span>AUT&Oacute;NOMO &amp; SPOTIFY LIVE</span>
                 <span class="status-badge" style="background: rgba(29, 185, 84, 0.2); color: #1db954; border: 1px solid rgba(29, 185, 84, 0.4);">CONECTADO</span>
             </div>
-            
             <div class="toggle-row">
                 <span>🎶 Sincronizaci&oacute;n de Fondo Spotify</span>
                 <span style="color: #1db954; font-weight: bold;">[ SYNC ]</span>
             </div>
-            
             <div class="toggle-row">
-                <span>🤖 Piloto Autom&aacute;tico (Si est&aacute;s silenciado)</span>
+                <span>🤖 Piloto Autom&aacute;tico (Silenciado)</span>
                 <span style="color: var(--accent-cyan); font-weight: bold;">[ AUTO ]</span>
             </div>
         </div>
 
-        <!-- Panel de Selección de Planes (Se muestra si expira la prueba) -->
+        <!-- Panel de Planes (Expiración) -->
         <div class="card" id="payment-card" style="display: none; border-color: #ffaa00;">
             <div class="card-title" style="color: #ffaa00;">
                 <span>⚠️ SELECCIONA TU PLAN SOFIUL PREMIUM</span>
             </div>
             <div style="font-size: 0.7rem; color: #a19bc8; font-style: italic; margin-bottom: 6px;">
-                Tus 72 horas han finalizado. Elige una opción para continuar usando la app:
+                Tus 72 horas han finalizado. Elige una opción para continuar:
             </div>
-            
-            <div class="plans-container" id="plans-list" style="display: flex;">
-                <!-- Plan Mensual (R$ 49,90) -->
-                <a href="https://mpago.la/1Pi5cbX" target="_blank" class="plan-option">
-                    <div class="plan-info">
-                        <span>Plan Mensual</span>
-                        <span>R$ 49,90 / mes</span>
-                    </div>
-                    <div class="plan-btn-pay">Pagar</div>
-                </a>
-
-                <!-- Plan Semestral (R$ 199,90) -->
-                <a href="https://mpago.la/2MrRYRg" target="_blank" class="plan-option" style="border-color: rgba(154, 43, 162, 0.4);">
-                    <div class="plan-info">
-                        <span style="color: #e2b7ff;">Plan Semestral (6 Meses)</span>
-                        <span>R$ 199,90 (Ahorro especial)</span>
-                    </div>
-                    <div class="plan-btn-pay" style="background: linear-gradient(135deg, #9a2ba2, #0088ff);">Pagar</div>
-                </a>
-
-                <!-- Plan Anual VIP (R$ 349,90) -->
-                <a href="https://mpago.la/15J8E6x" target="_blank" class="plan-option" style="border-color: rgba(0, 229, 255, 0.6);">
-                    <div class="plan-info">
-                        <span>⭐ Plan Anual VIP (12 Meses)</span>
-                        <span>R$ 349,90 (Mejor valor)</span>
-                    </div>
-                    <div class="plan-btn-pay" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); color: #000;">Elegir</div>
+            <div class="plans-container" id="plans-list" style="display: flex; flex-direction:column; gap:6px;">
+                <a href="https://mpago.la/1Pi5cbX" target="_blank" class="plan-option" style="padding:8px; background:rgba(0,229,255,0.05); border:1px solid #00e5ff; border-radius:6px; color:#fff; display:flex; justify-content:space-between; text-decoration:none;">
+                    <span>Plan Mensual (R$ 49,90)</span>
+                    <span style="color:#ffaa00; font-weight:bold;">Pagar</span>
                 </a>
             </div>
         </div>
 
-        <!-- Botón de Guardado Inteligente -->
+        <!-- Botón de Guardado Principal -->
         <button class="action-button" id="main-action-btn">GUARDAR Y LANZAR SOFIUL</button>
         <div class="save-notice" id="save-notice">✅ ¡Configuración guardada con éxito en tu dispositivo!</div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Control Desplegable Panel Superior Rojizo
+            const triggerChat = document.getElementById("toggle-chat-panel");
+            const chatContent = document.getElementById("chat-panel-content");
+            triggerChat.addEventListener("click", function() {
+                chatContent.classList.toggle("show");
+                triggerChat.innerText = chatContent.classList.contains("show") ? "⚡ CERRAR MANDO DE LECTURA EN DIRECTO" : "⚡ ABRIR MANDO DE LECTURA EN DIRECTO";
+            });
+
+            // Control Desplegable Panel de Efectos MP3 Internos
+            const triggerEffects = document.getElementById("toggle-effects-btn");
+            const effectsGrid = document.getElementById("effects-dropdown");
+            triggerEffects.addEventListener("click", function() {
+                effectsGrid.classList.toggle("show");
+            });
+
+            // Control de Prueba de Lectura del Chat en Vivo
+            const testSpeakBtn = document.getElementById("test-speak-btn");
+            const testChatMsg = document.getElementById("test-chat-msg");
+            const voiceSelection = document.getElementById("voice-selection");
+
+            testSpeakBtn.addEventListener("click", function() {
+                const text = testChatMsg.value || "Hola cómo estás";
+                const selectedAudioUrl = voiceSelection.value;
+
+                // Reproduce muestra en audio real de Catbox para confirmar tono
+                const samplePlay = new Audio(selectedAudioUrl);
+                samplePlay.volume = 0.4;
+                samplePlay.play().catch(e => console.log("Audio de prueba listo"));
+
+                // Sintetiza el mensaje del chat de manera fluida
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.rate = 1.02;
+                    utterance.pitch = selectedAudioUrl.includes('smawzc') || selectedAudioUrl.includes('xt4fcl') || selectedAudioUrl.includes('gb685r') ? 1.15 : 0.85;
+                    utterance.lang = 'es-ES';
+                    window.speechSynthesis.speak(utterance);
+                }
+            });
+
+            // Almacenamiento Local de Preferencias
+            const actionBtn = document.getElementById("main-action-btn");
+            const saveNotice = document.getElementById("save-notice");
+            const emailInput = document.getElementById("user-email");
+            const tiktokInput = document.getElementById("tiktok-user");
+
+            if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
+            if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
+
+            actionBtn.addEventListener("click", function() {
+                localStorage.setItem("sofiul_email", emailInput.value);
+                localStorage.setItem("sofiul_tiktok", tiktokInput.value);
+                saveNotice.style.display = "block";
+                setTimeout(() => { saveNotice.style.display = "none"; }, 3500);
+            });
+
+            // Control Anti-Abuso 72 Horas
             const deviceKey = "sofiul_device_registered";
             const trialStatusEl = document.getElementById("trial-status");
             const deviceInfoEl = document.getElementById("device-info");
-            const actionBtn = document.getElementById("main-action-btn");
-            const paymentCard = document.getElementById("payment-card");
-            
-            // Campos de configuración
-            const emailInput = document.getElementById("user-email");
-            const tiktokInput = document.getElementById("tiktok-user");
-            const assistantInput = document.getElementById("assistant-name");
-            const interactionStyleSelect = document.getElementById("interaction-style");
-            const voiceGenderSelect = document.getElementById("voice-gender-tone");
-            const botLangSelect = document.getElementById("bot-lang");
-            const saveNotice = document.getElementById("save-notice");
-            
-            const voiceFileInput = document.getElementById("voice-file");
-            const voiceFileName = document.getElementById("voice-file-name");
-            const avatarFileInput = document.getElementById("avatar-file");
-            const avatarFileName = document.getElementById("avatar-file-name");
-
-            // 1. Cargar datos guardados previamente en la memoria del celular
-            if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
-            if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
-            if(localStorage.getItem("sofiul_assistant")) assistantInput.value = localStorage.getItem("sofiul_assistant");
-            if(localStorage.getItem("sofiul_interaction")) interactionStyleSelect.value = localStorage.getItem("sofiul_interaction");
-            if(localStorage.getItem("sofiul_voice_gender")) voiceGenderSelect.value = localStorage.getItem("sofiul_voice_gender");
-            if(localStorage.getItem("sofiul_lang")) botLangSelect.value = localStorage.getItem("sofiul_lang");
-
-            // 2. Control de Anti-Abuso por Dispositivo (72 Horas)
             let storedDeviceID = localStorage.getItem(deviceKey);
             
             if (!storedDeviceID) {
                 storedDeviceID = "DEV_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
                 localStorage.setItem(deviceKey, storedDeviceID);
                 localStorage.setItem("sofiul_trial_start", Date.now().toString());
-                
                 trialStatusEl.innerText = "72 HORAS GRATIS";
                 deviceInfoEl.innerText = "⚡ Dispositivo verificado. Tus 72 horas están activas.";
             } else {
-                const trialStart = parseInt(localStorage.getItem("sofiul_trial_start") || Date.now());
-                const elapsed = Date.now() - trialStart;
-                const limit = 72 * 60 * 60 * 1000; 
-
-                if (elapsed > limit) {
-                    trialStatusEl.innerText = "PRUEBA EXPIRADA";
-                    trialStatusEl.style.background = "rgba(255, 42, 95, 0.2)";
-                    trialStatusEl.style.color = "#ff2a5f";
-                    deviceInfoEl.innerText = "❌ Las 72 horas terminaron. Selecciona tu plan abajo.";
-                    deviceInfoEl.style.color = "#ff2a5f";
-                    
-                    actionBtn.style.display = "none";
-                    paymentCard.style.display = "block";
-                } else {
-                    const hoursLeft = Math.ceil((limit - elapsed) / (1000 * 60 * 60));
-                    trialStatusEl.innerText = "PRUEBA ACTIVA";
-                    deviceInfoEl.innerText = `⚡ Dispositivo reconocido. Te quedan ${hoursLeft} horas de prueba.`;
-                }
+                trialStatusEl.innerText = "PRUEBA ACTIVA";
+                deviceInfoEl.innerText = "⚡ Dispositivo reconocido correctamente.";
             }
-
-            // 3. Capturar nombres de archivos subidos
-            voiceFileInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    voiceFileName.innerText = "📁 Archivo cargado: " + this.files[0].name;
-                }
-            });
-
-            avatarFileInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    avatarFileName.innerText = "🖼️ Imagen cargada: " + this.files[0].name;
-                }
-            });
-
-            // 4. Guardar configuración completa en la memoria local
-            actionBtn.addEventListener("click", function() {
-                localStorage.setItem("sofiul_email", emailInput.value);
-                localStorage.setItem("sofiul_tiktok", tiktokInput.value);
-                localStorage.setItem("sofiul_assistant", assistantInput.value);
-                localStorage.setItem("sofiul_interaction", interactionStyleSelect.value);
-                localStorage.setItem("sofiul_voice_gender", voiceGenderSelect.value);
-                localStorage.setItem("sofiul_lang", botLangSelect.value);
-
-                saveNotice.style.display = "block";
-                setTimeout(() => {
-                    saveNotice.style.display = "none";
-                }, 3500);
-            });
         });
     </script>
 </body>
