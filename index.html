@@ -55,7 +55,6 @@
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
         .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         .badge-active { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
-        .badge-purple { background: rgba(154, 43, 162, 0.2); color: #e2b7ff; border: 1px solid rgba(154, 43, 162, 0.4); }
         .badge-trial { background: rgba(255, 170, 0, 0.15); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
 
         .input-group { margin-bottom: 8px; }
@@ -76,7 +75,7 @@
             cursor: pointer; box-sizing: border-box; font-style: italic;
         }
 
-        /* Botón Rojizo / Degradado Desplegable Principal */
+        /* Botón Desplegable Rojizo Superior */
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff2a5f, #0088ff);
             color: #fff; border: none; border-radius: 8px; padding: 12px;
@@ -84,12 +83,21 @@
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
             box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
+
+        /* Botón Desplegable del Banco de Voces */
+        .voice-dropdown-btn {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000; border: none; border-radius: 8px; padding: 10px;
+            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
+            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
+            margin-top: 6px; box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        }
         
-        /* Contenedor deslizante */
-        .collapsible-transmission {
+        /* Contenedores deslizantes de acordeón */
+        .collapsible-content {
             max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         }
-        .collapsible-transmission.show {
+        .collapsible-content.show {
             max-height: 1200px; transition: max-height 0.5s ease-in;
         }
 
@@ -144,17 +152,17 @@
     </header>
 
     <div class="container">
-        <!-- 1. Panel Principal con el Botón Rojizo Desplegable -->
+        <!-- 1. Panel de Mando en Vivo (Desplegable) -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
                 <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
             </div>
             
             <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
-                ⚡ MANDO DE TRANSMISIÓN ACTIVO
+                ⚡ ABRIR MANDO DE TRANSMISIÓN
             </button>
             
-            <div class="collapsible-transmission show" id="transmission-content">
+            <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
                     <div class="card-title" style="color: #ff2a5f;">
                         <span>MANDO DE TRANSMISIÓN EN DIRECTO</span>
@@ -214,7 +222,7 @@
             </div>
         </div>
 
-        <!-- 2. Estado de Cuenta & Control Anti-Abuso (72 Horas & Gmail obligatorio) -->
+        <!-- 2. Estado de Cuenta & Seguridad (72 Horas & Gmail) -->
         <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
             <div class="card-title" style="color: #ffaa00;">
                 <span>ESTADO DE CUENTA &amp; SEGURIDAD</span>
@@ -244,7 +252,7 @@
             </div>
         </div>
 
-        <!-- 4. Banco de Voces HD (3 Mujeres y 3 Varones con Catbox) -->
+        <!-- 4. Banco de Voces HD Desplegable con Botones de Prueba y MP3 -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
@@ -268,33 +276,46 @@
                 </select>
             </div>
 
-            <div style="font-size: 0.7rem; color: var(--text-muted); font-style: italic; margin: 8px 0 4px 0; font-weight: bold;">
-                🎧 BANCO DE VOCES (TOCA PARA PROBAR):
+            <!-- Botón Desplegable del Banco de Voces -->
+            <button class="voice-dropdown-btn" id="toggle-voice-btn">
+                🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)
+            </button>
+
+            <!-- Contenedor Deslizable del Banco de Voces con los 6 botones MP3 -->
+            <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
+                <div class="voice-row">
+                    <span>1. ♀ Norah (Cálida)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
+                </div>
+                <div class="voice-row">
+                    <span>2. ♀ Valentina (Dulce)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
+                </div>
+                <div class="voice-row">
+                    <span>3. ♀ Camila (Alegre)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/gb685r.mp3').play()">▶ Probar</button>
+                </div>
+                <div class="voice-row">
+                    <span>4. ♂ Mateo Pro (Profundo)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
+                </div>
+                <div class="voice-row">
+                    <span>5. ♂ Lucas (Juvenil)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
+                </div>
+                <div class="voice-row">
+                    <span>6. ♂ Thiago (Firme)</span>
+                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
+                </div>
             </div>
 
-            <div class="voice-row">
-                <span>1. ♀ Norah (Cálida)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>2. ♀ Valentina (Dulce)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>3. ♀ Camila (Alegre)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/gb685r.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>4. ♂ Mateo Pro (Profundo)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>5. ♂ Lucas (Juvenil)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
-            </div>
-            <div class="voice-row">
-                <span>6. ♂ Thiago (Firme)</span>
-                <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
+            <div class="input-group" style="margin-top: 10px;">
+                <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
+                <label class="file-upload-btn">
+                    📁 Seleccionar Archivo MP3 desde el Celular
+                    <input type="file" id="voice-file" style="display: none;" accept="audio/*">
+                </label>
+                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
             </div>
         </div>
 
@@ -305,13 +326,22 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Desplegable del botón rojizo superior
-            const triggerBtn = document.getElementById("toggle-transmission-btn");
-            const contentBox = document.getElementById("transmission-content");
+            // 1. Desplegable del Mando de Transmisión (Arriba)
+            const triggerTrans = document.getElementById("toggle-transmission-btn");
+            const contentTrans = document.getElementById("transmission-content");
 
-            triggerBtn.addEventListener("click", function() {
-                contentBox.classList.toggle("show");
-                triggerBtn.innerText = contentBox.classList.contains("show") ? "⚡ MANDO DE TRANSMISIÓN ACTIVO" : "⚡ ABRIR MANDO DE TRANSMISIÓN";
+            triggerTrans.addEventListener("click", function() {
+                contentTrans.classList.toggle("show");
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR MANDO DE TRANSMISIÓN" : "⚡ ABRIR MANDO DE TRANSMISIÓN";
+            });
+
+            // 2. Desplegable del Banco de Voces (Abajo)
+            const triggerVoice = document.getElementById("toggle-voice-btn");
+            const contentVoice = document.getElementById("voice-content");
+
+            triggerVoice.addEventListener("click", function() {
+                contentVoice.classList.toggle("show");
+                triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)";
             });
 
             // Control Anti-Abuso 72 Horas y Memoria Local
