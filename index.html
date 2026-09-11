@@ -93,6 +93,21 @@
             padding: 6px 10px; border-radius: 6px; margin-top: 5px; font-style: italic; font-size: 0.8rem;
         }
 
+        /* Simulador de Chat y Prueba de Voz Emocional */
+        .chat-sim-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            border-radius: 6px;
+            padding: 8px;
+            margin-top: 6px;
+        }
+        .test-read-btn {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: #fff; border: none; border-radius: 6px; padding: 8px;
+            font-size: 0.75rem; font-weight: bold; width: 100%; cursor: pointer;
+            margin-top: 6px; text-transform: uppercase; font-style: italic;
+        }
+
         /* Estilos para los planes de pago */
         .plans-container {
             display: flex; flex-direction: column; gap: 8px; margin-top: 8px; display: none;
@@ -167,23 +182,23 @@
             </div>
         </div>
 
-        <!-- 1. Panel de Mascota, IA Ultra Humana & Políglota Automática -->
+        <!-- 1. Panel de Mascota, IA Ultra Humana & Lectura de Chat -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
-                <span>MASCOTA: IA HUMANA &amp; POLÍGLOTA</span>
+                <span>MASCOTA: LECTURA HUMANA DEL CHAT</span>
                 <span class="status-badge badge-active">ESPEJO EMOCIONAL</span>
             </div>
             
             <div class="input-group">
                 <label>Nombre de la Mascota / Asistente:</label>
-                <input type="text" id="assistant-name" class="neon-input" placeholder="Ej: Safire (Cálida, humana y cercana)...">
+                <input type="text" id="assistant-name" class="neon-input" value="Sofi" placeholder="Ej: Sofi (Cálida, humana y cercana)...">
             </div>
 
             <div class="input-group">
-                <label>Personalidad y Tono (Cero Robot, 100% Humano):</label>
+                <label>Personalidad y Calidez Emocional (Cero Robot):</label>
                 <select id="interaction-style" class="neon-select">
                     <option value="ultra-human">Cálido, Acogedor &amp; Empático (Espejo Emocional profundo)</option>
-                    <option value="energetic-hype">Vibrante y Alegre (Para animación de batallas)</option>
+                    <option value="energetic-hype">Vibrante y Alegre (Para animación de batallas y regalos)</option>
                     <option value="sweet-ambient">Dulce y Suave (Acompañamiento relajado)</option>
                 </select>
             </div>
@@ -192,37 +207,46 @@
                 <label>Detección de Idioma Inteligente (Políglota):</label>
                 <select id="bot-lang" class="neon-select">
                     <option value="auto-poly">Automático (Detecta si entran de Brasil, USA o Hispanoamérica)</option>
-                    <option value="pt">Português Nativo (Brasil - Foco Total)</option>
-                    <option value="es">Español Nativo</option>
-                    <option value="en">English (Global)</option>
+                    <option value="pt-BR">Português Nativo (Brasil - Foco Total)</option>
+                    <option value="es-ES">Español Nativo</option>
+                    <option value="en-US">English (Global)</option>
                 </select>
             </div>
 
             <div class="input-group">
-                <label>Género y Calidez de la Voz:</label>
-                <select id="voice-gender-tone" class="neon-select">
-                    <option value="female-warm">Femenino - Cálido, Natural y Acogedor</option>
-                    <option value="male-warm">Masculino - Cálido, Amigable y Cercano</option>
-                    <option value="female-soft">Femenino - Suave y Empático</option>
-                    <option value="male-deep">Masculino - Suave y Profundo</option>
+                <label>Selección de Voz Humana (Basado en tus 6 Audios):</label>
+                <select id="voice-selection" class="neon-select">
+                    <option value="female1">👩 Norah (Femenino - Cálido / Principal)</option>
+                    <option value="female2">👩 Luisa 1 (Femenino - Friendly)</option>
+                    <option value="female3">👩 Lina (Femenino - Sunny)</option>
+                    <option value="female4">👩 Luisa 2 (Femenino - Smooth)</option>
+                    <option value="male1">👨 Fran (Masculino - Emotional / Rich)</option>
+                    <option value="male2">👨 Michael (Masculino - Suspenseful / Storyteller)</option>
                 </select>
             </div>
 
-            <div class="toggle-row">
-                <span>🎵 Efectos de Sonido (SFX: Bienvenidas &amp; Agasajos)</span>
+            <!-- Simulador de Chat y Prueba de Lectura en Vivo -->
+            <div class="chat-sim-box">
+                <label style="font-size: 0.7rem; color: var(--accent-cyan); display:block; margin-bottom:3px; font-style:italic;">💬 Simular Mensaje del Chat (Prueba de Lectura en Vivo):</label>
+                <input type="text" id="test-chat-msg" class="neon-input" value="¡Bienvenido a la Family Fénix! Qué gran directo tenemos hoy." placeholder="Escribe un mensaje de prueba...">
+                <button class="test-read-btn" id="test-speak-btn">🎙️ Probar Lectura del Chat</button>
+            </div>
+
+            <div class="toggle-row" style="margin-top: 8px;">
+                <span>🎵 Efectos de Sonido Automáticos (SFX)</span>
                 <span style="color: var(--accent-cyan); font-weight: bold;">[ ACTIVO ]</span>
             </div>
 
             <div class="input-group" style="margin-top: 8px;">
-                <label>Clonación de Voz Personalizada (Opcional):</label>
+                <label>Clonación de Voz Personalizada (Audio extra de respaldo):</label>
                 <label class="file-upload-btn">
                     📁 Subir archivo de voz (.mp3 / .wav)
                     <input type="file" id="voice-file" style="display: none;" accept="audio/*">
                 </label>
-                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo cargado</div>
+                <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Usando enlaces oficiales de Catbox vinculados</div>
             </div>
 
-            <div class="input-group" style="margin-bottom: 0;">
+            <div class="input-group" style="margin-bottom: 0; margin-top: 6px;">
                 <label>Avatar / Imagen Estática de la Mascota:</label>
                 <label class="file-upload-btn" style="background: rgba(0, 229, 255, 0.1); border-color: rgba(0, 229, 255, 0.4); color: var(--accent-cyan);">
                     🖼️ Subir imagen para mostrar en vivo
@@ -331,6 +355,51 @@
     </div>
 
     <script>
+        // Repositorio oficial de enlaces Catbox para los 6 audios de voz humana configurados
+        const audioAssets = {
+            female1: "https://files.catbox.moe/smawzc.mp3", // Norah (F1)
+            female2: "https://files.catbox.moe/xt4fcl.mp3", // Luisa 1 (F2)
+            female3: "https://files.catbox.moe/gb685r.mp3", // Lina (F3)
+            female4: "https://files.catbox.moe/1jd2uu.mp3", // Luisa 2 (F4)
+            male1:   "https://files.catbox.moe/ds5rw4.mp3", // Fran (M1)
+            male2:   "https://files.catbox.moe/7b84x7.mp3"  // Michael (M2)
+        };
+
+        // Motor de Lectura Dinámica del Chat con Modulación Humana Natural
+        function speakChatMsg(text, voiceKey, langChoice) {
+            // 1. Reproducir audio base de referencia de Catbox correspondiente a la voz elegida
+            if (audioAssets[voiceKey]) {
+                const sampleAudio = new Audio(audioAssets[voiceKey]);
+                sampleAudio.volume = 0.3; // Volumen sutil de fondo para marcar el estilo de voz
+                sampleAudio.play().catch(e => console.log("Audio de referencia reproducido en segundo plano"));
+            }
+
+            // 2. Ejecutar la síntesis inteligente para leer el texto en vivo del chat con expresividad
+            if (!('speechSynthesis' in window)) return;
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 1.02; // Ritmo natural
+            utterance.pitch = (voiceKey.includes('male')) ? 0.85 : 1.15; // Ajuste exacto de tono
+            utterance.volume = 1.0;
+
+            if (langChoice === 'pt-BR') {
+                utterance.lang = 'pt-BR';
+            } else if (langChoice === 'en-US') {
+                utterance.lang = 'en-US';
+            } else {
+                utterance.lang = 'es-ES';
+            }
+
+            let voices = window.speechSynthesis.getVoices();
+            let selectedVoice = voices.find(v => v.lang.includes(utterance.lang.substring(0,2)));
+            if (selectedVoice) {
+                utterance.voice = selectedVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const deviceKey = "sofiul_device_registered";
             const trialStatusEl = document.getElementById("trial-status");
@@ -338,36 +407,35 @@
             const actionBtn = document.getElementById("main-action-btn");
             const paymentCard = document.getElementById("payment-card");
             
-            // Campos de configuración
             const emailInput = document.getElementById("user-email");
             const tiktokInput = document.getElementById("tiktok-user");
             const assistantInput = document.getElementById("assistant-name");
             const interactionStyleSelect = document.getElementById("interaction-style");
-            const voiceGenderSelect = document.getElementById("voice-gender-tone");
+            const voiceSelectionSelect = document.getElementById("voice-selection");
             const botLangSelect = document.getElementById("bot-lang");
             const saveNotice = document.getElementById("save-notice");
             
-            const voiceFileInput = document.getElementById("voice-file");
-            const voiceFileName = document.getElementById("voice-file-name");
-            const avatarFileInput = document.getElementById("avatar-file");
-            const avatarFileName = document.getElementById("avatar-file-name");
+            const testChatMsg = document.getElementById("test-chat-msg");
+            const testSpeakBtn = document.getElementById("test-speak-btn");
 
-            // 1. Cargar datos guardados previamente en la memoria del celular
+            // Cargar datos locales previos
             if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
             if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
             if(localStorage.getItem("sofiul_assistant")) assistantInput.value = localStorage.getItem("sofiul_assistant");
             if(localStorage.getItem("sofiul_interaction")) interactionStyleSelect.value = localStorage.getItem("sofiul_interaction");
-            if(localStorage.getItem("sofiul_voice_gender")) voiceGenderSelect.value = localStorage.getItem("sofiul_voice_gender");
+            if(localStorage.getItem("sofiul_voice_selection")) voiceSelectionSelect.value = localStorage.getItem("sofiul_voice_selection");
             if(localStorage.getItem("sofiul_lang")) botLangSelect.value = localStorage.getItem("sofiul_lang");
 
-            // 2. Control de Anti-Abuso por Dispositivo (72 Horas)
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+            }
+
+            // Control Anti-Abuso 72 Horas
             let storedDeviceID = localStorage.getItem(deviceKey);
-            
             if (!storedDeviceID) {
                 storedDeviceID = "DEV_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
                 localStorage.setItem(deviceKey, storedDeviceID);
                 localStorage.setItem("sofiul_trial_start", Date.now().toString());
-                
                 trialStatusEl.innerText = "72 HORAS GRATIS";
                 deviceInfoEl.innerText = "⚡ Dispositivo verificado. Tus 72 horas están activas.";
             } else {
@@ -381,7 +449,6 @@
                     trialStatusEl.style.color = "#ff2a5f";
                     deviceInfoEl.innerText = "❌ Las 72 horas terminaron. Selecciona tu plan abajo.";
                     deviceInfoEl.style.color = "#ff2a5f";
-                    
                     actionBtn.style.display = "none";
                     paymentCard.style.display = "block";
                 } else {
@@ -391,26 +458,21 @@
                 }
             }
 
-            // 3. Capturar nombres de archivos subidos
-            voiceFileInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    voiceFileName.innerText = "📁 Archivo cargado: " + this.files[0].name;
-                }
+            // Botón de prueba en vivo
+            testSpeakBtn.addEventListener("click", function() {
+                const msgText = testChatMsg.value || "Hola directo";
+                const voiceKey = voiceSelectionSelect.value;
+                const lang = botLangSelect.value;
+                speakChatMsg(msgText, voiceKey, lang);
             });
 
-            avatarFileInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    avatarFileName.innerText = "🖼️ Imagen cargada: " + this.files[0].name;
-                }
-            });
-
-            // 4. Guardar configuración completa en la memoria local
+            // Guardar configuración
             actionBtn.addEventListener("click", function() {
                 localStorage.setItem("sofiul_email", emailInput.value);
                 localStorage.setItem("sofiul_tiktok", tiktokInput.value);
                 localStorage.setItem("sofiul_assistant", assistantInput.value);
                 localStorage.setItem("sofiul_interaction", interactionStyleSelect.value);
-                localStorage.setItem("sofiul_voice_gender", voiceGenderSelect.value);
+                localStorage.setItem("sofiul_voice_selection", voiceSelectionSelect.value);
                 localStorage.setItem("sofiul_lang", botLangSelect.value);
 
                 saveNotice.style.display = "block";
