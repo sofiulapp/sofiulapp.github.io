@@ -63,15 +63,14 @@
             transition: opacity 0.4s ease;
         }
         
-        /* LOGOTIPO: Con el zoom exacto (1.35) para eliminar el espacio vacío inferior y cubrir todo el círculo */
+        /* LOGOTIPO: Usamos contain para que encaje a la perfección sin chocar con el borde neón */
         #logo-layer { 
             opacity: 1; z-index: 2; 
-            object-fit: cover; 
-            transform: scale(1.35);
-            transform-origin: center center;
+            object-fit: contain; 
+            background-color: #000;
         } 
         
-        /* MASCOTA (Inalterada, manteniendo su estructura exacta): */
+        /* MASCOTA (Inalterada): */
         #avatar-layer { 
             opacity: 0; z-index: 1; 
             object-fit: cover; 
