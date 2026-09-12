@@ -58,26 +58,25 @@
             border-color: #ffaa00 !important;
         }
         
-        /* NUEVO MÉTODO PROFESIONAL: El logo se maneja como fondo nativo del círculo, anclado de forma perfecta y cabal */
-        #logo-layer {
+        .mascot-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://files.catbox.moe/4fp3sa.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            z-index: 2;
-            opacity: 1;
             transition: opacity 0.4s ease;
         }
         
+        /* NUEVO LOGOTIPO: Con el nuevo enlace y la proporción exacta de cobertura de la mascota */
+        #logo-layer { 
+            opacity: 1; z-index: 2; 
+            object-fit: cover; 
+            transform: scale(1.35);
+            transform-origin: center center;
+        } 
+        
         /* MASCOTA (Inalterada, manteniendo su estructura exacta): */
         #avatar-layer { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             opacity: 0; z-index: 1; 
             object-fit: cover; 
             transform: scale(1.35);
             transform-origin: center center;
-            transition: opacity 0.4s ease;
         } 
 
         /* Transición de la mascota al activarse */
@@ -185,8 +184,8 @@
         <!-- Zona de Rebote Animado y Ping-Pong -->
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
-                <div id="logo-layer"></div>
-                <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
+                <img id="logo-layer" class="mascot-layer" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+                <img id="avatar-layer" class="mascot-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
         <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)</div>
@@ -454,7 +453,7 @@
             let urlToPlay = customEffectUrls[label];
             
             if (!urlToPlay) {
-                setTimeout(() => resetMsncotState(), 3000);
+                setTimeout(() => resetMascotState(), 3000);
                 return;
             }
 
