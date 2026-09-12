@@ -49,7 +49,6 @@
             transform: scale(1.08);
         }
 
-        /* MODO BATALLA: Anclado sobre la imagen estática */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
@@ -88,7 +87,7 @@
             outline: none; font-family: inherit; font-style: italic;
         }
 
-        /* Botón Rojizo Desplegable para EFECTOS DE SONIDO */
+        /* Botón Rojizo Desplegable Exacto */
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff2a5f, #0088ff);
             color: #fff; border: none; border-radius: 8px; padding: 12px;
@@ -97,7 +96,7 @@
             box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
 
-        /* Botón Desplegable para el BANCO DE VOCES HD */
+        /* Botón Banco de Voces HD Independiente */
         .voice-dropdown-btn {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #000; border: none; border-radius: 8px; padding: 12px;
@@ -109,7 +108,7 @@
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .collapsible-content.show { max-height: 1800px; transition: max-height 0.5s ease-in; }
 
-        /* Cuadrícula de los 6 Botones de Efectos de Sonido con MP3 */
+        /* Cuadrícula exacta de los 6 Botones de Efectos de Sonido */
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
@@ -131,7 +130,6 @@
             cursor: pointer; font-style: italic; text-align: center;
         }
 
-        /* Estilos del Banco de Voces HD con ON/OFF individual */
         .voice-row {
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
@@ -173,7 +171,7 @@
     </header>
 
     <div class="container">
-        <!-- 1. BOTÓN ROJIZO: EFECTOS DE SONIDO & SPOTIFY -->
+        <!-- 1. BOTÓN ROJIZO: PANTALLA DE DIRECTO (EFECTOS DE SONIDO Y SPOTIFY) -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
                 <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
@@ -186,48 +184,47 @@
             <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
                     <div class="card-title" style="color: #ff2a5f;">
-                        <span>EFECTOS DE SONIDO &amp; MODO BATALLA</span>
+                        <span>PANTALLA DE COMANDOS &amp; AUDIO EN DIRECTO</span>
                     </div>
 
-                    <!-- Botón de Modo Batalla Anclado -->
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff2a5f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         ⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
-                        🎮 Botonera de 6 Comandos de Efectos (Toca o sube tu MP3 en cada botón):
+                        🎮 6 Botones de Efectos (Sube tu MP3 en cada botón para activarlo):
                     </div>
 
-                    <!-- LOS 6 BOTONES DE COMANDO DE EFECTOS ESPECIALES -->
+                    <!-- LOS 6 BOTONES DE EFECTOS LIMPIOS (SIN AUDIO POR DEFECTO) -->
                     <div class="effects-grid-6">
                         <div class="effect-box">
                             <div class="effect-box-title">😂 1. Risa Divertida</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/36b8b6.mp3', 'Risa Divertida')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Divertida')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Divertida')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
                             <div class="effect-box-title">😈 2. Risa Burlona</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/xt4fcl.mp3', 'Risa Burlona')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Burlona')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Burlona')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
                             <div class="effect-box-title">🎉 3. Gritos de Júbilo</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/smawzc.mp3', 'Gritos de Júbilo')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Gritos de Júbilo')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Gritos de Júbilo')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
                             <div class="effect-box-title">😱 4. Sorpresa / Grito</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/ds5rw4.mp3', 'Sorpresa')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Sorpresa')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Sorpresa')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
                             <div class="effect-box-title">🔥 5. Hype &amp; Fiesta</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/7b84x7.mp3', 'Hype')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Hype')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Hype')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
                             <div class="effect-box-title">🎁 6. Regalo Épico</div>
-                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/1jd2uu.mp3', 'Regalo Épico')">▶ Tocar</button>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Regalo Épico')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Regalo Épico')" style="display:none;"></label>
                         </div>
                     </div>
@@ -267,7 +264,7 @@
             </div>
         </div>
 
-        <!-- 4. BOTÓN INDEPENDIENTE: BANCO DE VOCES HD CON ON/OFF Y VOZ PERSONALIZADA -->
+        <!-- 4. BANCO DE VOCES HD INDEPENDIENTE (Con ON/OFF y Voz Propia) -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD &amp; VOZ PERSONALIZADA</span>
@@ -322,7 +319,6 @@
                     </div>
                 </div>
 
-                <!-- Subida de Voz Personalizada con su botón ON/OFF propio -->
                 <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
                     <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
                     <div style="display: flex; gap: 6px; align-items: center;">
@@ -400,9 +396,13 @@
             }
         }
 
-        // Reproducir Efectos de Sonido del Botón Rojizo
-        function playEffect(defaultUrl, label) {
-            let urlToPlay = customEffectUrls[label] || defaultUrl;
+        // Reproducir solo si el usuario ha subido un MP3 propio a ese botón
+        function playCustomEffect(label) {
+            let urlToPlay = customEffectUrls[label];
+            if (!urlToPlay) {
+                alert("⚠️ Aún no has subido ningún archivo MP3 para '" + label + "'. Toca 'Subir MP3' primero.");
+                return;
+            }
             const audio = new Audio(urlToPlay);
             audio.play().then(() => {
                 mascot.classList.add("speaking");
@@ -425,7 +425,7 @@
             if(input.files && input.files[0]) {
                 const file = input.files[0];
                 customEffectUrls[label] = URL.createObjectURL(file);
-                alert("✅ ¡Audio MP3 para '" + label + "' cargado con éxito!");
+                alert("✅ ¡Audio MP3 para '" + label + "' cargado con éxito! Ya puedes tocar el botón.");
             }
         }
 
@@ -481,7 +481,6 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Desplegable rojizo de efectos
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
@@ -489,7 +488,6 @@
                 triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR PANTALLA DE DIRECTO" : "⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES";
             });
 
-            // Desplegable independiente del Banco de Voces HD
             const trVoice = document.getElementById("toggle-voice-btn");
             const coVoice = document.getElementById("voice-content");
             trVoice.addEventListener("click", function() {
@@ -497,7 +495,6 @@
                 trVoice.innerText = coVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (ON / OFF)";
             });
 
-            // Input de voz propia
             const customVoiceInput = document.getElementById("custom-voice-file");
             const voiceFileName = document.getElementById("voice-file-name");
             customVoiceInput.addEventListener("change", function() {
