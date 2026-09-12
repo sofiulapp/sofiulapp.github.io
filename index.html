@@ -261,7 +261,7 @@
             </div>
         </div>
 
-        <!-- 4. Banco de Voces HD Desplegable con Sueño (Sueñitos) de LimeWire Integrado -->
+        <!-- 4. Banco de Voces HD Desplegable con ON/OFF y Soporte MP3 Personalizado -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
@@ -278,7 +278,7 @@
                 <select id="voice-selection" class="neon-select">
                     <option value="https://files.catbox.moe/smawzc.mp3">1. ♀ Norah (Cálida y Afectuosa - Latam)</option>
                     <option value="https://files.catbox.moe/xt4fcl.mp3">2. ♀ Valentina (Dulce)</option>
-                    <option value="https://limewire.com/d/HTFdV#BpjUPcqBEc">3. ♀ Sueño (Sueñitos)</option>
+                    <option value="https://files.catbox.moe/36b8b6.mp3">3. ♀ Sueño (Sueñitos)</option>
                     <option value="https://files.catbox.moe/ds5rw4.mp3">4. ♂ Mateo Pro (Profundo)</option>
                     <option value="https://files.catbox.moe/7b84x7.mp3">5. ♂ Lucas (Juvenil)</option>
                     <option value="https://files.catbox.moe/1jd2uu.mp3">6. ♂ Thiago (Firme)</option>
@@ -309,8 +309,8 @@
                 <div class="voice-row">
                     <span>3. ♀ Sueño (Sueñitos)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://limewire.com/d/HTFdV#BpjUPcqBEc').play()">▶ Probar</button>
-                        <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://limewire.com/d/HTFdV#BpjUPcqBEc', 2)">OFF</button>
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/36b8b6.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
@@ -335,13 +335,16 @@
                     </div>
                 </div>
 
-                <!-- Subida de voz personalizada -->
+                <!-- Subida de voz personalizada con su propio ON/OFF -->
                 <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
                     <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
-                    <label class="file-upload-btn">
-                        📁 Seleccionar Archivo MP3 desde el Celular
-                        <input type="file" id="voice-file" style="display: none;" accept="audio/*">
-                    </label>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <label class="file-upload-btn" style="flex: 1; margin: 0;">
+                            📁 Seleccionar MP3 del Celular
+                            <input type="file" id="voice-file" style="display: none;" accept="audio/*">
+                        </label>
+                        <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
+                    </div>
                     <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
                 </div>
             </div>
@@ -353,12 +356,46 @@
     </div>
 
     <script>
-        // Función para cambiar el estado visual ON/OFF de las voces en directo
+        let customAudioUrl = "";
+
+        // Función para cambiar el estado visual ON/OFF de las voces del banco
         function setVoiceActive(audioUrl, index) {
             const selectEl = document.getElementById("voice-selection");
             selectEl.value = audioUrl;
 
-            // Apagar todos los botones y ponerles "OFF"
+            // Apagar todos los botones del banco y el personalizado
+            for(let i = 0; i <= 5; i++) {
+                const btn = document.getElementById("btn-voice-" + i);
+                if(btn) {
+                    btn.innerText = "OFF";
+                    btn.classList.remove("active-on");
+                }
+            }
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) {
+                customBtn.innerText = "OFF";
+                customBtn.classList.remove("active-on");
+            }
+
+            // Encender únicamente el botón seleccionado con "ON"
+            const activeBtn = document.getElementById("btn-voice-" + index);
+            if(activeBtn) {
+                activeBtn.innerText = "ON";
+                activeBtn.classList.add("active-on");
+            }
+        }
+
+        // Función para activar la voz personalizada subida desde el celular
+        function setCustomVoiceActive() {
+            if(!customAudioUrl) {
+                alert("⚠️ Primero selecciona un archivo MP3 desde tu celular.");
+                return;
+            }
+
+            const selectEl = document.getElementById("voice-selection");
+            selectEl.value = customAudioUrl;
+
+            // Apagar las 6 voces del banco
             for(let i = 0; i <= 5; i++) {
                 const btn = document.getElementById("btn-voice-" + i);
                 if(btn) {
@@ -367,11 +404,11 @@
                 }
             }
 
-            // Encender únicamente el botón seleccionado con "ON" y color activo
-            const activeBtn = document.getElementById("btn-voice-" + index);
-            if(activeBtn) {
-                activeBtn.innerText = "ON";
-                activeBtn.classList.add("active-on");
+            // Encender el botón de la voz personalizada
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) {
+                customBtn.innerText = "ON";
+                customBtn.classList.add("active-on");
             }
         }
 
@@ -394,12 +431,28 @@
                 triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)";
             });
 
-            // Mostrar nombre del archivo MP3 personalizado seleccionado
+            // Mostrar nombre del archivo MP3 personalizado seleccionado y crear su URL local
             const voiceFileInput = document.getElementById("voice-file");
             const voiceFileName = document.getElementById("voice-file-name");
             voiceFileInput.addEventListener("change", function() {
                 if(this.files && this.files[0]) {
-                    voiceFileName.innerText = "📁 Archivo cargado: " + this.files[0].name;
+                    const file = this.files[0];
+                    voiceFileName.innerText = "📁 Archivo cargado: " + file.name;
+                    customAudioUrl = URL.createObjectURL(file);
+                    
+                    // Agregar opción al select si no existe
+                    const selectEl = document.getElementById("voice-selection");
+                    let customOpt = document.getElementById("custom-select-option");
+                    if(!customOpt) {
+                        customOpt = document.createElement("option");
+                        customOpt.id = "custom-select-option";
+                        selectEl.appendChild(customOpt);
+                    }
+                    customOpt.value = customAudioUrl;
+                    customOpt.text = "⭐ Personalizado: " + file.name;
+                    
+                    // Auto-encender el ON de la voz personalizada al cargar el archivo
+                    setCustomVoiceActive();
                 }
             });
 
@@ -421,11 +474,10 @@
                 const savedVoice = localStorage.getItem("sofiul_voice_selection");
                 voiceSelection.value = savedVoice;
                 
-                // Marcar automáticamente el botón ON que corresponda a la voz guardada
                 const urls = [
                     "https://files.catbox.moe/smawzc.mp3",
                     "https://files.catbox.moe/xt4fcl.mp3",
-                    "https://limewire.com/d/HTFdV#BpjUPcqBEc",
+                    "https://files.catbox.moe/36b8b6.mp3",
                     "https://files.catbox.moe/ds5rw4.mp3",
                     "https://files.catbox.moe/7b84x7.mp3",
                     "https://files.catbox.moe/1jd2uu.mp3"
