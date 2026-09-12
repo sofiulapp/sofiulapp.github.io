@@ -39,14 +39,14 @@
             position: absolute; top: 35px; left: 40px; overflow: hidden; background: #000;
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        /* Efecto cuando habla o interactúa */
+        /* Efecto de Animación Vivo cuando habla o interactúa */
         .neon-container.speaking {
             border-color: #ff69b4 !important;
             box-shadow: 0 0 45px rgba(255, 105, 180, 0.9) !important;
-            transform: scale(1.12);
+            transform: scale(1.15) rotate(3deg);
         }
 
         /* MODO BATALLA: Anclado al centro */
@@ -58,16 +58,17 @@
             border-color: #ffaa00 !important;
         }
         
-        /* Capas ajustadas para llenar todo el círculo sin espacios negros */
+        /* Capas ajustadas para llenar exactamente el círculo de borde a borde (Sin espacios negros) */
         .mascot-layer {
             position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover; object-position: center center;
-            transition: opacity 0.4s ease;
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
-        #logo-layer { opacity: 1; z-index: 2; } 
-        #avatar-layer { opacity: 0; z-index: 1; } 
+        #logo-layer { opacity: 1; z-index: 2; transform: scale(1); } 
+        #avatar-layer { opacity: 0; z-index: 1; transform: scale(0.95); } 
 
-        .neon-container.show-mascot #logo-layer { opacity: 0; }
-        .neon-container.show-mascot #avatar-layer { opacity: 1; }
+        /* Transición Animada de la Mascota Detrás del Logo */
+        .neon-container.show-mascot #logo-layer { opacity: 0; transform: scale(1.05); }
+        .neon-container.show-mascot #avatar-layer { opacity: 1; transform: scale(1); }
 
         header {
             width: 100%; text-align: center; background: #070a12; position: sticky; top: 0; z-index: 10;
@@ -167,7 +168,7 @@
 </head>
 <body>
     <header>
-        <!-- Zona de Rebote Animado (Ping-Pong Restaurado) -->
+        <!-- Zona de Rebote Animado y Ping-Pong -->
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
                 <img id="logo-layer" class="mascot-layer" src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Logo Estático">
@@ -362,7 +363,7 @@
         let customEffectUrls = {};
         let customVoiceUrl = "";
 
-        // Motor de rebote ping-pong animado restaurado
+        // Motor de rebote ping-pong activo
         function updatePingPong() {
             if (!stage || !mascotContainer || isBattleMode) return;
             const sW = stage.clientWidth, sH = stage.clientHeight;
@@ -388,7 +389,7 @@
         }
         requestAnimationFrame(updatePingPong);
 
-        // Botón manual para mostrar/ocultar la mascota instantáneamente
+        // Botón manual para alternar y ver la mascota animada
         function toggleTestMascot() {
             mascotContainer.classList.toggle("show-mascot");
             mascotContainer.classList.toggle("speaking");
@@ -399,7 +400,6 @@
             }
         }
 
-        // Modo Batalla
         function toggleBattleMode() {
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
