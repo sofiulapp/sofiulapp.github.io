@@ -58,17 +58,19 @@
             border-color: #ffaa00 !important;
         }
         
-        /* NUEVO MÉTODO DEFINITIVO: Usamos posicionamiento absoluto directo con transformaciones limpias para centrar y bajar al milímetro exacto */
+        /* MÉTODO PROFESIONAL DEFINITIVO: object-fit contain con escala equilibrada y centrado exacto */
         #logo-layer { 
             position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            width: 125%; 
-            height: 125%;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
             opacity: 1; 
             z-index: 2; 
             object-fit: contain; 
-            transform: translate(-50%, -40%) scale(1.1);
+            object-position: center center;
+            transform: scale(1.3);
+            transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
         
