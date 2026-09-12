@@ -26,13 +26,14 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual de la Mascota */
+        /* Zona Visual Centralizada para el Espectador */
         .stage-area {
             width: 100%; height: 240px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
             display: flex; justify-content: center; align-items: center;
         }
 
+        /* Contenedor Circular Exacto */
         .neon-container {
             width: 120px; height: 120px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
@@ -43,12 +44,14 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
+        /* Efecto cuando habla o interactúa */
         .neon-container.speaking {
-            border-color: #ff2a5f !important;
-            box-shadow: 0 0 35px rgba(255, 42, 95, 0.9) !important;
-            transform: scale(1.08);
+            border-color: #ff69b4 !important;
+            box-shadow: 0 0 40px rgba(255, 105, 180, 0.9) !important;
+            transform: scale(1.12);
         }
 
+        /* MODO BATALLA: Anclado al centro */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
@@ -57,9 +60,17 @@
             border-color: #ffaa00 !important;
         }
         
-        .neon-container img {
-            position: absolute; width: 112%; height: 112%; top: -6%; left: -6%; object-fit: cover;
+        /* Sistema de Capas Idénticas al Milímetro (Mismo tamaño, misma proporción) */
+        .mascot-layer {
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover;
+            transition: opacity 0.4s ease;
         }
+        #logo-layer { opacity: 1; z-index: 2; }
+        #avatar-layer { opacity: 0; z-index: 1; }
+
+        /* Activación de la Mascota Detrás del Logo con Transición Suave */
+        .neon-container.show-mascot #logo-layer { opacity: 0; }
+        .neon-container.show-mascot #avatar-layer { opacity: 1; }
 
         header {
             width: 100%; text-align: center; background: #070a12; position: sticky; top: 0; z-index: 10;
@@ -108,7 +119,7 @@
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .collapsible-content.show { max-height: 1800px; transition: max-height 0.5s ease-in; }
 
-        /* Cuadrícula exacta de los 6 Botones de Efectos de Sonido */
+        /* Cuadrícula de los 6 Botones de Efectos de Sonido */
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
@@ -162,12 +173,14 @@
 </head>
 <body>
     <header>
+        <!-- Capa Dual Espectador: Logo Principal (al frente) y Mascota Tierna (exactamente al mismo tamaño por detrás) -->
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
-                <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Mascota">
+                <img id="logo-layer" class="mascot-layer" src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Logo Estático">
+                <img id="avatar-layer" class="mascot-layer" src="https://files.catbox.moe/pvh5y8.png" alt="SOFIUL Mascota Tierna">
             </div>
         </div>
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 Mascota en Movimiento (Rebote)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)</div>
     </header>
 
     <div class="container">
@@ -192,10 +205,10 @@
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
-                        🎮 6 Botones de Efectos (Sube tu MP3 en cada botón para activarlo):
+                        🎮 6 Botones de Efectos (Sube tu MP3 en cada botón):
                     </div>
 
-                    <!-- LOS 6 BOTONES DE EFECTOS LIMPIOS (SIN AUDIO POR DEFECTO) -->
+                    <!-- LOS 6 BOTONES DE EFECTOS LIMPIOS -->
                     <div class="effects-grid-6">
                         <div class="effect-box">
                             <div class="effect-box-title">😂 1. Risa Divertida</div>
@@ -264,7 +277,7 @@
             </div>
         </div>
 
-        <!-- 4. BANCO DE VOCES HD INDEPENDIENTE (Con ON/OFF y Voz Propia) -->
+        <!-- 4. BANCO DE VOCES HD INDEPENDIENTE -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD &amp; VOZ PERSONALIZADA</span>
@@ -338,7 +351,7 @@
     </div>
 
     <script>
-        const mascot = document.getElementById("mascot-frame");
+        const mascotContainer = document.getElementById("mascot-frame");
         const stage = document.getElementById("stage-box");
         const statusText = document.getElementById("mascot-status-text");
         
@@ -352,9 +365,9 @@
 
         // Motor de rebote ping-pong ultraligero
         function updatePingPong() {
-            if (!stage || !mascot || isBattleMode) return;
+            if (!stage || !mascotContainer || isBattleMode) return;
             const sW = stage.clientWidth, sH = stage.clientHeight;
-            const mW = mascot.clientWidth, mH = mascot.clientHeight;
+            const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
             posX += speedX; posY += speedY;
             let hit = false;
@@ -364,14 +377,14 @@
             if (posY <= 0) { posY = 0; speedY *= -1; hit = true; }
             else if (posY >= sH - mH) { posY = sH - mH; speedY *= -1; hit = true; }
 
-            if (hit && !mascot.classList.contains('speaking')) {
+            if (hit && !mascotContainer.classList.contains('speaking')) {
                 colorIndex = (colorIndex + 1) % neonColors.length;
-                mascot.style.borderColor = neonColors[colorIndex];
-                mascot.style.boxShadow = `0 0 25px ${neonColors[colorIndex]}`;
+                mascotContainer.style.borderColor = neonColors[colorIndex];
+                mascotContainer.style.boxShadow = `0 0 25px ${neonColors[colorIndex]}`;
             }
 
-            mascot.style.left = posX + 'px';
-            mascot.style.top = posY + 'px';
+            mascotContainer.style.left = posX + 'px';
+            mascotContainer.style.top = posY + 'px';
             requestAnimationFrame(updatePingPong);
         }
         requestAnimationFrame(updatePingPong);
@@ -381,43 +394,52 @@
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
-                mascot.classList.add("battle-mode");
+                mascotContainer.classList.add("battle-mode");
                 btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A REBOTE)";
                 btn.style.background = "linear-gradient(135deg, #00e5ff, #0088ff)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA (Anclado)";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA (Anclado en tu Imagen)";
             } else {
-                mascot.classList.remove("battle-mode");
+                mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
                 btn.style.background = "linear-gradient(135deg, #ffaa00, #ff2a5f)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
-        // Reproducir solo si el usuario ha subido un MP3 propio a ese botón
+        // Activar la mascota (muestra la carita tierna por detrás y la hace hablar)
+        function triggerMascotActivation(label) {
+            mascotContainer.classList.add("show-mascot", "speaking");
+            if(statusText && !isBattleMode) {
+                statusText.innerText = "🔴 Mascota Activa: " + label;
+                statusText.style.color = "#ff69b4";
+            }
+        }
+
+        function resetMascotState() {
+            mascotContainer.classList.remove("show-mascot", "speaking");
+            if(statusText && !isBattleMode) {
+                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
+                statusText.style.color = "#00e5ff";
+            }
+        }
+
+        // Reproducir Efecto de Sonido
         function playCustomEffect(label) {
+            triggerMascotActivation(label);
             let urlToPlay = customEffectUrls[label];
+            
             if (!urlToPlay) {
-                alert("⚠️ Aún no has subido ningún archivo MP3 para '" + label + "'. Toca 'Subir MP3' primero.");
+                setTimeout(() => resetMascotState(), 2000);
                 return;
             }
-            const audio = new Audio(urlToPlay);
-            audio.play().then(() => {
-                mascot.classList.add("speaking");
-                if(statusText && !isBattleMode) {
-                    statusText.innerText = "🔴 Efecto: " + label;
-                    statusText.style.color = "#ff2a5f";
-                }
-            }).catch(e => console.log(e));
 
+            const audio = new Audio(urlToPlay);
+            audio.play().catch(e => console.log(e));
             audio.onended = function() {
-                mascot.classList.remove("speaking");
-                if(statusText && !isBattleMode) {
-                    statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
-                    statusText.style.color = "#00e5ff";
-                }
+                resetMascotState();
             };
         }
 
@@ -425,29 +447,19 @@
             if(input.files && input.files[0]) {
                 const file = input.files[0];
                 customEffectUrls[label] = URL.createObjectURL(file);
-                alert("✅ ¡Audio MP3 para '" + label + "' cargado con éxito! Ya puedes tocar el botón.");
+                alert(`✅ ¡MP3 para '${label}' cargado con éxito!`);
             }
         }
 
-        // Reproducir Banco de Voces HD con ON/OFF
-        let currentActiveVoiceUrl = "https://files.catbox.moe/smawzc.mp3";
+        // Reproducir Banco de Voces HD
         function playAudioWithMascot(url, label) {
             if(!url) return;
+            triggerMascotActivation(label);
             const audio = new Audio(url);
-            audio.play().then(() => {
-                mascot.classList.add("speaking");
-                if(statusText && !isBattleMode) {
-                    statusText.innerText = "🔴 Voz: " + label;
-                    statusText.style.color = "#ff2a5f";
-                }
-            }).catch(e => console.log(e));
+            audio.play().catch(e => console.log(e));
 
             audio.onended = function() {
-                mascot.classList.remove("speaking");
-                if(statusText && !isBattleMode) {
-                    statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
-                    statusText.style.color = "#00e5ff";
-                }
+                resetMascotState();
             };
         }
 
@@ -462,7 +474,7 @@
 
             const active = document.getElementById("btn-voice-" + index);
             if(active) { active.innerText="ON"; active.classList.add("active-on"); }
-            playAudioWithMascot(url, "Voz Activa Seleccionada");
+            playAudioWithMascot(url, "Voz Activa");
         }
 
         function setCustomVoiceActive() {
@@ -477,7 +489,7 @@
             }
             const customBtn = document.getElementById("btn-voice-custom");
             if(customBtn) { customBtn.innerText="ON"; customBtn.classList.add("active-on"); }
-            playAudioWithMascot(customVoiceUrl, "Voz Personalizada Propia");
+            playAudioWithMascot(customVoiceUrl, "Voz Propia");
         }
 
         document.addEventListener("DOMContentLoaded", function() {
