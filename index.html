@@ -63,10 +63,12 @@
             transition: opacity 0.4s ease;
         }
         
-        /* LOGOTIPO: Con la nueva imagen limpia y encaje perfecto de cobertura */
+        /* LOGOTIPO: Con el zoom exacto (1.35) para eliminar el espacio vacío inferior y cubrir todo el círculo */
         #logo-layer { 
             opacity: 1; z-index: 2; 
             object-fit: cover; 
+            transform: scale(1.35);
+            transform-origin: center center;
         } 
         
         /* MASCOTA (Inalterada, manteniendo su estructura exacta): */
