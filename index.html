@@ -26,14 +26,14 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual Superior Estricta para el Círculo Brilloso y la Mascota */
+        /* Zona Visual Superior Estricta */
         .stage-area {
             width: 100%; height: 160px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* Círculo Brilloso y Logo Centralizados al Milímetro */
+        /* Círculo Brilloso y Contenedor Centralizado */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
@@ -42,29 +42,28 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         
-        /* Efecto cuando habla o interactúa */
         .neon-container.speaking {
             border-color: #ff69b4 !important;
             box-shadow: 0 0 40px rgba(255, 105, 180, 0.9) !important;
             transform: scale(1.08);
         }
 
-        /* MODO BATALLA */
         .neon-container.battle-mode {
             transform: scale(0.9) !important;
             box-shadow: 0 0 25px rgba(255, 170, 0, 0.8) !important;
             border-color: #ffaa00 !important;
         }
         
-        /* Sistema de Capas: Logo Original al frente (Capa 2), Mascota Tierna detrás (Capa 1) */
+        /* Capas Alineadas Quirúrgicamente al Borde del Círculo */
         .mascot-layer {
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover;
+            position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; object-fit: cover;
             transition: opacity 0.4s ease;
         }
-        #logo-layer { opacity: 1; z-index: 2; }
-        #avatar-layer { opacity: 0; z-index: 1; }
+        /* Logotipo subido exactamente al borde superior del círculo brilloso */
+        #logo-layer { opacity: 1; z-index: 2; object-position: center 25%; } 
+        /* Mascota centrada perfectamente detrás */
+        #avatar-layer { opacity: 0; z-index: 1; object-position: center center; } 
 
-        /* Activación de la Mascota */
         .neon-container.show-mascot #logo-layer { opacity: 0; }
         .neon-container.show-mascot #avatar-layer { opacity: 1; }
 
@@ -94,7 +93,6 @@
             outline: none; font-family: inherit; font-style: italic;
         }
 
-        /* Botón Rojizo Desplegable Vertical */
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff2a5f, #0088ff);
             color: #fff; border: none; border-radius: 8px; padding: 12px;
@@ -103,7 +101,6 @@
             box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
 
-        /* Botón Banco de Voces HD */
         .voice-dropdown-btn {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #000; border: none; border-radius: 8px; padding: 12px;
@@ -115,7 +112,6 @@
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .collapsible-content.show { max-height: 1800px; transition: max-height 0.5s ease-in; }
 
-        /* Cuadrícula de los 6 Botones de Efectos */
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
@@ -169,7 +165,6 @@
 </head>
 <body>
     <header>
-        <!-- Círculo Brilloso, Logo y Mascota perfectamente centrados y fijos arriba -->
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
                 <img id="logo-layer" class="mascot-layer" src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Logo Estático">
@@ -180,7 +175,7 @@
     </header>
 
     <div class="container">
-        <!-- 1. PANTALLA DE DIRECTO (Desplegable Vertical) -->
+        <!-- 1. PANTALLA DE DIRECTO -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
                 <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
@@ -271,7 +266,7 @@
             </div>
         </div>
 
-        <!-- 4. BANCO DE VOCES HD (Desplegable Vertical) -->
+        <!-- 4. BANCO DE VOCES HD -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD &amp; VOZ PERSONALIZADA</span>
@@ -352,7 +347,6 @@
         let customEffectUrls = {};
         let customVoiceUrl = "";
 
-        // Modo Batalla
         function toggleBattleMode() {
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
@@ -371,7 +365,7 @@
             }
         }
 
-        // Activar la mascota (muestra la carita tierna detrás al presionar botones o probar voces)
+        // Función para activar y ver la mascota de forma inmediata
         function triggerMascotActivation(label) {
             mascotContainer.classList.add("show-mascot", "speaking");
             if(statusText && !isBattleMode) {
@@ -388,13 +382,13 @@
             }
         }
 
-        // Reproducir Efecto de Sonido
         function playCustomEffect(label) {
             triggerMascotActivation(label);
             let urlToPlay = customEffectUrls[label];
             
             if (!urlToPlay) {
-                setTimeout(() => resetMascotState(), 2000);
+                // Al tocar el botón, la mascota se muestra 3 segundos para que la admires funcionando
+                setTimeout(() => resetMascotState(), 3000);
                 return;
             }
 
@@ -413,7 +407,6 @@
             }
         }
 
-        // Reproducir Banco de Voces HD
         function playAudioWithMascot(url, label) {
             if(!url) return;
             triggerMascotActivation(label);
