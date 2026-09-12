@@ -26,14 +26,14 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual Superior Estricta */
+        /* Zona Visual Superior */
         .stage-area {
             width: 100%; height: 160px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
             display: flex; justify-content: center; align-items: center;
         }
 
-        /* Círculo Brilloso y Contenedor Centralizado */
+        /* Círculo Brilloso y Contenedor */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
@@ -54,14 +54,14 @@
             border-color: #ffaa00 !important;
         }
         
-        /* Capas Alineadas Quirúrgicamente al Borde del Círculo */
+        /* SIN ZOOM EXTRA: Tamaño real de tus imágenes, solo desplazamiento vertical exacto al borde */
         .mascot-layer {
-            position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; object-fit: cover;
+            position: absolute; width: 100%; height: 100%; top: 0; left: 0; object-fit: cover;
             transition: opacity 0.4s ease;
         }
-        /* Logotipo subido exactamente al borde superior del círculo brilloso */
-        #logo-layer { opacity: 1; z-index: 2; object-position: center 25%; } 
-        /* Mascota centrada perfectamente detrás */
+        /* Tu logotipo en su tamaño original, solo desplazado ligeramente hacia arriba para tocar el borde */
+        #logo-layer { opacity: 1; z-index: 2; object-position: center 22%; } 
+        /* La mascota centrada por detrás */
         #avatar-layer { opacity: 0; z-index: 1; object-position: center center; } 
 
         .neon-container.show-mascot #logo-layer { opacity: 0; }
@@ -175,6 +175,13 @@
     </header>
 
     <div class="container">
+        <!-- BOTÓN DE PRUEBA DIRECTA PARA VER LA MASCOTA YA MISMO -->
+        <div class="card" style="border-color: #ff69b4; background: rgba(255, 105, 180, 0.05);">
+            <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #ff69b4, #ff2a5f); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
+                👁️ MOSTRAR / OCULTAR MASCOTA (PRUEBA VISUAL)
+            </button>
+        </div>
+
         <!-- 1. PANTALLA DE DIRECTO -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
@@ -347,6 +354,17 @@
         let customEffectUrls = {};
         let customVoiceUrl = "";
 
+        // Botón manual para ver la mascota de inmediato y comprobarla
+        function toggleTestMascot() {
+            mascotContainer.classList.toggle("show-mascot");
+            mascotContainer.classList.toggle("speaking");
+            const active = mascotContainer.classList.contains("show-mascot");
+            if(statusText) {
+                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
+                statusText.style.color = active ? "#ff69b4" : "#00e5ff";
+            }
+        }
+
         function toggleBattleMode() {
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
@@ -365,7 +383,6 @@
             }
         }
 
-        // Función para activar y ver la mascota de forma inmediata
         function triggerMascotActivation(label) {
             mascotContainer.classList.add("show-mascot", "speaking");
             if(statusText && !isBattleMode) {
@@ -387,7 +404,6 @@
             let urlToPlay = customEffectUrls[label];
             
             if (!urlToPlay) {
-                // Al tocar el botón, la mascota se muestra 3 segundos para que la admires funcionando
                 setTimeout(() => resetMascotState(), 3000);
                 return;
             }
