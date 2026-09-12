@@ -88,7 +88,7 @@
             outline: none; font-family: inherit; font-style: italic;
         }
 
-        /* Botón Desplegable Rojizo */
+        /* Botón Rojizo Desplegable para EFECTOS DE SONIDO */
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff2a5f, #0088ff);
             color: #fff; border: none; border-radius: 8px; padding: 12px;
@@ -97,10 +97,19 @@
             box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
 
+        /* Botón Desplegable para el BANCO DE VOCES HD */
+        .voice-dropdown-btn {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000; border: none; border-radius: 8px; padding: 12px;
+            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
+            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
+            margin-top: 6px; box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+        }
+
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .collapsible-content.show { max-height: 1800px; transition: max-height 0.5s ease-in; }
 
-        /* Cuadrícula exacta de 6 Botones de Efectos de Sonido */
+        /* Cuadrícula de los 6 Botones de Efectos de Sonido con MP3 */
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
@@ -120,6 +129,27 @@
             display: block; background: rgba(154, 43, 162, 0.2); border: 1px dashed rgba(154, 43, 162, 0.6);
             color: #e2b7ff; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
             cursor: pointer; font-style: italic; text-align: center;
+        }
+
+        /* Estilos del Banco de Voces HD con ON/OFF individual */
+        .voice-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
+            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
+        }
+        .test-btn {
+            background: rgba(0, 229, 255, 0.15); border: 1px solid rgba(0, 229, 255, 0.4);
+            color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+        }
+        .toggle-btn {
+            background: rgba(255, 42, 95, 0.2); border: 1px solid rgba(255, 42, 95, 0.5);
+            color: #ff2a5f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+        }
+        .toggle-btn.active-on {
+            background: rgba(0, 229, 255, 0.3); border-color: var(--accent-cyan);
+            color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
         }
 
         .action-button {
@@ -143,22 +173,20 @@
     </header>
 
     <div class="container">
-        <!-- PANEL DE MANDO CON EL BOTÓN ROJIZO DESPLEGABLE -->
+        <!-- 1. BOTÓN ROJIZO: EFECTOS DE SONIDO & SPOTIFY -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
                 <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
             </div>
             
-            <!-- Botón Rojizo para Deslizar -->
             <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
                 ⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES
             </button>
             
-            <!-- Contenido Deslizable -->
             <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
                     <div class="card-title" style="color: #ff2a5f;">
-                        <span>PANTALLA DE COMANDOS &amp; AUDIO EN DIRECTO</span>
+                        <span>EFECTOS DE SONIDO &amp; MODO BATALLA</span>
                     </div>
 
                     <!-- Botón de Modo Batalla Anclado -->
@@ -167,42 +195,36 @@
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
-                        🎮 Botonera de 6 Comandos de Efectos (Toca o sube tu MP3):
+                        🎮 Botonera de 6 Comandos de Efectos (Toca o sube tu MP3 en cada botón):
                     </div>
 
                     <!-- LOS 6 BOTONES DE COMANDO DE EFECTOS ESPECIALES -->
                     <div class="effects-grid-6">
-                        <!-- Efecto 1 -->
                         <div class="effect-box">
                             <div class="effect-box-title">😂 1. Risa Divertida</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/36b8b6.mp3', 'Risa Divertida')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Divertida')" style="display:none;"></label>
                         </div>
-                        <!-- Efecto 2 -->
                         <div class="effect-box">
                             <div class="effect-box-title">😈 2. Risa Burlona</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/xt4fcl.mp3', 'Risa Burlona')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Burlona')" style="display:none;"></label>
                         </div>
-                        <!-- Efecto 3 -->
                         <div class="effect-box">
                             <div class="effect-box-title">🎉 3. Gritos de Júbilo</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/smawzc.mp3', 'Gritos de Júbilo')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Gritos de Júbilo')" style="display:none;"></label>
                         </div>
-                        <!-- Efecto 4 -->
                         <div class="effect-box">
                             <div class="effect-box-title">😱 4. Sorpresa / Grito</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/ds5rw4.mp3', 'Sorpresa')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Sorpresa')" style="display:none;"></label>
                         </div>
-                        <!-- Efecto 5 -->
                         <div class="effect-box">
                             <div class="effect-box-title">🔥 5. Hype &amp; Fiesta</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/7b84x7.mp3', 'Hype')">▶ Tocar</button>
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Hype')" style="display:none;"></label>
                         </div>
-                        <!-- Efecto 6 -->
                         <div class="effect-box">
                             <div class="effect-box-title">🎁 6. Regalo Épico</div>
                             <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/1jd2uu.mp3', 'Regalo Épico')">▶ Tocar</button>
@@ -210,15 +232,12 @@
                         </div>
                     </div>
 
-                    <!-- Sección Spotify Ambiental (Independiente) -->
+                    <!-- Spotify Independiente -->
                     <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 12px; font-weight: bold;">
                         🎵 Spotify (Música ambiental de fondo para tu público):
                     </div>
                     <div style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
                         <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-                    <div style="font-size: 0.55rem; color: #8c82ce; font-style: italic; margin-top: 3px;">
-                        * La música de Spotify sigue sonando para tus espectadores aunque silencies tu micrófono o te mutees.
                     </div>
                 </div>
             </div>
@@ -248,6 +267,76 @@
             </div>
         </div>
 
+        <!-- 4. BOTÓN INDEPENDIENTE: BANCO DE VOCES HD CON ON/OFF Y VOZ PERSONALIZADA -->
+        <div class="card">
+            <div class="card-title" style="color: #fff;">
+                <span>BANCO DE VOCES HD &amp; VOZ PERSONALIZADA</span>
+                <span class="status-badge" style="background:rgba(0,229,255,0.2); color:var(--accent-cyan);">PRO</span>
+            </div>
+            
+            <button class="voice-dropdown-btn" id="toggle-voice-btn">
+                🎧 ABRIR BANCO DE VOCES (ON / OFF)
+            </button>
+
+            <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
+                <div class="voice-row">
+                    <span>1. ♀ Norah (Cálida)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>2. ♀ Valentina (Dulce)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>3. ♀ Sueño (Sueñitos)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>4. ♂ Mateo Pro</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>5. ♂ Lucas</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>6. ♂ Thiago</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
+                    </div>
+                </div>
+
+                <!-- Subida de Voz Personalizada con su botón ON/OFF propio -->
+                <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
+                    <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(154, 43, 162, 0.15); border: 1px dashed rgba(154, 43, 162, 0.5); color: #e2b7ff; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
+                            📁 Subir Voz Propia (MP3)
+                            <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
+                        </label>
+                        <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
+                    </div>
+                    <div id="voice-file-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
+                </div>
+            </div>
+        </div>
+
         <button class="action-button" id="main-action-btn">GUARDAR CONFIGURACIÓN</button>
         <div class="save-notice" id="save-notice">✅ ¡Guardado con éxito!</div>
     </div>
@@ -263,6 +352,7 @@
         let colorIndex = 0;
         let isBattleMode = false;
         let customEffectUrls = {};
+        let customVoiceUrl = "";
 
         // Motor de rebote ping-pong ultraligero
         function updatePingPong() {
@@ -310,7 +400,7 @@
             }
         }
 
-        // Reproducir Efectos de Sonido Especiales (Risas, Gritos, etc.)
+        // Reproducir Efectos de Sonido del Botón Rojizo
         function playEffect(defaultUrl, label) {
             let urlToPlay = customEffectUrls[label] || defaultUrl;
             const audio = new Audio(urlToPlay);
@@ -331,21 +421,92 @@
             };
         }
 
-        // Cargar MP3 personalizado por cada botón de efecto
         function loadCustomEffect(input, label) {
             if(input.files && input.files[0]) {
                 const file = input.files[0];
                 customEffectUrls[label] = URL.createObjectURL(file);
-                alert("✅ ¡Audio MP3 para '" + label + "' cargado con éxito desde tu celular!");
+                alert("✅ ¡Audio MP3 para '" + label + "' cargado con éxito!");
             }
         }
 
+        // Reproducir Banco de Voces HD con ON/OFF
+        let currentActiveVoiceUrl = "https://files.catbox.moe/smawzc.mp3";
+        function playAudioWithMascot(url, label) {
+            if(!url) return;
+            const audio = new Audio(url);
+            audio.play().then(() => {
+                mascot.classList.add("speaking");
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🔴 Voz: " + label;
+                    statusText.style.color = "#ff2a5f";
+                }
+            }).catch(e => console.log(e));
+
+            audio.onended = function() {
+                mascot.classList.remove("speaking");
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                    statusText.style.color = "#00e5ff";
+                }
+            };
+        }
+
+        function setVoiceActive(url, index) {
+            currentActiveVoiceUrl = url;
+            for(let i=0; i<=5; i++) {
+                const b = document.getElementById("btn-voice-" + i);
+                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
+            }
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) { customBtn.innerText="OFF"; customBtn.classList.remove("active-on"); }
+
+            const active = document.getElementById("btn-voice-" + index);
+            if(active) { active.innerText="ON"; active.classList.add("active-on"); }
+            playAudioWithMascot(url, "Voz Activa Seleccionada");
+        }
+
+        function setCustomVoiceActive() {
+            if(!customVoiceUrl) {
+                alert("⚠️ Primero sube un archivo de voz propia (.mp3).");
+                return;
+            }
+            currentActiveVoiceUrl = customVoiceUrl;
+            for(let i=0; i<=5; i++) {
+                const b = document.getElementById("btn-voice-" + i);
+                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
+            }
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) { customBtn.innerText="ON"; customBtn.classList.add("active-on"); }
+            playAudioWithMascot(customVoiceUrl, "Voz Personalizada Propia");
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
+            // Desplegable rojizo de efectos
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
                 contentTrans.classList.toggle("show");
                 triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR PANTALLA DE DIRECTO" : "⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES";
+            });
+
+            // Desplegable independiente del Banco de Voces HD
+            const trVoice = document.getElementById("toggle-voice-btn");
+            const coVoice = document.getElementById("voice-content");
+            trVoice.addEventListener("click", function() {
+                coVoice.classList.toggle("show");
+                trVoice.innerText = coVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (ON / OFF)";
+            });
+
+            // Input de voz propia
+            const customVoiceInput = document.getElementById("custom-voice-file");
+            const voiceFileName = document.getElementById("voice-file-name");
+            customVoiceInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    const file = this.files[0];
+                    voiceFileName.innerText = "📁 Cargado: " + file.name;
+                    customVoiceUrl = URL.createObjectURL(file);
+                    setCustomVoiceActive();
+                }
             });
 
             document.getElementById("main-action-btn").addEventListener("click", function() {
