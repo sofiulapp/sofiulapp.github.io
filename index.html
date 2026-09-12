@@ -58,18 +58,17 @@
             border-color: #ffaa00 !important;
         }
         
-        /* MÉTODO PROFESIONAL DEFINITIVO: object-fit contain con escala equilibrada y centrado exacto */
+        /* LOGOTIPO AJUSTADO PROFESIONALMENTE: Proporción exacta para rellenar el círculo sin verse pequeño */
         #logo-layer { 
             position: absolute; 
-            top: 0; 
-            left: 0; 
+            top: 50%; 
+            left: 50%; 
             width: 100%; 
             height: 100%;
             opacity: 1; 
             z-index: 2; 
-            object-fit: contain; 
-            object-position: center center;
-            transform: scale(1.3);
+            object-fit: cover; 
+            transform: translate(-50%, -50%) scale(1.4);
             transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
@@ -188,7 +187,7 @@
     <header>
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
-                <img id="logo-layer" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+                <img id="logo-layer" src="https://i.ibb.co/3ykG4S2C/sofiul-logo-hd.png" alt="SOFIUL Logo Estático">
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
