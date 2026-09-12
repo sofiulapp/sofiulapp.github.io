@@ -27,9 +27,15 @@
         }
         
         @keyframes softNeonPulse {
-            0% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
-            50% { box-shadow: 0 0 35px rgba(0, 229, 255, 0.95); border-color: rgba(0, 229, 255, 1); }
-            100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
+            50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(0, 229, 255, 0.9); border-color: rgba(0, 229, 255, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); border-color: rgba(0, 229, 255, 0.6); }
+        }
+
+        @keyframes mascotTalking {
+            0% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.03); filter: brightness(1.2); }
+            100% { transform: scale(1); filter: brightness(1); }
         }
 
         header {
@@ -41,6 +47,12 @@
             width: 220px; height: 220px; border-radius: 50%;
             border: 2px solid #00e5ff; animation: softNeonPulse 3s infinite ease-in-out;
             position: relative; overflow: hidden; background: #000; margin: 0 auto;
+            will-change: transform, box-shadow;
+        }
+        .neon-container.speaking {
+            animation: mascotTalking 0.4s infinite ease-in-out !important;
+            border-color: #ff2a5f !important;
+            box-shadow: 0 0 35px rgba(255, 42, 95, 0.8) !important;
         }
         .neon-container img {
             position: absolute; width: 109%; height: 109%; top: -9%; left: -4.5%; object-fit: cover;
@@ -95,7 +107,7 @@
             max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
         }
         .collapsible-content.show {
-            max-height: 1200px; transition: max-height 0.5s ease-in;
+            max-height: 1400px; transition: max-height 0.5s ease-in;
         }
 
         .effects-grid-2x2 {
@@ -116,8 +128,9 @@
         .spotify-row { display: flex; gap: 6px; margin-top: 8px; }
         .spotify-btn {
             flex: 1; background: rgba(29, 185, 84, 0.15); border: 1px solid rgba(29, 185, 84, 0.4);
-            color: #1db954; padding: 6px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-align: center; cursor: pointer; font-style: italic;
+            color: #1db954; padding: 8px 4px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-align: center; cursor: pointer; font-style: italic; text-transform: uppercase;
         }
+        .spotify-btn:active { background: rgba(29, 185, 84, 0.4); }
 
         .voice-row {
             display: flex; justify-content: space-between; align-items: center;
@@ -131,7 +144,6 @@
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
         
-        /* Botones de Estado ON / OFF visuales */
         .toggle-btn {
             background: rgba(255, 42, 95, 0.2); border: 1px solid rgba(255, 42, 95, 0.5);
             color: #ff2a5f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
@@ -155,13 +167,13 @@
 </head>
 <body>
     <header>
-        <div class="neon-container">
-            <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Logo">
+        <div class="neon-container" id="mascot-frame">
+            <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Mascota Inteligente">
         </div>
     </header>
 
     <div class="container">
-        <!-- 1. Panel de Mando en Vivo (Desplegable) -->
+        <!-- 1. Panel de Mando en Vivo con Spotify Integrado -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
                 <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
@@ -220,12 +232,18 @@
                     </div>
 
                     <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 10px; font-weight: bold;">
-                        🎵 Controles de Spotify (Fondo independiente al micro):
+                        🎵 Controles de Spotify (Fondo ambiental):
                     </div>
+                    
+                    <!-- Reproductor Web integrado y optimizado para móvil -->
+                    <div style="margin-top: 6px; border-radius: 6px; overflow: hidden; background: #000;">
+                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+
                     <div class="spotify-row">
-                        <div class="spotify-btn">▶ PLAY</div>
-                        <div class="spotify-btn">⏸ PAUSAR</div>
-                        <div class="spotify-btn">⏭ SIGUIENTE</div>
+                        <div class="spotify-btn" onclick="controlSpotify('play')">▶ PLAY</div>
+                        <div class="spotify-btn" onclick="controlSpotify('pause')">⏸ PAUSAR</div>
+                        <div class="spotify-btn" onclick="controlSpotify('reload')">🔄 CAMBIAR LISTA</div>
                     </div>
                 </div>
             </div>
@@ -295,42 +313,42 @@
                 <div class="voice-row">
                     <span>1. ♀ Norah (Cálida)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>2. ♀ Valentina (Dulce)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>3. ♀ Sueño (Sueñitos)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/36b8b6.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>4. ♂ Mateo Pro (Profundo)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>5. ♂ Lucas (Juvenil)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>6. ♂ Thiago (Firme)</span>
                     <div class="voice-actions">
-                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
                     </div>
                 </div>
@@ -358,12 +376,37 @@
     <script>
         let customAudioUrl = "";
 
-        // Función para cambiar el estado visual ON/OFF de las voces del banco
+        // Función para controlar el reproductor de Spotify de forma práctica
+        function controlSpotify(action) {
+            const player = document.getElementById("spotify-player");
+            if(action === 'reload') {
+                // Permite refrescar o cambiar de playlist si el usuario lo desea
+                alert("💡 Puedes cambiar la lista de Spotify directamente desde el reproductor superior.");
+            } else {
+                // Nota: Los reproductores embebidos oficiales de Spotify se controlan interactivamente desde sus propios botones en pantalla por seguridad de la plataforma.
+                alert("🎵 Usa los controles directos en el reproductor de arriba para Reproducir o Pausar la música ambiental.");
+            }
+        }
+
+        // Función inteligente para reproducir audio y activar la animación de la mascota sincronizada
+        function playAudioWithMascot(url) {
+            if(!url) return;
+            const audio = new Audio(url);
+            const mascotFrame = document.getElementById("mascot-frame");
+
+            audio.play().then(() => {
+                if(mascotFrame) mascotFrame.classList.add("speaking");
+            }).catch(e => console.log("Audio play prevented:", e));
+
+            audio.onended = function() {
+                if(mascotFrame) mascotFrame.classList.remove("speaking");
+            };
+        }
+
         function setVoiceActive(audioUrl, index) {
             const selectEl = document.getElementById("voice-selection");
             selectEl.value = audioUrl;
 
-            // Apagar todos los botones del banco y el personalizado
             for(let i = 0; i <= 5; i++) {
                 const btn = document.getElementById("btn-voice-" + i);
                 if(btn) {
@@ -377,15 +420,15 @@
                 customBtn.classList.remove("active-on");
             }
 
-            // Encender únicamente el botón seleccionado con "ON"
             const activeBtn = document.getElementById("btn-voice-" + index);
             if(activeBtn) {
                 activeBtn.innerText = "ON";
                 activeBtn.classList.add("active-on");
             }
+            
+            playAudioWithMascot(audioUrl);
         }
 
-        // Función para activar la voz personalizada subida desde el celular
         function setCustomVoiceActive() {
             if(!customAudioUrl) {
                 alert("⚠️ Primero selecciona un archivo MP3 desde tu celular.");
@@ -395,7 +438,6 @@
             const selectEl = document.getElementById("voice-selection");
             selectEl.value = customAudioUrl;
 
-            // Apagar las 6 voces del banco
             for(let i = 0; i <= 5; i++) {
                 const btn = document.getElementById("btn-voice-" + i);
                 if(btn) {
@@ -404,16 +446,16 @@
                 }
             }
 
-            // Encender el botón de la voz personalizada
             const customBtn = document.getElementById("btn-voice-custom");
             if(customBtn) {
                 customBtn.innerText = "ON";
                 customBtn.classList.add("active-on");
             }
+
+            playAudioWithMascot(customAudioUrl);
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // 1. Desplegable del Mando de Transmisión (Arriba)
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
 
@@ -422,7 +464,6 @@
                 triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR MANDO DE TRANSMISIÓN" : "⚡ ABRIR MANDO DE TRANSMISIÓN";
             });
 
-            // 2. Desplegable del Banco de Voces (Abajo)
             const triggerVoice = document.getElementById("toggle-voice-btn");
             const contentVoice = document.getElementById("voice-content");
 
@@ -431,7 +472,6 @@
                 triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)";
             });
 
-            // Mostrar nombre del archivo MP3 personalizado seleccionado y crear su URL local
             const voiceFileInput = document.getElementById("voice-file");
             const voiceFileName = document.getElementById("voice-file-name");
             voiceFileInput.addEventListener("change", function() {
@@ -440,7 +480,6 @@
                     voiceFileName.innerText = "📁 Archivo cargado: " + file.name;
                     customAudioUrl = URL.createObjectURL(file);
                     
-                    // Agregar opción al select si no existe
                     const selectEl = document.getElementById("voice-selection");
                     let customOpt = document.getElementById("custom-select-option");
                     if(!customOpt) {
@@ -451,12 +490,10 @@
                     customOpt.value = customAudioUrl;
                     customOpt.text = "⭐ Personalizado: " + file.name;
                     
-                    // Auto-encender el ON de la voz personalizada al cargar el archivo
                     setCustomVoiceActive();
                 }
             });
 
-            // Control Anti-Abuso 72 Horas y Memoria Local
             const deviceKey = "sofiul_device_registered";
             const trialStatusEl = document.getElementById("trial-status");
             const deviceInfoEl = document.getElementById("device-info");
