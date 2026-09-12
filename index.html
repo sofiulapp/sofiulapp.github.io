@@ -46,53 +46,18 @@
         .neon-container.speaking {
             border-color: #ff69b4 !important;
             box-shadow: 0 0 45px rgba(255, 105, 180, 0.9) !important;
-            transform: scale(1.15);
         }
 
-        /* MODO BATALLA: Explosión de colores vibrantes y encendidos para atrapar al público */
+        /* MODO BATALLA: Contenedor fijo y estable, delegando todo el espectáculo visual a la mascota */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
             margin: 15px auto !important;
-            animation: battleNeonExplosion 2s infinite linear, battleWiggle 0.5s infinite ease-in-out;
-        }
-
-        @keyframes battleNeonExplosion {
-            0% {
-                border-color: #00e5ff;
-                box-shadow: 0 0 30px #00e5ff, inset 0 0 15px #0088ff;
-                transform: scale(1);
-            }
-            25% {
-                border-color: #ff2a5f;
-                box-shadow: 0 0 45px #ff2a5f, inset 0 0 20px #ff69b4;
-                transform: scale(1.08);
-            }
-            50% {
-                border-color: #ffaa00;
-                box-shadow: 0 0 55px #ffaa00, inset 0 0 25px #ff2a5f;
-                transform: scale(1.04);
-            }
-            75% {
-                border-color: #9a2ba2;
-                box-shadow: 0 0 45px #9a2ba2, inset 0 0 20px #00e5ff;
-                transform: scale(1.08);
-            }
-            100% {
-                border-color: #00e5ff;
-                box-shadow: 0 0 30px #00e5ff, inset 0 0 15px #0088ff;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes battleWiggle {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(-2.5deg); }
-            75% { transform: rotate(2.5deg); }
-            100% { transform: rotate(0deg); }
+            border-color: #ffaa00 !important;
+            box-shadow: 0 0 35px rgba(255, 170, 0, 0.8);
         }
         
-        /* LOGOTIPO: Posición exacta aprobada (61.5% abajo, 47% izquierda, zoom de 126px) */
+        /* LOGOTIPO: Estático y limpio, sin interferir con el público */
         #logo-layer { 
             position: absolute; 
             top: 61.5%; 
@@ -106,7 +71,7 @@
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Zoom exacto y posición centrada aprobada (136px) */
+        /* MASCOTA: Zoom exacto (136px) y CENTRO DE ACCIÓN PÚBLICO (Cambios de color RGB + Giro amplio de combate) */
         #avatar-layer { 
             position: absolute; 
             top: 52%; 
@@ -119,6 +84,25 @@
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
         } 
+
+        /* Animación exclusiva en la mascota para el público en Modo Batalla (Filtro de color dinámico + Giro amplio) */
+        .neon-container.battle-mode #avatar-layer {
+            animation: mascotPublicShow 2.5s infinite linear, mascotWideSwing 0.8s infinite ease-in-out;
+        }
+
+        @keyframes mascotPublicShow {
+            0% { filter: hue-rotate(0deg) saturate(1.5) brightness(1.2); }
+            33% { filter: hue-rotate(120deg) saturate(2) brightness(1.3); }
+            66% { filter: hue-rotate(240deg) saturate(2) brightness(1.3); }
+            100% { filter: hue-rotate(360deg) saturate(1.5) brightness(1.2); }
+        }
+
+        @keyframes mascotWideSwing {
+            0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25% { transform: translate(-50%, -50%) rotate(-12deg) scale(1.08); }
+            75% { transform: translate(-50%, -50%) rotate(12deg) scale(1.08); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
 
         /* Transición de la mascota al activarse */
         .neon-container.show-mascot #logo-layer { opacity: 0; }
@@ -454,7 +438,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA";
                 btn.style.background = "linear-gradient(135deg, #00e5ff, #0088ff)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ENERGÍA MÁXIMA!";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡MASCOTA EN ACCIÓN!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
