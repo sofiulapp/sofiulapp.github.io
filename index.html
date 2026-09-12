@@ -63,11 +63,11 @@
             transition: opacity 0.4s ease;
         }
         
-        /* LOGOTIPO: Zoom regulado a 1.15 para que respire perfectamente dentro del círculo sin chocar los bordes */
+        /* LOGOTIPO: Ajustado con object-fit cover y escala limpia (1.05) para llenar perfectamente el círculo neón sin verse minúsculo ni gigante */
         #logo-layer { 
             opacity: 1; z-index: 2; 
             object-fit: cover; 
-            transform: scale(1.15);
+            transform: scale(1.05);
             transform-origin: center center;
         } 
         
