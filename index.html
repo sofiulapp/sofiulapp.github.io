@@ -58,7 +58,7 @@
             border-color: #ffaa00 !important;
         }
         
-        /* LOGOTIPO: Ajuste exacto centrado hacia abajo para que no quede arriba */
+        /* LOGOTIPO: Corregido con object-position a 35% para bajarlo exactamente al centro del círculo */
         #logo-layer { 
             position: absolute; 
             top: 0; left: 0; 
@@ -66,13 +66,13 @@
             opacity: 1; 
             z-index: 2; 
             object-fit: cover; 
-            object-position: center 65%;
+            object-position: center 35%;
             transform: scale(1.15);
             transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Restaurada a sus proporciones originales perfectas (intacta) */
+        /* MASCOTA: Intacta y en su lugar perfecto tal como pediste */
         #avatar-layer { 
             position: absolute; 
             top: 0; left: 0; 
