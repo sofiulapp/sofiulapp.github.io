@@ -32,12 +32,11 @@
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
         }
 
-        /* Círculo Brilloso: Centrado automático Flexbox aplicado exactamente a tu estructura */
+        /* Círculo Brilloso en su posición exacta original */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
             position: absolute; top: 35px; left: 40px; overflow: hidden; background: #000;
-            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
             transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
@@ -59,29 +58,30 @@
             border-color: #ffaa00 !important;
         }
         
-        /* LOGOTIPO: Solución matemática exacta sobre tu archivo original */
+        /* LOGOTIPO: Ajuste exacto centrado hacia abajo para que no quede arriba */
         #logo-layer { 
-            position: relative; 
-            width: 100%; 
-            height: 100%;
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
             opacity: 1; 
             z-index: 2; 
             object-fit: cover; 
-            object-position: center center;
+            object-position: center 65%;
+            transform: scale(1.15);
+            transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Intacta, exactamente como estaba en tu código original */
+        /* MASCOTA: Restaurada a sus proporciones originales perfectas (intacta) */
         #avatar-layer { 
             position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            width: 112px; 
-            height: 112px;
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
             opacity: 0; 
             z-index: 1; 
             object-fit: cover; 
-            transform: translate(-50%, -50%);
+            transform: scale(1.35);
+            transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
 
