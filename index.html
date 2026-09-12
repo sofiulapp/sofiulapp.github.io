@@ -58,29 +58,31 @@
             border-color: #ffaa00 !important;
         }
         
-        /* SOLUCIÓN DEFINITIVA: Desplazamiento interno exacto hacia abajo y escala perfecta */
+        /* CÁLCULO TÉCNICO EXACTO: Centrado absoluto mediante translate (-50%, -50%) y tamaño proporcional de precisión */
         #logo-layer { 
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
+            top: 50%; 
+            left: 50%; 
+            width: 112px; 
+            height: 112px;
             opacity: 1; 
             z-index: 2; 
             object-fit: cover; 
-            object-position: center 62%;
-            transform: scale(1.12);
-            transform-origin: center center;
+            transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
         } 
         
         /* MASCOTA: Intacta, exactamente como me pediste que no se toque */
         #avatar-layer { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; z-index: 1; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: 112px; 
+            height: 112px;
+            opacity: 0; 
+            z-index: 1; 
             object-fit: cover; 
-            transform: scale(1.35);
-            transform-origin: center center;
+            transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
         } 
 
