@@ -124,12 +124,24 @@
             background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
             padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
         }
+        .voice-actions { display: flex; gap: 4px; }
         .test-btn {
             background: rgba(0, 229, 255, 0.15); border: 1px solid rgba(0, 229, 255, 0.4);
-            color: var(--accent-cyan); padding: 4px 10px; border-radius: 4px; font-size: 0.65rem;
+            color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
-        .test-btn:hover { background: rgba(0, 229, 255, 0.3); }
+        
+        /* Botones de Estado ON / OFF visuales */
+        .toggle-btn {
+            background: rgba(255, 42, 95, 0.2); border: 1px solid rgba(255, 42, 95, 0.5);
+            color: #ff2a5f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+            transition: all 0.3s ease;
+        }
+        .toggle-btn.active-on {
+            background: rgba(0, 229, 255, 0.3); border-color: var(--accent-cyan);
+            color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+        }
 
         .action-button {
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
@@ -249,7 +261,7 @@
             </div>
         </div>
 
-        <!-- 4. Banco de Voces HD Desplegable con Sueño (Sueñitos) y su Audio Activo -->
+        <!-- 4. Banco de Voces HD Desplegable con Botones ON/OFF Visuales -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
                 <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
@@ -266,7 +278,7 @@
                 <select id="voice-selection" class="neon-select">
                     <option value="https://files.catbox.moe/smawzc.mp3">1. ♀ Norah (Cálida y Afectuosa - Latam)</option>
                     <option value="https://files.catbox.moe/xt4fcl.mp3">2. ♀ Valentina (Dulce)</option>
-                    <option value="https://vocaroo.com/180kLHzzOom">3. ♀ Sueño (Sueñitos)</option>
+                    <option value="https://voca.ro/180kLHzzOom">3. ♀ Sueño (Sueñitos)</option>
                     <option value="https://files.catbox.moe/ds5rw4.mp3">4. ♂ Mateo Pro (Profundo)</option>
                     <option value="https://files.catbox.moe/7b84x7.mp3">5. ♂ Lucas (Juvenil)</option>
                     <option value="https://files.catbox.moe/1jd2uu.mp3">6. ♂ Thiago (Firme)</option>
@@ -275,34 +287,52 @@
 
             <!-- Botón Desplegable del Banco de Voces -->
             <button class="voice-dropdown-btn" id="toggle-voice-btn">
-                🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)
+                🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)
             </button>
 
-            <!-- Contenedor Deslizable -->
+            <!-- Contenedor Deslizable con Botones ON/OFF -->
             <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
                 <div class="voice-row">
                     <span>1. ♀ Norah (Cálida)</span>
-                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/smawzc.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
+                    </div>
                 </div>
                 <div class="voice-row">
                     <span>2. ♀ Valentina (Dulce)</span>
-                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/xt4fcl.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
+                    </div>
                 </div>
                 <div class="voice-row">
                     <span>3. ♀ Sueño (Sueñitos)</span>
-                    <button class="test-btn" onclick="new Audio('https://vocaroo.com/180kLHzzOom').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://voca.ro/180kLHzzOom').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://voca.ro/180kLHzzOom', 2)">OFF</button>
+                    </div>
                 </div>
                 <div class="voice-row">
                     <span>4. ♂ Mateo Pro (Profundo)</span>
-                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/ds5rw4.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
+                    </div>
                 </div>
                 <div class="voice-row">
                     <span>5. ♂ Lucas (Juvenil)</span>
-                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/7b84x7.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
+                    </div>
                 </div>
                 <div class="voice-row">
                     <span>6. ♂ Thiago (Firme)</span>
-                    <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
+                    <div class="voice-actions">
+                        <button class="test-btn" onclick="new Audio('https://files.catbox.moe/1jd2uu.mp3').play()">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
+                    </div>
                 </div>
 
                 <!-- Subida de voz personalizada -->
@@ -323,6 +353,28 @@
     </div>
 
     <script>
+        // Función para cambiar el estado visual ON/OFF de las voces en directo
+        function setVoiceActive(audioUrl, index) {
+            const selectEl = document.getElementById("voice-selection");
+            selectEl.value = audioUrl;
+
+            // Apagar todos los botones y ponerles "OFF"
+            for(let i = 0; i <= 5; i++) {
+                const btn = document.getElementById("btn-voice-" + i);
+                if(btn) {
+                    btn.innerText = "OFF";
+                    btn.classList.remove("active-on");
+                }
+            }
+
+            // Encender únicamente el botón seleccionado con "ON" y color activo
+            const activeBtn = document.getElementById("btn-voice-" + index);
+            if(activeBtn) {
+                activeBtn.innerText = "ON";
+                activeBtn.classList.add("active-on");
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             // 1. Desplegable del Mando de Transmisión (Arriba)
             const triggerTrans = document.getElementById("toggle-transmission-btn");
@@ -339,7 +391,7 @@
 
             triggerVoice.addEventListener("click", function() {
                 contentVoice.classList.toggle("show");
-                triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (TOCA PARA PROBAR)";
+                triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)";
             });
 
             // Mostrar nombre del archivo MP3 personalizado seleccionado
@@ -365,7 +417,28 @@
             if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
             if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
             if(localStorage.getItem("sofiul_assistant")) assistantInput.value = localStorage.getItem("sofiul_assistant");
-            if(localStorage.getItem("sofiul_voice_selection")) voiceSelection.value = localStorage.getItem("sofiul_voice_selection");
+            if(localStorage.getItem("sofiul_voice_selection")) {
+                const savedVoice = localStorage.getItem("sofiul_voice_selection");
+                voiceSelection.value = savedVoice;
+                
+                // Marcar automáticamente el botón ON que corresponda a la voz guardada
+                const urls = [
+                    "https://files.catbox.moe/smawzc.mp3",
+                    "https://files.catbox.moe/xt4fcl.mp3",
+                    "https://voca.ro/180kLHzzOom",
+                    "https://files.catbox.moe/ds5rw4.mp3",
+                    "https://files.catbox.moe/7b84x7.mp3",
+                    "https://files.catbox.moe/1jd2uu.mp3"
+                ];
+                let foundIndex = urls.indexOf(savedVoice);
+                if(foundIndex !== -1) {
+                    const activeBtn = document.getElementById("btn-voice-" + foundIndex);
+                    if(activeBtn) {
+                        activeBtn.innerText = "ON";
+                        activeBtn.classList.add("active-on");
+                    }
+                }
+            }
 
             let storedDeviceID = localStorage.getItem(deviceKey);
             if (!storedDeviceID) {
