@@ -49,31 +49,47 @@
             transform: scale(1.15);
         }
 
-        /* MODO BATALLA: Animación combinada de poder (Pulso + Oscilación) respetando el tamaño exacto */
+        /* MODO BATALLA: Explosión de colores vibrantes y encendidos para atrapar al público */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
             margin: 15px auto !important;
-            animation: battlePowerCombo 1.5s infinite alternate ease-in-out, battleWiggle 0.6s infinite ease-in-out;
-            border-color: #ffaa00 !important;
+            animation: battleNeonExplosion 2s infinite linear, battleWiggle 0.5s infinite ease-in-out;
         }
 
-        @keyframes battlePowerCombo {
+        @keyframes battleNeonExplosion {
             0% {
-                box-shadow: 0 0 20px rgba(255, 170, 0, 0.6);
-                transform: scale(0.95);
+                border-color: #00e5ff;
+                box-shadow: 0 0 30px #00e5ff, inset 0 0 15px #0088ff;
+                transform: scale(1);
+            }
+            25% {
+                border-color: #ff2a5f;
+                box-shadow: 0 0 45px #ff2a5f, inset 0 0 20px #ff69b4;
+                transform: scale(1.08);
+            }
+            50% {
+                border-color: #ffaa00;
+                box-shadow: 0 0 55px #ffaa00, inset 0 0 25px #ff2a5f;
+                transform: scale(1.04);
+            }
+            75% {
+                border-color: #9a2ba2;
+                box-shadow: 0 0 45px #9a2ba2, inset 0 0 20px #00e5ff;
+                transform: scale(1.08);
             }
             100% {
-                box-shadow: 0 0 45px rgba(255, 42, 95, 0.95);
-                transform: scale(1.08);
+                border-color: #00e5ff;
+                box-shadow: 0 0 30px #00e5ff, inset 0 0 15px #0088ff;
+                transform: scale(1);
             }
         }
 
         @keyframes battleWiggle {
-            0% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-3deg) scale(1.03); }
-            75% { transform: rotate(3deg) scale(1.03); }
-            100% { transform: rotate(0deg) scale(1); }
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-2.5deg); }
+            75% { transform: rotate(2.5deg); }
+            100% { transform: rotate(0deg); }
         }
         
         /* LOGOTIPO: Posición exacta aprobada (61.5% abajo, 47% izquierda, zoom de 126px) */
@@ -438,7 +454,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA";
                 btn.style.background = "linear-gradient(135deg, #00e5ff, #0088ff)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA ACTIVO";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ENERGÍA MÁXIMA!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
