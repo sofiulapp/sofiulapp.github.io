@@ -63,11 +63,12 @@
             transition: opacity 0.4s ease;
         }
         
-        /* LOGOTIPO: Usamos contain para que encaje a la perfección sin chocar con el borde neón */
+        /* LOGOTIPO: Zoom regulado a 1.15 para que respire perfectamente dentro del círculo sin chocar los bordes */
         #logo-layer { 
             opacity: 1; z-index: 2; 
-            object-fit: contain; 
-            background-color: #000;
+            object-fit: cover; 
+            transform: scale(1.15);
+            transform-origin: center center;
         } 
         
         /* MASCOTA (Inalterada): */
