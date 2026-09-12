@@ -58,14 +58,17 @@
             border-color: #ffaa00 !important;
         }
         
-        /* LOGOTIPO: Ajustado exactamente al 62% con zoom de 1.12 para el centrado perfecto */
+        /* NUEVO MÉTODO DEFINITIVO: Usamos posicionamiento absoluto directo con transformaciones limpias para centrar y bajar al milímetro exacto */
         #logo-layer { 
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 1; z-index: 2; 
-            object-fit: cover; 
-            object-position: center 62%; 
-            transform: scale(1.12);
-            transform-origin: center center;
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            width: 125%; 
+            height: 125%;
+            opacity: 1; 
+            z-index: 2; 
+            object-fit: contain; 
+            transform: translate(-50%, -40%) scale(1.1);
             transition: opacity 0.4s ease;
         } 
         
