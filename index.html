@@ -58,12 +58,12 @@
             border-color: #ffaa00 !important;
         }
         
-        /* LOGOTIPO: Ajuste exclusivo para que llene el círculo neón sin salirse ni dejar espacios negros */
+        /* LOGOTIPO: Desplazado 2 puntos más abajo con object-position y zoom exacto de 1.12 */
         #logo-layer { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             opacity: 1; z-index: 2; 
             object-fit: cover; 
-            object-position: center center;
+            object-position: center 58%; 
             transform: scale(1.12);
             transform-origin: center center;
             transition: opacity 0.4s ease;
