@@ -58,7 +58,7 @@
             border-color: #ffaa00 !important;
         }
         
-        /* CÁLCULO PROPORCIONAL EXACTO: Escala ajustada a 1.65 para encajar perfectamente con el tamaño del círculo neón */
+        /* REDUCCIÓN EXACTA: Escala de 0.72 para minimizar la imagen al tamaño perfecto del círculo brilloso */
         #logo-layer { 
             position: absolute; 
             top: 0; 
@@ -67,9 +67,9 @@
             height: 100%;
             opacity: 1; 
             z-index: 2; 
-            object-fit: cover; 
+            object-fit: contain; 
             object-position: center center;
-            transform: scale(1.65);
+            transform: scale(0.72);
             transform-origin: center center;
             transition: opacity 0.4s ease;
         } 
