@@ -26,17 +26,17 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual de la Mascota y Pantalla */
+        /* Zona Visual de la Mascota */
         .stage-area {
-            width: 100%; height: 220px; background: #03060a;
+            width: 100%; height: 240px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
             display: flex; justify-content: center; align-items: center;
         }
 
         .neon-container {
-            width: 110px; height: 110px; border-radius: 50%;
+            width: 120px; height: 120px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
-            position: absolute; top: 50px; left: 120px;
+            position: absolute; top: 60px; left: 120px;
             overflow: hidden; background: #000;
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
             will-change: transform, left, top, box-shadow, border-color;
@@ -49,7 +49,7 @@
             transform: scale(1.08);
         }
 
-        /* MODO BATALLA: Se ancla a la imagen estática sin estorbar */
+        /* MODO BATALLA: Anclado sobre la imagen estática */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
@@ -79,8 +79,7 @@
         }
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
         .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-        .badge-active { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
-
+        
         .input-group { margin-bottom: 8px; }
         .input-group label { display: block; font-size: 0.7rem; color: #a19bc8; margin-bottom: 3px; font-style: italic; }
         .neon-input {
@@ -89,20 +88,38 @@
             outline: none; font-family: inherit; font-style: italic;
         }
 
-        /* 🚀 LA BOTONERA DE CONTROL MAESTRA (6 Botones Limpios) */
-        .control-grid-6 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;
+        /* Botón Desplegable Rojizo Estilo Captura */
+        .dropdown-trigger-btn {
+            background: linear-gradient(135deg, #ff2a5f, #0088ff);
+            color: #fff; border: none; border-radius: 8px; padding: 12px;
+            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
+            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
+            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
         }
-        .control-btn {
-            background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.4);
-            color: var(--accent-cyan); padding: 10px 6px; border-radius: 8px; font-size: 0.7rem;
-            font-weight: bold; text-align: center; cursor: pointer; text-transform: uppercase;
-            font-style: italic; box-sizing: border-box; transition: all 0.2s ease;
+
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .collapsible-content.show { max-height: 1500px; transition: max-height 0.5s ease-in; }
+
+        /* Cuadrícula de Efectos de Sonido */
+        .effects-grid-3 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
-        .control-btn:active { background: rgba(0, 229, 255, 0.3); }
-        .btn-battle-special {
-            background: linear-gradient(135deg, #ffaa00, #ff2a5f);
-            border: none; color: #000; box-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
+        .effect-box {
+            background: rgba(255, 42, 95, 0.05); border: 1px solid rgba(255, 42, 95, 0.3);
+            border-radius: 8px; padding: 8px; text-align: center;
+        }
+        .effect-box-title {
+            font-size: 0.65rem; color: #ff2a5f; font-weight: bold; font-style: italic; margin-bottom: 6px;
+        }
+        .play-effect-btn {
+            width: 100%; background: rgba(255, 42, 95, 0.2); border: 1px solid rgba(255, 42, 95, 0.4);
+            color: #ff2a5f; padding: 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; font-style: italic; margin-bottom: 4px;
+        }
+        .upload-effect-label {
+            display: block; background: rgba(154, 43, 162, 0.2); border: 1px dashed rgba(154, 43, 162, 0.6);
+            color: #e2b7ff; padding: 4px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
+            cursor: pointer; font-style: italic; text-align: center;
         }
 
         .voice-dropdown-btn {
@@ -112,9 +129,6 @@
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
             margin-top: 6px; box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
         }
-        
-        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .collapsible-content.show { max-height: 1200px; transition: max-height 0.5s ease-in; }
 
         .voice-row {
             display: flex; justify-content: space-between; align-items: center;
@@ -148,7 +162,6 @@
 </head>
 <body>
     <header>
-        <!-- Escenario donde se mueve la mascota -->
         <div class="stage-area" id="stage-box">
             <div class="neon-container" id="mascot-frame">
                 <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Mascota">
@@ -158,40 +171,67 @@
     </header>
 
     <div class="container">
-        <!-- Panel Principal con los 6 Botones de Control -->
+        <!-- 1. PANEL DE MANDO CON EL BOTÓN ROJIZO DESPLEGABLE -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
-                <span>🚀 PANEL DE CONTROL &amp; 6 BOTONES</span>
+                <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
             </div>
             
-            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 6px;">
-                Tus comandos esenciales para la transmisión en vivo:
-            </div>
+            <!-- El Botón Rojizo que pediste -->
+            <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
+                ⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES
+            </button>
+            
+            <!-- Contenido que se desliza al tocar el botón -->
+            <div class="collapsible-content" id="transmission-content">
+                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
+                    <div class="card-title" style="color: #ff2a5f;">
+                        <span>PANTALLA DE COMANDOS &amp; AUDIO EN DIRECTO</span>
+                    </div>
 
-            <!-- Botonera Limpia de 6 Comandos -->
-            <div class="control-grid-6">
-                <button class="control-btn btn-battle-special" id="battle-toggle-btn" onclick="toggleBattleMode()">
-                    ⚔️ 1. Modo Batalla
-                </button>
-                <button class="control-btn" onclick="triggerMascotGreet()">
-                    👋 2. Saludar Chat
-                </button>
-                <button class="control-btn" onclick="triggerMascotHype()">
-                    🔥 3. Lanzar Hype
-                </button>
-                <button class="control-btn" onclick="triggerMascotThanks()">
-                    🎁 4. Agradecer Regalo
-                </button>
-                <button class="control-btn" onclick="alert('🎵 Mantén tu música ambiental sonando en segundo plano.')">
-                    🎵 5. Música Fondo
-                </button>
-                <button class="control-btn" style="border-color:#ff2a5f; color:#ff2a5f;" onclick="resetMascotPosition()">
-                    🔄 6. Reiniciar Vista
-                </button>
+                    <!-- Botón de Modo Batalla Anclado -->
+                    <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff2a5f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        ⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)
+                    </button>
+
+                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
+                        🎮 Botonera de Comandos de Efectos Especiales:
+                    </div>
+
+                    <!-- Botones de Comando (Risas, Gritos, etc. con opción de subir MP3) -->
+                    <div class="effects-grid-3">
+                        <div class="effect-box">
+                            <div class="effect-box-title">😂 Risa Divertida</div>
+                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/36b8b6.mp3', 'Risa')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">😈 Risa Burlona</div>
+                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/xt4fcl.mp3', 'Burlona')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Burlona')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">🎉 Gritos de Júbilo</div>
+                            <button class="play-effect-btn" onclick="playEffect('https://files.catbox.moe/smawzc.mp3', 'Júbilo')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Júbilo')" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <!-- Sección Spotify Ambiental (Sigue sonando aunque te mutees) -->
+                    <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 10px; font-weight: bold;">
+                        🎵 Spotify (Música de fondo para tu público):
+                    </div>
+                    <div style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
+                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                    <div style="font-size: 0.55rem; color: #8c82ce; font-style: italic; margin-top: 3px;">
+                        * La música de Spotify corre independiente en segundo plano para tus espectadores aunque silencies tu micrófono.
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Seguridad y Cuenta -->
+        <!-- 2. Estado de Cuenta & Seguridad -->
         <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
             <div class="card-title" style="color: #ffaa00;">
                 <span>ESTADO DE CUENTA &amp; SEGURIDAD (72H)</span>
@@ -203,11 +243,11 @@
             </div>
         </div>
 
-        <!-- Vinculación TikTok -->
+        <!-- 3. Vinculación TikTok -->
         <div class="card" style="border-color: rgba(0, 229, 255, 0.4);">
             <div class="card-title" style="color: var(--accent-cyan);">
                 <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
-                <span class="status-badge badge-active">ID P&Uacute;BLICO</span>
+                <span class="status-badge" style="background:rgba(0,229,255,0.2); color:var(--accent-cyan);">ID PÚBLICO</span>
             </div>
             <div class="input-group" style="margin-bottom: 4px;">
                 <label>Tu Usuario P&uacute;blico (@TikTok):</label>
@@ -215,11 +255,11 @@
             </div>
         </div>
 
-        <!-- Banco de Voces HD -->
+        <!-- 4. Banco de Voces HD -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
-                <span>BANCO DE VOCES HD &amp; MP3 PERSONALIZADO</span>
-                <span class="status-badge badge-active">PRO</span>
+                <span>BANCO DE VOCES HD &amp; ASISTENTE</span>
+                <span class="status-badge" style="background:rgba(0,229,255,0.2); color:var(--accent-cyan);">PRO</span>
             </div>
             
             <button class="voice-dropdown-btn" id="toggle-voice-btn">
@@ -282,10 +322,11 @@
         const statusText = document.getElementById("mascot-status-text");
         
         let posX = 40, posY = 30;
-        let speedX = 1.4, speedY = 1.1;
+        let speedX = 1.3, speedY = 1.0;
         const neonColors = ["#00e5ff", "#ff2a5f", "#9a2ba2", "#00ff88", "#ffaa00"];
         let colorIndex = 0;
         let isBattleMode = false;
+        let customEffectUrls = {};
 
         // Motor de rebote ping-pong ultraligero
         function updatePingPong() {
@@ -313,26 +354,54 @@
         }
         requestAnimationFrame(updatePingPong);
 
-        // Funciones de los 6 Botones
+        // Modo Batalla Anclado
         function toggleBattleMode() {
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
                 mascot.classList.add("battle-mode");
-                btn.innerText = "⚔️ 1. Salir Batalla";
+                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A REBOTE)";
+                btn.style.background = "linear-gradient(135deg, #00e5ff, #0088ff)";
+                btn.style.color = "#000";
                 if(statusText) statusText.innerText = "⚔️ MODO BATALLA (Anclado)";
             } else {
                 mascot.classList.remove("battle-mode");
-                btn.innerText = "⚔️ 1. Modo Batalla";
+                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
+                btn.style.background = "linear-gradient(135deg, #ffaa00, #ff2a5f)";
+                btn.style.color = "#000";
                 if(statusText) statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
-        function triggerMascotGreet() { playAudioWithMascot("https://files.catbox.moe/smawzc.mp3", "¡Hola a todos!"); }
-        function triggerMascotHype() { playAudioWithMascot("https://files.catbox.moe/xt4fcl.mp3", "¡Energía al tope!"); }
-        function triggerMascotThanks() { playAudioWithMascot("https://files.catbox.moe/36b8b6.mp3", "¡Gracias por el regalo!"); }
-        function resetMascotPosition() { posX = 40; posY = 30; alert("🔄 Posición reiniciada."); }
+        // Reproducir Efectos (Risa, Burlona, Júbilo o MP3 subido)
+        function playEffect(defaultUrl, label) {
+            let urlToPlay = customEffectUrls[label] || defaultUrl;
+            const audio = new Audio(urlToPlay);
+            audio.play().then(() => {
+                mascot.classList.add("speaking");
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🔴 Efecto: " + label;
+                    statusText.style.color = "#ff2a5f";
+                }
+            }).catch(e => console.log(e));
+
+            audio.onended = function() {
+                mascot.classList.remove("speaking");
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                    statusText.style.color = "#00e5ff";
+                }
+            };
+        }
+
+        function loadCustomEffect(input, label) {
+            if(input.files && input.files[0]) {
+                const file = input.files[0];
+                customEffectUrls[label] = URL.createObjectURL(file);
+                alert("✅ ¡Audio personalizado para '" + label + "' cargado con éxito!");
+            }
+        }
 
         let currentActiveVoiceUrl = "https://files.catbox.moe/smawzc.mp3";
         function playAudioWithMascot(url, label) {
@@ -340,12 +409,18 @@
             const audio = new Audio(url);
             audio.play().then(() => {
                 mascot.classList.add("speaking");
-                if(statusText && !isBattleMode) statusText.innerText = "🔴 " + label;
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🔴 " + label;
+                    statusText.style.color = "#ff2a5f";
+                }
             }).catch(e => console.log(e));
 
             audio.onended = function() {
                 mascot.classList.remove("speaking");
-                if(statusText && !isBattleMode) statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                if(statusText && !isBattleMode) {
+                    statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                    statusText.style.color = "#00e5ff";
+                }
             };
         }
 
@@ -361,6 +436,13 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+            const triggerTrans = document.getElementById("toggle-transmission-btn");
+            const contentTrans = document.getElementById("transmission-content");
+            triggerTrans.addEventListener("click", function() {
+                contentTrans.classList.toggle("show");
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR PANTALLA DE DIRECTO" : "⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES";
+            });
+
             const trVoice = document.getElementById("toggle-voice-btn");
             const coVoice = document.getElementById("voice-content");
             trVoice.addEventListener("click", function() {
