@@ -24,22 +24,28 @@
             background-color: var(--bg-color); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center;
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
+            touch-action: pan-y; /* Permite scroll vertical fluido en la página */
         }
         
-        /* Zona Visual Superior Original */
+        /* Zona Visual Superior Original (Área de juego/arrastre de la mascota) */
         .stage-area {
             width: 100%; height: 180px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
         }
 
-        /* Círculo Brilloso en su posición exacta original */
+        /* Círculo Brilloso - Burbuja Flotante Arrastrable con el dedo */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
             position: absolute; top: 35px; left: 40px; overflow: hidden; background: #000;
             box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
+            cursor: grab; user-select: none;
             will-change: transform, left, top, box-shadow, border-color;
-            transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+            z-index: 100;
+        }
+        .neon-container:active {
+            cursor: grabbing;
         }
         
         /* Efecto Vivo cuando habla o interactúa */
@@ -49,13 +55,32 @@
             transform: scale(1.15);
         }
 
-        /* MODO BATALLA: Anclado al centro, manteniendo efectos vivos de respiración/brillo */
+        /* MODO BATALLA: Animación combinada (Pulso rápido + Onda expansiva + Oscilación sutil) */
         .neon-container.battle-mode {
-            position: relative !important;
-            top: auto !important; left: auto !important;
-            margin: 15px auto !important; transform: scale(0.9) !important;
-            box-shadow: 0 0 25px rgba(255, 170, 0, 0.8) !important;
+            animation: battlePowerCombo 1.5s infinite alternate ease-in-out, battleWiggle 0.6s infinite ease-in-out;
             border-color: #ffaa00 !important;
+        }
+
+        @keyframes battlePowerCombo {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 170, 0, 0.5), inset 0 0 10px rgba(255, 170, 0, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(255, 42, 95, 0.9), inset 0 0 20px rgba(0, 229, 255, 0.6);
+                transform: scale(1.12);
+            }
+            100% {
+                box-shadow: 0 0 50px rgba(154, 43, 162, 0.95), inset 0 0 25px rgba(255, 170, 0, 0.8);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes battleWiggle {
+            0% { transform: rotate(0deg) scale(1.05); }
+            25% { transform: rotate(-3deg) scale(1.08); }
+            75% { transform: rotate(3deg) scale(1.08); }
+            100% { transform: rotate(0deg) scale(1.05); }
         }
         
         /* LOGOTIPO: Posición exacta aprobada (61.5% abajo, 47% izquierda, zoom de 126px) */
@@ -70,9 +95,10 @@
             object-fit: cover; 
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
+            pointer-events: none;
         } 
         
-        /* MASCOTA: Zoom aumentado a 136px (dos pasos más) manteniendo la posición central aprobada */
+        /* MASCOTA: Zoom exacto y posición centrada aprobada */
         #avatar-layer { 
             position: absolute; 
             top: 52%; 
@@ -84,6 +110,7 @@
             object-fit: cover; 
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
+            pointer-events: none;
         } 
 
         /* Transición de la mascota al activarse */
@@ -369,16 +396,19 @@
         const stage = document.getElementById("stage-box");
         const statusText = document.getElementById("mascot-status-text");
         
-        let posX = 40, posY = 30;
+        let posX = 40, posY = 35;
         let speedX = 1.3, speedY = 1.0;
         const neonColors = ["#00e5ff", "#ff2a5f", "#9a2ba2", "#00ff88", "#ffaa00"];
         let colorIndex = 0;
         let isBattleMode = false;
+        let isDragging = false;
+        let startX, startY;
         let customEffectUrls = {};
         let customVoiceUrl = "";
 
+        // Sistema de Movimiento Automático (Ping-Pong) cuando no se arrastra
         function updatePingPong() {
-            if (!stage || !mascotContainer || isBattleMode) return;
+            if (!stage || !mascotContainer || isBattleMode || isDragging) return;
             const sW = stage.clientWidth, sH = stage.clientHeight;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
@@ -402,6 +432,65 @@
         }
         requestAnimationFrame(updatePingPong);
 
+        // Sistema de Arrastre Táctil (Touch & Mouse Drag) para la burbuja
+        function startDrag(e) {
+            isDragging = true;
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            
+            startX = clientX - mascotContainer.offsetLeft;
+            startY = clientY - mascotContainer.offsetTop;
+            
+            if (e.type === 'touchstart') {
+                window.addEventListener('touchmove', onDrag, { passive: false });
+                window.addEventListener('touchend', stopDrag);
+            } else {
+                window.addEventListener('mousemove', onDrag);
+                window.addEventListener('mouseup', stopDrag);
+            }
+        }
+
+        function onDrag(e) {
+            if (!isDragging || !stage) return;
+            if (e.type === 'touchmove') e.preventDefault(); // Evita scroll de pantalla mientras arrastras la mascota
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            let newX = clientX - startX;
+            let newY = clientY - startY;
+
+            const sW = stage.clientWidth, sH = stage.clientHeight;
+            const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
+
+            // Restringir dentro de los límites del stage superior
+            if (newX < 0) newX = 0;
+            if (newX > sW - mW) newX = sW - mW;
+            if (newY < 0) newY = 0;
+            if (newY > sH - mH) newY = sH - mH;
+
+            posX = newX;
+            posY = newY;
+            mascotContainer.style.left = posX + 'px';
+            mascotContainer.style.top = posY + 'px';
+        }
+
+        function stopDrag(e) {
+            isDragging = false;
+            window.removeEventListener('mousemove', onDrag);
+            window.removeEventListener('mouseup', stopDrag);
+            window.removeEventListener('touchmove', onDrag);
+            window.removeEventListener('touchend', stopDrag);
+
+            // Si no está en modo batalla, reanuda el movimiento automático
+            if (!isBattleMode) {
+                requestAnimationFrame(updatePingPong);
+            }
+        }
+
+        mascotContainer.addEventListener('mousedown', startDrag);
+        mascotContainer.addEventListener('touchstart', startDrag, { passive: false });
+
         function toggleTestMascot() {
             mascotContainer.classList.toggle("show-mascot");
             mascotContainer.classList.toggle("speaking");
@@ -420,7 +509,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA";
                 btn.style.background = "linear-gradient(135deg, #00e5ff, #0088ff)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA ACTIVO";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA ACTIVO (PODER MÁXIMO)";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
