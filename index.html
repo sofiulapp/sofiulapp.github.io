@@ -49,7 +49,7 @@
             transform: scale(1.15);
         }
 
-        /* MODO BATALLA: Anclado al centro */
+        /* MODO BATALLA: Anclado al centro pero manteniendo el ritmo de animación y efectos vivos */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
@@ -58,7 +58,7 @@
             border-color: #ffaa00 !important;
         }
         
-        /* LOGOTIPO: Ajuste final (61.5% abajo, 47% izquierda, zoom de 126px) */
+        /* LOGOTIPO: Posición exacta aprobada (61.5% abajo, 47% izquierda, zoom de 126px) */
         #logo-layer { 
             position: absolute; 
             top: 61.5%; 
@@ -72,13 +72,13 @@
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Intacta y en su lugar perfecto */
+        /* MASCOTA: Sincronizada exactamente con la misma posición y zoom del logotipo para llenar el círculo */
         #avatar-layer { 
             position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            width: 112px; 
-            height: 112px;
+            top: 61.5%; 
+            left: 47%; 
+            width: 126px; 
+            height: 126px;
             opacity: 0; 
             z-index: 1; 
             object-fit: cover; 
