@@ -63,15 +63,16 @@
             transition: opacity 0.4s ease;
         }
         
-        /* LOGOTIPO: Zoom deducido y ajustado al tamaño exacto del círculo brilloso */
+        /* LOGOTIPO: Ajuste fino y milimétrico para quedar justito al borde del círculo neón */
         #logo-layer { 
             opacity: 1; z-index: 2; 
-            object-fit: contain; 
-            transform: scale(0.95) translateY(-2px); 
+            object-fit: cover; 
+            transform: scale(1.08); 
+            object-position: center center;
             transform-origin: center center;
         } 
         
-        /* MASCOTA (Inalterada, con su zoom perfecto y centrada): */
+        /* MASCOTA (Inalterada, con su estructura intacta): */
         #avatar-layer { 
             opacity: 0; z-index: 1; 
             object-fit: cover; 
