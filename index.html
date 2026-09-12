@@ -23,51 +23,55 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: var(--bg-color); color: var(--text-main);
             display: flex; flex-direction: column; align-items: center;
-            min-height: 100vh; padding-bottom: 40px;
+            min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Animación de Respiración Viva y Llamativa para la Mascota */
-        @keyframes mascotLiveBreathing {
-            0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), inset 0 0 15px rgba(0, 229, 255, 0.3); border-color: #00e5ff; }
-            50% { transform: scale(1.04) rotate(0.5deg); box-shadow: 0 0 40px rgba(0, 229, 255, 0.9), inset 0 0 25px rgba(0, 229, 255, 0.6); border-color: #9a2ba2; }
-            100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 20px rgba(0, 229, 255, 0.5), inset 0 0 15px rgba(0, 229, 255, 0.3); border-color: #00e5ff; }
+        /* Zona Visual de la Mascota y Pantalla */
+        .stage-area {
+            width: 100%; height: 220px; background: #03060a;
+            position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 229, 255, 0.3);
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* Animación de Habla Activa (Cuando la mascota emite voz o audio) */
-        @keyframes mascotActiveTalking {
-            0% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 42, 95, 0.8); border-color: #ff2a5f; filter: brightness(1.1); }
-            25% { transform: scale(1.06); box-shadow: 0 0 50px rgba(255, 42, 95, 1); border-color: #00e5ff; filter: brightness(1.3); }
-            50% { transform: scale(1.02); box-shadow: 0 0 30px rgba(255, 42, 95, 0.8); border-color: #ff2a5f; filter: brightness(1.1); }
-            75% { transform: scale(1.06); box-shadow: 0 0 50px rgba(255, 42, 95, 1); border-color: #00e5ff; filter: brightness(1.3); }
-            100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 42, 95, 0.8); border-color: #ff2a5f; filter: brightness(1.1); }
+        .neon-container {
+            width: 110px; height: 110px; border-radius: 50%;
+            border: 3px solid var(--accent-cyan);
+            position: absolute; top: 50px; left: 120px;
+            overflow: hidden; background: #000;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+            will-change: transform, left, top, box-shadow, border-color;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .neon-container.speaking {
+            border-color: #ff2a5f !important;
+            box-shadow: 0 0 35px rgba(255, 42, 95, 0.9) !important;
+            transform: scale(1.08);
+        }
+
+        /* MODO BATALLA: Se ancla a la imagen estática sin estorbar */
+        .neon-container.battle-mode {
+            position: relative !important;
+            top: auto !important; left: auto !important;
+            margin: 0 auto; transform: scale(0.85) !important;
+            box-shadow: 0 0 25px rgba(255, 170, 0, 0.8) !important;
+            border-color: #ffaa00 !important;
+        }
+        
+        .neon-container img {
+            position: absolute; width: 112%; height: 112%; top: -6%; left: -6%; object-fit: cover;
         }
 
         header {
-            width: 100%; padding: 15px 0 10px 0; text-align: center;
-            background: #070a12; position: sticky; top: 0; z-index: 10;
+            width: 100%; text-align: center; background: #070a12; position: sticky; top: 0; z-index: 10;
         }
         
-        .neon-container {
-            width: 230px; height: 230px; border-radius: 50%;
-            border: 3px solid #00e5ff; animation: mascotLiveBreathing 4s infinite ease-in-out;
-            position: relative; overflow: hidden; background: #000; margin: 0 auto;
-            will-change: transform, box-shadow, border-color;
-        }
-        .neon-container.speaking {
-            animation: mascotActiveTalking 0.35s infinite ease-in-out !important;
-        }
-        .neon-container img {
-            position: absolute; width: 112% !important; height: 112% !important; top: -6% !important; left: -6% !important; object-fit: cover;
-        }
-
-        /* Indicador visual inteligente en pantalla de lo que hace la mascota */
         .mascot-status-tag {
             font-size: 0.65rem; color: var(--accent-cyan); text-transform: uppercase;
-            letter-spacing: 2px; margin-top: 6px; font-weight: bold; font-style: italic;
-            transition: color 0.3s ease;
+            letter-spacing: 2px; padding: 6px 0; font-weight: bold; font-style: italic; background: #070a12;
         }
         
-        .container { width: 92%; max-width: 420px; margin: 15px auto 10px auto; display: flex; flex-direction: column; gap: 10px; }
+        .container { width: 92%; max-width: 420px; margin: 12px auto; display: flex; flex-direction: column; gap: 10px; }
         
         .card {
             background-color: var(--card-bg); border: 1px solid rgba(0, 181, 255, 0.2);
@@ -76,7 +80,6 @@
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
         .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         .badge-active { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); border: 1px solid rgba(0, 229, 255, 0.3); }
-        .badge-trial { background: rgba(255, 170, 0, 0.15); color: #ffaa00; border: 1px solid rgba(255, 170, 0, 0.3); }
 
         .input-group { margin-bottom: 8px; }
         .input-group label { display: block; font-size: 0.7rem; color: #a19bc8; margin-bottom: 3px; font-style: italic; }
@@ -85,23 +88,21 @@
             border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
             outline: none; font-family: inherit; font-style: italic;
         }
-        .neon-input:focus {
-            border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
-        }
-        
-        .file-upload-btn {
-            display: block; width: 100%; background: rgba(154, 43, 162, 0.15);
-            border: 1px dashed rgba(154, 43, 162, 0.5); color: #e2b7ff; padding: 8px;
-            border-radius: 6px; text-align: center; font-size: 0.75rem; font-weight: bold;
-            cursor: pointer; box-sizing: border-box; font-style: italic;
-        }
 
-        .dropdown-trigger-btn {
-            background: linear-gradient(135deg, #ff2a5f, #0088ff);
-            color: #fff; border: none; border-radius: 8px; padding: 12px;
-            font-size: 0.8rem; font-weight: bold; text-align: center; cursor: pointer;
-            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
-            box-shadow: 0 0 15px rgba(255, 42, 95, 0.4); margin-top: 6px;
+        /* 🚀 LA BOTONERA DE CONTROL MAESTRA (6 Botones Limpios) */
+        .control-grid-6 {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;
+        }
+        .control-btn {
+            background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.4);
+            color: var(--accent-cyan); padding: 10px 6px; border-radius: 8px; font-size: 0.7rem;
+            font-weight: bold; text-align: center; cursor: pointer; text-transform: uppercase;
+            font-style: italic; box-sizing: border-box; transition: all 0.2s ease;
+        }
+        .control-btn:active { background: rgba(0, 229, 255, 0.3); }
+        .btn-battle-special {
+            background: linear-gradient(135deg, #ffaa00, #ff2a5f);
+            border: none; color: #000; box-shadow: 0 0 10px rgba(255, 170, 0, 0.4);
         }
 
         .voice-dropdown-btn {
@@ -112,36 +113,23 @@
             margin-top: 6px; box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
         }
         
-        .collapsible-content {
-            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;
-        }
-        .collapsible-content.show {
-            max-height: 1400px; transition: max-height 0.5s ease-in;
-        }
-
-        .spotify-row { display: flex; gap: 6px; margin-top: 8px; }
-        .spotify-btn {
-            flex: 1; background: rgba(29, 185, 84, 0.15); border: 1px solid rgba(29, 185, 84, 0.4);
-            color: #1db954; padding: 8px 4px; border-radius: 6px; font-size: 0.65rem; font-weight: bold; text-align: center; cursor: pointer; font-style: italic; text-transform: uppercase;
-        }
+        .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .collapsible-content.show { max-height: 1200px; transition: max-height 0.5s ease-in; }
 
         .voice-row {
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(0, 229, 255, 0.03); border: 1px solid rgba(0, 229, 255, 0.15);
             padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
         }
-        .voice-actions { display: flex; gap: 4px; }
         .test-btn {
             background: rgba(0, 229, 255, 0.15); border: 1px solid rgba(0, 229, 255, 0.4);
             color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
-        
         .toggle-btn {
             background: rgba(255, 42, 95, 0.2); border: 1px solid rgba(255, 42, 95, 0.5);
             color: #ff2a5f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
-            transition: all 0.3s ease;
         }
         .toggle-btn.active-on {
             background: rgba(0, 229, 255, 0.3); border-color: var(--accent-cyan);
@@ -160,79 +148,62 @@
 </head>
 <body>
     <header>
-        <!-- Contenedor Visual Inteligente de la Mascota -->
-        <div class="neon-container" id="mascot-frame">
-            <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Mascota Inteligente">
+        <!-- Escenario donde se mueve la mascota -->
+        <div class="stage-area" id="stage-box">
+            <div class="neon-container" id="mascot-frame">
+                <img src="https://files.catbox.moe/4fp3sa.png" alt="SOFIUL Mascota">
+            </div>
         </div>
-        <!-- Texto indicador de estado en vivo para que veas qué hace -->
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 Mascota en Línea (Modo Reposo)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 Mascota en Movimiento (Rebote)</div>
     </header>
 
     <div class="container">
-        <!-- 1. Panel de Mando en Vivo con Spotify Integrado -->
+        <!-- Panel Principal con los 6 Botones de Control -->
         <div class="card" style="border-color: rgba(255, 42, 95, 0.4);">
             <div class="card-title" style="color: #ff2a5f;">
-                <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
+                <span>🚀 PANEL DE CONTROL &amp; 6 BOTONES</span>
             </div>
             
-            <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
-                ⚡ ABRIR MANDO DE TRANSMISIÓN
-            </button>
-            
-            <div class="collapsible-content" id="transmission-content">
-                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 42, 95, 0.3);">
-                    <div class="card-title" style="color: #ff2a5f;">
-                        <span>MANDO DE TRANSMISIÓN EN DIRECTO</span>
-                        <span class="status-badge" style="background:rgba(255,42,95,0.2); color:#ff2a5f; padding:2px 6px; border-radius:4px; font-size:0.55rem;">EN DIRECTO</span>
-                    </div>
-                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 6px;">
-                        🎮 Botones de Control de Voz &amp; Efectos:
-                    </div>
+            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 6px;">
+                Tus comandos esenciales para la transmisión en vivo:
+            </div>
 
-                    <div class="effects-grid-2x2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                        <div class="effect-box" style="background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 8px; padding: 8px; text-align: center;">
-                            <div style="font-size: 0.65rem; color: var(--accent-cyan); font-weight: bold; font-style: italic; margin-bottom: 6px;">👋 BIENVENIDA</div>
-                            <label class="file-upload-btn" style="padding: 6px; font-size: 0.55rem;">📁 Subir MP3<input type="file" accept="audio/mp3" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box" style="background: rgba(0, 229, 255, 0.05); border: 1px solid rgba(0, 229, 255, 0.3); border-radius: 8px; padding: 8px; text-align: center;">
-                            <div style="font-size: 0.65rem; color: var(--accent-cyan); font-weight: bold; font-style: italic; margin-bottom: 6px;">🔥 HYPE &amp; FIESTA</div>
-                            <label class="file-upload-btn" style="padding: 6px; font-size: 0.55rem;">📁 Subir MP3<input type="file" accept="audio/mp3" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 10px; font-weight: bold;">
-                        🎵 Controles de Spotify (Fondo ambiental):
-                    </div>
-                    
-                    <div style="margin-top: 6px; border-radius: 6px; overflow: hidden; background: #000;">
-                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-
-                    <div class="spotify-row">
-                        <div class="spotify-btn" onclick="alert('Usa los controles del reproductor superior de Spotify')">▶ PLAY</div>
-                        <div class="spotify-btn" onclick="alert('Usa los controles del reproductor superior de Spotify')">⏸ PAUSAR</div>
-                        <div class="spotify-btn" onclick="alert('Usa el reproductor superior para cambiar temas')">🔄 CAMBIAR</div>
-                    </div>
-                </div>
+            <!-- Botonera Limpia de 6 Comandos -->
+            <div class="control-grid-6">
+                <button class="control-btn btn-battle-special" id="battle-toggle-btn" onclick="toggleBattleMode()">
+                    ⚔️ 1. Modo Batalla
+                </button>
+                <button class="control-btn" onclick="triggerMascotGreet()">
+                    👋 2. Saludar Chat
+                </button>
+                <button class="control-btn" onclick="triggerMascotHype()">
+                    🔥 3. Lanzar Hype
+                </button>
+                <button class="control-btn" onclick="triggerMascotThanks()">
+                    🎁 4. Agradecer Regalo
+                </button>
+                <button class="control-btn" onclick="alert('🎵 Mantén tu música ambiental sonando en segundo plano.')">
+                    🎵 5. Música Fondo
+                </button>
+                <button class="control-btn" style="border-color:#ff2a5f; color:#ff2a5f;" onclick="resetMascotPosition()">
+                    🔄 6. Reiniciar Vista
+                </button>
             </div>
         </div>
 
-        <!-- 2. Estado de Cuenta & Seguridad (72 Horas & Gmail) -->
+        <!-- Seguridad y Cuenta -->
         <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
             <div class="card-title" style="color: #ffaa00;">
-                <span>ESTADO DE CUENTA &amp; SEGURIDAD</span>
-                <span class="status-badge badge-trial" id="trial-status">VERIFICANDO...</span>
+                <span>ESTADO DE CUENTA &amp; SEGURIDAD (72H)</span>
+                <span class="status-badge" style="background:rgba(255,170,0,0.2); color:#ffaa00;">ACTIVO</span>
             </div>
             <div class="input-group" style="margin-bottom: 4px;">
-                <label>Correo Electr&oacute;nico (Gmail / Registro Obligatorio):</label>
+                <label>Correo Electr&oacute;nico (Gmail):</label>
                 <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
-            </div>
-            <div id="device-info" style="font-size: 0.65rem; color: #ffaa00; font-style: italic;">
-                🔍 Analizando huella digital del dispositivo (Anti-abuso 72h)...
             </div>
         </div>
 
-        <!-- 3. Vinculación TikTok Live -->
+        <!-- Vinculación TikTok -->
         <div class="card" style="border-color: rgba(0, 229, 255, 0.4);">
             <div class="card-title" style="color: var(--accent-cyan);">
                 <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
@@ -242,241 +213,167 @@
                 <label>Tu Usuario P&uacute;blico (@TikTok):</label>
                 <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
             </div>
-            <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic;">
-                * Enlace seguro por ID durante las 72 horas de prueba. Sin riesgos.
-            </div>
         </div>
 
-        <!-- 4. Banco de Voces HD Desplegable con ON/OFF y Soporte MP3 Personalizado -->
+        <!-- Banco de Voces HD -->
         <div class="card">
             <div class="card-title" style="color: #fff;">
-                <span>BANCO DE VOCES HD (3 MUJERES Y 3 VARONES)</span>
-                <span class="status-badge badge-active">ESTUDIO PRO</span>
+                <span>BANCO DE VOCES HD &amp; MP3 PERSONALIZADO</span>
+                <span class="status-badge badge-active">PRO</span>
             </div>
             
-            <div class="input-group">
-                <label>Nombre de la Mascota / Asistente:</label>
-                <input type="text" id="assistant-name" class="neon-input" value="Sofiul" placeholder="Ej: Sofiul...">
-            </div>
-
-            <!-- Botón Desplegable del Banco de Voces -->
             <button class="voice-dropdown-btn" id="toggle-voice-btn">
-                🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)
+                🎧 ABRIR BANCO DE VOCES (ON / OFF)
             </button>
 
-            <!-- Contenedor Deslizable con Botones ON/OFF -->
             <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
                 <div class="voice-row">
                     <span>1. ♀ Norah (Cálida)</span>
-                    <div class="voice-actions">
-                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah (Cálida)')">▶ Probar</button>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>2. ♀ Valentina (Dulce)</span>
-                    <div class="voice-actions">
-                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina (Dulce)')">▶ Probar</button>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
                     <span>3. ♀ Sueño (Sueñitos)</span>
-                    <div class="voice-actions">
-                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño (Sueñitos)')">▶ Probar</button>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
-                    <span>4. ♂ Mateo Pro (Profundo)</span>
-                    <div class="voice-actions">
-                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo Pro')">▶ Probar</button>
+                    <span>4. ♂ Mateo Pro</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
-                    <span>5. ♂ Lucas (Juvenil)</span>
-                    <div class="voice-actions">
+                    <span>5. ♂ Lucas</span>
+                    <div style="display:flex; gap:4px;">
                         <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
                     </div>
                 </div>
                 <div class="voice-row">
-                    <span>6. ♂ Thiago (Firme)</span>
-                    <div class="voice-actions">
+                    <span>6. ♂ Thiago</span>
+                    <div style="display:flex; gap:4px;">
                         <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
                         <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
                     </div>
                 </div>
-
-                <!-- Subida de voz personalizada con su propio ON/OFF -->
-                <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
-                    <label>--- O SUBIR SU PROPIA VOZ PERSONALIZADA ---</label>
-                    <div style="display: flex; gap: 6px; align-items: center;">
-                        <label class="file-upload-btn" style="flex: 1; margin: 0;">
-                            📁 Seleccionar MP3 del Celular
-                            <input type="file" id="voice-file" style="display: none;" accept="audio/*">
-                        </label>
-                        <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
-                    </div>
-                    <div id="voice-file-name" style="font-size: 0.65rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún MP3 cargado (Usando el Banco de Voces HD)</div>
-                </div>
             </div>
         </div>
 
-        <!-- Botón de Guardado Principal -->
-        <button class="action-button" id="main-action-btn">GUARDAR Y LANZAR SOFIUL</button>
-        <div class="save-notice" id="save-notice">✅ ¡Configuración guardada con éxito en tu dispositivo!</div>
+        <button class="action-button" id="main-action-btn">GUARDAR CONFIGURACIÓN</button>
+        <div class="save-notice" id="save-notice">✅ ¡Guardado con éxito!</div>
     </div>
 
     <script>
-        let currentActiveVoiceUrl = "https://files.catbox.moe/smawzc.mp3";
-        let customAudioUrl = "";
+        const mascot = document.getElementById("mascot-frame");
+        const stage = document.getElementById("stage-box");
+        const statusText = document.getElementById("mascot-status-text");
+        
+        let posX = 40, posY = 30;
+        let speedX = 1.4, speedY = 1.1;
+        const neonColors = ["#00e5ff", "#ff2a5f", "#9a2ba2", "#00ff88", "#ffaa00"];
+        let colorIndex = 0;
+        let isBattleMode = false;
 
-        // Función de prueba visual en vivo para que veas a la mascota interactuar
-        function playAudioWithMascot(url, voiceName) {
+        // Motor de rebote ping-pong ultraligero
+        function updatePingPong() {
+            if (!stage || !mascot || isBattleMode) return;
+            const sW = stage.clientWidth, sH = stage.clientHeight;
+            const mW = mascot.clientWidth, mH = mascot.clientHeight;
+
+            posX += speedX; posY += speedY;
+            let hit = false;
+
+            if (posX <= 0) { posX = 0; speedX *= -1; hit = true; }
+            else if (posX >= sW - mW) { posX = sW - mW; speedX *= -1; hit = true; }
+            if (posY <= 0) { posY = 0; speedY *= -1; hit = true; }
+            else if (posY >= sH - mH) { posY = sH - mH; speedY *= -1; hit = true; }
+
+            if (hit && !mascot.classList.contains('speaking')) {
+                colorIndex = (colorIndex + 1) % neonColors.length;
+                mascot.style.borderColor = neonColors[colorIndex];
+                mascot.style.boxShadow = `0 0 25px ${neonColors[colorIndex]}`;
+            }
+
+            mascot.style.left = posX + 'px';
+            mascot.style.top = posY + 'px';
+            requestAnimationFrame(updatePingPong);
+        }
+        requestAnimationFrame(updatePingPong);
+
+        // Funciones de los 6 Botones
+        function toggleBattleMode() {
+            isBattleMode = !isBattleMode;
+            const btn = document.getElementById("battle-toggle-btn");
+            if (isBattleMode) {
+                mascot.classList.add("battle-mode");
+                btn.innerText = "⚔️ 1. Salir Batalla";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA (Anclado)";
+            } else {
+                mascot.classList.remove("battle-mode");
+                btn.innerText = "⚔️ 1. Modo Batalla";
+                if(statusText) statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
+                requestAnimationFrame(updatePingPong);
+            }
+        }
+
+        function triggerMascotGreet() { playAudioWithMascot("https://files.catbox.moe/smawzc.mp3", "¡Hola a todos!"); }
+        function triggerMascotHype() { playAudioWithMascot("https://files.catbox.moe/xt4fcl.mp3", "¡Energía al tope!"); }
+        function triggerMascotThanks() { playAudioWithMascot("https://files.catbox.moe/36b8b6.mp3", "¡Gracias por el regalo!"); }
+        function resetMascotPosition() { posX = 40; posY = 30; alert("🔄 Posición reiniciada."); }
+
+        let currentActiveVoiceUrl = "https://files.catbox.moe/smawzc.mp3";
+        function playAudioWithMascot(url, label) {
             if(!url) return;
             const audio = new Audio(url);
-            const mascotFrame = document.getElementById("mascot-frame");
-            const statusText = document.getElementById("mascot-status-text");
-
-            // Activa el estado visual dinámico en la pantalla del celular
             audio.play().then(() => {
-                if(mascotFrame) mascotFrame.classList.add("speaking");
-                if(statusText) {
-                    statusText.innerText = "🔴 Mascota Hablando: " + voiceName;
-                    statusText.style.color = "#ff2a5f";
-                }
-            }).catch(e => {
-                console.log("Audio play prevented:", e);
-                alert("💡 Toca la pantalla o presiona el botón para permitir la reproducción de audio en tu navegador móvil.");
-            });
+                mascot.classList.add("speaking");
+                if(statusText && !isBattleMode) statusText.innerText = "🔴 " + label;
+            }).catch(e => console.log(e));
 
             audio.onended = function() {
-                if(mascotFrame) mascotFrame.classList.remove("speaking");
-                if(statusText) {
-                    statusText.innerText = "🟢 Mascota en Línea (Modo Reposo)";
-                    statusText.style.color = "#00e5ff";
-                }
+                mascot.classList.remove("speaking");
+                if(statusText && !isBattleMode) statusText.innerText = "🟢 Mascota en Movimiento (Rebote)";
             };
         }
 
-        function setVoiceActive(audioUrl, index) {
-            currentActiveVoiceUrl = audioUrl;
-
-            for(let i = 0; i <= 5; i++) {
-                const btn = document.getElementById("btn-voice-" + i);
-                if(btn) {
-                    btn.innerText = "OFF";
-                    btn.classList.remove("active-on");
-                }
+        function setVoiceActive(url, index) {
+            currentActiveVoiceUrl = url;
+            for(let i=0; i<=5; i++) {
+                const b = document.getElementById("btn-voice-" + i);
+                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
             }
-            const customBtn = document.getElementById("btn-voice-custom");
-            if(customBtn) {
-                customBtn.innerText = "OFF";
-                customBtn.classList.remove("active-on");
-            }
-
-            const activeBtn = document.getElementById("btn-voice-" + index);
-            if(activeBtn) {
-                activeBtn.innerText = "ON";
-                activeBtn.classList.add("active-on");
-            }
-            
-            // Nombres para mostrar en el indicador visual
-            const names = ["Norah (Cálida)", "Valentina (Dulce)", "Sueño (Sueñitos)", "Mateo Pro", "Lucas", "Thiago"];
-            playAudioWithMascot(audioUrl, names[index]);
-        }
-
-        function setCustomVoiceActive() {
-            if(!customAudioUrl) {
-                alert("⚠️ Primero selecciona un archivo MP3 desde tu celular.");
-                return;
-            }
-
-            currentActiveVoiceUrl = customAudioUrl;
-
-            for(let i = 0; i <= 5; i++) {
-                const btn = document.getElementById("btn-voice-" + i);
-                if(btn) {
-                    btn.innerText = "OFF";
-                    btn.classList.remove("active-on");
-                }
-            }
-
-            const customBtn = document.getElementById("btn-voice-custom");
-            if(customBtn) {
-                customBtn.innerText = "ON";
-                customBtn.classList.add("active-on");
-            }
-
-            playAudioWithMascot(customAudioUrl, "Audio Personalizado MP3");
+            const active = document.getElementById("btn-voice-" + index);
+            if(active) { active.innerText="ON"; active.classList.add("active-on"); }
+            playAudioWithMascot(url, "Voz Activa Seleccionada");
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const triggerTrans = document.getElementById("toggle-transmission-btn");
-            const contentTrans = document.getElementById("transmission-content");
-
-            triggerTrans.addEventListener("click", function() {
-                contentTrans.classList.toggle("show");
-                triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR MANDO DE TRANSMISIÓN" : "⚡ ABRIR MANDO DE TRANSMISIÓN";
+            const trVoice = document.getElementById("toggle-voice-btn");
+            const coVoice = document.getElementById("voice-content");
+            trVoice.addEventListener("click", function() {
+                coVoice.classList.toggle("show");
+                trVoice.innerText = coVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (ON / OFF)";
             });
 
-            const triggerVoice = document.getElementById("toggle-voice-btn");
-            const contentVoice = document.getElementById("voice-content");
-
-            triggerVoice.addEventListener("click", function() {
-                contentVoice.classList.toggle("show");
-                triggerVoice.innerText = contentVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (SELECCIONAR VOZ ACTIVA)";
-            });
-
-            const voiceFileInput = document.getElementById("voice-file");
-            const voiceFileName = document.getElementById("voice-file-name");
-            voiceFileInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    const file = this.files[0];
-                    voiceFileName.innerText = "📁 Archivo cargado: " + file.name;
-                    customAudioUrl = URL.createObjectURL(file);
-                    setCustomVoiceActive();
-                }
-            });
-
-            const deviceKey = "sofiul_device_registered";
-            const trialStatusEl = document.getElementById("trial-status");
-            const deviceInfoEl = document.getElementById("device-info");
-            const emailInput = document.getElementById("user-email");
-            const tiktokInput = document.getElementById("tiktok-user");
-            const assistantInput = document.getElementById("assistant-name");
-            const actionBtn = document.getElementById("main-action-btn");
-            const saveNotice = document.getElementById("save-notice");
-
-            if(localStorage.getItem("sofiul_email")) emailInput.value = localStorage.getItem("sofiul_email");
-            if(localStorage.getItem("sofiul_tiktok")) tiktokInput.value = localStorage.getItem("sofiul_tiktok");
-            if(localStorage.getItem("sofiul_assistant")) assistantInput.value = localStorage.getItem("sofiul_assistant");
-            if(localStorage.getItem("sofiul_voice_selection")) {
-                currentActiveVoiceUrl = localStorage.getItem("sofiul_voice_selection");
-            }
-
-            let storedDeviceID = localStorage.getItem(deviceKey);
-            if (!storedDeviceID) {
-                storedDeviceID = "DEV_" + Math.random().toString(36).substring(2) + Date.now().toString(36);
-                localStorage.setItem(deviceKey, storedDeviceID);
-                localStorage.setItem("sofiul_trial_start", Date.now().toString());
-                trialStatusEl.innerText = "72 HORAS GRATIS";
-                deviceInfoEl.innerText = "⚡ Dispositivo verificado. Cuenta nueva activada.";
-            } else {
-                trialStatusEl.innerText = "PRUEBA ACTIVA";
-                deviceInfoEl.innerText = "⚡ Dispositivo reconocido con seguridad anti-abuso.";
-            }
-
-            actionBtn.addEventListener("click", function() {
-                localStorage.setItem("sofiul_email", emailInput.value);
-                localStorage.setItem("sofiul_tiktok", tiktokInput.value);
-                localStorage.setItem("sofiul_assistant", assistantInput.value);
-                localStorage.setItem("sofiul_voice_selection", currentActiveVoiceUrl);
-
-                saveNotice.style.display = "block";
-                setTimeout(() => { saveNotice.style.display = "none"; }, 3500);
+            document.getElementById("main-action-btn").addEventListener("click", function() {
+                localStorage.setItem("sofiul_email", document.getElementById("user-email").value);
+                localStorage.setItem("sofiul_tiktok", document.getElementById("tiktok-user").value);
+                const n = document.getElementById("save-notice");
+                n.style.display = "block";
+                setTimeout(() => n.style.display = "none", 3000);
             });
         });
     </script>
