@@ -54,7 +54,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Neón exterior intacto + Neón interior flotante independiente */
+        /* ZONA DE LA MASCOTA: Movimiento de balanceo a 80° + Neón exterior e interior simultáneo */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -68,19 +68,8 @@
             overflow: hidden; 
             transform-origin: bottom center;
             will-change: transform, box-shadow, border-color;
-            /* MODO ZEN: Ciclo de 24 segundos con neón exterior potente */
+            /* MODO ZEN: Ciclo de 24s con giro de 80° y doble brillo (exterior + interior inset) */
             animation: mascotZenFlow 24s infinite ease-in-out;
-        }
-
-        /* Capa de neón interior independiente que baña a la mascota por dentro */
-        .neon-mascot-container::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            z-index: 1;
-            pointer-events: none;
-            animation: mascotInnerGlowLayer 24s infinite ease-in-out;
         }
 
         #avatar-layer { 
@@ -88,7 +77,7 @@
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
             filter: brightness(1.2) saturate(1.1);
-            z-index: 2; /* Se sitúa flotando exactamente por encima de la luz interior */
+            z-index: 2;
         } 
 
         .neon-mascot-container.battle-mode {
@@ -97,33 +86,50 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MODO ZEN: Sincronización de neón exterior */
+        /* MODO ZEN: Rotación de 80° con brillo neón exacto por fuera y por dentro */
         @keyframes mascotZenFlow {
-            0%   { transform: rotate(0deg);   border-color: #06b6d4; box-shadow: 0 0 25px #06b6d4; }
-            16.6%{ transform: rotate(80deg);  border-color: #10b981; box-shadow: 0 0 30px #10b981; }
-            33.3%{ transform: rotate(0deg);   border-color: #a855f7; box-shadow: 0 0 25px #a855f7; }
-            50%  { transform: rotate(0deg);   border-color: #ec4899; box-shadow: 0 0 30px #ec4899; }
-            66.6%{ transform: rotate(-80deg); border-color: #f59e0b; box-shadow: 0 0 25px #f59e0b; }
-            83.3%{ transform: rotate(0deg);   border-color: #3b82f6; box-shadow: 0 0 30px #3b82f6; }
-            100% { transform: rotate(0deg);   border-color: #06b6d4; box-shadow: 0 0 25px #06b6d4; }
+            0%   { 
+                transform: rotate(0deg);   
+                border-color: #06b6d4; 
+                box-shadow: inset 0 0 25px rgba(6, 182, 212, 0.9), 0 0 25px rgba(6, 182, 212, 0.7); 
+            }
+            16.6%{ 
+                transform: rotate(80deg);  
+                border-color: #10b981; 
+                box-shadow: inset 0 0 25px rgba(16, 185, 129, 0.9), 0 0 30px rgba(16, 185, 129, 0.7); 
+            }
+            33.3%{ 
+                transform: rotate(0deg);   
+                border-color: #a855f7; 
+                box-shadow: inset 0 0 25px rgba(168, 85, 247, 0.9), 0 0 25px rgba(168, 85, 247, 0.7); 
+            }
+            50%  { 
+                transform: rotate(0deg);   
+                border-color: #ec4899; 
+                box-shadow: inset 0 0 25px rgba(236, 72, 153, 0.9), 0 0 30px rgba(236, 72, 153, 0.7); 
+            }
+            66.6%{ 
+                transform: rotate(-80deg); 
+                border-color: #f59e0b; 
+                box-shadow: inset 0 0 25px rgba(245, 158, 11, 0.9), 0 0 25px rgba(245, 158, 11, 0.7); 
+            }
+            83.3%{ 
+                transform: rotate(0deg);   
+                border-color: #3b82f6; 
+                box-shadow: inset 0 0 25px rgba(59, 130, 246, 0.9), 0 0 30px rgba(59, 130, 246, 0.7); 
+            }
+            100% { 
+                transform: rotate(0deg);   
+                border-color: #06b6d4; 
+                box-shadow: inset 0 0 25px rgba(6, 182, 212, 0.9), 0 0 25px rgba(6, 182, 212, 0.7); 
+            }
         }
 
-        /* MODO ZEN: Sincronización de neón interior brillando hacia la mascota */
-        @keyframes mascotInnerGlowLayer {
-            0%   { background: radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 75%); }
-            16.6%{ background: radial-gradient(circle, rgba(16, 185, 129, 0.6) 0%, transparent 75%); }
-            33.3%{ background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 75%); }
-            50%  { background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 75%); }
-            66.6%{ background: radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, transparent 75%); }
-            83.3%{ background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 75%); }
-            100% { background: radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 75%); }
-        }
-
-        /* MODO BATALLA: Adrenalina con brillo interno y externo */
+        /* MODO BATALLA: Adrenalina con brillo interno y externo intenso */
         @keyframes mascotBattleGlow {
-            0%   { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
-            50%  { border-color: #ec4899; box-shadow: 0 0 40px #ec4899; }
-            100% { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
+            0%   { border-color: #3b82f6; box-shadow: inset 0 0 35px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 0.9); }
+            50%  { border-color: #ec4899; box-shadow: inset 0 0 35px rgba(236, 72, 153, 1), 0 0 40px rgba(236, 72, 153, 0.9); }
+            100% { border-color: #3b82f6; box-shadow: inset 0 0 35px rgba(59, 130, 246, 1), 0 0 40px rgba(59, 130, 246, 0.9); }
         }
 
         header {
