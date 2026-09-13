@@ -65,7 +65,7 @@
             filter: none; 
         }
 
-        /* ZONA DE LA MASCOTA: Movimiento fluido, sin pausas y luz interna sutil */
+        /* ZONA DE LA MASCOTA: Balanceo de 80° fluido y respiración de luz marcada */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -79,8 +79,8 @@
             overflow: hidden; 
             transform-origin: bottom center;
             will-change: transform, box-shadow, border-color, background-color;
-            /* Giro de péndulo suave, continuo y lento (8s por ciclo completo sin pausas) + Colores terapéuticos Zen */
-            animation: mascotSmoothSwing 8s infinite ease-in-out, mascotZenTherapeuticColors 24s infinite ease-in-out;
+            /* Balanceo de 80° (8s) + Ciclo de colores terapéuticos de 30s totales (5s por cada uno de los 6 tonos) con efecto respiración fuerte */
+            animation: mascotSmoothSwing 8s infinite ease-in-out, mascotZenTherapeuticColors 30s infinite ease-in-out;
         }
 
         #avatar-layer { 
@@ -88,17 +88,16 @@
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
             z-index: 2;
-            filter: brightness(1.15) contrast(1.05);
+            filter: brightness(1.2) contrast(1.1);
         } 
 
         .neon-mascot-container.battle-mode {
             cursor: grab;
-            /* MODO BATALLA: Colores de alta energía y adrenalina pura que enganchan al público */
             animation: mascotBattleSwing 4s infinite ease-in-out, mascotBattleAdrenalineColors 3s infinite ease-in-out !important;
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MOVIMIENTO PÉNDULO SUAVE (80 grados totales: -40° a +40° de forma armónica y sin pausas) */
+        /* MOVIMIENTO PÉNDULO SUAVE (80 grados totales: -40° a +40°) */
         @keyframes mascotSmoothSwing {
             0%   { transform: rotate(0deg); }
             25%  { transform: rotate(40deg); }   
@@ -115,19 +114,22 @@
             100% { transform: rotate(0deg) scale(1.03); }
         }
 
-        /* COLORES TERAPÉUTICOS Y PSICOLÓGICOS (Modo Zen: calma, conexión y bienestar) */
+        /* 6 TONOS TERAPÉUTICOS (5 segundos por cada uno = 30s ciclo) CON EFECTO RESPIRACIÓN NOTABLE */
         @keyframes mascotZenTherapeuticColors {
-            0%   { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.18); box-shadow: 0 0 20px #06b6d4, inset 0 0 10px #06b6d4; --mascot-glow-color: #06b6d4; }
-            33%  { border-color: #10b981; background-color: rgba(16, 185, 129, 0.18); box-shadow: 0 0 22px #10b981, inset 0 0 12px #10b981; --mascot-glow-color: #10b981; }
-            66%  { border-color: #8b5cf6; background-color: rgba(139, 92, 246, 0.18); box-shadow: 0 0 20px #8b5cf6, inset 0 0 10px #8b5cf6; --mascot-glow-color: #8b5cf6; }
-            100% { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.18); box-shadow: 0 0 20px #06b6d4, inset 0 0 10px #06b6d4; --mascot-glow-color: #06b6d4; }
+            0%   { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
+            16.6%{ border-color: #10b981; background-color: rgba(16, 185, 129, 0.28); box-shadow: 0 0 35px #10b981, inset 0 0 18px #10b981; --mascot-glow-color: #10b981; }
+            33.3%{ border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.28); box-shadow: 0 0 30px #3b82f6, inset 0 0 16px #3b82f6; --mascot-glow-color: #3b82f6; }
+            50%  { border-color: #8b5cf6; background-color: rgba(139, 92, 246, 0.28); box-shadow: 0 0 35px #8b5cf6, inset 0 0 18px #8b5cf6; --mascot-glow-color: #8b5cf6; }
+            66.6%{ border-color: #ec4899; background-color: rgba(236, 72, 153, 0.28); box-shadow: 0 0 30px #ec4899, inset 0 0 16px #ec4899; --mascot-glow-color: #ec4899; }
+            83.3%{ border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.35); box-shadow: 0 0 40px #06b6d4, inset 0 0 22px #06b6d4; --mascot-glow-color: #06b6d4; }
+            100% { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
         }
 
-        /* COLORES DE ADRENALINA Y ENERGÍA (Modo Batalla: atracción total y dinamismo) */
+        /* COLORES DE ADRENALINA Y ENERGÍA (Modo Batalla) */
         @keyframes mascotBattleAdrenalineColors {
-            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.35); box-shadow: 0 0 35px #ef4444, inset 0 0 20px #ef4444; --mascot-glow-color: #ef4444; }
-            50%  { border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.35); box-shadow: 0 0 35px #f59e0b, inset 0 0 20px #f59e0b; --mascot-glow-color: #f59e0b; }
-            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.35); box-shadow: 0 0 35px #ef4444, inset 0 0 20px #ef4444; --mascot-glow-color: #ef4444; }
+            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.45); box-shadow: 0 0 45px #ef4444, inset 0 0 25px #ef4444; --mascot-glow-color: #ef4444; }
+            50%  { border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.45); box-shadow: 0 0 45px #f59e0b, inset 0 0 25px #f59e0b; --mascot-glow-color: #f59e0b; }
+            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.45); box-shadow: 0 0 45px #ef4444, inset 0 0 25px #ef4444; --mascot-glow-color: #ef4444; }
         }
 
         header {
@@ -458,7 +460,7 @@
         const statusText = document.getElementById("mascot-status-text");
         
         let posX = 30, posY = 20;
-        let speedX = 0.7, speedY = 0.6; /* Pimponeo más lento y fluido */
+        let speedX = 0.5, speedY = 0.45; /* Pimponeo ultralento, calmado y nada estresante para el público */
         let isBattleMode = false;
         let isDragging = false;
         let startX, startY;
