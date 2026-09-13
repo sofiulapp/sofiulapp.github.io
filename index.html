@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Movimiento elegante a 80 grados con sincronización total */
+        /* ZONA DE LA MASCOTA: Sin líneas blancas, con balanceo a 80º e iluminación interior */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -66,23 +66,23 @@
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
             background: #000;
-            border: 3px solid #06b6d4;
+            border: 3px solid #06b6d4; /* Borde de color limpio sin blancos */
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
             position: relative;
-            transform-origin: bottom center; /* Eje de rotación natural */
+            transform-origin: bottom center; /* Eje de rotación natural para los 80º */
             will-change: transform, box-shadow, border-color;
-            /* Balanceo lento y constante a 80º (8 segundos de ida y vuelta) */
             animation: mascotBalance80deg 8s infinite ease-in-out;
         }
 
-        /* Resplandor interno de fondo que cambia sincronizado en el mismo ciclo */
+        /* Iluminación y resplandor interior sincronizado detrás de la mascota */
         .neon-mascot-container::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 50%;
             z-index: 1;
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, rgba(0, 0, 0, 0.8) 100%);
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, rgba(0, 0, 0, 0.9) 100%);
+            box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.4);
             animation: mascotInnerSync 8s infinite ease-in-out;
         }
 
@@ -100,7 +100,7 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* KEYFRAMES: Balanceo a 80 grados con rotación de color exterior */
+        /* Balanceo oscilatorio elegante a 80 grados con rotación de color exterior */
         @keyframes mascotBalance80deg {
             0% { 
                 transform: rotate(0deg); 
@@ -129,20 +129,20 @@
             }
         }
 
-        /* Sincronización exacta del tono interior con el exterior */
+        /* Sincronización perfecta de la iluminación interior con los giros */
         @keyframes mascotInnerSync {
-            0%   { background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); }
-            25%  { background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); }
-            50%  { background: radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); }
-            75%  { background: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); }
-            100% { background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(0, 0, 0, 0.85) 100%); }
+            0%   { background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%); box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.5); }
+            25%  { background: radial-gradient(circle, rgba(16, 185, 129, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%); box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.5); }
+            50%  { background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%); box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.5); }
+            75%  { background: radial-gradient(circle, rgba(236, 72, 153, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%); box-shadow: inset 0 0 20px rgba(236, 72, 153, 0.5); }
+            100% { background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, rgba(0, 0, 0, 0.9) 100%); box-shadow: inset 0 0 20px rgba(6, 182, 212, 0.5); }
         }
 
         /* Modo Batalla energético */
         @keyframes mascotBattleGlow {
-            0%   { border-color: #3b82f6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.8); }
-            50%  { border-color: #ec4899; box-shadow: 0 0 35px rgba(236, 72, 153, 0.8); }
-            100% { border-color: #3b82f6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.8); }
+            0%   { border-color: #3b82f6; box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
+            50%  { border-color: #ec4899; box-shadow: 0 0 40px rgba(236, 72, 153, 0.8); }
+            100% { border-color: #3b82f6; box-shadow: 0 0 40px rgba(59, 130, 246, 0.8); }
         }
 
         header {
