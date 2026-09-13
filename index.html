@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Estilo de borde y resplandor idéntico al logotipo superior */
+        /* ZONA DE LA MASCOTA: Sincronizada exactamente con el código del Logo Superior */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -65,22 +65,12 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
-            background: #000; /* Fondo negro idéntico al logo */
-            border: 3px solid var(--accent-secondary); /* Borde idéntico al estilo del logo */
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); /* Resplandor idéntico al logo */
+            background: #000;
+            border: 3px solid var(--accent-secondary);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
+            position: relative; overflow: hidden;
             will-change: transform, left, top, box-shadow, border-color;
-            /* Animación de ciclo de colores idéntica a la respiración del logo */
-            animation: mascotLogoStyleGlow 24s infinite ease-in-out;
-        }
-
-        /* Capa interior limpia y oscura para que la mascota resalte profesionalmente igual que el logo */
-        .neon-mascot-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            z-index: 1;
-            background: rgba(0, 0, 0, 0.4);
+            animation: logoRespiration 3.5s infinite ease-in-out;
         }
 
         #avatar-layer { 
@@ -97,18 +87,6 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Ciclo de colores con el mismo estilo exacto del logotipo superior */
-        @keyframes mascotLogoStyleGlow {
-            0%   { border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); }
-            16.6%{ border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
-            33.3%{ border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); }
-            50%  { border-color: #f43f5e; box-shadow: 0 0 25px rgba(244, 63, 94, 0.5); }
-            66.6%{ border-color: #0ea5e9; box-shadow: 0 0 25px rgba(14, 165, 233, 0.5); }
-            83.3%{ border-color: #f59e0b; box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
-            100% { border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); }
-        }
-
-        /* Modo Batalla energético con el mismo estilo de borde */
         @keyframes mascotBattleGlow {
             0%   { border-color: #3b82f6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.8); }
             50%  { border-color: #ec4899; box-shadow: 0 0 35px rgba(236, 72, 153, 0.8); }
