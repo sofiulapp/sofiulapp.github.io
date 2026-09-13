@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* Zona de la Mascota Móvil con Brillo Íntegro (Interior y Exterior Sincronizados) */
+        /* Zona de la Mascota Móvil con Iluminación Íntegra (Interior y Exterior Sincronizada) */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -65,25 +65,25 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; overflow: hidden; 
-            will-change: transform, left, top, box-shadow, border-color, background-color;
-            animation: therapeuticInnerOuterGlow 18s infinite linear;
+            will-change: transform, left, top, box-shadow, border-color, background;
+            animation: therapeuticCoreGlow 18s infinite linear;
         }
 
         .neon-mascot-container.battle-mode {
             cursor: grab;
-            animation: battleInnerOuterGlow 2s infinite linear !important;
+            animation: battleCoreGlow 2s infinite linear !important;
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Los 6 Colores Terapéuticos con Fuerte Iluminación Tanto por Fuera como por Dentro */
-        @keyframes therapeuticInnerOuterGlow {
-            0%   { border: 5px solid #06b6d4; background-color: rgba(6,182,212,0.4); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
-            16.6%{ border: 5px solid #10b981; background-color: rgba(16,185,129,0.4); box-shadow: 0 0 35px #10b981, inset 0 0 35px #10b981; }
-            33.3%{ border: 5px solid #a855f7; background-color: rgba(168,85,247,0.4); box-shadow: 0 0 35px #a855f7, inset 0 0 35px #a855f7; }
-            50%  { border: 5px solid #f43f5e; background-color: rgba(244,63,94,0.4); box-shadow: 0 0 35px #f43f5e, inset 0 0 35px #f43f5e; }
-            66.6%{ border: 5px solid #0ea5e9; background-color: rgba(14,165,233,0.4); box-shadow: 0 0 35px #0ea5e9, inset 0 0 35px #0ea5e9; }
-            83.3%{ border: 5px solid #f59e0b; background-color: rgba(245,158,11,0.4); box-shadow: 0 0 35px #f59e0b, inset 0 0 35px #f59e0b; }
-            100% { border: 5px solid #06b6d4; background-color: rgba(6,182,212,0.4); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
+        /* Los 6 Colores Terapéuticos con Brillo Potente Tanto Afuera como Adentro */
+        @keyframes therapeuticCoreGlow {
+            0%   { border: 4px solid #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.85) 0%, rgba(3,38,51,0.95) 70%, #000 100%); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
+            16.6%{ border: 4px solid #10b981; background: radial-gradient(circle, rgba(16,185,129,0.85) 0%, rgba(4,43,30,0.95) 70%, #000 100%); box-shadow: 0 0 35px #10b981, inset 0 0 35px #10b981; }
+            33.3%{ border: 4px solid #a855f7; background: radial-gradient(circle, rgba(168,85,247,0.85) 0%, rgba(41,13,61,0.95) 70%, #000 100%); box-shadow: 0 0 35px #a855f7, inset 0 0 35px #a855f7; }
+            50%  { border: 4px solid #f43f5e; background: radial-gradient(circle, rgba(244,63,94,0.85) 0%, rgba(59,10,22,0.95) 70%, #000 100%); box-shadow: 0 0 35px #f43f5e, inset 0 0 35px #f43f5e; }
+            66.6%{ border: 4px solid #0ea5e9; background: radial-gradient(circle, rgba(14,165,233,0.85) 0%, rgba(3,39,56,0.95) 70%, #000 100%); box-shadow: 0 0 35px #0ea5e9, inset 0 0 35px #0ea5e9; }
+            83.3%{ border: 4px solid #f59e0b; background: radial-gradient(circle, rgba(245,158,11,0.85) 0%, rgba(56,34,3,0.95) 70%, #000 100%); box-shadow: 0 0 35px #f59e0b, inset 0 0 35px #f59e0b; }
+            100% { border: 4px solid #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.85) 0%, rgba(3,38,51,0.95) 70%, #000 100%); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
         }
 
         #avatar-layer { 
@@ -93,11 +93,11 @@
             filter: brightness(1.2) saturate(1.1);
         } 
 
-        /* Colores de Alta Adrenalina (Modo Batalla) - Interior y Exterior Brillantes */
-        @keyframes battleInnerOuterGlow {
-            0%   { border: 5px solid #3b82f6; background-color: rgba(59,130,246,0.5); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
-            50%  { border: 5px solid #ec4899; background-color: rgba(236,72,153,0.5); box-shadow: 0 0 45px #ec4899, inset 0 0 45px #ec4899; }
-            100% { border: 5px solid #3b82f6; background-color: rgba(59,130,246,0.5); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
+        /* Modo Batalla: Adrenalina Pura Interior y Exterior */
+        @keyframes battleCoreGlow {
+            0%   { border: 4px solid #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(13,31,69,0.95) 70%, #000 100%); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
+            50%  { border: 4px solid #ec4899; background: radial-gradient(circle, rgba(236,72,153,0.9) 0%, rgba(66,13,44,0.95) 70%, #000 100%); box-shadow: 0 0 45px #ec4899, inset 0 0 45px #ec4899; }
+            100% { border: 4px solid #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(13,31,69,0.95) 70%, #000 100%); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
         }
 
         header {
@@ -810,3 +810,4 @@
     </script>
 </body>
 </html>
+
