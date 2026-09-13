@@ -131,7 +131,7 @@
         }
 
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .collapsible-content.show { max-height: 2500px; transition: max-height 0.5s ease-in; }
+        .collapsible-content.show { max-height: 3000px; transition: max-height 0.5s ease-in; }
 
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
@@ -208,12 +208,12 @@
         <!-- ========================================== -->
         <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
             <div class="card-title" style="color: var(--accent-secondary);">
-                <span>🛠️ FASE 1: CONFIGURACIÓN PREVIA (CUENTA, VOCES &amp; MÚSICA)</span>
+                <span>🛠️ FASE 1: CONFIGURACIÓN PREVIA (CUENTA &amp; VOCES)</span>
                 <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">PRE-LIVE</span>
             </div>
             
             <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
-                ⚙️ ABRIR AJUSTES PREVIOS (CUENTA, VOCES &amp; MÚSICA)
+                ⚙️ ABRIR AJUSTES DE CUENTA &amp; VOCES
             </button>
 
             <div class="collapsible-content" id="config-content">
@@ -294,49 +294,13 @@
                     </div>
                 </div>
 
-                <!-- Música Ambiental / Playlist previa con Volumen DJ -->
-                <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>PLAYLIST AMBIENTAL &amp; VOLUMEN DJ</span>
-                    </div>
-
-                    <div style="font-size: 0.65rem; color: var(--text-muted); font-style: italic; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
-                        <span>Control de Volumen Continuo:</span>
-                        <span id="vol-label" style="color: var(--accent-secondary);">Vol: 80%</span>
-                    </div>
-
-                    <div style="margin-top: 4px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.6rem; color: var(--text-muted);">🔈 Bajar</span>
-                        <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
-                        <span style="font-size: 0.6rem; color: var(--text-muted);">🔊 Subir</span>
-                    </div>
-
-                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                        <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
-                        <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
-                    </div>
-
-                    <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
-                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-
-                    <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
-                        <label class="upload-effect-label" style="margin-bottom: 4px;">
-                            📁 Subir Música de Fondo (MP3)
-                            <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
-                        </label>
-                        <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo cargado</div>
-                        <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
-                    </div>
-                </div>
-
                 <button class="action-button" id="main-action-btn" style="margin-top: 10px;">GUARDAR CONFIGURACIÓN PREVIA</button>
-                <div class="save-notice" id="save-notice">✅ ¡Todo configurado y guardado con éxito!</div>
+                <div class="save-notice" id="save-notice">✅ ¡Credenciales y voces guardadas!</div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
+        <!-- FASE 2: PANEL DE COMANDOS EN VIVO (CAJA ÚNICA) -->
         <!-- ========================================== -->
         <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
             <div class="card-title" style="color: var(--accent-secondary);">
@@ -344,38 +308,37 @@
                 <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
             </div>
 
-            <!-- 1. Botón: Mostrar / Ocultar Mascota -->
-            <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #1e293b, var(--accent-primary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
-                👁️ MOSTRAR / OCULTAR MASCOTA
-            </button>
-
-            <!-- 2. Botón 7: Captura Limpia -->
-            <button class="action-button" onclick="takeCleanScreenshot()" style="background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
-                📸 7. CAPTURA LIMPIA (FOTO SIN CONTROLES)
-            </button>
-
-            <!-- 3. Botón 8: Grabación de Video Limpio -->
-            <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="background: linear-gradient(135deg, #2563eb, var(--accent-secondary)); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
-                🔴 8. GRABAR VIDEO LIMPIO (INICIAR / PARAR)
-            </button>
-
-            <!-- Banco de Efectos (6 Botones) -->
-            <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="margin-top: 8px;">
-                ⚡ ABRIR BANCO DE EFECTOS (6 BOTONES)
+            <!-- Botón Maestro: Caja de Sonidos & Efectos (Agrupa todo lo del directo) -->
+            <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 14px; font-size: 0.8rem;">
+                🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)
             </button>
             
             <div class="collapsible-content" id="transmission-content">
-                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(59, 130, 246, 0.3);">
-                    <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>EFECTOS DE AUDIO EN DIRECTO</span>
-                    </div>
+                <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
+                    
+                    <!-- 1. Mostrar / Ocultar Mascota -->
+                    <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #1e293b, var(--accent-primary)); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        👁️ MOSTRAR / OCULTAR MASCOTA
+                    </button>
 
+                    <!-- 2. Activar Modo Batalla -->
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
                     </button>
 
-                    <div style="font-size: 0.65rem; color: var(--text-muted); font-style: italic; margin-bottom: 4px;">
-                        🎮 Toca tus 6 efectos de sonido configurados:
+                    <!-- 3 y 4. Botones de Captura Limpia y Video Limpio -->
+                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+                        <button class="action-button" onclick="takeCleanScreenshot()" style="flex:1; background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
+                            📸 CAPTURA FOTO
+                        </button>
+                        <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="flex:1; background: linear-gradient(135deg, #2563eb, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
+                            🔴 GRABAR VIDEO
+                        </button>
+                    </div>
+
+                    <!-- 5. Los 6 Botones de Efectos de Sonido MP3 -->
+                    <div style="font-size: 0.65rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 4px; font-weight: bold;">
+                        🎮 Banco de 6 Efectos de Sonido (MP3):
                     </div>
 
                     <div class="effects-grid-6">
@@ -410,6 +373,41 @@
                             <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
                         </div>
                     </div>
+
+                    <!-- 6. Playlist Ambiental / Spotify o MP3 con Control de Volumen DJ -->
+                    <div style="font-size: 0.65rem; color: #10b981; font-style: italic; margin-top: 12px; font-weight: bold;">
+                        🎵 Playlist Ambiental &amp; Control DJ:
+                    </div>
+
+                    <div style="font-size: 0.6rem; color: var(--text-muted); font-style: italic; margin-top: 4px; display: flex; justify-content: space-between;">
+                        <span>Volumen de Fondo:</span>
+                        <span id="vol-label" style="color: var(--accent-secondary);">80%</span>
+                    </div>
+
+                    <div style="margin-top: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span style="font-size: 0.55rem; color: var(--text-muted);">🔈</span>
+                        <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
+                        <span style="font-size: 0.55rem; color: var(--text-muted);">🔊</span>
+                    </div>
+
+                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                        <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
+                        <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
+                    </div>
+
+                    <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
+                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+
+                    <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
+                        <label class="upload-effect-label" style="margin-bottom: 4px;">
+                            📁 Subir Archivo de Música (MP3)
+                            <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
+                        </label>
+                        <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
+                        <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
+                    </div>
+
                 </div>
             </div>
 
@@ -464,14 +462,14 @@
 
         mascotContainer.addEventListener("pointermove", function(e) {
             if (!isDragging || !isBattleMode || !mascotStage) return;
-            const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
+            const sW = mascotStage.clientHeight ? mascotStage.clientWidth : 0; // safe check
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
             let newX = e.clientX - startX;
             let newY = e.clientY - startY;
 
-            posX = Math.max(0, Math.min(newX, sW - mW));
-            posY = Math.max(0, Math.min(newY, sH - mH));
+            posX = Math.max(0, Math.min(newX, mascotStage.clientWidth - mW));
+            posY = Math.max(0, Math.min(newY, mascotStage.clientHeight - mH));
 
             mascotContainer.style.left = posX + 'px';
             mascotContainer.style.top = posY + 'px';
@@ -486,7 +484,7 @@
         /* Control de Volumen DJ */
         function adjustBgVolume(val) {
             const pct = Math.round(val * 100);
-            document.getElementById("vol-label").innerText = "Vol: " + pct + "%";
+            document.getElementById("vol-label").innerText = pct + "%";
             const localAudio = document.getElementById("local-audio-element");
             if(localAudio) localAudio.volume = val;
         }
@@ -559,7 +557,7 @@
             playAudioWithMascot(customVoiceUrl, "Voz Propia");
         }
 
-        /* BOTÓN 7: Captura Limpia */
+        /* BOTÓN: Captura Limpia (Vacía / Neutra sin controles) */
         function takeCleanScreenshot() {
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
@@ -574,7 +572,7 @@
             link.click();
         }
 
-        /* BOTÓN 8: Grabación de Video Limpio */
+        /* BOTÓN: Grabación de Video Limpio */
         async function toggleRecordVideo() {
             const recBtn = document.getElementById("record-video-btn");
             if (!isRecording) {
@@ -593,8 +591,8 @@
                     };
                     mediaRecorder.start();
                     isRecording = true;
-                    recBtn.innerText = "⏹️ PARAR Y GUARDAR VIDEO";
-                    recBtn.style.background = "linear-gradient(135deg, #059669, var(--accent-secondary))";
+                    recBtn.innerText = "⏹️ DETENER VIDEO";
+                    recBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
                 } catch (err) {
                     alert("⚠️ Grabación cancelada o no disponible.");
                 }
@@ -604,7 +602,7 @@
                     mediaRecorder.stream.getTracks().forEach(t => t.stop());
                 }
                 isRecording = false;
-                recBtn.innerText = "🔴 8. GRABAR VIDEO LIMPIO (INICIAR / PARAR)";
+                recBtn.innerText = "🔴 GRABAR VIDEO";
                 recBtn.style.background = "linear-gradient(135deg, #2563eb, var(--accent-secondary))";
             }
         }
@@ -670,14 +668,14 @@
             const coConfig = document.getElementById("config-content");
             trConfig.addEventListener("click", function() {
                 coConfig.classList.toggle("show");
-                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR AJUSTES PREVIOS" : "⚙️ ABRIR AJUSTES PREVIOS (CUENTA, VOCES &amp; MÚSICA)";
+                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR AJUSTES DE CUENTA &amp; VOCES" : "⚙️ ABRIR AJUSTES DE CUENTA &amp; VOCES";
             });
 
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
                 contentTrans.classList.toggle("show");
-                triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR BANCO DE EFECTOS" : "⚡ ABRIR BANCO DE EFECTOS (6 BOTONES)";
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "🎛️ CERRAR CAJA DE SONIDOS &amp; EFECTOS" : "🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)";
             });
 
             const customVoiceInput = document.getElementById("custom-voice-file");
