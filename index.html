@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Matizado perfecto sin líneas blancas (Estilo Referencia) */
+        /* ZONA DE LA MASCOTA: Estilo de borde y resplandor idéntico al logotipo superior */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -65,23 +65,22 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
-            background: #000; /* Fondo totalmente limpio sin bordes blancos */
-            border: none;
-            will-change: transform, left, top, box-shadow;
-            /* Ciclo de matizado exterior profesional (28s) */
-            animation: mascotReferenceGlow 28s infinite ease-in-out;
+            background: #000; /* Fondo negro idéntico al logo */
+            border: 3px solid var(--accent-secondary); /* Borde idéntico al estilo del logo */
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); /* Resplandor idéntico al logo */
+            will-change: transform, left, top, box-shadow, border-color;
+            /* Animación de ciclo de colores idéntica a la respiración del logo */
+            animation: mascotLogoStyleGlow 24s infinite ease-in-out;
         }
 
-        /* Núcleo interior elegante fundido con el estilo de tus referencias */
+        /* Capa interior limpia y oscura para que la mascota resalte profesionalmente igual que el logo */
         .neon-mascot-container::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 50%;
             z-index: 1;
-            background: radial-gradient(circle, rgba(15, 23, 42, 0.85) 0%, rgba(5, 8, 15, 0.95) 100%);
-            box-shadow: inset 0 0 25px rgba(6, 182, 212, 0.35);
-            animation: mascotReferenceInner 14s infinite alternate ease-in-out;
+            background: rgba(0, 0, 0, 0.4);
         }
 
         #avatar-layer { 
@@ -98,28 +97,22 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Matizado exterior fluido idéntico a tus capturas */
-        @keyframes mascotReferenceGlow {
-            0%   { box-shadow: 0 0 35px #06b6d4, 0 0 10px #06b6d4; }
-            20%  { box-shadow: 0 0 45px #10b981, 0 0 15px #10b981; }
-            40%  { box-shadow: 0 0 40px #a855f7, 0 0 12px #a855f7; }
-            60%  { box-shadow: 0 0 50px #ec4899, 0 0 18px #ec4899; }
-            80%  { box-shadow: 0 0 40px #f59e0b, 0 0 12px #f59e0b; }
-            100% { box-shadow: 0 0 35px #06b6d4, 0 0 10px #06b6d4; }
+        /* Ciclo de colores con el mismo estilo exacto del logotipo superior */
+        @keyframes mascotLogoStyleGlow {
+            0%   { border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); }
+            16.6%{ border-color: #10b981; box-shadow: 0 0 25px rgba(16, 185, 129, 0.5); }
+            33.3%{ border-color: #a855f7; box-shadow: 0 0 25px rgba(168, 85, 247, 0.5); }
+            50%  { border-color: #f43f5e; box-shadow: 0 0 25px rgba(244, 63, 94, 0.5); }
+            66.6%{ border-color: #0ea5e9; box-shadow: 0 0 25px rgba(14, 165, 233, 0.5); }
+            83.3%{ border-color: #f59e0b; box-shadow: 0 0 25px rgba(245, 158, 11, 0.5); }
+            100% { border-color: #06b6d4; box-shadow: 0 0 25px rgba(6, 182, 212, 0.5); }
         }
 
-        /* Pulso interior suave y elegante */
-        @keyframes mascotReferenceInner {
-            0%   { box-shadow: inset 0 0 18px rgba(6, 182, 212, 0.45); }
-            50%  { box-shadow: inset 0 0 28px rgba(236, 72, 153, 0.45); }
-            100% { box-shadow: inset 0 0 18px rgba(16, 185, 129, 0.45); }
-        }
-
-        /* Modo Batalla energético */
+        /* Modo Batalla energético con el mismo estilo de borde */
         @keyframes mascotBattleGlow {
-            0%   { box-shadow: 0 0 60px #3b82f6, 0 0 20px #3b82f6; }
-            50%  { box-shadow: 0 0 60px #ec4899, 0 0 20px #ec4899; }
-            100% { box-shadow: 0 0 60px #3b82f6, 0 0 20px #3b82f6; }
+            0%   { border-color: #3b82f6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.8); }
+            50%  { border-color: #ec4899; box-shadow: 0 0 35px rgba(236, 72, 153, 0.8); }
+            100% { border-color: #3b82f6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.8); }
         }
 
         header {
