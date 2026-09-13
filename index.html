@@ -7,7 +7,6 @@
     <meta name="theme-color" content="#0b0f19">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Librería para captura limpia -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
@@ -55,7 +54,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Iluminación interna neón y externa con ciclo de 6 colores y movimiento lento */
+        /* ZONA DE LA MASCOTA: Neón dinámico tanto por fuera como por dentro (inset) */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -66,23 +65,11 @@
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
             border: 3px solid #06b6d4;
-            position: relative; 
             overflow: hidden; 
             transform-origin: bottom center;
-            will-change: transform, box-shadow, border-color, background;
-            /* MODO ZEN: 24 segundos en total (4 segundos por cada uno de los 6 colores) con balanceo a 80° ultra tranquilo */
+            will-change: transform, box-shadow, border-color;
+            /* MODO ZEN: Ciclo de 24 segundos (6 colores, 4s cada uno) con brillo neón EXTERIOR e INTERIOR (inset) */
             animation: mascotZenFlow 24s infinite ease-in-out;
-        }
-
-        /* Capa de iluminación interna de neón que baña el círculo por dentro */
-        .neon-mascot-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            z-index: 1;
-            pointer-events: none;
-            animation: mascotInnerGlowSync 24s infinite ease-in-out;
         }
 
         #avatar-layer { 
@@ -90,7 +77,7 @@
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
             filter: brightness(1.2) saturate(1.1);
-            z-index: 2; /* Flota perfectamente sobre la luz interna */
+            z-index: 2;
         } 
 
         .neon-mascot-container.battle-mode {
@@ -99,68 +86,50 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MODO ZEN: 6 colores atractivos cambiando cada 4 segundos de forma suave (ciclo de 24s) */
+        /* MODO ZEN: Los 6 colores iluminando simultáneamente por dentro (inset) y por fuera */
         @keyframes mascotZenFlow {
             0%   { 
                 transform: rotate(0deg);   
                 border-color: #06b6d4; 
-                background: radial-gradient(circle, rgba(6, 182, 212, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.95), 0 0 25px rgba(6,182,212,0.7); 
+                box-shadow: inset 0 0 20px #06b6d4, 0 0 25px #06b6d4; 
             }
             16.6%{ 
                 transform: rotate(80deg);  
                 border-color: #10b981; 
-                background: radial-gradient(circle, rgba(16, 185, 129, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(16, 185, 129, 0.95), 0 0 30px rgba(16,185,129,0.7); 
+                box-shadow: inset 0 0 20px #10b981, 0 0 30px #10b981; 
             }
             33.3%{ 
                 transform: rotate(0deg);   
                 border-color: #a855f7; 
-                background: radial-gradient(circle, rgba(168, 85, 247, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(168, 85, 247, 0.95), 0 0 25px rgba(168,85,247,0.7); 
+                box-shadow: inset 0 0 20px #a855f7, 0 0 25px #a855f7; 
             }
             50%  { 
                 transform: rotate(0deg);   
                 border-color: #ec4899; 
-                background: radial-gradient(circle, rgba(236, 72, 153, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(236, 72, 153, 0.95), 0 0 30px rgba(236,72,153,0.7); 
+                box-shadow: inset 0 0 20px #ec4899, 0 0 30px #ec4899; 
             }
             66.6%{ 
                 transform: rotate(-80deg); 
                 border-color: #f59e0b; 
-                background: radial-gradient(circle, rgba(245, 158, 11, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(245, 158, 11, 0.95), 0 0 25px rgba(245,158,11,0.7); 
+                box-shadow: inset 0 0 20px #f59e0b, 0 0 25px #f59e0b; 
             }
             83.3%{ 
                 transform: rotate(0deg);   
                 border-color: #3b82f6; 
-                background: radial-gradient(circle, rgba(59, 130, 246, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(59, 130, 246, 0.95), 0 0 30px rgba(59,130,246,0.7); 
+                box-shadow: inset 0 0 20px #3b82f6, 0 0 30px #3b82f6; 
             }
             100% { 
                 transform: rotate(0deg);   
                 border-color: #06b6d4; 
-                background: radial-gradient(circle, rgba(6, 182, 212, 0.85) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.95), 0 0 25px rgba(6,182,212,0.7); 
+                box-shadow: inset 0 0 20px #06b6d4, 0 0 25px #06b6d4; 
             }
         }
 
-        /* Sincronización exacta del resplandor interior del círculo cambiando cada 4 segundos */
-        @keyframes mascotInnerGlowSync {
-            0%   { background: radial-gradient(circle, rgba(6, 182, 212, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            16.6%{ background: radial-gradient(circle, rgba(16, 185, 129, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            33.3%{ background: radial-gradient(circle, rgba(168, 85, 247, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            50%  { background: radial-gradient(circle, rgba(236, 72, 153, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            66.6%{ background: radial-gradient(circle, rgba(245, 158, 11, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            83.3%{ background: radial-gradient(circle, rgba(59, 130, 246, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-            100% { background: radial-gradient(circle, rgba(6, 182, 212, 0.75) 0%, rgba(0, 0, 0, 0.9) 75%); }
-        }
-
-        /* MODO BATALLA: Adrenalina y energía pura al activarlo */
+        /* MODO BATALLA: Adrenalina pura con brillo interno y externo intenso */
         @keyframes mascotBattleGlow {
-            0%   { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.85) 0%, rgba(0,0,0,0.9) 75%); box-shadow: inset 0 0 40px rgba(59,130,246,1), 0 0 40px rgba(59, 130, 246, 0.9); }
-            50%  { border-color: #ec4899; background: radial-gradient(circle, rgba(236,72,153,0.85) 0%, rgba(0,0,0,0.9) 75%); box-shadow: inset 0 0 40px rgba(236,72,153,1), 0 0 40px rgba(236, 72, 153, 0.9); }
-            100% { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.85) 0%, rgba(0,0,0,0.9) 75%); box-shadow: inset 0 0 40px rgba(59,130,246,1), 0 0 40px rgba(59, 130, 246, 0.9); }
+            0%   { border-color: #3b82f6; box-shadow: inset 0 0 25px #3b82f6, 0 0 35px #3b82f6; }
+            50%  { border-color: #ec4899; box-shadow: inset 0 0 25px #ec4899, 0 0 35px #ec4899; }
+            100% { border-color: #3b82f6; box-shadow: inset 0 0 25px #3b82f6, 0 0 35px #3b82f6; }
         }
 
         header {
