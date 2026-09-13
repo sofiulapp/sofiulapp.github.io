@@ -7,16 +7,16 @@
     <meta name="theme-color" content="#070a12">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- Librerías para captura de pantalla y grabación de video limpia -->
+    <!-- Librería para captura limpia -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --bg-color: #070a12;
-            --card-bg: #0b1424;
-            --accent-cyan: #00f2fe;
-            --accent-blue: #4facfe;
-            --text-main: #ffffff;
-            --text-muted: #8c82ce;
+            --bg-color: #0b0f19;
+            --card-bg: #121826;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
         body {
             margin: 0; padding: 0;
@@ -28,24 +28,24 @@
         
         /* Zona Superior con el Logo Estático Original */
         .stage-area {
-            width: 100%; height: 180px; background: #03060a;
-            position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
+            width: 100%; height: 180px; background: #05080f;
+            position: relative; overflow: hidden; border-bottom: 2px solid rgba(59, 130, 246, 0.3);
             display: flex; align-items: center; justify-content: center;
         }
 
         .logo-container {
             width: 110px; height: 110px; border-radius: 50%;
-            border: 3px solid #00f2fe;
+            border: 3px solid var(--accent-primary);
             background: #000;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
             position: relative; overflow: hidden;
             animation: logoRespiration 3.5s infinite ease-in-out;
         }
 
         @keyframes logoRespiration {
-            0% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
-            50% { border-color: rgba(0, 242, 254, 1); box-shadow: 0 0 35px rgba(0, 242, 254, 0.9); }
-            100% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+            0% { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+            50% { border-color: rgba(6, 182, 212, 1); box-shadow: 0 0 35px rgba(6, 182, 212, 0.7); }
+            100% { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
         }
 
         #logo-fixed {
@@ -57,18 +57,18 @@
 
         /* Zona de la Mascota Móvil Original */
         .stage-mascot-area {
-            width: 100%; height: 150px; background: rgba(0, 242, 254, 0.02);
-            position: relative; overflow: hidden; border-bottom: 2px dashed rgba(0, 242, 254, 0.2);
+            width: 100%; height: 150px; background: rgba(59, 130, 246, 0.02);
+            position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
             touch-action: none;
         }
 
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
-            border: 3px solid var(--accent-cyan);
+            border: 3px solid var(--accent-secondary);
             position: absolute; top: 20px; left: 30px; overflow: hidden; background: #000;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
             will-change: transform, left, top, box-shadow, border-color;
-            animation: ring5Colors4s 4s infinite linear;
+            animation: ringNeutral4s 4s infinite linear;
         }
 
         .neon-mascot-container.battle-mode {
@@ -77,131 +77,101 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        @keyframes ring5Colors4s {
-            0%   { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
-            20%  { border-color: #00ff88; box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), inset 0 0 12px rgba(0, 255, 136, 0.4); }
-            40%  { border-color: #a855f7; box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), inset 0 0 12px rgba(168, 85, 247, 0.4); }
-            60%  { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), inset 0 0 12px rgba(59, 130, 246, 0.4); }
-            80%  { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), inset 0 0 12px rgba(6, 182, 212, 0.4); }
-            100% { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
+        @keyframes ringNeutral4s {
+            0%   { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
+            50%  { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
+            100% { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
         }
 
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
-            filter: brightness(1.15) saturate(1.1);
-            animation: mascotColorSync4s 4s infinite linear, mascotSlow40Degrees 4s infinite ease-in-out;
+            filter: brightness(1.1) saturate(1.05);
         } 
 
-        @keyframes mascotColorSync4s {
-            0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.05); }
-            20%  { filter: hue-rotate(70deg) saturate(1.3) brightness(1.1); }
-            40%  { filter: hue-rotate(160deg) saturate(1.2) brightness(1.05); }
-            60%  { filter: hue-rotate(220deg) saturate(1.2) brightness(1.05); }
-            80%  { filter: hue-rotate(290deg) saturate(1.2) brightness(1.05); }
-            100% { filter: hue-rotate(360deg) saturate(1.2) brightness(1.05); }
-        }
-
-        @keyframes mascotSlow40Degrees {
-            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-20deg) scale(1.03); }
-            75%  { transform: translate(-50%, -50%) rotate(20deg) scale(1.03); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-        }
-
         @keyframes ringEnergySync {
-            0%   { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
-            33%  { border-color: #ffaa00; box-shadow: 0 0 45px #ffaa00, inset 0 0 20px #ffaa00; }
-            66%  { border-color: #00ff88; box-shadow: 0 0 45px #00ff88, inset 0 0 20px #00ff88; }
-            100% { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
-        }
-
-        .neon-mascot-container.battle-mode #avatar-layer {
-            animation: mascotEnergyCycle 2s infinite linear, mascotBattleAction 1.2s infinite ease-in-out !important;
-        }
-
-        @keyframes mascotEnergyCycle {
-            0%   { filter: hue-rotate(0deg) saturate(2.8) brightness(1.4); }
-            33%  { filter: hue-rotate(120deg) saturate(3) brightness(1.45); }
-            66%  { filter: hue-rotate(270deg) saturate(3) brightness(1.45); }
-            100% { filter: hue-rotate(360deg) saturate(2.8) brightness(1.4); }
-        }
-
-        @keyframes mascotBattleAction {
-            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-35deg) scale(1.12); }
-            75%  { transform: translate(-50%, -50%) rotate(35deg) scale(1.12); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            0%   { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
+            50%  { border-color: #10b981; box-shadow: 0 0 40px #10b981; }
+            100% { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
         }
 
         header {
-            width: 100%; text-align: center; background: #070a12; position: sticky; top: 0; z-index: 10;
+            width: 100%; text-align: center; background: var(--bg-color); position: sticky; top: 0; z-index: 10;
         }
         
         .mascot-status-tag {
-            font-size: 0.6rem; color: var(--accent-cyan); text-transform: uppercase;
-            letter-spacing: 2px; padding: 4px 0; font-weight: bold; font-style: italic; background: #070a12;
+            font-size: 0.6rem; color: var(--accent-secondary); text-transform: uppercase;
+            letter-spacing: 2px; padding: 4px 0; font-weight: bold; font-style: italic; background: var(--bg-color);
         }
         
         .container { width: 92%; max-width: 420px; margin: 12px auto; display: flex; flex-direction: column; gap: 10px; }
         
         .card {
-            background-color: var(--card-bg); border: 1px solid rgba(0, 242, 254, 0.2);
+            background-color: var(--card-bg); border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 10px; padding: 10px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
         .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         
+        .input-group { margin-bottom: 8px; }
+        .input-group label { display: block; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 3px; font-style: italic; }
+        .neon-input {
+            width: 100%; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
+            outline: none; font-family: inherit; font-style: italic;
+        }
+
         .dropdown-trigger-btn {
-            background: linear-gradient(135deg, #ff007f, #4facfe);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: #fff; border: none; border-radius: 8px; padding: 12px;
             font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); margin-top: 6px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); margin-top: 6px;
         }
 
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .collapsible-content.show { max-height: 1800px; transition: max-height 0.5s ease-in; }
+        .collapsible-content.show { max-height: 2000px; transition: max-height 0.5s ease-in; }
 
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
         }
         .effect-box {
-            background: rgba(255, 0, 127, 0.05); border: 1px solid rgba(255, 0, 127, 0.3);
+            background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.2);
             border-radius: 8px; padding: 8px; text-align: center;
         }
         .effect-box-title {
-            font-size: 0.65rem; color: #ff007f; font-weight: bold; font-style: italic; margin-bottom: 6px; min-height: 22px;
+            font-size: 0.65rem; color: var(--accent-secondary); font-weight: bold; font-style: italic; margin-bottom: 6px; min-height: 22px;
         }
         .play-effect-btn {
-            width: 100%; background: rgba(255, 0, 127, 0.2); border: 1px solid rgba(255, 0, 127, 0.4);
-            color: #ff007f; padding: 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold;
+            width: 100%; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #fff; padding: 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold;
             cursor: pointer; text-transform: uppercase; font-style: italic; margin-bottom: 4px;
         }
         .upload-effect-label {
-            display: block; background: rgba(121, 40, 202, 0.2); border: 1px dashed rgba(121, 40, 202, 0.6);
-            color: #e2b7ff; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
+            display: block; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5);
+            color: #67e8f9; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
             cursor: pointer; font-style: italic; text-align: center;
         }
 
         .toggle-btn {
-            background: rgba(255, 0, 127, 0.2); border: 1px solid rgba(255, 0, 127, 0.5);
-            color: #ff007f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
+            background: rgba(148, 163, 184, 0.2); border: 1px solid rgba(148, 163, 184, 0.4);
+            color: var(--text-muted); padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
         .toggle-btn.active-on {
-            background: rgba(0, 242, 254, 0.3); border-color: var(--accent-cyan);
-            color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+            background: rgba(6, 182, 212, 0.3); border-color: var(--accent-secondary);
+            color: var(--accent-secondary); box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
         }
 
         .action-button {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000; border: none; border-radius: 8px; padding: 12px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #fff; border: none; border-radius: 8px; padding: 12px;
             font-size: 0.9rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); text-transform: uppercase; margin-top: 10px;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); text-transform: uppercase; margin-top: 10px;
             font-style: italic; width: 100%; box-sizing: border-box;
         }
+        .save-notice { font-size: 0.65rem; color: var(--accent-secondary); text-align: center; font-style: italic; margin-top: 4px; display: none; }
     </style>
 </head>
 <body>
@@ -220,32 +190,64 @@
             </div>
         </div>
 
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (NEUTRAL PRO)</div>
     </header>
 
     <div class="container">
         
         <!-- ========================================== -->
-        <!-- PANEL EN VIVO (MANDO GENERAL PARA EL USUARIO) -->
+        <!-- FASE 1: CONFIGURACIÓN PRE-DIRECTO (AJUSTES) -->
         <!-- ========================================== -->
-        <div class="card" style="border-color: #ff007f; background: rgba(255, 0, 127, 0.03);">
-            <div class="card-title" style="color: #ff007f;">
-                <span>🚀 PANEL DE COMANDOS EN VIVO</span>
-                <span class="status-badge" style="background:rgba(255,0,127,0.2); color:#ff007f;">ACTIVO</span>
+        <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
+            <div class="card-title" style="color: var(--accent-secondary);">
+                <span>🛠️ FASE 1: CONFIGURACIÓN PREVIA (CUENTA &amp; DATOS)</span>
+                <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">PRE-LIVE</span>
+            </div>
+            
+            <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
+                ⚙️ ABRIR AJUSTES DE CONEXIÓN (TIKTOK &amp; CORREO)
+            </button>
+
+            <div class="collapsible-content" id="config-content">
+                <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                    <div class="card-title" style="color: var(--accent-secondary);">
+                        <span>VINCULACIÓN TIKTOK &amp; CORREO ELECTRÓNICO</span>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 4px;">
+                        <label>Correo Electr&oacute;nico (Gmail):</label>
+                        <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
+                    </div>
+                    <div class="input-group" style="margin-bottom: 4px;">
+                        <label>Tu Usuario P&uacute;blico (@TikTok):</label>
+                        <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
+                    </div>
+                    <button class="action-button" id="main-action-btn" style="margin-top: 8px;">GUARDAR CREDENCIALES</button>
+                    <div class="save-notice" id="save-notice">✅ ¡Credenciales guardadas con éxito!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
+        <!-- ========================================== -->
+        <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
+            <div class="card-title" style="color: var(--accent-secondary);">
+                <span>🚀 FASE 2: PANEL DE COMANDOS EN VIVO</span>
+                <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
             </div>
 
             <!-- 1. Botón: Mostrar / Ocultar Mascota -->
-            <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #ff007f, #4facfe); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
+            <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #1e293b, var(--accent-primary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
                 👁️ MOSTRAR / OCULTAR MASCOTA
             </button>
 
-            <!-- 2. Botón 7: Captura Limpia (Pantalla totalmente vacía de controles) -->
-            <button class="action-button" onclick="takeCleanScreenshot()" style="background: linear-gradient(135deg, #00ff88, #00f2fe); color: #000; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
-                📸 7. CAPTURA LIMPIA (SIN CONTROLES NI LOGO)
+            <!-- 2. Botón 7: Captura Limpia -->
+            <button class="action-button" onclick="takeCleanScreenshot()" style="background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
+                📸 7. CAPTURA LIMPIA (FOTO SIN CONTROLES)
             </button>
 
             <!-- 3. Botón 8: Grabación de Video Limpio -->
-            <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="background: linear-gradient(135deg, #ff007f, #ffaa00); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
+            <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="background: linear-gradient(135deg, #2563eb, var(--accent-secondary)); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
                 🔴 8. GRABAR VIDEO LIMPIO (INICIAR / PARAR)
             </button>
 
@@ -255,16 +257,16 @@
             </button>
             
             <div class="collapsible-content" id="transmission-content">
-                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 0, 127, 0.3);">
-                    <div class="card-title" style="color: #ff007f;">
+                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(59, 130, 246, 0.3);">
+                    <div class="card-title" style="color: var(--accent-secondary);">
                         <span>EFECTOS DE AUDIO EN DIRECTO</span>
                     </div>
 
-                    <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                    <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
                     </button>
 
-                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
+                    <div style="font-size: 0.65rem; color: var(--text-muted); font-style: italic; margin-bottom: 4px;">
                         🎮 Sube y toca tus 6 efectos de sonido personalizados:
                     </div>
 
@@ -304,20 +306,20 @@
             </div>
 
             <!-- Playlist / Spotify / Archivo Local + Control de Volumen DJ -->
-            <div class="card" style="border-color: rgba(29, 185, 84, 0.4); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                <div class="card-title" style="color: #1db954;">
+            <div class="card" style="border-color: rgba(6, 182, 212, 0.4); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                <div class="card-title" style="color: var(--accent-secondary);">
                     <span>🎵 PLAYLIST AMBIENTAL &amp; VOLUMEN DJ</span>
                 </div>
 
-                <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-size: 0.65rem; color: var(--text-muted); font-style: italic; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
                     <span>Control de Volumen Continuo:</span>
-                    <span id="vol-label" style="color: var(--accent-cyan);">Vol: 80%</span>
+                    <span id="vol-label" style="color: var(--accent-secondary);">Vol: 80%</span>
                 </div>
 
                 <div style="margin-top: 4px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                    <span style="font-size: 0.6rem; color: #8c82ce;">🔈 Bajar</span>
-                    <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-cyan); cursor: pointer;" oninput="adjustBgVolume(this.value)">
-                    <span style="font-size: 0.6rem; color: #8c82ce;">🔊 Subir</span>
+                    <span style="font-size: 0.6rem; color: var(--text-muted);">🔈 Bajar</span>
+                    <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
+                    <span style="font-size: 0.6rem; color: var(--text-muted);">🔊 Subir</span>
                 </div>
 
                 <div style="display: flex; gap: 6px; margin-bottom: 6px;">
@@ -329,12 +331,12 @@
                     <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
 
-                <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(0,242,254,0.3);">
+                <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
                     <label class="upload-effect-label" style="margin-bottom: 4px;">
                         📁 Subir Música de Fondo (MP3)
                         <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
                     </label>
-                    <div id="local-music-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; text-align: center;">Ningún archivo cargado</div>
+                    <div id="local-music-name" style="font-size: 0.6rem; color: var(--accent-secondary); font-style: italic; text-align: center;">Ningún archivo cargado</div>
                     <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
                 </div>
             </div>
@@ -448,13 +450,13 @@
             }
         }
 
-        /* BOTÓN 7: Captura Limpia (Genera una imagen completamente vacía/neutra sin interfaz de la app) */
+        /* BOTÓN 7: Captura Limpia */
         function takeCleanScreenshot() {
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
             canvas.height = 1920;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#070a12';
+            ctx.fillStyle = '#0b0f19';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const link = document.createElement('a');
@@ -463,7 +465,7 @@
             link.click();
         }
 
-        /* BOTÓN 8: Grabación de Video Limpio (Genera una grabación limpia sin elementos de la app) */
+        /* BOTÓN 8: Grabación de Video Limpio */
         async function toggleRecordVideo() {
             const recBtn = document.getElementById("record-video-btn");
             if (!isRecording) {
@@ -483,8 +485,7 @@
                     mediaRecorder.start();
                     isRecording = true;
                     recBtn.innerText = "⏹️ PARAR Y GUARDAR VIDEO";
-                    recBtn.style.background = "linear-gradient(135deg, #00ff88, #00f2fe)";
-                    recBtn.style.color = "#000";
+                    recBtn.style.background = "linear-gradient(135deg, #059669, var(--accent-secondary))";
                 } catch (err) {
                     alert("⚠️ Grabación cancelada o no disponible.");
                 }
@@ -495,8 +496,7 @@
                 }
                 isRecording = false;
                 recBtn.innerText = "🔴 8. GRABAR VIDEO LIMPIO (INICIAR / PARAR)";
-                recBtn.style.background = "linear-gradient(135deg, #ff007f, #ffaa00)";
-                recBtn.style.color = "#fff";
+                recBtn.style.background = "linear-gradient(135deg, #2563eb, var(--accent-secondary))";
             }
         }
 
@@ -505,7 +505,7 @@
             const active = mascotContainer.classList.contains("speaking");
             if(statusText) {
                 statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : (isBattleMode ? "⚔️ MODO BATALLA" : "🟢 SISTEMA VIVO ACTIVO");
-                statusText.style.color = active ? "#ff007f" : "#00f2fe";
+                statusText.style.color = active ? "#3b82f6" : "#06b6d4";
             }
         }
 
@@ -515,54 +515,50 @@
             if (isBattleMode) {
                 mascotContainer.classList.add("battle-mode");
                 btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A PING-PONG)";
-                btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
-                btn.style.color = "#000";
                 if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡BURBUJA LIBRE!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)";
-                btn.style.background = "linear-gradient(135deg, #ffaa00, #ff007f)";
-                btn.style.color = "#000";
                 if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
-        function triggerMascotActivation(label) {
-            mascotContainer.classList.add("speaking");
-            if(statusText) { statusText.innerText = "🔴 Mascota Activa: " + label; statusText.style.color = "#ff007f"; }
-        }
-
-        function resetMascotState() {
-            mascotContainer.classList.remove("speaking");
-            if(statusText) {
-                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡BURBUJA LIBRE!" : "🟢 SISTEMA VIVO ACTIVO";
-                statusText.style.color = isBattleMode ? "#ff007f" : "#00f2fe";
-            }
-        }
-
         function playCustomEffect(label) {
-            triggerMascotActivation(label);
             let urlToPlay = customEffectUrls[label];
-            if (!urlToPlay) { setTimeout(() => resetMascotState(), 3000); return; }
+            if (!urlToPlay) return;
             const audio = new Audio(urlToPlay);
             audio.play().catch(e => console.log(e));
-            audio.onended = () => resetMascotState();
         }
 
         function loadCustomEffect(input, label) {
             if(input.files && input.files[0]) {
                 customEffectUrls[label] = URL.createObjectURL(input.files[0]);
-                alert(`✅ Archivo para '${label}' cargado correctamente.`);
+                alert(`✅ Archivo para '${label}' cargado.`);
             }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+            const trConfig = document.getElementById("toggle-config-btn");
+            const coConfig = document.getElementById("config-content");
+            trConfig.addEventListener("click", function() {
+                coConfig.classList.toggle("show");
+                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR AJUSTES DE CONEXIÓN" : "⚙️ ABRIR AJUSTES DE CONEXIÓN (TIKTOK & CORREO)";
+            });
+
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
                 contentTrans.classList.toggle("show");
                 triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR BANCO DE EFECTOS" : "⚡ ABRIR BANCO DE EFECTOS (6 BOTONES)";
+            });
+
+            document.getElementById("main-action-btn").addEventListener("click", function() {
+                localStorage.setItem("sofiul_email", document.getElementById("user-email").value);
+                localStorage.setItem("sofiul_tiktok", document.getElementById("tiktok-user").value);
+                const n = document.getElementById("save-notice");
+                n.style.display = "block";
+                setTimeout(() => n.style.display = "none", 3000);
             });
         });
     </script>
