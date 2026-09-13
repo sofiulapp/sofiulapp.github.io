@@ -24,14 +24,14 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual Superior Estática para el Logo */
+        /* Zona Superior Única con el Logo Estático y su Respiración Neón Original */
         .stage-area {
-            width: 100%; height: 160px; background: #03060a;
+            width: 100%; height: 180px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
             display: flex; align-items: center; justify-content: center;
         }
 
-        /* Contenedor Fijo del Logo Principal (Estático con respiración neón) */
+        /* Contenedor Fijo del Logo Principal (Estático, en su lugar y con respiración neón) */
         .logo-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid #00f2fe;
@@ -48,15 +48,15 @@
         }
 
         #logo-fixed {
-            position: absolute; top: 50%; left: 50%;
+            position: absolute; top: 60%; left: 47%;
             width: 132px; height: 132px;
             transform: translate(-50%, -50%);
             object-fit: cover;
         }
 
-        /* Zona de la Mascota Móvil (Pimponeada y Burbuja tipo Messenger) */
+        /* Zona de la Mascota: Ping-pong automático fuera de batalla / Burbuja libre en batalla */
         .stage-mascot-area {
-            width: 100%; height: 140px; background: rgba(0, 242, 254, 0.02);
+            width: 100%; height: 150px; background: rgba(0, 242, 254, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(0, 242, 254, 0.2);
             touch-action: none;
         }
@@ -64,16 +64,20 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
-            position: absolute; top: 15px; left: 20px; overflow: hidden; background: #000;
+            position: absolute; top: 20px; left: 30px; overflow: hidden; background: #000;
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
-            cursor: grab;
             animation: ring5Colors4s 4s infinite linear;
         }
 
-        .neon-mascot-container:active { cursor: grabbing; }
+        /* Cuando se activa modo batalla, el cursor indica que se puede arrastrar */
+        .neon-mascot-container.battle-mode {
+            cursor: grab;
+            animation: ringEnergySync 2s infinite linear !important;
+        }
+        .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Aro sincronizado a 4 segundos con los 5 colores terapéuticos */
+        /* Aro sincronizado a 4 segundos con los 5 colores terapéuticos (Fuera de batalla) */
         @keyframes ring5Colors4s {
             0%   { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
             20%  { border-color: #00ff88; box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), inset 0 0 12px rgba(0, 255, 136, 0.4); }
@@ -108,11 +112,7 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* MODO BATALLA (Colores enérgicos) */
-        .neon-mascot-container.battle-mode {
-            animation: ringEnergySync 2s infinite linear !important;
-        }
-
+        /* MODO BATALLA (Colores enérgicos y animación de batalla) */
         @keyframes ringEnergySync {
             0%   { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
             33%  { border-color: #ffaa00; box-shadow: 0 0 45px #ffaa00, inset 0 0 20px #ffaa00; }
@@ -236,21 +236,21 @@
 </head>
 <body>
     <header>
-        <!-- 1. Logo Principal Estático (Inamovible con respiración neón) -->
+        <!-- 1. Logo Principal Estático en su lugar correcto con respiración neón -->
         <div class="stage-area">
             <div class="logo-container">
                 <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
             </div>
         </div>
 
-        <!-- 2. Zona de la Mascota Móvil (Pimponeada y Burbuja tipo Messenger) -->
+        <!-- 2. Zona de la Mascota: Ping-pong automático fuera de batalla / Burbuja libre en batalla -->
         <div class="stage-mascot-area" id="mascot-stage">
             <div class="neon-mascot-container" id="mascot-frame">
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
 
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (PING-PONG AUTOMÁTICO)</div>
     </header>
 
     <div class="container">
@@ -276,7 +276,7 @@
                     </div>
 
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        ⚔️ ACTIVAR MODO BATALLA (ANCLAR BURBUJA)
+                        ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
@@ -425,7 +425,7 @@
         const mascotStage = document.getElementById("mascot-stage");
         const statusText = document.getElementById("mascot-status-text");
         
-        let posX = 20, posY = 15;
+        let posX = 30, posY = 20;
         let speedX = 1.1, speedY = 0.9;
         let isBattleMode = false;
         let isDragging = false;
@@ -433,6 +433,7 @@
         let customEffectUrls = {};
         let customVoiceUrl = "";
 
+        /* Ping-pong automático SOLO cuando NO estamos en modo batalla */
         function updatePingPong() {
             if (!mascotStage || !mascotContainer || isBattleMode || isDragging) return;
             const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
@@ -451,8 +452,9 @@
         }
         requestAnimationFrame(updatePingPong);
 
-        /* Funcionalidad de arrastre de la mascota tipo burbuja de Messenger */
+        /* Funcionalidad de arrastre estilo burbuja de Messenger (SOLO ACTIVA EN MODO BATALLA) */
         mascotContainer.addEventListener("pointerdown", function(e) {
+            if (!isBattleMode) return; // Fuera de batalla se mueve solo con ping-pong
             isDragging = true;
             startX = e.clientX - mascotContainer.offsetLeft;
             startY = e.clientY - mascotContainer.offsetTop;
@@ -461,7 +463,7 @@
         });
 
         mascotContainer.addEventListener("pointermove", function(e) {
-            if (!isDragging || !mascotStage) return;
+            if (!isDragging || !isBattleMode || !mascotStage) return;
             const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
@@ -476,16 +478,16 @@
         });
 
         mascotContainer.addEventListener("pointerup", function(e) {
+            if (!isBattleMode) return;
             isDragging = false;
             mascotContainer.releasePointerCapture(e.pointerId);
-            if (!isBattleMode) requestAnimationFrame(updatePingPong);
         });
 
         function toggleTestMascot() {
             mascotContainer.classList.toggle("speaking");
             const active = mascotContainer.classList.contains("speaking");
             if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
+                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : (isBattleMode ? "⚔️ MODO BATALLA: BURBUJA LIBRE" : "🟢 SISTEMA VIVO ACTIVO (PING-PONG)");
                 statusText.style.color = active ? "#ff007f" : "#00f2fe";
             }
         }
@@ -495,23 +497,23 @@
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
                 mascotContainer.classList.add("battle-mode");
-                btn.innerText = "⚔️ SALIR DE BATALLA (LIBERAR BURBUJA)";
+                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A PING-PONG)";
                 btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: BURBUJA LIBRE &amp; ENERGÍA ACTIVA";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡BURBUJA LIBRE PARA ARRASTRAR!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
-                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR BURBUJA)";
+                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)";
                 btn.style.background = "linear-gradient(135deg, #ffaa00, #ff007f)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
+                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (PING-PONG)";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
         function triggerMascotActivation(label) {
             mascotContainer.classList.add("speaking");
-            if(statusText && !isBattleMode) {
+            if(statusText) {
                 statusText.innerText = "🔴 Mascota Activa: " + label;
                 statusText.style.color = "#ff007f";
             }
@@ -519,9 +521,9 @@
 
         function resetMascotState() {
             mascotContainer.classList.remove("speaking");
-            if(statusText && !isBattleMode) {
-                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
-                statusText.style.color = "#00f2fe";
+            if(statusText) {
+                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡BURBUJA LIBRE PARA ARRASTRAR!" : "🟢 SISTEMA VIVO ACTIVO (PING-PONG)";
+                statusText.style.color = isBattleMode ? "#ff007f" : "#00f2fe";
             }
         }
 
