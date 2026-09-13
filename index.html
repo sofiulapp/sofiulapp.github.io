@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOFIUL - Mobile Live System</title>
-    <meta name="theme-color" content="#070a12">
+    <meta name="theme-color" content="#0b0f19">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- Librería para captura limpia -->
@@ -55,20 +55,21 @@
             object-fit: cover;
         }
 
-        /* Zona de la Mascota Móvil Original */
+        /* Zona de la Mascota Móvil con Brillo Íntegro (Interior y Exterior - 6 Colores Terapéuticos) */
         .stage-mascot-area {
-            width: 100%; height: 150px; background: rgba(59, 130, 246, 0.02);
+            width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
             touch-action: none;
         }
 
         .neon-mascot-container {
-            width: 110px; height: 110px; border-radius: 50%;
-            border: 3px solid var(--accent-secondary);
-            position: absolute; top: 20px; left: 30px; overflow: hidden; background: #000;
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.5);
-            will-change: transform, left, top, box-shadow, border-color;
-            animation: ringNeutral4s 4s infinite linear;
+            width: 115px; height: 115px; border-radius: 50%;
+            border: 3px solid #06b6d4;
+            position: absolute; top: 20px; left: 30px; overflow: hidden; 
+            background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, rgba(0,0,0,0.95) 80%);
+            box-shadow: inset 0 0 22px rgba(6, 182, 212, 0.6), 0 0 30px rgba(6, 182, 212, 0.6);
+            will-change: transform, left, top, box-shadow, border-color, background;
+            animation: therapeutic6Colors 18s infinite linear;
         }
 
         .neon-mascot-container.battle-mode {
@@ -77,23 +78,29 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        @keyframes ringNeutral4s {
-            0%   { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
-            50%  { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.6); }
-            100% { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.6); }
+        /* Ciclo de 6 Colores Terapéuticos y Relajantes (Modo Normal) */
+        @keyframes therapeutic6Colors {
+            0%   { border-color: #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(6,182,212,0.6), 0 0 30px rgba(6,182,212,0.6); } /* 1. Azul Ciclón */
+            16.6%{ border-color: #10b981; background: radial-gradient(circle, rgba(16,185,129,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(16,185,129,0.6), 0 0 30px rgba(16,185,129,0.6); } /* 2. Verde Menta */
+            33.3%{ border-color: #a855f7; background: radial-gradient(circle, rgba(168,85,247,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(168,85,247,0.6), 0 0 30px rgba(168,85,247,0.6); } /* 3. Lavanda */
+            50%  { border-color: #f43f5e; background: radial-gradient(circle, rgba(244,63,94,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(244,63,94,0.6), 0 0 30px rgba(244,63,94,0.6); } /* 4. Rosa Pálido */
+            66.6%{ border-color: #0ea5e9; background: radial-gradient(circle, rgba(14,165,233,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(14,165,233,0.6), 0 0 30px rgba(14,165,233,0.6); } /* 5. Turquesa */
+            83.3%{ border-color: #f59e0b; background: radial-gradient(circle, rgba(245,158,11,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(245,158,11,0.6), 0 0 30px rgba(245,158,11,0.6); } /* 6. Ámbar Cálido */
+            100% { border-color: #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, #000 80%); box-shadow: inset 0 0 22px rgba(6,182,212,0.6), 0 0 30px rgba(6,182,212,0.6); }
         }
 
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
-            width: 136px; height: 136px;
+            width: 140px; height: 140px;
             object-fit: cover; transform: translate(-50%, -50%);
-            filter: brightness(1.1) saturate(1.05);
+            filter: brightness(1.15) saturate(1.1);
         } 
 
+        /* Colores de Alta Adrenalina (Modo Batalla / MVP) */
         @keyframes ringEnergySync {
-            0%   { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
-            50%  { border-color: #10b981; box-shadow: 0 0 40px #10b981; }
-            100% { border-color: #3b82f6; box-shadow: 0 0 40px #3b82f6; }
+            0%   { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.6) 0%, #000 80%); box-shadow: inset 0 0 35px #3b82f6, 0 0 50px #3b82f6; }
+            50%  { border-color: #ec4899; background: radial-gradient(circle, rgba(236,72,153,0.6) 0%, #000 80%); box-shadow: inset 0 0 35px #ec4899, 0 0 50px #ec4899; }
+            100% { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.6) 0%, #000 80%); box-shadow: inset 0 0 35px #3b82f6, 0 0 50px #3b82f6; }
         }
 
         header {
@@ -131,7 +138,7 @@
         }
 
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .collapsible-content.show { max-height: 3000px; transition: max-height 0.5s ease-in; }
+        .collapsible-content.show { max-height: 3800px; transition: max-height 0.5s ease-in; }
 
         .effects-grid-6 {
             display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
@@ -182,6 +189,7 @@
             font-style: italic; width: 100%; box-sizing: border-box;
         }
         .save-notice { font-size: 0.65rem; color: var(--accent-secondary); text-align: center; font-style: italic; margin-top: 4px; display: none; }
+        .paywall-alert { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; margin-top: 8px; text-align: center; display: none; }
     </style>
 </head>
 <body>
@@ -198,43 +206,53 @@
             </div>
         </div>
 
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (NEUTRAL PRO)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SOFIUL ZEN &amp; TAPEUTIC VIVO</div>
     </header>
 
     <div class="container">
         
         <!-- ========================================== -->
-        <!-- FASE 1: CONFIGURACIÓN PRE-DIRECTO (AJUSTES) -->
+        <!-- FASE 1: CONFIGURACIÓN & LICENCIA DE 72H -->
         <!-- ========================================== -->
         <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
             <div class="card-title" style="color: var(--accent-secondary);">
-                <span>🛠️ FASE 1: CONFIGURACIÓN PREVIA (CUENTA &amp; VOCES)</span>
-                <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">PRE-LIVE</span>
+                <span>🛠️ FASE 1: CONFIGURACIÓN &amp; LICENCIA (72H)</span>
+                <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">ACCESO</span>
             </div>
             
             <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
-                ⚙️ ABRIR AJUSTES DE CUENTA &amp; VOCES
+                ⚙️ ABRIR ACCESO (GMAIL, TIKTOK &amp; LICENCIA)
             </button>
 
             <div class="collapsible-content" id="config-content">
                 <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
                     <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>VINCULACIÓN TIKTOK &amp; CORREO</span>
+                        <span>VINCULACIÓN TIKTOK &amp; VALIDACIÓN</span>
                     </div>
                     <div class="input-group" style="margin-bottom: 4px;">
-                        <label>Correo Electr&oacute;nico (Gmail):</label>
+                        <label>Correo Electr&oacute;nico (Gmail de Registro):</label>
                         <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
                     </div>
                     <div class="input-group" style="margin-bottom: 4px;">
                         <label>Tu Usuario P&uacute;blico (@TikTok):</label>
                         <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
                     </div>
+                    
+                    <button class="action-button" id="main-action-btn" style="margin-top: 8px;">REGISTRAR Y ACTIVAR LICENCIA</button>
+                    <div class="save-notice" id="save-notice">✅ ¡Licencia registrada! Tienes 72 horas de acceso garantizado.</div>
+
+                    <!-- Alerta de Licencia Expirada / Pasarela de Cobro -->
+                    <div class="paywall-alert" id="paywall-alert">
+                        <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 4px;">⚠️ PERIODO DE PRUEBA EXPIRADO (72H)</div>
+                        <div style="font-size: 0.6rem; color: var(--text-muted); margin-bottom: 8px;">Para continuar conectando tu cuenta de TikTok y usando el bot inteligente, activa tu acceso comercial.</div>
+                        <a href="https://pay.hotmart.com/TU_ENLACE_DE_COBRO" target="_blank" style="display: block; background: #ef4444; color: #fff; padding: 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-decoration: none; text-transform: uppercase;">💳 ACTIVAR LICENCIA MENSUAL (ENLACE DE PAGO)</a>
+                    </div>
                 </div>
 
                 <!-- Banco de Voces HD Previo -->
                 <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
                     <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>BANCO DE VOCES HD (VOZ DE LA MASCOTA)</span>
+                        <span>BANCO DE VOCES HD &amp; TEXT-TO-SPEECH</span>
                     </div>
                     
                     <div class="voice-row">
@@ -292,9 +310,6 @@
                         <div id="voice-file-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
                     </div>
                 </div>
-
-                <button class="action-button" id="main-action-btn" style="margin-top: 10px;">GUARDAR CONFIGURACIÓN PREVIA</button>
-                <div class="save-notice" id="save-notice">✅ ¡Credenciales y voces guardadas!</div>
             </div>
         </div>
 
@@ -315,6 +330,16 @@
             <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
                     
+                    <!-- Botón de Simulación / Anuncio Automático MVP (Batalla) -->
+                    <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP (BATALLA)
+                    </button>
+
+                    <!-- Simulación de Saludo Inteligente / TTS -->
+                    <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        🤖 PROBAR SALUDO INTELIGENTE DE CHAT
+                    </button>
+
                     <!-- 1. Mostrar / Ocultar Mascota -->
                     <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #1e293b, var(--accent-primary)); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         👁️ MOSTRAR / OCULTAR MASCOTA
@@ -429,6 +454,131 @@
         let mediaRecorder;
         let recordedChunks = [];
         let isRecording = false;
+
+        /* Sistema de Licencia y API WebSockets Preparada */
+        document.addEventListener("DOMContentLoaded", function() {
+            checkLicenseStatus();
+
+            const trConfig = document.getElementById("toggle-config-btn");
+            const coConfig = document.getElementById("config-content");
+            trConfig.addEventListener("click", function() {
+                coConfig.classList.toggle("show");
+                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR ACCESO" : "⚙️ ABRIR ACCESO (GMAIL, TIKTOK & LICENCIA)";
+            });
+
+            const triggerTrans = document.getElementById("toggle-transmission-btn");
+            const contentTrans = document.getElementById("transmission-content");
+            triggerTrans.addEventListener("click", function() {
+                contentTrans.classList.toggle("show");
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "🎛️ CERRAR CAJA DE SONIDOS &amp; EFECTOS" : "🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)";
+            });
+
+            const customVoiceInput = document.getElementById("custom-voice-file");
+            const voiceFileName = document.getElementById("voice-file-name");
+            customVoiceInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    voiceFileName.innerText = "📁 Cargado: " + this.files[0].name;
+                    customVoiceUrl = URL.createObjectURL(this.files[0]);
+                    setCustomVoiceActive();
+                }
+            });
+
+            document.getElementById("main-action-btn").addEventListener("click", function() {
+                const email = document.getElementById("user-email").value;
+                const tiktok = document.getElementById("tiktok-user").value;
+                
+                if(!email) {
+                    alert("⚠️ Ingresa un correo electrónico válido.");
+                    return;
+                }
+
+                const registerDate = new Date().getTime();
+                localStorage.setItem("sofiul_email", email);
+                localStorage.setItem("sofiul_tiktok", tiktok);
+                localStorage.setItem("sofiul_reg_date", registerDate);
+
+                const n = document.getElementById("save-notice");
+                n.style.display = "block";
+                setTimeout(() => {
+                    n.style.display = "none";
+                    checkLicenseStatus();
+                }, 2000);
+            });
+        });
+
+        function checkLicenseStatus() {
+            const regDate = localStorage.getItem("sofiul_reg_date");
+            const email = localStorage.getItem("sofiul_email");
+            
+            if(email) document.getElementById("user-email").value = email;
+            if(localStorage.getItem("sofiul_tiktok")) document.getElementById("tiktok-user").value = localStorage.getItem("sofiul_tiktok");
+
+            if (!regDate) {
+                localStorage.setItem("sofiul_reg_date", new Date().getTime());
+                return;
+            }
+
+            const now = new Date().getTime();
+            const elapsedHours = (now - parseInt(regDate)) / (1000 * 60 * 60);
+
+            if (elapsedHours > 72) {
+                document.getElementById("paywall-alert").style.display = "block";
+                if(statusText) {
+                    statusText.innerText = "🔴 LICENCIA EXPIRADA - ACCESO BLOQUEADO";
+                    statusText.style.color = "#ef4444";
+                }
+            } else {
+                const hoursLeft = Math.round(72 - elapsedHours);
+                if(statusText) {
+                    statusText.innerText = `🟢 LICENCIA ACTIVA (${hoursLeft}H RESTANTES)`;
+                    statusText.style.color = "#06b6d4";
+                }
+            }
+        }
+
+        /* Simulador de Saludo Inteligente por Text-to-Speech */
+        function simulateSmartBotGreeting() {
+            const sampleNames = ["Carlos_Live", "Mariana_99", "AlexPro", "Valeria_Dance"];
+            const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+            const phrases = [
+                `¡Ey, ${randomName}! Bienvenido a la nave, acomódate en la primera fila.`,
+                `¡Hola ${randomName}! Me encanta cómo me tocas... ¡los efectos del panel, claro!`,
+                `¡Un saludo gigante para ${randomName} que acaba de entrar! ¡Escribe algo en el chat!`
+            ];
+            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+
+            triggerMascotActivation("Saludando a " + randomName);
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(randomPhrase);
+                utterance.lang = 'es-ES';
+                utterance.rate = 1.05;
+                utterance.pitch = 1.2;
+                window.speechSynthesis.speak(utterance);
+                utterance.onend = () => resetMascotState();
+            } else {
+                setTimeout(() => resetMascotState(), 3000);
+            }
+        }
+
+        /* Automatización de Anuncio de Top 3 MVP (Modo Batalla) */
+        function simulateMvpAnnouncement() {
+            const mvps = ["KingDavid_77", "Estrellita_Pro", "Dragon_Rojo"];
+            const mvpText = `¡Atención absoluta en la arena! El Top 3 de guerreros dominando la batalla son: en primer lugar ${mvps[0]}, seguido de ${mvps[1]} y en tercer lugar ${mvps[2]}. ¡Imparables!`;
+
+            triggerMascotActivation("Anunciando Top 3 MVP 🏆");
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(mvpText);
+                utterance.lang = 'es-ES';
+                utterance.rate = 1.1;
+                utterance.pitch = 1.3; // Tono de alta adrenalina y emoción
+                window.speechSynthesis.speak(utterance);
+                utterance.onend = () => resetMascotState();
+            } else {
+                setTimeout(() => resetMascotState(), 4000);
+            }
+        }
 
         /* Ping-pong automático */
         function updatePingPong() {
@@ -609,7 +759,7 @@
             mascotContainer.classList.toggle("speaking");
             const active = mascotContainer.classList.contains("speaking");
             if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : (isBattleMode ? "⚔️ MODO BATALLA" : "🟢 SISTEMA VIVO ACTIVO");
+                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : (isBattleMode ? "⚔️ MODO BATALLA" : "🟢 SOFIUL ZEN & TAPEUTIC VIVO");
                 statusText.style.color = active ? "#3b82f6" : "#06b6d4";
             }
         }
@@ -619,26 +769,26 @@
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
                 mascotContainer.classList.add("battle-mode");
-                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A PING-PONG)";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡BURBUJA LIBRE!";
+                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A ZEN)";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)";
-                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO";
+                if(statusText) statusText.innerText = "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
         function triggerMascotActivation(label) {
             mascotContainer.classList.add("speaking");
-            if(statusText) { statusText.innerText = "🔴 Mascota Activa: " + label; statusText.style.color = "#3b82f6"; }
+            if(statusText) { statusText.innerText = "🔴 Mascota: " + label; statusText.style.color = "#ec4899"; }
         }
 
         function resetMascotState() {
             mascotContainer.classList.remove("speaking");
             if(statusText) {
-                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡BURBUJA LIBRE!" : "🟢 SISTEMA VIVO ACTIVO";
-                statusText.style.color = isBattleMode ? "#3b82f6" : "#06b6d4";
+                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!" : "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
+                statusText.style.color = isBattleMode ? "#ec4899" : "#06b6d4";
             }
         }
 
@@ -660,40 +810,6 @@
                 alert(`✅ Archivo para '${label}' cargado.`);
             }
         }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const trConfig = document.getElementById("toggle-config-btn");
-            const coConfig = document.getElementById("config-content");
-            trConfig.addEventListener("click", function() {
-                coConfig.classList.toggle("show");
-                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR AJUSTES DE CUENTA &amp; VOCES" : "⚙️ ABRIR AJUSTES DE CUENTA &amp; VOCES";
-            });
-
-            const triggerTrans = document.getElementById("toggle-transmission-btn");
-            const contentTrans = document.getElementById("transmission-content");
-            triggerTrans.addEventListener("click", function() {
-                contentTrans.classList.toggle("show");
-                triggerTrans.innerText = contentTrans.classList.contains("show") ? "🎛️ CERRAR CAJA DE SONIDOS &amp; EFECTOS" : "🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)";
-            });
-
-            const customVoiceInput = document.getElementById("custom-voice-file");
-            const voiceFileName = document.getElementById("voice-file-name");
-            customVoiceInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    voiceFileName.innerText = "📁 Cargado: " + this.files[0].name;
-                    customVoiceUrl = URL.createObjectURL(this.files[0]);
-                    setCustomVoiceActive();
-                }
-            });
-
-            document.getElementById("main-action-btn").addEventListener("click", function() {
-                localStorage.setItem("sofiul_email", document.getElementById("user-email").value);
-                localStorage.setItem("sofiul_tiktok", document.getElementById("tiktok-user").value);
-                const n = document.getElementById("save-notice");
-                n.style.display = "block";
-                setTimeout(() => n.style.display = "none", 3000);
-            });
-        });
     </script>
 </body>
 </html>
