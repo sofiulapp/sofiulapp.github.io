@@ -26,7 +26,7 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Superior Exclusiva para Capturas y Grabaciones (Logo Estático Original intacto) */
+        /* Zona Superior con el Logo Estático Original */
         .stage-area {
             width: 100%; height: 180px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
@@ -153,28 +153,12 @@
         .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
         .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
         
-        .input-group { margin-bottom: 8px; }
-        .input-group label { display: block; font-size: 0.7rem; color: #a19bc8; margin-bottom: 3px; font-style: italic; }
-        .neon-input {
-            width: 100%; background: rgba(0, 242, 254, 0.05); border: 1px solid rgba(0, 242, 254, 0.3);
-            border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
-            outline: none; font-family: inherit; font-style: italic;
-        }
-
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, #ff007f, #4facfe);
             color: #fff; border: none; border-radius: 8px; padding: 12px;
             font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
             box-shadow: 0 0 15px rgba(255, 0, 127, 0.4); margin-top: 6px;
-        }
-
-        .voice-dropdown-btn {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-            color: #000; border: none; border-radius: 8px; padding: 12px;
-            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
-            width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
-            margin-top: 6px; box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
         }
 
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
@@ -201,16 +185,6 @@
             cursor: pointer; font-style: italic; text-align: center;
         }
 
-        .voice-row {
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.15);
-            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
-        }
-        .test-btn {
-            background: rgba(0, 242, 254, 0.15); border: 1px solid rgba(0, 242, 254, 0.4);
-            color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
-            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
-        }
         .toggle-btn {
             background: rgba(255, 0, 127, 0.2); border: 1px solid rgba(255, 0, 127, 0.5);
             color: #ff007f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
@@ -228,185 +202,54 @@
             box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); text-transform: uppercase; margin-top: 10px;
             font-style: italic; width: 100%; box-sizing: border-box;
         }
-        .save-notice { font-size: 0.65rem; color: #00f2fe; text-align: center; font-style: italic; margin-top: 4px; display: none; }
     </style>
 </head>
 <body>
     <header>
-        <div class="stage-area" id="capture-clean-area">
+        <!-- Zona Superior con el Logo Estático Original -->
+        <div class="stage-area">
             <div class="logo-container">
-                <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+                <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="Logo de Aplicación">
             </div>
         </div>
 
+        <!-- Zona de la Mascota Móvil -->
         <div class="stage-mascot-area" id="mascot-stage">
             <div class="neon-mascot-container" id="mascot-frame">
-                <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
+                <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="Mascota Virtual">
             </div>
         </div>
 
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (PANTALLA OPERATIVA)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)</div>
     </header>
 
     <div class="container">
         
         <!-- ========================================== -->
-        <!-- FASE 1: CONFIGURACIÓN PRE-DIRECTO (AJUSTES BASE) -->
-        <!-- ========================================== -->
-        <div class="card" style="border-color: rgba(255, 170, 0, 0.5); background: rgba(255, 170, 0, 0.03);">
-            <div class="card-title" style="color: #ffaa00;">
-                <span>🛠️ FASE 1: PREPARACIÓN &amp; CONFIGURACIÓN PREVIA</span>
-                <span class="status-badge" style="background:rgba(255,170,0,0.2); color:#ffaa00;">ANTES DEL LIVE</span>
-            </div>
-            
-            <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color: #000;">
-                ⚙️ ABRIR AJUSTES PREVIOS (CUENTA, VOCES &amp; MÚSICA)
-            </button>
-
-            <div class="collapsible-content" id="config-content">
-                <!-- Vinculación TikTok -->
-                <div class="card" style="border-color: rgba(0, 242, 254, 0.4); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: var(--accent-cyan);">
-                        <span>VINCULACIÓN TIKTOK &amp; CORREO</span>
-                    </div>
-                    <div class="input-group" style="margin-bottom: 4px;">
-                        <label>Correo Electr&oacute;nico (Gmail):</label>
-                        <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 4px;">
-                        <label>Tu Usuario P&uacute;blico (@TikTok):</label>
-                        <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
-                    </div>
-                </div>
-
-                <!-- Banco de Voces HD Previo -->
-                <div class="card" style="border-color: rgba(255,255,255,0.2); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: #fff;">
-                        <span>BANCO DE VOCES HD (VOZ DE LA MASCOTA)</span>
-                    </div>
-                    
-                    <div class="voice-row">
-                        <span>1. ♀ Norah (Cálida)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>2. ♀ Valentina (Dulce)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>3. ♀ Sueño (Sueñitos)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>4. ♂ Mateo Pro</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>5. ♂ Lucas</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>6. ♂ Thiago</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
-                        </div>
-                    </div>
-
-                    <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
-                        <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(121, 40, 202, 0.15); border: 1px dashed rgba(121, 40, 202, 0.5); color: #e2b7ff; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
-                                📁 Subir Voz Propia (MP3)
-                                <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
-                            </label>
-                            <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
-                        </div>
-                        <div id="voice-file-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
-                    </div>
-                </div>
-
-                <!-- Música Ambiental Previa (Spotify / MP3 + Volumen DJ) -->
-                <div class="card" style="border-color: rgba(29, 185, 84, 0.4); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: #1db954;">
-                        <span>MÚSICA AMBIENTAL &amp; VOLUMEN DJ</span>
-                    </div>
-
-                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
-                        <span>Nivel de Volumen Continuo:</span>
-                        <span id="vol-label" style="color: var(--accent-cyan);">Vol: 80%</span>
-                    </div>
-
-                    <div style="margin-top: 4px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-                        <span style="font-size: 0.6rem; color: #8c82ce;">🔈 Bajar</span>
-                        <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-cyan); cursor: pointer;" oninput="adjustBgVolume(this.value)">
-                        <span style="font-size: 0.6rem; color: #8c82ce;">🔊 Subir</span>
-                    </div>
-
-                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                        <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
-                        <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
-                    </div>
-
-                    <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
-                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-
-                    <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(0,242,254,0.3);">
-                        <label class="upload-effect-label" style="margin-bottom: 4px;">
-                            📁 Subir Música de Fondo (MP3)
-                            <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
-                        </label>
-                        <div id="local-music-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; text-align: center;">Ningún archivo cargado</div>
-                        <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
-                    </div>
-                </div>
-
-                <button class="action-button" id="main-action-btn" style="margin-top: 10px;">GUARDAR CONFIGURACIÓN PREVIA</button>
-                <div class="save-notice" id="save-notice">✅ ¡Todo configurado y listo para el directo!</div>
-            </div>
-        </div>
-
-        <!-- ========================================== -->
-        <!-- FASE 2: EN DIRECTO (LOS 8 BOTONES OPERATIVOS) -->
+        <!-- PANEL EN VIVO (MANDO GENERAL PARA EL USUARIO) -->
         <!-- ========================================== -->
         <div class="card" style="border-color: #ff007f; background: rgba(255, 0, 127, 0.03);">
             <div class="card-title" style="color: #ff007f;">
-                <span>🚀 FASE 2: PANEL EN VIVO (8 BOTONES DE MANDO)</span>
-                <span class="status-badge" style="background:rgba(255,0,127,0.2); color:#ff007f;">EN DIRECTO</span>
+                <span>🚀 PANEL DE COMANDOS EN VIVO</span>
+                <span class="status-badge" style="background:rgba(255,0,127,0.2); color:#ff007f;">ACTIVO</span>
             </div>
 
-            <!-- Botón Prueba Visual Mascota -->
+            <!-- 1. Botón: Mostrar / Ocultar Mascota -->
             <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #ff007f, #4facfe); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
-                👁️ MOSTRAR / OCULTAR MASCOTA (PRUEBA VISUAL)
+                👁️ MOSTRAR / OCULTAR MASCOTA
             </button>
 
-            <!-- BOTÓN 7: Captura Limpia Automática -->
+            <!-- 2. Botón 7: Captura Limpia (Pantalla totalmente vacía de controles) -->
             <button class="action-button" onclick="takeCleanScreenshot()" style="background: linear-gradient(135deg, #00ff88, #00f2fe); color: #000; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
-                📸 7. CAPTURA LIMPIA AUTOMÁTICA (FOTO)
+                📸 7. CAPTURA LIMPIA (SIN CONTROLES NI LOGO)
             </button>
 
-            <!-- BOTÓN 8: Grabación de Video Inteligente -->
+            <!-- 3. Botón 8: Grabación de Video Limpio -->
             <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="background: linear-gradient(135deg, #ff007f, #ffaa00); color: #fff; margin-top: 8px; padding: 12px; font-size: 0.8rem;">
                 🔴 8. GRABAR VIDEO LIMPIO (INICIAR / PARAR)
             </button>
 
-            <!-- Desplegable con los 6 Botones de Efectos de Sonido -->
+            <!-- Banco de Efectos (6 Botones) -->
             <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="margin-top: 8px;">
                 ⚡ ABRIR BANCO DE EFECTOS (6 BOTONES)
             </button>
@@ -414,7 +257,7 @@
             <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 0, 127, 0.3);">
                     <div class="card-title" style="color: #ff007f;">
-                        <span>COMANDOS &amp; AUDIO EN DIRECTO</span>
+                        <span>EFECTOS DE AUDIO EN DIRECTO</span>
                     </div>
 
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
@@ -422,45 +265,81 @@
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
-                        🎮 6 Botones de Efectos (Ya configurados en Fase 1):
+                        🎮 Sube y toca tus 6 efectos de sonido personalizados:
                     </div>
 
                     <div class="effects-grid-6">
                         <div class="effect-box">
-                            <div class="effect-box-title">😂 1. Risa Divertida</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Divertida')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Divertida')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 1</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
-                            <div class="effect-box-title">😈 2. Risa Burlona</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Burlona')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Burlona')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 2</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
-                            <div class="effect-box-title">🎉 3. Gritos de Júbilo</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Gritos de Júbilo')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Gritos de Júbilo')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 3</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
-                            <div class="effect-box-title">😱 4. Sorpresa / Grito</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Sorpresa')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Sorpresa')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 4</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
-                            <div class="effect-box-title">🔥 5. Hype &amp; Fiesta</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Hype')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Hype')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 5</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
                         </div>
                         <div class="effect-box">
-                            <div class="effect-box-title">🎁 6. Regalo Épico</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Regalo Épico')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Regalo Épico')" style="display:none;"></label>
+                            <div class="effect-box-title">🎧 Efecto 6</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <!-- Playlist / Spotify / Archivo Local + Control de Volumen DJ -->
+            <div class="card" style="border-color: rgba(29, 185, 84, 0.4); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                <div class="card-title" style="color: #1db954;">
+                    <span>🎵 PLAYLIST AMBIENTAL &amp; VOLUMEN DJ</span>
+                </div>
+
+                <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+                    <span>Control de Volumen Continuo:</span>
+                    <span id="vol-label" style="color: var(--accent-cyan);">Vol: 80%</span>
+                </div>
+
+                <div style="margin-top: 4px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 0.6rem; color: #8c82ce;">🔈 Bajar</span>
+                    <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-cyan); cursor: pointer;" oninput="adjustBgVolume(this.value)">
+                    <span style="font-size: 0.6rem; color: #8c82ce;">🔊 Subir</span>
+                </div>
+
+                <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                    <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
+                    <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
+                </div>
+
+                <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
+                    <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+
+                <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(0,242,254,0.3);">
+                    <label class="upload-effect-label" style="margin-bottom: 4px;">
+                        📁 Subir Música de Fondo (MP3)
+                        <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
+                    </label>
+                    <div id="local-music-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; text-align: center;">Ningún archivo cargado</div>
+                    <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
@@ -474,12 +353,11 @@
         let isDragging = false;
         let startX, startY;
         let customEffectUrls = {};
-        let customVoiceUrl = "";
         let mediaRecorder;
         let recordedChunks = [];
         let isRecording = false;
 
-        /* Ping-pong automático original */
+        /* Ping-pong automático */
         function updatePingPong() {
             if (!mascotStage || !mascotContainer || isBattleMode || isDragging) return;
             const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
@@ -570,18 +448,22 @@
             }
         }
 
-        /* BOTÓN 7: Captura Limpia */
+        /* BOTÓN 7: Captura Limpia (Genera una imagen completamente vacía/neutra sin interfaz de la app) */
         function takeCleanScreenshot() {
-            const captureArea = document.getElementById("capture-clean-area");
-            html2canvas(captureArea, { backgroundColor: "#03060a", scale: 2 }).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'FamilyFenix_CapturaLimpia.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
+            const canvas = document.createElement('canvas');
+            canvas.width = 1080;
+            canvas.height = 1920;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#070a12';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const link = document.createElement('a');
+            link.download = 'SOFIUL_CapturaLimpia.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
         }
 
-        /* BOTÓN 8: Grabador de Video Inteligente */
+        /* BOTÓN 8: Grabación de Video Limpio (Genera una grabación limpia sin elementos de la app) */
         async function toggleRecordVideo() {
             const recBtn = document.getElementById("record-video-btn");
             if (!isRecording) {
@@ -594,7 +476,7 @@
                         const blob = new Blob(recordedChunks, { type: 'video/webm' });
                         const url = URL.createObjectURL(blob);
                         const a = document.createElement('a');
-                        a.style.display = 'none'; a.href = url; a.download = 'FamilyFenix_VideoLimpio.webm';
+                        a.style.display = 'none'; a.href = url; a.download = 'SOFIUL_VideoLimpio.webm';
                         document.body.appendChild(a); a.click();
                         setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
                     };
@@ -671,73 +553,16 @@
         function loadCustomEffect(input, label) {
             if(input.files && input.files[0]) {
                 customEffectUrls[label] = URL.createObjectURL(input.files[0]);
-                alert(`✅ MP3 para '${label}' cargado.`);
+                alert(`✅ Archivo para '${label}' cargado correctamente.`);
             }
-        }
-
-        function playAudioWithMascot(url, label) {
-            if(!url) return;
-            triggerMascotActivation(label);
-            const audio = new Audio(url);
-            audio.play().catch(e => console.log(e));
-            audio.onended = () => resetMascotState();
-        }
-
-        function setVoiceActive(url, index) {
-            for(let i=0; i<=5; i++) {
-                const b = document.getElementById("btn-voice-" + i);
-                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
-            }
-            const customBtn = document.getElementById("btn-voice-custom");
-            if(customBtn) { customBtn.innerText="OFF"; customBtn.classList.remove("active-on"); }
-
-            const active = document.getElementById("btn-voice-" + index);
-            if(active) { active.innerText="ON"; active.classList.add("active-on"); }
-            playAudioWithMascot(url, "Voz Activa");
-        }
-
-        function setCustomVoiceActive() {
-            if(!customVoiceUrl) { alert("⚠️ Sube tu voz propia primero."); return; }
-            for(let i=0; i<=5; i++) {
-                const b = document.getElementById("btn-voice-" + i);
-                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
-            }
-            const customBtn = document.getElementById("btn-voice-custom");
-            if(customBtn) { customBtn.innerText="ON"; customBtn.classList.add("active-on"); }
-            playAudioWithMascot(customVoiceUrl, "Voz Propia");
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const trConfig = document.getElementById("toggle-config-btn");
-            const coConfig = document.getElementById("config-content");
-            trConfig.addEventListener("click", function() {
-                coConfig.classList.toggle("show");
-                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR AJUSTES PREVIOS" : "⚙️ ABRIR AJUSTES PREVIOS (CUENTA, VOCES &amp; MÚSICA)";
-            });
-
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
                 contentTrans.classList.toggle("show");
                 triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR BANCO DE EFECTOS" : "⚡ ABRIR BANCO DE EFECTOS (6 BOTONES)";
-            });
-
-            const customVoiceInput = document.getElementById("custom-voice-file");
-            const voiceFileName = document.getElementById("voice-file-name");
-            customVoiceInput.addEventListener("change", function() {
-                if(this.files && this.files[0]) {
-                    voiceFileName.innerText = "📁 Cargado: " + this.files[0].name;
-                    customVoiceUrl = URL.createObjectURL(this.files[0]);
-                    setCustomVoiceActive();
-                }
-            });
-
-            document.getElementById("main-action-btn").addEventListener("click", function() {
-                localStorage.setItem("sofiul_email", document.getElementById("user-email").value);
-                localStorage.setItem("sofiul_tiktok", document.getElementById("tiktok-user").value);
-                const n = document.getElementById("save-notice");
-                n.style.display = "block";
-                setTimeout(() => n.style.display = "none", 3000);
             });
         });
     </script>
