@@ -30,7 +30,7 @@
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
         }
 
-        /* Círculo Base: Aro sincronizado a 5 segundos con los 5 colores terapéuticos */
+        /* Círculo Base: Aro sincronizado exactamente a 4 segundos con los 5 colores terapéuticos */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
@@ -38,11 +38,11 @@
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
             transition: transform 0.4s ease;
-            animation: ring5ColorsSync 5s infinite linear;
+            animation: ring5Colors4s 4s infinite linear;
         }
         
-        /* Transición sincronizada de 5 segundos para el aro */
-        @keyframes ring5ColorsSync {
+        /* Transición armónica y sincronizada de 4 segundos para el aro */
+        @keyframes ring5Colors4s {
             0%   { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
             20%  { border-color: #00ff88; box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), inset 0 0 12px rgba(0, 255, 136, 0.4); }
             40%  { border-color: #a855f7; box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), inset 0 0 12px rgba(168, 85, 247, 0.4); }
@@ -65,7 +65,7 @@
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Sincronizada a 5s en colores y giro suave de 50º exactos en 3 segundos */
+        /* MASCOTA: Sincronizada a 4s en colores exactos y giro suave de 40 grados ejecutado de forma lenta y pausada */
         #avatar-layer { 
             position: absolute; 
             top: 52%; 
@@ -78,11 +78,11 @@
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
             filter: brightness(1.15) saturate(1.1);
-            animation: mascotColorSync5s 5s infinite linear, mascotSmooth50Degrees 3s infinite ease-in-out;
+            animation: mascotColorSync4s 4s infinite linear, mascotSlow40Degrees 4s infinite ease-in-out;
         } 
 
-        /* Colores de la mascota sincronizados exactamente a 5 segundos */
-        @keyframes mascotColorSync5s {
+        /* Colores de la mascota sincronizados exactamente a 4 segundos con el aro */
+        @keyframes mascotColorSync4s {
             0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.05); }
             20%  { filter: hue-rotate(70deg) saturate(1.3) brightness(1.1); }
             40%  { filter: hue-rotate(160deg) saturate(1.2) brightness(1.05); }
@@ -91,11 +91,11 @@
             100% { filter: hue-rotate(360deg) saturate(1.2) brightness(1.05); }
         }
 
-        /* Giro suave de 50 grados total (25º a cada lado) ejecutado en 3 segundos (nada brusco) */
-        @keyframes mascotSmooth50Degrees {
+        /* Giro suave y lento de 40 grados total (20º a la izquierda y 20º a la derecha) en 4 segundos */
+        @keyframes mascotSlow40Degrees {
             0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-25deg) scale(1.03); }
-            75%  { transform: translate(-50%, -50%) rotate(25deg) scale(1.03); }
+            25%  { transform: translate(-50%, -50%) rotate(-20deg) scale(1.03); }
+            75%  { transform: translate(-50%, -50%) rotate(20deg) scale(1.03); }
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
@@ -238,7 +238,7 @@
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (4s SINCRONIZADO &amp; 40º LENTO)</div>
     </header>
 
     <div class="container">
@@ -443,7 +443,7 @@
             mascotContainer.classList.toggle("speaking");
             const active = mascotContainer.classList.contains("show-mascot");
             if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (4s SINCRONIZADO &amp; 40º LENTO)";
                 statusText.style.color = active ? "#ff007f" : "#00f2fe";
             }
         }
@@ -462,7 +462,7 @@
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ENERGÍA &amp; HYPE)";
                 btn.style.background = "linear-gradient(135deg, #ffaa00, #ff007f)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (4s SINCRONIZADO &amp; 40º LENTO)";
                 requestAnimationFrame(updatePingPong);
             }
         }
@@ -478,7 +478,7 @@
         function resetMascotState() {
             mascotContainer.classList.remove("show-mascot", "speaking");
             if(statusText && !isBattleMode) {
-                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (4s SINCRONIZADO &amp; 40º LENTO)";
                 statusText.style.color = "#00f2fe";
             }
         }
