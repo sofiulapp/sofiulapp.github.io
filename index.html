@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOFIUL - Mobile Live System</title>
+    
+    <!-- CONFIGURACIÓN PWA (OPCIÓN 5) -->
     <meta name="theme-color" content="#0b0f19">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SOFIUL">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/PqLknBx/1000731214.png">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
@@ -502,6 +507,15 @@
     </div>
 
     <script>
+        // REGISTRO DE SERVICE WORKER PARA HABILITAR PWA (INSTALACIÓN)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,')
+                .then(reg => console.log('SOFIUL PWA Registrada con éxito'))
+                .catch(err => console.log('Error PWA: ', err));
+            });
+        }
+
         const mascotContainer = document.getElementById("mascot-frame");
         const mascotStage = document.getElementById("mascot-stage");
         const statusText = document.getElementById("mascot-status-text");
