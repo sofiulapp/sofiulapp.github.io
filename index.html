@@ -76,10 +76,10 @@
             100% { border-color: #00f2fe; box-shadow: 0 0 40px #00f2fe, inset 0 0 15px #00f2fe; }
         }
         
-        /* LOGOTIPO PERFECTAMENTE AJUSTADO: Posición centrada a la derecha (left: 47%) y zoom equilibrado (132px) */
+        /* LOGOTIPO AJUSTADO: Posición bajada un tantito más (top: 57%) manteniendo el zoom ideal (132px) y horizontal en 47% */
         #logo-layer { 
             position: absolute; 
-            top: 54%; 
+            top: 57%; 
             left: 47%; 
             width: 132px; 
             height: 132px;
@@ -449,7 +449,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA";
                 btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡LOGOTIPO PERFECTAMENTE EN SU SITIO!";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡LOGOTIPO CENTRADO Y PERFECTO!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
