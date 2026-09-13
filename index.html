@@ -73,14 +73,24 @@
             animation: mascotZenFlow 24s infinite steps(1, end);
         }
 
-        /* LA MASCOTA CON COLOR SINCRONIZADO DIRECTO (Sin brillo débil, color puro interactivo) */
+        /* CAPA DE TINTE INTERNO PARA LA MASCOTA: Sincronizada exactamente con el color del neón */
+        .neon-mascot-container::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            z-index: 3;
+            pointer-events: none;
+            mix-blend-mode: overlay; /* Fusiona el color puro del neón sobre la mascota */
+            animation: mascotColorTintSync 24s infinite steps(1, end);
+        }
+
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
             z-index: 2;
-            /* Sincroniza el cambio de color directo en la mascota al mismo ritmo de 24s */
-            animation: mascotColorSync 24s infinite steps(1, end);
+            filter: brightness(1.15) contrast(1.1);
         } 
 
         .neon-mascot-container.battle-mode {
@@ -100,15 +110,15 @@
             100% { transform: rotate(0deg);   border-color: #06b6d4; box-shadow: 0 0 30px #06b6d4; --mascot-glow-color: #06b6d4; }
         }
 
-        /* FILTRO DE COLOR DIRECTO EN LA MASCOTA: Sincronizado exactamente con el círculo */
-        @keyframes mascotColorSync {
-            0%   { filter: brightness(1.2) drop-shadow(0 0 12px #06b6d4) hue-rotate(0deg); }
-            16.6%{ filter: brightness(1.2) drop-shadow(0 0 12px #10b981) hue-rotate(90deg); }
-            33.3%{ filter: brightness(1.2) drop-shadow(0 0 12px #a855f7) hue-rotate(180deg); }
-            50%  { filter: brightness(1.2) drop-shadow(0 0 12px #ec4899) hue-rotate(270deg); }
-            66.6%{ filter: brightness(1.2) drop-shadow(0 0 12px #f59e0b) hue-rotate(45deg); }
-            83.3%{ filter: brightness(1.2) drop-shadow(0 0 12px #3b82f6) hue-rotate(210deg); }
-            100% { filter: brightness(1.2) drop-shadow(0 0 12px #06b6d4) hue-rotate(0deg); }
+        /* SINCRONIZACIÓN DE COLOR INTERIOR PARA LA MASCOTA (Mismos colores exactos que el neón) */
+        @keyframes mascotColorTintSync {
+            0%   { background-color: rgba(6, 182, 212, 0.45); }
+            16.6%{ background-color: rgba(16, 185, 129, 0.45); }
+            33.3%{ background-color: rgba(168, 85, 247, 0.45); }
+            50%  { background-color: rgba(236, 72, 153, 0.45); }
+            66.6%{ background-color: rgba(245, 158, 11, 0.45); }
+            83.3%{ background-color: rgba(59, 130, 246, 0.45); }
+            100% { background-color: rgba(6, 182, 212, 0.45); }
         }
 
         /* MODO BATALLA: Adrenalina pura */
