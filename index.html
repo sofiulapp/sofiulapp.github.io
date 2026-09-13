@@ -30,7 +30,7 @@
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
         }
 
-        /* Círculo Brilloso Base */
+        /* Círculo Base: Aro sincronizado a 5 segundos con los 5 colores terapéuticos */
         .neon-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
@@ -38,86 +38,20 @@
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
             transition: transform 0.4s ease;
+            animation: ring5ColorsSync 5s infinite linear;
         }
         
-        /* LOGOTIPO ESTÁTICO: Color oficial fijo y puro neón con respiración sutil (Inamovible) */
-        .neon-container:not(.show-mascot) {
-            border-color: #00f2fe !important;
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7) !important;
-            animation: logoRespiration 3.5s infinite ease-in-out;
+        /* Transición sincronizada de 5 segundos para el aro */
+        @keyframes ring5ColorsSync {
+            0%   { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
+            20%  { border-color: #00ff88; box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), inset 0 0 12px rgba(0, 255, 136, 0.4); }
+            40%  { border-color: #a855f7; box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), inset 0 0 12px rgba(168, 85, 247, 0.4); }
+            60%  { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), inset 0 0 12px rgba(59, 130, 246, 0.4); }
+            80%  { border-color: #06b6d4; box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), inset 0 0 12px rgba(6, 182, 212, 0.4); }
+            100% { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
         }
 
-        @keyframes logoRespiration {
-            0% {
-                border-color: rgba(0, 242, 254, 0.5);
-                box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-            }
-            50% {
-                border-color: rgba(0, 242, 254, 1);
-                box-shadow: 0 0 35px rgba(0, 242, 254, 0.9);
-            }
-            100% {
-                border-color: rgba(0, 242, 254, 0.5);
-                box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
-            }
-        }
-
-        /* MODO NORMAL: 5 Colores terapéuticos, lentos y balance suave de lado a lado hasta la mitad */
-        .neon-container #avatar-layer {
-            animation: mascotTherapeuticCycle 15s infinite ease-in-out, mascotHalfBalance 3s infinite ease-in-out;
-        }
-
-        @keyframes mascotTherapeuticCycle {
-            0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.05); }   /* Cian suave / Paz */
-            20%  { filter: hue-rotate(70deg) saturate(1.3) brightness(1.1); }    /* Verde menta / Descanso visual */
-            40%  { filter: hue-rotate(160deg) saturate(1.2) brightness(1.05); }  /* Verde agua / Calma */
-            60%  { filter: hue-rotate(220deg) saturate(1.2) brightness(1.05); }  /* Lavanda / Relajación mental */
-            80%  { filter: hue-rotate(290deg) saturate(1.2) brightness(1.05); }  /* Violeta suave / Equilibrado */
-            100% { filter: hue-rotate(360deg) saturate(1.2) brightness(1.05); }  /* Retorno suave a Cian */
-        }
-
-        @keyframes mascotHalfBalance {
-            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-18deg) scale(1.02); } /* Solo hasta la mitad (18 grados) */
-            75%  { transform: translate(-50%, -50%) rotate(18deg) scale(1.02); }  /* Solo hasta la mitad (18 grados) */
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-        }
-
-        /* MODO BATALLA: Aro con la secuencia rápida y enérgica (colores explosivos) */
-        .neon-container.battle-mode {
-            position: relative !important;
-            top: auto !important; left: auto !important;
-            margin: 15px auto !important;
-            animation: ringEnergySync 3s infinite linear !important;
-        }
-
-        @keyframes ringEnergySync {
-            0%   { border-color: #ff007f; box-shadow: 0 0 40px #ff007f, inset 0 0 15px #ff007f; }
-            33%  { border-color: #ffaa00; box-shadow: 0 0 40px #ffaa00, inset 0 0 15px #ffaa00; }
-            66%  { border-color: #00ff88; box-shadow: 0 0 40px #00ff88, inset 0 0 15px #00ff88; }
-            100% { border-color: #ff007f; box-shadow: 0 0 40px #ff007f, inset 0 0 15px #ff007f; }
-        }
-
-        /* MODO BATALLA (MASCOTA): Colores súper vivos, brillantes y dinámicos para motivar la batalla y los regalos */
-        .neon-container.battle-mode #avatar-layer {
-            animation: mascotEnergyCycle 2.5s infinite linear, mascotBattleAction 1.2s infinite ease-in-out !important;
-        }
-
-        @keyframes mascotEnergyCycle {
-            0%   { filter: hue-rotate(0deg) saturate(2.2) brightness(1.3); }
-            33%  { filter: hue-rotate(110deg) saturate(2.5) brightness(1.4); }
-            66%  { filter: hue-rotate(250deg) saturate(2.5) brightness(1.4); }
-            100% { filter: hue-rotate(360deg) saturate(2.2) brightness(1.3); }
-        }
-
-        @keyframes mascotBattleAction {
-            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-45deg) scale(1.12); } /* Giro más amplio y rápido estilo batalla */
-            75%  { transform: translate(-50%, -50%) rotate(45deg) scale(1.12); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-        }
-        
-        /* LOGOTIPO FIJO: Posición y zoom inamovibles (top: 60%, left: 47%, tamaño 132px) */
+        /* LOGOTIPO ESTÁTICO: Inamovible, posición y zoom exactos */
         #logo-layer { 
             position: absolute; 
             top: 60%; 
@@ -131,7 +65,7 @@
             transition: opacity 0.4s ease;
         } 
         
-        /* MASCOTA: Zoom exacto (136px) */
+        /* MASCOTA: Sincronizada a 5s en colores y giro suave de 50º exactos en 3 segundos */
         #avatar-layer { 
             position: absolute; 
             top: 52%; 
@@ -143,7 +77,58 @@
             object-fit: cover; 
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
+            filter: brightness(1.15) saturate(1.1);
+            animation: mascotColorSync5s 5s infinite linear, mascotSmooth50Degrees 3s infinite ease-in-out;
         } 
+
+        /* Colores de la mascota sincronizados exactamente a 5 segundos */
+        @keyframes mascotColorSync5s {
+            0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.05); }
+            20%  { filter: hue-rotate(70deg) saturate(1.3) brightness(1.1); }
+            40%  { filter: hue-rotate(160deg) saturate(1.2) brightness(1.05); }
+            60%  { filter: hue-rotate(220deg) saturate(1.2) brightness(1.05); }
+            80%  { filter: hue-rotate(290deg) saturate(1.2) brightness(1.05); }
+            100% { filter: hue-rotate(360deg) saturate(1.2) brightness(1.05); }
+        }
+
+        /* Giro suave de 50 grados total (25º a cada lado) ejecutado en 3 segundos (nada brusco) */
+        @keyframes mascotSmooth50Degrees {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25%  { transform: translate(-50%, -50%) rotate(-25deg) scale(1.03); }
+            75%  { transform: translate(-50%, -50%) rotate(25deg) scale(1.03); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
+
+        /* MODO BATALLA: Energía máxima y colores explosivos para los regalos */
+        .neon-container.battle-mode {
+            animation: ringEnergySync 2s infinite linear !important;
+            transform: none !important;
+        }
+
+        @keyframes ringEnergySync {
+            0%   { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
+            33%  { border-color: #ffaa00; box-shadow: 0 0 45px #ffaa00, inset 0 0 20px #ffaa00; }
+            66%  { border-color: #00ff88; box-shadow: 0 0 45px #00ff88, inset 0 0 20px #00ff88; }
+            100% { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
+        }
+
+        .neon-container.battle-mode #avatar-layer {
+            animation: mascotEnergyCycle 2s infinite linear, mascotBattleAction 1.2s infinite ease-in-out !important;
+        }
+
+        @keyframes mascotEnergyCycle {
+            0%   { filter: hue-rotate(0deg) saturate(2.8) brightness(1.4); }
+            33%  { filter: hue-rotate(120deg) saturate(3) brightness(1.45); }
+            66%  { filter: hue-rotate(270deg) saturate(3) brightness(1.45); }
+            100% { filter: hue-rotate(360deg) saturate(2.8) brightness(1.4); }
+        }
+
+        @keyframes mascotBattleAction {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25%  { transform: translate(-50%, -50%) rotate(-35deg) scale(1.12); }
+            75%  { transform: translate(-50%, -50%) rotate(35deg) scale(1.12); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
 
         /* Transición de la mascota al activarse */
         .neon-container.show-mascot #logo-layer { opacity: 0; }
@@ -210,4 +195,392 @@
             cursor: pointer; text-transform: uppercase; font-style: italic; margin-bottom: 4px;
         }
         .upload-effect-label {
-            display: block; background: rgba(121, 40, 202, 0.2); border: 1px dashed rgba(121, 40, 2
+            display: block; background: rgba(121, 40, 202, 0.2); border: 1px dashed rgba(121, 40, 202, 0.6);
+            color: #e2b7ff; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
+            cursor: pointer; font-style: italic; text-align: center;
+        }
+
+        .voice-row {
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(0, 242, 254, 0.03); border: 1px solid rgba(0, 242, 254, 0.15);
+            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
+        }
+        .test-btn {
+            background: rgba(0, 242, 254, 0.15); border: 1px solid rgba(0, 242, 254, 0.4);
+            color: var(--accent-cyan); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+        }
+        .toggle-btn {
+            background: rgba(255, 0, 127, 0.2); border: 1px solid rgba(255, 0, 127, 0.5);
+            color: #ff007f; padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
+            font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
+        }
+        .toggle-btn.active-on {
+            background: rgba(0, 242, 254, 0.3); border-color: var(--accent-cyan);
+            color: var(--accent-cyan); box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000; border: none; border-radius: 8px; padding: 12px;
+            font-size: 0.9rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4); text-transform: uppercase; margin-top: 10px;
+            font-style: italic; width: 100%; box-sizing: border-box;
+        }
+        .save-notice { font-size: 0.65rem; color: #00f2fe; text-align: center; font-style: italic; margin-top: 4px; display: none; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="stage-area" id="stage-box">
+            <div class="neon-container" id="mascot-frame">
+                <img id="logo-layer" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+                <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
+            </div>
+        </div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)</div>
+    </header>
+
+    <div class="container">
+        <div class="card" style="border-color: #ff007f; background: rgba(255, 0, 127, 0.05);">
+            <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #ff007f, #4facfe); color: #fff; margin-top: 0; padding: 10px; font-size: 0.75rem;">
+                👁️ MOSTRAR / OCULTAR MASCOTA (PRUEBA VISUAL)
+            </button>
+        </div>
+
+        <div class="card" style="border-color: rgba(255, 0, 127, 0.4);">
+            <div class="card-title" style="color: #ff007f;">
+                <span>🚀 PANEL DE CONTROL &amp; MANDO EN VIVO</span>
+            </div>
+            
+            <button class="dropdown-trigger-btn" id="toggle-transmission-btn">
+                ⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES
+            </button>
+            
+            <div class="collapsible-content" id="transmission-content">
+                <div class="card" style="background: rgba(0,0,0,0.3); margin-top: 8px; border-color: rgba(255, 0, 127, 0.3);">
+                    <div class="card-title" style="color: #ff007f;">
+                        <span>PANTALLA DE COMANDOS &amp; AUDIO EN DIRECTO</span>
+                    </div>
+
+                    <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        ⚔️ ACTIVAR MODO BATALLA (ENERGÍA &amp; HYPE)
+                    </button>
+
+                    <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
+                        🎮 6 Botones de Efectos (Sube tu MP3 en cada botón):
+                    </div>
+
+                    <div class="effects-grid-6">
+                        <div class="effect-box">
+                            <div class="effect-box-title">😂 1. Risa Divertida</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Divertida')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Divertida')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">😈 2. Risa Burlona</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Risa Burlona')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Burlona')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">🎉 3. Gritos de Júbilo</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Gritos de Júbilo')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Gritos de Júbilo')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">😱 4. Sorpresa / Grito</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Sorpresa')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Sorpresa')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">🔥 5. Hype &amp; Fiesta</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Hype')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Hype')" style="display:none;"></label>
+                        </div>
+                        <div class="effect-box">
+                            <div class="effect-box-title">🎁 6. Regalo Épico</div>
+                            <button class="play-effect-btn" onclick="playCustomEffect('Regalo Épico')">▶ Tocar</button>
+                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Regalo Épico')" style="display:none;"></label>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.65rem; color: #1db954; font-style: italic; margin-top: 12px; font-weight: bold;">
+                        🎵 Spotify (Música ambiental de fondo para tu público):
+                    </div>
+                    <div style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
+                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="border-color: rgba(255, 170, 0, 0.4);">
+            <div class="card-title" style="color: #ffaa00;">
+                <span>ESTADO DE CUENTA &amp; SEGURIDAD (72H)</span>
+                <span class="status-badge" style="background:rgba(255,170,0,0.2); color:#ffaa00;">ACTIVO</span>
+            </div>
+            <div class="input-group" style="margin-bottom: 4px;">
+                <label>Correo Electr&oacute;nico (Gmail):</label>
+                <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
+            </div>
+        </div>
+
+        <div class="card" style="border-color: rgba(0, 242, 254, 0.4);">
+            <div class="card-title" style="color: var(--accent-cyan);">
+                <span>VINCULACI&Oacute;N TIKTOK LIVE</span>
+                <span class="status-badge" style="background:rgba(0,242,254,0.2); color:var(--accent-cyan);">ID PÚBLICO</span>
+            </div>
+            <div class="input-group" style="margin-bottom: 4px;">
+                <label>Tu Usuario P&uacute;blico (@TikTok):</label>
+                <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" style="color: #fff;">
+                <span>BANCO DE VOCES HD &amp; VOZ PERSONALIZADA</span>
+                <span class="status-badge" style="background:rgba(0,242,254,0.2); color:var(--accent-cyan);">PRO</span>
+            </div>
+            
+            <button class="voice-dropdown-btn" id="toggle-voice-btn">
+                🎧 ABRIR BANCO DE VOCES (ON / OFF)
+            </button>
+
+            <div class="collapsible-content" id="voice-content" style="margin-top: 8px;">
+                <div class="voice-row">
+                    <span>1. ♀ Norah (Cálida)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>2. ♀ Valentina (Dulce)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>3. ♀ Sueño (Sueñitos)</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>4. ♂ Mateo Pro</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>5. ♂ Lucas</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
+                    </div>
+                </div>
+                <div class="voice-row">
+                    <span>6. ♂ Thiago</span>
+                    <div style="display:flex; gap:4px;">
+                        <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
+                        <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
+                    <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
+                    <div style="display: flex; gap: 6px; align-items: center;">
+                        <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(121, 40, 202, 0.15); border: 1px dashed rgba(121, 40, 202, 0.5); color: #e2b7ff; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
+                            📁 Subir Voz Propia (MP3)
+                            <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
+                        </label>
+                        <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
+                    </div>
+                    <div id="voice-file-name" style="font-size: 0.6rem; color: #e2b7ff; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="action-button" id="main-action-btn">GUARDAR CONFIGURACIÓN</button>
+        <div class="save-notice" id="save-notice">✅ ¡Guardado con éxito!</div>
+    </div>
+
+    <script>
+        const mascotContainer = document.getElementById("mascot-frame");
+        const stage = document.getElementById("stage-box");
+        const statusText = document.getElementById("mascot-status-text");
+        
+        let posX = 40, posY = 30;
+        let speedX = 1.3, speedY = 1.0;
+        let isBattleMode = false;
+        let customEffectUrls = {};
+        let customVoiceUrl = "";
+
+        function updatePingPong() {
+            if (!stage || !mascotContainer || isBattleMode) return;
+            const sW = stage.clientWidth, sH = stage.clientHeight;
+            const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
+
+            posX += speedX; posY += speedY;
+            let hit = false;
+
+            if (posX <= 0) { posX = 0; speedX *= -1; hit = true; }
+            else if (posX >= sW - mW) { posX = sW - mW; speedX *= -1; hit = true; }
+            if (posY <= 0) { posY = 0; speedY *= -1; hit = true; }
+            else if (posY >= sH - mH) { posY = sH - mH; speedY *= -1; hit = true; }
+
+            mascotContainer.style.left = posX + 'px';
+            mascotContainer.style.top = posY + 'px';
+            requestAnimationFrame(updatePingPong);
+        }
+        requestAnimationFrame(updatePingPong);
+
+        function toggleTestMascot() {
+            mascotContainer.classList.toggle("show-mascot");
+            mascotContainer.classList.toggle("speaking");
+            const active = mascotContainer.classList.contains("show-mascot");
+            if(statusText) {
+                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                statusText.style.color = active ? "#ff007f" : "#00f2fe";
+            }
+        }
+
+        function toggleBattleMode() {
+            isBattleMode = !isBattleMode;
+            const btn = document.getElementById("battle-toggle-btn");
+            if (isBattleMode) {
+                mascotContainer.classList.add("battle-mode");
+                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A PAZ)";
+                btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
+                btn.style.color = "#000";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ENERGÍA MÁXIMA &amp; HYPE ACTIVADO!";
+            } else {
+                mascotContainer.classList.remove("battle-mode");
+                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ENERGÍA &amp; HYPE)";
+                btn.style.background = "linear-gradient(135deg, #ffaa00, #ff007f)";
+                btn.style.color = "#000";
+                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                requestAnimationFrame(updatePingPong);
+            }
+        }
+
+        function triggerMascotActivation(label) {
+            mascotContainer.classList.add("show-mascot", "speaking");
+            if(statusText && !isBattleMode) {
+                statusText.innerText = "🔴 Mascota Activa: " + label;
+                statusText.style.color = "#ff007f";
+            }
+        }
+
+        function resetMascotState() {
+            mascotContainer.classList.remove("show-mascot", "speaking");
+            if(statusText && !isBattleMode) {
+                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (5s SINCRONIZADO &amp; 50º SUAVE)";
+                statusText.style.color = "#00f2fe";
+            }
+        }
+
+        function playCustomEffect(label) {
+            triggerMascotActivation(label);
+            let urlToPlay = customEffectUrls[label];
+            
+            if (!urlToPlay) {
+                setTimeout(() => resetMascotState(), 3000);
+                return;
+            }
+
+            const audio = new Audio(urlToPlay);
+            audio.play().catch(e => console.log(e));
+            audio.onended = function() {
+                resetMascotState();
+            };
+        }
+
+        function loadCustomEffect(input, label) {
+            if(input.files && input.files[0]) {
+                const file = input.files[0];
+                customEffectUrls[label] = URL.createObjectURL(file);
+                alert(`✅ ¡MP3 para '${label}' cargado con éxito!`);
+            }
+        }
+
+        function playAudioWithMascot(url, label) {
+            if(!url) return;
+            triggerMascotActivation(label);
+            const audio = new Audio(url);
+            audio.play().catch(e => console.log(e));
+
+            audio.onended = function() {
+                resetMascotState();
+            };
+        }
+
+        function setVoiceActive(url, index) {
+            currentActiveVoiceUrl = url;
+            for(let i=0; i<=5; i++) {
+                const b = document.getElementById("btn-voice-" + i);
+                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
+            }
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) { customBtn.innerText="OFF"; customBtn.classList.remove("active-on"); }
+
+            const active = document.getElementById("btn-voice-" + index);
+            if(active) { active.innerText="ON"; active.classList.add("active-on"); }
+            playAudioWithMascot(url, "Voz Activa");
+        }
+
+        function setCustomVoiceActive() {
+            if(!customVoiceUrl) {
+                alert("⚠️ Primero sube un archivo de voz propia (.mp3).");
+                return;
+            }
+            currentActiveVoiceUrl = customVoiceUrl;
+            for(let i=0; i<=5; i++) {
+                const b = document.getElementById("btn-voice-" + i);
+                if(b) { b.innerText="OFF"; b.classList.remove("active-on"); }
+            }
+            const customBtn = document.getElementById("btn-voice-custom");
+            if(customBtn) { customBtn.innerText="ON"; customBtn.classList.add("active-on"); }
+            playAudioWithMascot(customVoiceUrl, "Voz Propia");
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const triggerTrans = document.getElementById("toggle-transmission-btn");
+            const contentTrans = document.getElementById("transmission-content");
+            triggerTrans.addEventListener("click", function() {
+                contentTrans.classList.toggle("show");
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "⚡ CERRAR PANTALLA DE DIRECTO" : "⚡ ABRIR PANTALLA DE DIRECTO CON BOTONES";
+            });
+
+            const trVoice = document.getElementById("toggle-voice-btn");
+            const coVoice = document.getElementById("voice-content");
+            trVoice.addEventListener("click", function() {
+                coVoice.classList.toggle("show");
+                trVoice.innerText = coVoice.classList.contains("show") ? "🎧 CERRAR BANCO DE VOCES" : "🎧 ABRIR BANCO DE VOCES (ON / OFF)";
+            });
+
+            const customVoiceInput = document.getElementById("custom-voice-file");
+            const voiceFileName = document.getElementById("voice-file-name");
+            customVoiceInput.addEventListener("change", function() {
+                if(this.files && this.files[0]) {
+                    const file = this.files[0];
+                    voiceFileName.innerText = "📁 Cargado: " + file.name;
+                    customVoiceUrl = URL.createObjectURL(file);
+                    setCustomVoiceActive();
+                }
+            });
+
+            document.getElementById("main-action-btn").addEventListener("click", function() {
+                localStorage.setItem("sofiul_email", document.getElementById("user-email").value);
+                localStorage.setItem("sofiul_tiktok", document.getElementById("tiktok-user").value);
+                const n = document.getElementById("save-notice");
+                n.style.display = "block";
+                setTimeout(() => n.style.display = "none", 3000);
+            });
+        });
+    </script>
+</body>
+</html>
