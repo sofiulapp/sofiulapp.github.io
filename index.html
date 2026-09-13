@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* Zona de la Mascota Móvil con Iluminación Íntegra (Interior y Exterior Sincronizada) */
+        /* Zona de la Mascota Móvil con Iluminación Potente Interior y Exterior */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -66,24 +66,24 @@
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; overflow: hidden; 
             will-change: transform, left, top, box-shadow, border-color, background;
-            animation: therapeuticCoreGlow 18s infinite linear;
+            animation: therapeuticFullGlow 18s infinite linear;
         }
 
         .neon-mascot-container.battle-mode {
             cursor: grab;
-            animation: battleCoreGlow 2s infinite linear !important;
+            animation: battleFullGlow 2s infinite linear !important;
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Los 6 Colores Terapéuticos con Brillo Potente Tanto Afuera como Adentro */
-        @keyframes therapeuticCoreGlow {
-            0%   { border: 4px solid #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.85) 0%, rgba(3,38,51,0.95) 70%, #000 100%); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
-            16.6%{ border: 4px solid #10b981; background: radial-gradient(circle, rgba(16,185,129,0.85) 0%, rgba(4,43,30,0.95) 70%, #000 100%); box-shadow: 0 0 35px #10b981, inset 0 0 35px #10b981; }
-            33.3%{ border: 4px solid #a855f7; background: radial-gradient(circle, rgba(168,85,247,0.85) 0%, rgba(41,13,61,0.95) 70%, #000 100%); box-shadow: 0 0 35px #a855f7, inset 0 0 35px #a855f7; }
-            50%  { border: 4px solid #f43f5e; background: radial-gradient(circle, rgba(244,63,94,0.85) 0%, rgba(59,10,22,0.95) 70%, #000 100%); box-shadow: 0 0 35px #f43f5e, inset 0 0 35px #f43f5e; }
-            66.6%{ border: 4px solid #0ea5e9; background: radial-gradient(circle, rgba(14,165,233,0.85) 0%, rgba(3,39,56,0.95) 70%, #000 100%); box-shadow: 0 0 35px #0ea5e9, inset 0 0 35px #0ea5e9; }
-            83.3%{ border: 4px solid #f59e0b; background: radial-gradient(circle, rgba(245,158,11,0.85) 0%, rgba(56,34,3,0.95) 70%, #000 100%); box-shadow: 0 0 35px #f59e0b, inset 0 0 35px #f59e0b; }
-            100% { border: 4px solid #06b6d4; background: radial-gradient(circle, rgba(6,182,212,0.85) 0%, rgba(3,38,51,0.95) 70%, #000 100%); box-shadow: 0 0 35px #06b6d4, inset 0 0 35px #06b6d4; }
+        /* Los 6 Colores Terapéuticos con Luz Sincronizada 100% Interior y Exterior */
+        @keyframes therapeuticFullGlow {
+            0%   { border: 5px solid #06b6d4; background-color: #06b6d4; box-shadow: 0 0 40px #06b6d4, inset 0 0 40px #06b6d4; }
+            16.6%{ border: 5px solid #10b981; background-color: #10b981; box-shadow: 0 0 40px #10b981, inset 0 0 40px #10b981; }
+            33.3%{ border: 5px solid #a855f7; background-color: #a855f7; box-shadow: 0 0 40px #a855f7, inset 0 0 40px #a855f7; }
+            50%  { border: 5px solid #f43f5e; background-color: #f43f5e; box-shadow: 0 0 40px #f43f5e, inset 0 0 40px #f43f5e; }
+            66.6%{ border: 5px solid #0ea5e9; background-color: #0ea5e9; box-shadow: 0 0 40px #0ea5e9, inset 0 0 40px #0ea5e9; }
+            83.3%{ border: 5px solid #f59e0b; background-color: #f59e0b; box-shadow: 0 0 40px #f59e0b, inset 0 0 40px #f59e0b; }
+            100% { border: 5px solid #06b6d4; background-color: #06b6d4; box-shadow: 0 0 40px #06b6d4, inset 0 0 40px #06b6d4; }
         }
 
         #avatar-layer { 
@@ -93,11 +93,11 @@
             filter: brightness(1.2) saturate(1.1);
         } 
 
-        /* Modo Batalla: Adrenalina Pura Interior y Exterior */
-        @keyframes battleCoreGlow {
-            0%   { border: 4px solid #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(13,31,69,0.95) 70%, #000 100%); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
-            50%  { border: 4px solid #ec4899; background: radial-gradient(circle, rgba(236,72,153,0.9) 0%, rgba(66,13,44,0.95) 70%, #000 100%); box-shadow: 0 0 45px #ec4899, inset 0 0 45px #ec4899; }
-            100% { border: 4px solid #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(13,31,69,0.95) 70%, #000 100%); box-shadow: 0 0 45px #3b82f6, inset 0 0 45px #3b82f6; }
+        /* Modo Batalla: Iluminación Intensa Interna y Externa */
+        @keyframes battleFullGlow {
+            0%   { border: 5px solid #3b82f6; background-color: #3b82f6; box-shadow: 0 0 50px #3b82f6, inset 0 0 50px #3b82f6; }
+            50%  { border: 5px solid #ec4899; background-color: #ec4899; box-shadow: 0 0 50px #ec4899, inset 0 0 50px #ec4899; }
+            100% { border: 5px solid #3b82f6; background-color: #3b82f6; box-shadow: 0 0 50px #3b82f6, inset 0 0 50px #3b82f6; }
         }
 
         header {
@@ -810,4 +810,3 @@
     </script>
 </body>
 </html>
-
