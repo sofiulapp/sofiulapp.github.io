@@ -40,9 +40,10 @@
             transition: transform 0.4s ease;
         }
         
-        /* LOGOTIPO ESTÁTICO: Color fijo agradable y efecto de respiración sutil */
+        /* LOGOTIPO ESTÁTICO: Color oficial fijo y puro neón con respiración sutil */
         .neon-container:not(.show-mascot) {
             border-color: #00f2fe !important;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7) !important;
             animation: logoRespiration 3.5s infinite ease-in-out;
         }
 
@@ -61,7 +62,7 @@
             }
         }
 
-        /* MODO BATALLA / INTERACCIÓN: Aro y Mascota sincronizados al 100% */
+        /* MODO BATALLA: Aro sincronizado exclusivamente con la mascota */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
@@ -76,7 +77,7 @@
             100% { border-color: #00f2fe; box-shadow: 0 0 40px #00f2fe, inset 0 0 15px #00f2fe; }
         }
         
-        /* LOGOTIPO FINALES: Posición bajada al punto exacto (top: 60%) manteniendo zoom de 132px y horizontal en 47% */
+        /* LOGOTIPO FIJO: Posición y zoom inamovibles (top: 60%, left: 47%, tamaño 132px) */
         #logo-layer { 
             position: absolute; 
             top: 60%; 
@@ -104,16 +105,16 @@
             transition: opacity 0.4s ease;
         } 
 
-        /* MASCOTA EN MODO BATALLA: Colores sincronizados con el aro + Balanceo profundo (50% / 45 grados estilo "echado") */
+        /* MASCOTA EN MODO BATALLA: Colores vivos únicos, brillantes y balanceo profundo (50% / 45 grados estilo "echado") */
         .neon-container.battle-mode #avatar-layer {
             animation: mascotColorSync 4s infinite linear, mascotEchadoLean 2.2s infinite ease-in-out;
         }
 
         @keyframes mascotColorSync {
-            0% { filter: hue-rotate(0deg) saturate(2) brightness(1.2); }
-            33% { filter: hue-rotate(110deg) saturate(2.3) brightness(1.3); }
-            66% { filter: hue-rotate(250deg) saturate(2.3) brightness(1.3); }
-            100% { filter: hue-rotate(360deg) saturate(2) brightness(1.2); }
+            0% { filter: hue-rotate(0deg) saturate(2.2) brightness(1.3); }
+            33% { filter: hue-rotate(110deg) saturate(2.5) brightness(1.4); }
+            66% { filter: hue-rotate(250deg) saturate(2.5) brightness(1.4); }
+            100% { filter: hue-rotate(360deg) saturate(2.2) brightness(1.3); }
         }
 
         @keyframes mascotEchadoLean {
@@ -449,7 +450,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA";
                 btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡LOGOTIPO EN SU PUNTO EXACTO!";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡LOGO INTACTO & MASCOTA VIVA!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
