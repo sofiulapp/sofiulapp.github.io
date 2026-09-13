@@ -65,7 +65,7 @@
             filter: none; 
         }
 
-        /* ZONA DE LA MASCOTA: Balanceo de 80° fluido y respiración de luz marcada */
+        /* ZONA DE LA MASCOTA */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -79,7 +79,6 @@
             overflow: hidden; 
             transform-origin: bottom center;
             will-change: transform, box-shadow, border-color, background-color;
-            /* Balanceo de 80° (8s) + Ciclo de colores terapéuticos de 30s totales (5s por cada uno de los 6 tonos) con efecto respiración fuerte */
             animation: mascotSmoothSwing 8s infinite ease-in-out, mascotZenTherapeuticColors 30s infinite ease-in-out;
         }
 
@@ -91,13 +90,21 @@
             filter: brightness(1.2) contrast(1.1);
         } 
 
+        /* MODO BATALLA */
         .neon-mascot-container.battle-mode {
             cursor: grab;
-            animation: mascotBattleSwing 4s infinite ease-in-out, mascotBattleAdrenalineColors 3s infinite ease-in-out !important;
+            animation: mascotBattleAdrenalineSwing 2s infinite ease-in-out, mascotBattleAdrenalineColors 2s infinite ease-in-out !important;
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MOVIMIENTO PÉNDULO SUAVE (80 grados totales: -40° a +40°) */
+        /* ESTADOS DE TRIUNFO Y DERRROTA EN LA MASCOTA */
+        .neon-mascot-container.victory-mode {
+            animation: mascotVictoryJump 1s infinite alternate ease-in-out, mascotVictoryColors 1.5s infinite ease-in-out !important;
+        }
+        .neon-mascot-container.defeat-mode {
+            animation: mascotDefeatShake 0.4s infinite ease-in-out, mascotDefeatColors 2s infinite ease-in-out !important;
+        }
+
         @keyframes mascotSmoothSwing {
             0%   { transform: rotate(0deg); }
             25%  { transform: rotate(40deg); }   
@@ -106,15 +113,23 @@
             100% { transform: rotate(0deg); }
         }
 
-        @keyframes mascotBattleSwing {
-            0%   { transform: rotate(0deg) scale(1.03); }
-            25%  { transform: rotate(42deg) scale(1.05); }   
-            50%  { transform: rotate(0deg) scale(1.03); }   
-            75%  { transform: rotate(-42deg) scale(1.05); }  
-            100% { transform: rotate(0deg) scale(1.03); }
+        @keyframes mascotBattleAdrenalineSwing {
+            0%   { transform: rotate(-10deg) scale(1.05); }
+            50%  { transform: rotate(10deg) scale(1.12); }
+            100% { transform: rotate(-10deg) scale(1.05); }
         }
 
-        /* 6 TONOS TERAPÉUTICOS (5 segundos por cada uno = 30s ciclo) CON EFECTO RESPIRACIÓN NOTABLE */
+        @keyframes mascotVictoryJump {
+            0%   { transform: translateY(0px) scale(1.1); }
+            100% { transform: translateY(-12px) scale(1.15); }
+        }
+
+        @keyframes mascotDefeatShake {
+            0%   { transform: translateX(0px) rotate(-3deg); }
+            50%  { transform: translateX(3px) rotate(3deg); }
+            100% { transform: translateX(0px) rotate(-3deg); }
+        }
+
         @keyframes mascotZenTherapeuticColors {
             0%   { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
             16.6%{ border-color: #10b981; background-color: rgba(16, 185, 129, 0.28); box-shadow: 0 0 35px #10b981, inset 0 0 18px #10b981; --mascot-glow-color: #10b981; }
@@ -125,11 +140,38 @@
             100% { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
         }
 
-        /* COLORES DE ADRENALINA Y ENERGÍA (Modo Batalla) */
         @keyframes mascotBattleAdrenalineColors {
-            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.45); box-shadow: 0 0 45px #ef4444, inset 0 0 25px #ef4444; --mascot-glow-color: #ef4444; }
-            50%  { border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.45); box-shadow: 0 0 45px #f59e0b, inset 0 0 25px #f59e0b; --mascot-glow-color: #f59e0b; }
-            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.45); box-shadow: 0 0 45px #ef4444, inset 0 0 25px #ef4444; --mascot-glow-color: #ef4444; }
+            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.55); box-shadow: 0 0 50px #ef4444, inset 0 0 30px #ef4444; --mascot-glow-color: #ef4444; }
+            50%  { border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.55); box-shadow: 0 0 50px #f59e0b, inset 0 0 30px #f59e0b; --mascot-glow-color: #f59e0b; }
+            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.55); box-shadow: 0 0 50px #ef4444, inset 0 0 30px #ef4444; --mascot-glow-color: #ef4444; }
+        }
+
+        @keyframes mascotVictoryColors {
+            0%   { border-color: #22c55e; background-color: rgba(34, 197, 94, 0.6); box-shadow: 0 0 60px #22c55e, inset 0 0 35px #22c55e; }
+            50%  { border-color: #eab308; background-color: rgba(234, 179, 8, 0.6); box-shadow: 0 0 60px #eab308, inset 0 0 35px #eab308; }
+            100% { border-color: #22c55e; background-color: rgba(34, 197, 94, 0.6); box-shadow: 0 0 60px #22c55e, inset 0 0 35px #22c55e; }
+        }
+
+        @keyframes mascotDefeatColors {
+            0%   { border-color: #64748b; background-color: rgba(100, 116, 139, 0.5); box-shadow: 0 0 40px #64748b, inset 0 0 25px #64748b; }
+            50%  { border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 40px #3b82f6, inset 0 0 25px #3b82f6; }
+            100% { border-color: #64748b; background-color: rgba(100, 116, 139, 0.5); box-shadow: 0 0 40px #64748b, inset 0 0 25px #64748b; }
+        }
+
+        /* CAPA DE PARTÍCULAS (CONFETI / LÁGRIMAS) */
+        #particle-layer {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 20; display: none;
+        }
+
+        .particle {
+            position: absolute; font-size: 1.2rem;
+            animation: fallParticle 2.5s linear infinite;
+        }
+
+        @keyframes fallParticle {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
         }
 
         header {
@@ -230,6 +272,7 @@
         </div>
 
         <div class="stage-mascot-area" id="mascot-stage">
+            <div id="particle-layer"></div>
             <div class="neon-mascot-container" id="mascot-frame">
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="Mascota Virtual">
             </div>
@@ -353,23 +396,27 @@
             <div class="collapsible-content" id="transmission-content">
                 <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
                     
+                    <button class="action-button" onclick="triggerVictoryEffect()" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        🎉 SIMULAR TRIUNFO (LLUVIA DE CONFETI)
+                    </button>
+
+                    <button class="action-button" onclick="triggerDefeatEffect()" style="background: linear-gradient(135deg, #64748b, #ef4444); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                        💧 SIMULAR DERROTA (LLUVIA DE LÁGRIMAS)
+                    </button>
+
                     <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP (BATALLA)
+                        🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP
                     </button>
 
                     <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         🤖 PROBAR SALUDO INTELIGENTE DE CHAT
                     </button>
 
-                    <button class="action-button" onclick="toggleTestMascot()" style="background: linear-gradient(135deg, #1e293b, var(--accent-primary)); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        👁️ MOSTRAR / OCULTAR MASCOTA
-                    </button>
-
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
                         ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
                     </button>
 
-                    <div style="display: flex; gap: 6px; margin-bottom: 10px;">
+                    <div style="display: flex; gap: 6px; margin-bottom: 10px; margin-top: 8px;">
                         <button class="action-button" onclick="takeCleanScreenshot()" style="flex:1; background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
                             📸 CAPTURA FOTO
                         </button>
@@ -458,9 +505,10 @@
         const mascotContainer = document.getElementById("mascot-frame");
         const mascotStage = document.getElementById("mascot-stage");
         const statusText = document.getElementById("mascot-status-text");
+        const particleLayer = document.getElementById("particle-layer");
         
         let posX = 30, posY = 20;
-        let speedX = 0.5, speedY = 0.45; /* Pimponeo ultralento, calmado y nada estresante para el público */
+        let speedX = 0.5, speedY = 0.45;
         let isBattleMode = false;
         let isDragging = false;
         let startX, startY;
@@ -551,6 +599,64 @@
             }
         }
 
+        /* EFECTO TRIUNFO: LLUVIA DE CONFETI Y BRILLO VERDE/DORADO */
+        function triggerVictoryEffect() {
+            mascotContainer.className = "neon-mascot-container victory-mode";
+            if(statusText) {
+                statusText.innerText = "🎉 ¡BATALLA GANADA! ¡VICTORIA FAMILIA FÉNIX!";
+                statusText.style.color = "#22c55e";
+            }
+            startParticles(["🎉", "✨", "🎊", "⭐", "💎"], 30);
+            
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance("¡Impresionante! ¡Batalla ganada familia! ¡Gracias a todos por su apoyo!");
+                utterance.lang = 'es-ES'; utterance.pitch = 1.3; utterance.rate = 1.1;
+                window.speechSynthesis.speak(utterance);
+            }
+
+            setTimeout(() => resetMascotState(), 6000);
+        }
+
+        /* EFECTO DERROTA: LLUVIA DE LÁGRIMAS Y ANIMACIÓN TIERNA */
+        function triggerDefeatEffect() {
+            mascotContainer.className = "neon-mascot-container defeat-mode";
+            if(statusText) {
+                statusText.innerText = "💧 ¡CERCA PERO A SEGUIR LUCHANDO!";
+                statusText.style.color = "#64748b";
+            }
+            startParticles(["💧", "🌧️", "💙", "🥺"], 25);
+
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance("¡Estuvo muy reñido! No pasa nada familia, en la revancha ganamos.");
+                utterance.lang = 'es-ES'; utterance.pitch = 0.9; utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            }
+
+            setTimeout(() => resetMascotState(), 6000);
+        }
+
+        /* GENERADOR DE PARTÍCULAS FLOTANTES */
+        function startParticles(emojis, count) {
+            particleLayer.innerHTML = "";
+            particleLayer.style.display = "block";
+            
+            for(let i=0; i<count; i++) {
+                const p = document.createElement("div");
+                p.className = "particle";
+                p.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                p.style.left = Math.random() * 100 + "%";
+                p.style.top = (Math.random() * 40 - 20) + "px";
+                p.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+                p.style.animationDelay = (Math.random() * 0.8) + "s";
+                particleLayer.appendChild(p);
+            }
+
+            setTimeout(() => {
+                particleLayer.innerHTML = "";
+                particleLayer.style.display = "none";
+            }, 6000);
+        }
+
         function simulateSmartBotGreeting() {
             const sampleNames = ["Carlos_Live", "Mariana_99", "AlexPro", "Valeria_Dance"];
             const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
@@ -565,9 +671,7 @@
             
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(randomPhrase);
-                utterance.lang = 'es-ES';
-                utterance.rate = 1.05;
-                utterance.pitch = 1.2;
+                utterance.lang = 'es-ES'; utterance.rate = 1.05; utterance.pitch = 1.2;
                 window.speechSynthesis.speak(utterance);
                 utterance.onend = () => resetMascotState();
             } else {
@@ -583,9 +687,7 @@
             
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(mvpText);
-                utterance.lang = 'es-ES';
-                utterance.rate = 1.1;
-                utterance.pitch = 1.3;
+                utterance.lang = 'es-ES'; utterance.rate = 1.1; utterance.pitch = 1.3;
                 window.speechSynthesis.speak(utterance);
                 utterance.onend = () => resetMascotState();
             } else {
@@ -715,11 +817,9 @@
 
         function takeCleanScreenshot() {
             const canvas = document.createElement('canvas');
-            canvas.width = 1080;
-            canvas.height = 1920;
+            canvas.width = 1080; canvas.height = 1920;
             const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#0b0f19';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0b0f19'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             const link = document.createElement('a');
             link.download = 'SOFIUL_CapturaLimpia.png';
@@ -774,11 +874,11 @@
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
-                mascotContainer.classList.add("battle-mode");
+                mascotContainer.className = "neon-mascot-container battle-mode";
                 btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A ZEN)";
                 if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!";
             } else {
-                mascotContainer.classList.remove("battle-mode");
+                mascotContainer.className = "neon-mascot-container";
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)";
                 if(statusText) statusText.innerText = "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
                 requestAnimationFrame(updatePingPong);
@@ -791,7 +891,7 @@
         }
 
         function resetMascotState() {
-            mascotContainer.classList.remove("speaking");
+            mascotContainer.className = "neon-mascot-container" + (isBattleMode ? " battle-mode" : "");
             if(statusText) {
                 statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!" : "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
                 statusText.style.color = isBattleMode ? "#ec4899" : "#06b6d4";
