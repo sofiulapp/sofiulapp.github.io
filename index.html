@@ -24,30 +24,56 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Visual Superior Original */
+        /* Zona Visual Superior Estática para el Logo */
         .stage-area {
-            width: 100%; height: 180px; background: #03060a;
+            width: 100%; height: 160px; background: #03060a;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(0, 242, 254, 0.3);
-            touch-action: none; /* Permite arrastrar libremente en móvil estilo burbuja */
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* Círculo Base: Aro sincronizado a 4 segundos con los 5 colores terapéuticos */
-        .neon-container {
+        /* Contenedor Fijo del Logo Principal (Estático con respiración neón) */
+        .logo-container {
+            width: 110px; height: 110px; border-radius: 50%;
+            border: 3px solid #00f2fe;
+            background: #000;
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
+            position: relative; overflow: hidden;
+            animation: logoRespiration 3.5s infinite ease-in-out;
+        }
+
+        @keyframes logoRespiration {
+            0% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+            50% { border-color: rgba(0, 242, 254, 1); box-shadow: 0 0 35px rgba(0, 242, 254, 0.9); }
+            100% { border-color: rgba(0, 242, 254, 0.5); box-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        }
+
+        #logo-fixed {
+            position: absolute; top: 50%; left: 50%;
+            width: 132px; height: 132px;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* Zona de la Mascota Móvil (Pimponeada y Burbuja tipo Messenger) */
+        .stage-mascot-area {
+            width: 100%; height: 140px; background: rgba(0, 242, 254, 0.02);
+            position: relative; overflow: hidden; border-bottom: 2px dashed rgba(0, 242, 254, 0.2);
+            touch-action: none;
+        }
+
+        .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             border: 3px solid var(--accent-cyan);
-            position: absolute; top: 35px; left: 40px; overflow: hidden; background: #000;
+            position: absolute; top: 15px; left: 20px; overflow: hidden; background: #000;
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.7);
             will-change: transform, left, top, box-shadow, border-color;
-            transition: transform 0.4s ease;
-            animation: ring5Colors4s 4s infinite linear;
             cursor: grab;
-        }
-        
-        .neon-container:active {
-            cursor: grabbing;
+            animation: ring5Colors4s 4s infinite linear;
         }
 
-        /* Transición de 4 segundos para el aro */
+        .neon-mascot-container:active { cursor: grabbing; }
+
+        /* Aro sincronizado a 4 segundos con los 5 colores terapéuticos */
         @keyframes ring5Colors4s {
             0%   { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
             20%  { border-color: #00ff88; box-shadow: 0 0 30px rgba(0, 255, 136, 0.8), inset 0 0 12px rgba(0, 255, 136, 0.4); }
@@ -57,32 +83,11 @@
             100% { border-color: #00f2fe; box-shadow: 0 0 30px rgba(0, 242, 254, 0.8), inset 0 0 12px rgba(0, 242, 254, 0.4); }
         }
 
-        /* LOGOTIPO ESTÁTICO: Color oficial puro, sin efectos de colores locos, inamovible */
-        #logo-layer { 
-            position: absolute; 
-            top: 60%; 
-            left: 47%; 
-            width: 132px; 
-            height: 132px;
-            opacity: 1; 
-            z-index: 2; 
-            object-fit: cover; 
-            transform: translate(-50%, -50%);
-            transition: opacity 0.4s ease;
-        } 
-        
-        /* MASCOTA: Sincronizada a 4s en colores y giro suave de 40 grados */
+        /* Mascota con colores sincronizados y giro suave de 40 grados */
         #avatar-layer { 
-            position: absolute; 
-            top: 52%; 
-            left: 48.5%; 
-            width: 136px; 
-            height: 136px;
-            opacity: 0; 
-            z-index: 1; 
-            object-fit: cover; 
-            transform: translate(-50%, -50%);
-            transition: opacity 0.4s ease;
+            position: absolute; top: 52%; left: 48.5%; 
+            width: 136px; height: 136px;
+            object-fit: cover; transform: translate(-50%, -50%);
             filter: brightness(1.15) saturate(1.1);
             animation: mascotColorSync4s 4s infinite linear, mascotSlow40Degrees 4s infinite ease-in-out;
         } 
@@ -103,8 +108,8 @@
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
 
-        /* MODO BATALLA: Estilo burbuja manipulable, colores enérgicos y dinámicos */
-        .neon-container.battle-mode {
+        /* MODO BATALLA (Colores enérgicos) */
+        .neon-mascot-container.battle-mode {
             animation: ringEnergySync 2s infinite linear !important;
         }
 
@@ -115,7 +120,7 @@
             100% { border-color: #ff007f; box-shadow: 0 0 45px #ff007f, inset 0 0 20px #ff007f; }
         }
 
-        .neon-container.battle-mode #avatar-layer {
+        .neon-mascot-container.battle-mode #avatar-layer {
             animation: mascotEnergyCycle 2s infinite linear, mascotBattleAction 1.2s infinite ease-in-out !important;
         }
 
@@ -132,10 +137,6 @@
             75%  { transform: translate(-50%, -50%) rotate(35deg) scale(1.12); }
             100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
-
-        /* Transición de la mascota al activarse */
-        .neon-container.show-mascot #logo-layer { opacity: 0; }
-        .neon-container.show-mascot #avatar-layer { opacity: 1; }
 
         header {
             width: 100%; text-align: center; background: #070a12; position: sticky; top: 0; z-index: 10;
@@ -235,12 +236,20 @@
 </head>
 <body>
     <header>
-        <div class="stage-area" id="stage-box">
-            <div class="neon-container" id="mascot-frame">
-                <img id="logo-layer" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+        <!-- 1. Logo Principal Estático (Inamovible con respiración neón) -->
+        <div class="stage-area">
+            <div class="logo-container">
+                <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="SOFIUL Logo Estático">
+            </div>
+        </div>
+
+        <!-- 2. Zona de la Mascota Móvil (Pimponeada y Burbuja tipo Messenger) -->
+        <div class="stage-mascot-area" id="mascot-stage">
+            <div class="neon-mascot-container" id="mascot-frame">
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
+
         <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)</div>
     </header>
 
@@ -413,11 +422,11 @@
 
     <script>
         const mascotContainer = document.getElementById("mascot-frame");
-        const stage = document.getElementById("stage-box");
+        const mascotStage = document.getElementById("mascot-stage");
         const statusText = document.getElementById("mascot-status-text");
         
-        let posX = 40, posY = 30;
-        let speedX = 1.0, speedY = 0.8;
+        let posX = 20, posY = 15;
+        let speedX = 1.1, speedY = 0.9;
         let isBattleMode = false;
         let isDragging = false;
         let startX, startY;
@@ -425,8 +434,8 @@
         let customVoiceUrl = "";
 
         function updatePingPong() {
-            if (!stage || !mascotContainer || isBattleMode || isDragging) return;
-            const sW = stage.clientWidth, sH = stage.clientHeight;
+            if (!mascotStage || !mascotContainer || isBattleMode || isDragging) return;
+            const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
             posX += speedX; posY += speedY;
@@ -442,7 +451,7 @@
         }
         requestAnimationFrame(updatePingPong);
 
-        /* Funcionalidad de arrastre estilo burbuja de Messenger en cualquier momento */
+        /* Funcionalidad de arrastre de la mascota tipo burbuja de Messenger */
         mascotContainer.addEventListener("pointerdown", function(e) {
             isDragging = true;
             startX = e.clientX - mascotContainer.offsetLeft;
@@ -452,14 +461,13 @@
         });
 
         mascotContainer.addEventListener("pointermove", function(e) {
-            if (!isDragging || !stage) return;
-            const sW = stage.clientWidth, sH = stage.clientHeight;
+            if (!isDragging || !mascotStage) return;
+            const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
             let newX = e.clientX - startX;
             let newY = e.clientY - startY;
 
-            // Limitar dentro del área de la etapa superior
             posX = Math.max(0, Math.min(newX, sW - mW));
             posY = Math.max(0, Math.min(newY, sH - mH));
 
@@ -474,11 +482,10 @@
         });
 
         function toggleTestMascot() {
-            mascotContainer.classList.toggle("show-mascot");
             mascotContainer.classList.toggle("speaking");
-            const active = mascotContainer.classList.contains("show-mascot");
+            const active = mascotContainer.classList.contains("speaking");
             if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
+                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
                 statusText.style.color = active ? "#ff007f" : "#00f2fe";
             }
         }
@@ -491,7 +498,7 @@
                 btn.innerText = "⚔️ SALIR DE BATALLA (LIBERAR BURBUJA)";
                 btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: BURBUJA ANCLADA Y QUIETA";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: BURBUJA LIBRE &amp; ENERGÍA ACTIVA";
             } else {
                 mascotContainer.classList.remove("battle-mode");
                 btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR BURBUJA)";
@@ -503,7 +510,7 @@
         }
 
         function triggerMascotActivation(label) {
-            mascotContainer.classList.add("show-mascot", "speaking");
+            mascotContainer.classList.add("speaking");
             if(statusText && !isBattleMode) {
                 statusText.innerText = "🔴 Mascota Activa: " + label;
                 statusText.style.color = "#ff007f";
@@ -511,7 +518,7 @@
         }
 
         function resetMascotState() {
-            mascotContainer.classList.remove("show-mascot", "speaking");
+            mascotContainer.classList.remove("speaking");
             if(statusText && !isBattleMode) {
                 statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (BURBUJA MÓVIL)";
                 statusText.style.color = "#00f2fe";
