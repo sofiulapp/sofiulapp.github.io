@@ -217,7 +217,6 @@
             </button>
 
             <div class="collapsible-content" id="config-content">
-                <!-- Credenciales -->
                 <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
                     <div class="card-title" style="color: var(--accent-secondary);">
                         <span>VINCULACIÓN TIKTOK &amp; CORREO</span>
@@ -308,7 +307,7 @@
                 <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
             </div>
 
-            <!-- Botón Maestro: Caja de Sonidos & Efectos (Agrupa todo lo del directo) -->
+            <!-- Botón Maestro: Caja de Sonidos & Efectos -->
             <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 14px; font-size: 0.8rem;">
                 🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)
             </button>
@@ -326,7 +325,7 @@
                         ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
                     </button>
 
-                    <!-- 3 y 4. Botones de Captura Limpia y Video Limpio -->
+                    <!-- 3 y 4. Captura Foto y Grabar Video -->
                     <div style="display: flex; gap: 6px; margin-bottom: 10px;">
                         <button class="action-button" onclick="takeCleanScreenshot()" style="flex:1; background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
                             📸 CAPTURA FOTO
@@ -336,7 +335,7 @@
                         </button>
                     </div>
 
-                    <!-- 5. Los 6 Botones de Efectos de Sonido MP3 -->
+                    <!-- 5. Banco de 6 Efectos de Sonido MP3 -->
                     <div style="font-size: 0.65rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 4px; font-weight: bold;">
                         🎮 Banco de 6 Efectos de Sonido (MP3):
                     </div>
@@ -462,7 +461,6 @@
 
         mascotContainer.addEventListener("pointermove", function(e) {
             if (!isDragging || !isBattleMode || !mascotStage) return;
-            const sW = mascotStage.clientHeight ? mascotStage.clientWidth : 0; // safe check
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
 
             let newX = e.clientX - startX;
@@ -557,7 +555,7 @@
             playAudioWithMascot(customVoiceUrl, "Voz Propia");
         }
 
-        /* BOTÓN: Captura Limpia (Vacía / Neutra sin controles) */
+        /* BOTÓN: Captura Limpia */
         function takeCleanScreenshot() {
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
