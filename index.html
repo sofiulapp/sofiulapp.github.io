@@ -55,7 +55,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Iluminación interior real dentro del círculo y movimiento zen lento */
+        /* ZONA DE LA MASCOTA: Iluminación interna neón potente dentro del círculo y movimiento zen lento */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -65,24 +65,33 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
-            /* Fondo con iluminación interior radial que cambia de color cada 4s (ciclo de 24s) */
-            background: radial-gradient(circle, rgba(6, 182, 212, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
             border: 3px solid #06b6d4;
-            box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.7);
             position: relative; 
-            overflow: hidden; /* Cero líneas blancas */
+            overflow: hidden; 
             transform-origin: bottom center;
             will-change: transform, box-shadow, border-color, background;
             /* MODO ZEN: 24 segundos en total (4 segundos por cada uno de los 6 colores) con balanceo a 80° ultra tranquilo */
             animation: mascotZenFlow 24s infinite ease-in-out;
         }
 
+        /* Iluminación interior neón profunda que baña y envuelve a la mascota por dentro del círculo */
+        .neon-mascot-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+            mix-blend-mode: screen; /* Permite que el brillo neón resalte por detrás y alrededor de la mascota */
+            animation: mascotInnerLightSync 24s infinite ease-in-out;
+        }
+
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
-            filter: brightness(1.25) saturate(1.15);
-            z-index: 2; /* Flota perfectamente sobre la luz interna */
+            filter: brightness(1.2) saturate(1.1);
+            z-index: 2; /* Flota perfectamente sobre la iluminación interna */
         } 
 
         .neon-mascot-container.battle-mode {
@@ -91,57 +100,68 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MODO ZEN: 6 colores atractivos cambiando cada 4 segundos de forma suave y elegante (ciclo de 24s) */
+        /* MODO ZEN: 6 colores atractivos cambiando cada 4 segundos de forma suave y elegante (ciclo de 24s) con luz interna potente */
         @keyframes mascotZenFlow {
             0%   { 
                 transform: rotate(0deg);   
                 border-color: #06b6d4; 
-                background: radial-gradient(circle, rgba(6, 182, 212, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.8), 0 0 25px rgba(6,182,212,0.7); 
+                background: radial-gradient(circle, rgba(6, 182, 212, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.95), 0 0 25px rgba(6,182,212,0.7); 
             }
             16.6%{ 
                 transform: rotate(80deg);  
                 border-color: #10b981; 
-                background: radial-gradient(circle, rgba(16, 185, 129, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(16, 185, 129, 0.8), 0 0 30px rgba(16,185,129,0.7); 
+                background: radial-gradient(circle, rgba(16, 185, 129, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(16, 185, 129, 0.95), 0 0 30px rgba(16,185,129,0.7); 
             }
             33.3%{ 
                 transform: rotate(0deg);   
                 border-color: #a855f7; 
-                background: radial-gradient(circle, rgba(168, 85, 247, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.8), 0 0 25px rgba(168,85,247,0.7); 
+                background: radial-gradient(circle, rgba(168, 85, 247, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(168, 85, 247, 0.95), 0 0 25px rgba(168,85,247,0.7); 
             }
             50%  { 
                 transform: rotate(0deg);   
                 border-color: #ec4899; 
-                background: radial-gradient(circle, rgba(236, 72, 153, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(236, 72, 153, 0.8), 0 0 30px rgba(236,72,153,0.7); 
+                background: radial-gradient(circle, rgba(236, 72, 153, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(236, 72, 153, 0.95), 0 0 30px rgba(236,72,153,0.7); 
             }
             66.6%{ 
                 transform: rotate(-80deg); 
                 border-color: #f59e0b; 
-                background: radial-gradient(circle, rgba(245, 158, 11, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(245, 158, 11, 0.8), 0 0 25px rgba(245,158,11,0.7); 
+                background: radial-gradient(circle, rgba(245, 158, 11, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(245, 158, 11, 0.95), 0 0 25px rgba(245,158,11,0.7); 
             }
             83.3%{ 
                 transform: rotate(0deg);   
                 border-color: #3b82f6; 
-                background: radial-gradient(circle, rgba(59, 130, 246, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59,130,246,0.7); 
+                background: radial-gradient(circle, rgba(59, 130, 246, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(59, 130, 246, 0.95), 0 0 30px rgba(59,130,246,0.7); 
             }
             100% { 
                 transform: rotate(0deg);   
                 border-color: #06b6d4; 
-                background: radial-gradient(circle, rgba(6, 182, 212, 0.65) 0%, rgba(5, 8, 15, 0.95) 75%);
-                box-shadow: inset 0 0 30px rgba(6, 182, 212, 0.8), 0 0 25px rgba(6,182,212,0.7); 
+                background: radial-gradient(circle, rgba(6, 182, 212, 0.9) 0%, rgba(0, 0, 0, 0.95) 70%);
+                box-shadow: inset 0 0 35px rgba(6, 182, 212, 0.95), 0 0 25px rgba(6,182,212,0.7); 
             }
+        }
+
+        /* Sincronización exacta del resplandor interior */
+        @keyframes mascotInnerLightSync {
+            0%   { background: radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 80%); }
+            16.6%{ background: radial-gradient(circle, rgba(16, 185, 129, 0.6) 0%, transparent 80%); }
+            33.3%{ background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 80%); }
+            50%  { background: radial-gradient(circle, rgba(236, 72, 153, 0.6) 0%, transparent 80%); }
+            66.6%{ background: radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, transparent 80%); }
+            83.3%{ background: radial-gradient(circle, rgba(59, 130, 246, 0.6) 0%, transparent 80%); }
+            100% { background: radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 80%); }
         }
 
         /* MODO BATALLA: Adrenalina y energía pura al activarlo */
         @keyframes mascotBattleGlow {
-            0%   { border-color: #3b82f6; box-shadow: inset 0 0 35px rgba(59,130,246,0.9), 0 0 40px rgba(59, 130, 246, 0.9); }
-            50%  { border-color: #ec4899; box-shadow: inset 0 0 35px rgba(236,72,153,0.9), 0 0 40px rgba(236, 72, 153, 0.9); }
-            100% { border-color: #3b82f6; box-shadow: inset 0 0 35px rgba(59,130,246,0.9), 0 0 40px rgba(59, 130, 246, 0.9); }
+            0%   { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(0,0,0,0.95) 70%); box-shadow: inset 0 0 40px rgba(59,130,246,1), 0 0 40px rgba(59, 130, 246, 0.9); }
+            50%  { border-color: #ec4899; background: radial-gradient(circle, rgba(236,72,153,0.9) 0%, rgba(0,0,0,0.95) 70%); box-shadow: inset 0 0 40px rgba(236,72,153,1), 0 0 40px rgba(236, 72, 153, 0.9); }
+            100% { border-color: #3b82f6; background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(0,0,0,0.95) 70%); box-shadow: inset 0 0 40px rgba(59,130,246,1), 0 0 40px rgba(59, 130, 246, 0.9); }
         }
 
         header {
