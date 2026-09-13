@@ -62,24 +62,60 @@
             }
         }
 
-        /* MODO BATALLA: Aro con la secuencia exacta de 5 colores sincronizados */
+        /* MODO NORMAL (TERAPÉUTICO): Colores suaves, lentos y relajantes para desestresar al público */
+        .neon-container #avatar-layer {
+            animation: mascotTherapeuticCycle 9s infinite ease-in-out, mascotHalfBalance 3s infinite ease-in-out;
+        }
+
+        @keyframes mascotTherapeuticCycle {
+            0%   { filter: hue-rotate(0deg) saturate(1.2) brightness(1.05); }   /* Cian suave / Paz */
+            33%  { filter: hue-rotate(90deg) saturate(1.3) brightness(1.1); }    /* Verde menta / Descanso visual */
+            66%  { filter: hue-rotate(220deg) saturate(1.2) brightness(1.05); }  /* Lavanda / Relajación mental */
+            100% { filter: hue-rotate(360deg) saturate(1.2) brightness(1.05); }  /* Retorno suave a Cian */
+        }
+
+        @keyframes mascotHalfBalance {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25%  { transform: translate(-50%, -50%) rotate(-12deg) scale(1.02); }
+            75%  { transform: translate(-50%, -50%) rotate(12deg) scale(1.02); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        }
+
+        /* MODO BATALLA (ENERGÍA MÁXIMA PARA REGALOS Y TAPS): Aro con colores explosivos y enérgicos */
         .neon-container.battle-mode {
             position: relative !important;
             top: auto !important; left: auto !important;
             margin: 15px auto !important;
-            animation: ring5ColorSync 6s infinite linear !important;
+            animation: ringEnergySync 2.5s infinite linear !important;
         }
 
-        @keyframes ring5ColorSync {
-            0%   { border-color: #00f2fe; box-shadow: 0 0 40px #00f2fe, inset 0 0 15px #00f2fe; }
-            20%  { border-color: #ff007f; box-shadow: 0 0 40px #ff007f, inset 0 0 15px #ff007f; }
-            40%  { border-color: #7928ca; box-shadow: 0 0 40px #7928ca, inset 0 0 15px #7928ca; }
-            60%  { border-color: #ffaa00; box-shadow: 0 0 40px #ffaa00, inset 0 0 15px #ffaa00; }
-            80%  { border-color: #00ff88; box-shadow: 0 0 40px #00ff88, inset 0 0 15px #00ff88; }
-            100% { border-color: #00f2fe; box-shadow: 0 0 40px #00f2fe, inset 0 0 15px #00f2fe; }
+        @keyframes ringEnergySync {
+            0%   { border-color: #ff007f; box-shadow: 0 0 50px #ff007f, inset 0 0 20px #ff007f; }
+            33%  { border-color: #ffaa00; box-shadow: 0 0 50px #ffaa00, inset 0 0 20px #ffaa00; }
+            66%  { border-color: #00ff88; box-shadow: 0 0 50px #00ff88, inset 0 0 20px #00ff88; }
+            100% { border-color: #ff007f; box-shadow: 0 0 50px #ff007f, inset 0 0 20px #ff007f; }
+        }
+
+        /* MODO BATALLA (MASCOTA): Colores súper vivos, brillantes y dinámicos para motivar la batalla y los regalos */
+        .neon-container.battle-mode #avatar-layer {
+            animation: mascotEnergyCycle 2s infinite linear, mascotBattleAction 1.2s infinite ease-in-out !important;
+        }
+
+        @keyframes mascotEnergyCycle {
+            0%   { filter: hue-rotate(0deg) saturate(2.8) brightness(1.4); }
+            33%  { filter: hue-rotate(120deg) saturate(3) brightness(1.45); }
+            66%  { filter: hue-rotate(270deg) saturate(3) brightness(1.45); }
+            100% { filter: hue-rotate(360deg) saturate(2.8) brightness(1.4); }
+        }
+
+        @keyframes mascotBattleAction {
+            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+            25%  { transform: translate(-50%, -50%) rotate(-25deg) scale(1.12); }
+            75%  { transform: translate(-50%, -50%) rotate(25deg) scale(1.12); }
+            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
         }
         
-        /* LOGOTIPO FIJO: Posición y zoom exactos aprobados */
+        /* LOGOTIPO FIJO: Posición y zoom inamovibles (top: 60%, left: 47%, tamaño 132px) */
         #logo-layer { 
             position: absolute; 
             top: 60%; 
@@ -106,27 +142,6 @@
             transform: translate(-50%, -50%);
             transition: opacity 0.4s ease;
         } 
-
-        /* MASCOTA EN MODO BATALLA: 5 Colores sincronizados + Balanceo controlado hasta la mitad (hasta 20 grados máximo de lado a lado) sin giros locos */
-        .neon-container.battle-mode #avatar-layer {
-            animation: mascot5ColorSync 6s infinite linear, mascotHalfBalance 2.5s infinite ease-in-out;
-        }
-
-        @keyframes mascot5ColorSync {
-            0%   { filter: hue-rotate(0deg) saturate(2.2) brightness(1.3); }
-            20%  { filter: hue-rotate(75deg) saturate(2.4) brightness(1.35); }
-            40%  { filter: hue-rotate(160deg) saturate(2.4) brightness(1.35); }
-            60%  { filter: hue-rotate(240deg) saturate(2.5) brightness(1.4); }
-            80%  { filter: hue-rotate(310deg) saturate(2.3) brightness(1.35); }
-            100% { filter: hue-rotate(360deg) saturate(2.2) brightness(1.3); }
-        }
-
-        @keyframes mascotHalfBalance {
-            0%   { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-            25%  { transform: translate(-50%, -50%) rotate(-18deg) scale(1.06); }
-            75%  { transform: translate(-50%, -50%) rotate(18deg) scale(1.06); }
-            100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
-        }
 
         /* Transición de la mascota al activarse */
         .neon-container.show-mascot #logo-layer { opacity: 0; }
@@ -236,7 +251,7 @@
                 <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="SOFIUL Mascota Real">
             </div>
         </div>
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)</div>
+        <div class="mascot-status-tag" id="mascot-status-text">🟢 SISTEMA VIVO ACTIVO (TERAPÉUTICO &amp; PAZ)</div>
     </header>
 
     <div class="container">
@@ -262,7 +277,7 @@
                     </div>
 
                     <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #ffaa00, #ff007f); color:#000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        ⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)
+                        ⚔️ ACTIVAR MODO BATALLA (ENERGÍA &amp; HYPE)
                     </button>
 
                     <div style="font-size: 0.65rem; color: #8c82ce; font-style: italic; margin-bottom: 4px;">
@@ -441,7 +456,7 @@
             mascotContainer.classList.toggle("speaking");
             const active = mascotContainer.classList.contains("show-mascot");
             if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
+                statusText.innerText = active ? "🔴 MASCOTA VISIBLE (PRUEBA)" : "🟢 SISTEMA VIVO ACTIVO (TERAPÉUTICO &amp; PAZ)";
                 statusText.style.color = active ? "#ff007f" : "#00f2fe";
             }
         }
@@ -451,16 +466,16 @@
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
                 mascotContainer.classList.add("battle-mode");
-                btn.innerText = "⚔️ SALIR DE BATALLA";
+                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A PAZ)";
                 btn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡5 COLORES SINCRONIZADOS Y BALANCE SUAVE!";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ENERGÍA MÁXIMA &amp; HYPE ACTIVADO!";
             } else {
                 mascotContainer.classList.remove("battle-mode");
-                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ANCLAR A IMAGEN)";
+                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (ENERGÍA &amp; HYPE)";
                 btn.style.background = "linear-gradient(135deg, #ffaa00, #ff007f)";
                 btn.style.color = "#000";
-                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
+                if(statusText) statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (TERAPÉUTICO &amp; PAZ)";
                 requestAnimationFrame(updatePingPong);
             }
         }
@@ -476,7 +491,7 @@
         function resetMascotState() {
             mascotContainer.classList.remove("show-mascot", "speaking");
             if(statusText && !isBattleMode) {
-                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (EN DIRECTO)";
+                statusText.innerText = "🟢 SISTEMA VIVO ACTIVO (TERAPÉUTICO &amp; PAZ)";
                 statusText.style.color = "#00f2fe";
             }
         }
