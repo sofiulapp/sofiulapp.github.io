@@ -26,26 +26,36 @@
             min-height: 100vh; padding-bottom: 40px; overflow-x: hidden;
         }
         
-        /* Zona Superior con el Logo Estático Original */
+        /* ZONA SUPERIOR: LOGOTIPO CON COLOR NEÓN PURO Y EFECTO RESPIRACIÓN */
         .stage-area {
             width: 100%; height: 180px; background: #05080f;
-            position: relative; overflow: hidden; border-bottom: 2px solid rgba(59, 130, 246, 0.3);
+            position: relative; overflow: hidden; border-bottom: 2px solid rgba(6, 182, 212, 0.3);
             display: flex; align-items: center; justify-content: center;
         }
 
         .logo-container {
             width: 110px; height: 110px; border-radius: 50%;
-            border: 3px solid var(--accent-primary);
+            border: 3px solid #06b6d4;
             background: #000;
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6), inset 0 0 15px rgba(6, 182, 212, 0.4);
             position: relative; overflow: hidden;
+            /* Efecto respiración puro con el color neón de la V */
             animation: logoRespiration 3.5s infinite ease-in-out;
         }
 
         @keyframes logoRespiration {
-            0% { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-            50% { border-color: rgba(6, 182, 212, 1); box-shadow: 0 0 35px rgba(6, 182, 212, 0.7); }
-            100% { border-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+            0% { 
+                border-color: rgba(6, 182, 212, 0.4); 
+                box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), inset 0 0 8px rgba(6, 182, 212, 0.2); 
+            }
+            50% { 
+                border-color: rgba(6, 182, 212, 1); 
+                box-shadow: 0 0 40px rgba(6, 182, 212, 0.9), inset 0 0 22px rgba(6, 182, 212, 0.7); 
+            }
+            100% { 
+                border-color: rgba(6, 182, 212, 0.4); 
+                box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), inset 0 0 8px rgba(6, 182, 212, 0.2); 
+            }
         }
 
         #logo-fixed {
@@ -53,6 +63,8 @@
             width: 132px; height: 132px;
             transform: translate(-50%, -50%);
             object-fit: cover;
+            /* Logo con su color original intacto, sin filtros de tinte extraños */
+            filter: none; 
         }
 
         /* ZONA DE LA MASCOTA: Movimiento de balanceo de 80° + Neón con luz interna potente */
@@ -69,19 +81,15 @@
             overflow: hidden; 
             transform-origin: bottom center;
             will-change: transform, box-shadow, border-color, background-color;
-            /* Ciclo de 24s con rotación de 80° y sincronización de luz interna ultra llamativa */
             animation: mascotZenFlow 24s infinite steps(1, end);
         }
 
-        /* MASCOTA CON ALTO BRILLO Y FUSIÓN DE LUZ ULTRA LLAMATIVA */
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
             width: 136px; height: 136px;
             object-fit: cover; transform: translate(-50%, -50%);
             z-index: 2;
-            mix-blend-mode: luminosity; /* Fuerza que la mascota absorba la luz del fondo de color puro */
-            filter: brightness(1.6) contrast(1.3) saturate(1.5);
-            animation: mascotImagePulse 24s infinite steps(1, end);
+            filter: brightness(1.2) contrast(1.1);
         } 
 
         .neon-mascot-container.battle-mode {
@@ -90,7 +98,7 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* MODO ZEN: Sincronización perfecta del borde neón, brillo exterior y fondo de luz interna */
+        /* MODO ZEN: Mascota con rotación de 80° y sincronización de luz interna */
         @keyframes mascotZenFlow {
             0%   { transform: rotate(0deg);   border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.85); box-shadow: 0 0 35px #06b6d4, inset 0 0 25px #06b6d4; --mascot-glow-color: #06b6d4; }
             16.6%{ transform: rotate(40deg);  border-color: #10b981; background-color: rgba(16, 185, 129, 0.85); box-shadow: 0 0 40px #10b981, inset 0 0 30px #10b981; --mascot-glow-color: #10b981; }
@@ -101,18 +109,7 @@
             100% { transform: rotate(0deg);   border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.85); box-shadow: 0 0 35px #06b6d4, inset 0 0 25px #06b6d4; --mascot-glow-color: #06b6d4; }
         }
 
-        /* PULSO DE LUZ DE LA MASCOTA AL COMPás DE LOS CAMBIOS */
-        @keyframes mascotImagePulse {
-            0%   { filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #06b6d4); }
-            16.6%{ filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #10b981); }
-            33.3%{ filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #a855f7); }
-            50%  { filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #ec4899); }
-            66.6%{ filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #f59e0b); }
-            83.3%{ filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #3b82f6); }
-            100% { filter: brightness(1.7) contrast(1.4) saturate(1.6) drop-shadow(0 0 10px #06b6d4); }
-        }
-
-        /* MODO BATALLA: Adrenalina pura */
+        /* MODO BATALLA */
         @keyframes mascotBattleGlow {
             0%   { border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.9); box-shadow: 0 0 50px #3b82f6, inset 0 0 35px #3b82f6; --mascot-glow-color: #3b82f6; }
             50%  { border-color: #ec4899; background-color: rgba(236, 72, 153, 0.9); box-shadow: 0 0 50px #ec4899, inset 0 0 35px #ec4899; --mascot-glow-color: #ec4899; }
