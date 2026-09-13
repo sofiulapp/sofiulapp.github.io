@@ -54,7 +54,7 @@
             object-fit: cover;
         }
 
-        /* ZONA DE LA MASCOTA: Enfoque absoluto en el brillo interior y exterior sincronizado */
+        /* ZONA DE LA MASCOTA: Círculo con luz intensa tanto por dentro como por fuera (Cambio cada 24s total / 4s por tono) */
         .stage-mascot-area {
             width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
@@ -64,8 +64,8 @@
         .neon-mascot-container {
             width: 110px; height: 110px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; overflow: hidden; 
-            will-change: transform, left, top, box-shadow, border-color, background;
-            animation: mascotStrictGlow 18s infinite linear;
+            will-change: transform, left, top, box-shadow, border-color, background-color;
+            animation: mascotTimerGlow 24s infinite linear;
         }
 
         .neon-mascot-container.battle-mode {
@@ -74,8 +74,8 @@
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
 
-        /* Los 6 Colores Terapéuticos: Fondo interior y borde exterior idénticos y brillantes */
-        @keyframes mascotStrictGlow {
+        /* Ciclo exacto de 6 colores cambiando cada 4 segundos (24s total), iluminando interior y exterior a la par */
+        @keyframes mascotTimerGlow {
             0%   { border: 5px solid #06b6d4; background-color: #06b6d4; box-shadow: 0 0 40px #06b6d4, inset 0 0 45px #06b6d4; }
             16.6%{ border: 5px solid #10b981; background-color: #10b981; box-shadow: 0 0 40px #10b981, inset 0 0 45px #10b981; }
             33.3%{ border: 5px solid #a855f7; background-color: #a855f7; box-shadow: 0 0 40px #a855f7, inset 0 0 45px #a855f7; }
