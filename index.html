@@ -96,7 +96,7 @@
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
         .collapsible-content.show { max-height: 3500px; transition: max-height 0.4s ease-in; }
 
-        /* 🔥 GRILLA ESTRICTA EN 2 COLUMNAS (MINI-BOTONES DE 1CM²) 🔥 */
+        /* GRILLA EN 2 COLUMNAS COMPACTAS */
         .grid-2col-compact {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -199,7 +199,7 @@
                             ⚡ Acciones Rápidas:
                         </div>
 
-                        <!-- 🚀 BOTONES SUPERIORES EN 2 COLUMNAS -->
+                        <!-- BOTONES SUPERIORES EN 2 COLUMNAS -->
                         <div class="grid-2col-compact" style="margin-bottom: 5px;">
                             <button class="mini-control-btn" style="background: linear-gradient(135deg, #22c55e, #10b981);" onclick="triggerVictoryEffect()">🎉 Triunfo</button>
                             <button class="mini-control-btn" style="background: linear-gradient(135deg, #64748b, #ef4444);" onclick="triggerDefeatEffect()">💧 Derrota</button>
@@ -218,7 +218,7 @@
                             🎮 Banco de Efectos (2 Columnas):
                         </div>
 
-                        <!-- 🚀 6 EFECTOS TEMÁTICOS EN 2 COLUMNAS -->
+                        <!-- 6 EFECTOS TEMÁTICOS EN 2 COLUMNAS -->
                         <div class="grid-2col-compact">
                             <div class="mini-btn-box">
                                 <div class="mini-title">🤣 Risa Burlona</div>
@@ -267,12 +267,6 @@
         let customEffectUrls = {};
         let interfazOculta = false;
         let isBattleMode = false;
-
-        document.getElementById("toggle-transmission-btn").addEventListener("click", function5 = function() {
-            const content = document.getElementById("transmission-content");
-            content.classList.toggle("show");
-            this.innerText = content.classList.contains("show") ? "🎛️ CERRAR PANEL DE BOTONES" : "🎛️ ABRIR PANEL DE BOTONES";
-        });
 
         document.getElementById("toggle-transmission-btn").addEventListener("click", function() {
             const content = document.getElementById("transmission-content");
