@@ -33,82 +33,63 @@
         
         /* ZONA SUPERIOR: LOGOTIPO CON COLOR NEÓN PURO Y EFECTO RESPIRACIÓN */
         .stage-area {
-            width: 100%; height: 180px; background: #05080f;
+            width: 100%; height: 140px; background: #05080f;
             position: relative; overflow: hidden; border-bottom: 2px solid rgba(6, 182, 212, 0.3);
             display: flex; align-items: center; justify-content: center;
         }
 
         .logo-container {
-            width: 110px; height: 110px; border-radius: 50%;
+            width: 90px; height: 90px; border-radius: 50%;
             border: 3px solid #06b6d4;
             background: #000;
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.6), inset 0 0 15px rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), inset 0 0 12px rgba(6, 182, 212, 0.4);
             position: relative; overflow: hidden;
             animation: logoRespiration 3.5s infinite ease-in-out;
         }
 
         @keyframes logoRespiration {
-            0% { 
-                border-color: rgba(6, 182, 212, 0.4); 
-                box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), inset 0 0 8px rgba(6, 182, 212, 0.2); 
-            }
-            50% { 
-                border-color: rgba(6, 182, 212, 1); 
-                box-shadow: 0 0 40px rgba(6, 182, 212, 0.9), inset 0 0 22px rgba(6, 182, 212, 0.7); 
-            }
-            100% { 
-                border-color: rgba(6, 182, 212, 0.4); 
-                box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), inset 0 0 8px rgba(6, 182, 212, 0.2); 
-            }
+            0% { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 0 12px rgba(6, 182, 212, 0.2); }
+            50% { border-color: rgba(6, 182, 212, 1); box-shadow: 0 0 35px rgba(6, 182, 212, 0.9); }
+            100% { border-color: rgba(6, 182, 212, 0.4); box-shadow: 0 0 12px rgba(6, 182, 212, 0.2); }
         }
 
         #logo-fixed {
             position: absolute; top: 60%; left: 47%;
-            width: 132px; height: 132px;
+            width: 108px; height: 108px;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            filter: none; 
         }
 
         /* ZONA DE LA MASCOTA */
         .stage-mascot-area {
-            width: 100%; height: 160px; background: rgba(59, 130, 246, 0.02);
+            width: 100%; height: 130px; background: rgba(59, 130, 246, 0.02);
             position: relative; overflow: hidden; border-bottom: 2px dashed rgba(59, 130, 246, 0.2);
             touch-action: none;
         }
 
         .neon-mascot-container {
-            width: 110px; height: 110px; border-radius: 50%;
+            width: 90px; height: 90px; border-radius: 50%;
             position: absolute; top: 20px; left: 30px; 
             border: 3px solid var(--mascot-glow-color);
-            overflow: hidden; 
-            transform-origin: bottom center;
+            overflow: hidden; transform-origin: bottom center;
             will-change: transform, box-shadow, border-color, background-color;
             animation: mascotSmoothSwing 8s infinite ease-in-out, mascotZenTherapeuticColors 30s infinite ease-in-out;
         }
 
         #avatar-layer { 
             position: absolute; top: 52%; left: 48.5%; 
-            width: 136px; height: 136px;
-            object-fit: cover; transform: translate(-50%, -50%);
-            z-index: 2;
+            width: 110px; height: 110px;
+            object-fit: cover; transform: translate(-50%, -50%); z-index: 2;
             filter: brightness(1.2) contrast(1.1);
         } 
 
-        /* MODO BATALLA */
         .neon-mascot-container.battle-mode {
             cursor: grab;
             animation: mascotBattleAdrenalineSwing 2s infinite ease-in-out, mascotBattleAdrenalineColors 2s infinite ease-in-out !important;
         }
         .neon-mascot-container.battle-mode:active { cursor: grabbing; }
-
-        /* ESTADOS DE TRIUNFO Y DERROTA */
-        .neon-mascot-container.victory-mode {
-            animation: mascotVictoryJump 1s infinite alternate ease-in-out, mascotVictoryColors 1.5s infinite ease-in-out !important;
-        }
-        .neon-mascot-container.defeat-mode {
-            animation: mascotDefeatShake 0.4s infinite ease-in-out, mascotDefeatColors 2s infinite ease-in-out !important;
-        }
+        .neon-mascot-container.victory-mode { animation: mascotVictoryJump 1s infinite alternate ease-in-out !important; }
+        .neon-mascot-container.defeat-mode { animation: mascotDefeatShake 0.4s infinite ease-in-out !important; }
 
         @keyframes mascotSmoothSwing {
             0%   { transform: rotate(0deg); }
@@ -117,157 +98,126 @@
             75%  { transform: rotate(-40deg); }  
             100% { transform: rotate(0deg); }
         }
-
         @keyframes mascotBattleAdrenalineSwing {
             0%   { transform: rotate(-10deg) scale(1.05); }
             50%  { transform: rotate(10deg) scale(1.12); }
             100% { transform: rotate(-10deg) scale(1.05); }
         }
-
         @keyframes mascotVictoryJump {
             0%   { transform: translateY(0px) scale(1.1); }
-            100% { transform: translateY(-12px) scale(1.15); }
+            100% { transform: translateY(-10px) scale(1.15); }
         }
-
         @keyframes mascotDefeatShake {
             0%   { transform: translateX(0px) rotate(-3deg); }
             50%  { transform: translateX(3px) rotate(3deg); }
             100% { transform: translateX(0px) rotate(-3deg); }
         }
-
         @keyframes mascotZenTherapeuticColors {
-            0%   { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
-            16.6%{ border-color: #10b981; background-color: rgba(16, 185, 129, 0.28); box-shadow: 0 0 35px #10b981, inset 0 0 18px #10b981; --mascot-glow-color: #10b981; }
-            33.3%{ border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.28); box-shadow: 0 0 30px #3b82f6, inset 0 0 16px #3b82f6; --mascot-glow-color: #3b82f6; }
-            50%  { border-color: #8b5cf6; background-color: rgba(139, 92, 246, 0.28); box-shadow: 0 0 35px #8b5cf6, inset 0 0 18px #8b5cf6; --mascot-glow-color: #8b5cf6; }
-            66.6%{ border-color: #ec4899; background-color: rgba(236, 72, 153, 0.28); box-shadow: 0 0 30px #ec4899, inset 0 0 16px #ec4899; --mascot-glow-color: #ec4899; }
-            83.3%{ border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.35); box-shadow: 0 0 40px #06b6d4, inset 0 0 22px #06b6d4; --mascot-glow-color: #06b6d4; }
-            100% { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 30px #06b6d4, inset 0 0 16px #06b6d4; --mascot-glow-color: #06b6d4; }
+            0%   { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 25px #06b6d4; }
+            50%  { border-color: #8b5cf6; background-color: rgba(139, 92, 246, 0.28); box-shadow: 0 0 30px #8b5cf6; }
+            100% { border-color: #06b6d4; background-color: rgba(6, 182, 212, 0.28); box-shadow: 0 0 25px #06b6d4; }
         }
-
         @keyframes mascotBattleAdrenalineColors {
-            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.55); box-shadow: 0 0 50px #ef4444, inset 0 0 30px #ef4444; --mascot-glow-color: #ef4444; }
-            50%  { border-color: #f59e0b; background-color: rgba(245, 158, 11, 0.55); box-shadow: 0 0 50px #f59e0b, inset 0 0 30px #f59e0b; --mascot-glow-color: #f59e0b; }
-            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.55); box-shadow: 0 0 50px #ef4444, inset 0 0 30px #ef4444; --mascot-glow-color: #ef4444; }
+            0%   { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 40px #ef4444; }
+            100% { border-color: #ef4444; background-color: rgba(239, 68, 68, 0.5); box-shadow: 0 0 40px #ef4444; }
         }
 
-        @keyframes mascotVictoryColors {
-            0%   { border-color: #22c55e; background-color: rgba(34, 197, 94, 0.6); box-shadow: 0 0 60px #22c55e, inset 0 0 35px #22c55e; }
-            50%  { border-color: #eab308; background-color: rgba(234, 179, 8, 0.6); box-shadow: 0 0 60px #eab308, inset 0 0 35px #eab308; }
-            100% { border-color: #22c55e; background-color: rgba(34, 197, 94, 0.6); box-shadow: 0 0 60px #22c55e, inset 0 0 35px #22c55e; }
-        }
-
-        @keyframes mascotDefeatColors {
-            0%   { border-color: #64748b; background-color: rgba(100, 116, 139, 0.5); box-shadow: 0 0 40px #64748b, inset 0 0 25px #64748b; }
-            50%  { border-color: #3b82f6; background-color: rgba(59, 130, 246, 0.4); box-shadow: 0 0 40px #3b82f6, inset 0 0 25px #3b82f6; }
-            100% { border-color: #64748b; background-color: rgba(100, 116, 139, 0.5); box-shadow: 0 0 40px #64748b, inset 0 0 25px #64748b; }
-        }
-
-        /* CAPA DE PARTÍCULAS */
         #particle-layer {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; overflow: hidden; z-index: 20; display: none;
         }
-
         .particle {
-            position: absolute; font-size: 1.2rem;
+            position: absolute; font-size: 1.1rem;
             animation: fallParticle 2.5s linear infinite;
         }
-
         @keyframes fallParticle {
             0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(180px) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(140px) rotate(360deg); opacity: 0; }
         }
 
-        header {
-            width: 100%; text-align: center; background: var(--bg-color); position: sticky; top: 0; z-index: 10;
-        }
-        
-        .mascot-status-tag {
-            font-size: 0.6rem; color: var(--accent-secondary); text-transform: uppercase;
-            letter-spacing: 2px; padding: 4px 0; font-weight: bold; font-style: italic; background: var(--bg-color);
-        }
-        
-        .container { width: 92%; max-width: 420px; margin: 12px auto; display: flex; flex-direction: column; gap: 10px; }
+        header { width: 100%; text-align: center; background: var(--bg-color); position: sticky; top: 0; z-index: 10; }
+        .mascot-status-tag { font-size: 0.55rem; color: var(--accent-secondary); text-transform: uppercase; letter-spacing: 2px; padding: 3px 0; font-weight: bold; font-style: italic; background: var(--bg-color); }
+        .container { width: 92%; max-width: 400px; margin: 10px auto; display: flex; flex-direction: column; gap: 8px; }
         
         .card {
             background-color: var(--card-bg); border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 10px; padding: 10px 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-radius: 8px; padding: 8px 10px; box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
         }
-        .card-title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
-        .status-badge { font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+        .card-title { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-style: italic; }
+        .status-badge { font-size: 0.55rem; padding: 2px 5px; border-radius: 4px; font-weight: bold; }
         
-        .input-group { margin-bottom: 8px; }
-        .input-group label { display: block; font-size: 0.7rem; color: var(--text-muted); margin-bottom: 3px; font-style: italic; }
+        .input-group { margin-bottom: 6px; }
+        .input-group label { display: block; font-size: 0.65rem; color: var(--text-muted); margin-bottom: 2px; font-style: italic; }
         .neon-input {
             width: 100%; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 6px; padding: 8px; color: #fff; font-size: 0.85rem; box-sizing: border-box;
+            border-radius: 5px; padding: 6px; color: #fff; font-size: 0.8rem; box-sizing: border-box;
             outline: none; font-family: inherit; font-style: italic;
         }
 
         .dropdown-trigger-btn {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: #fff; border: none; border-radius: 8px; padding: 12px;
-            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
+            color: #fff; border: none; border-radius: 6px; padding: 9px;
+            font-size: 0.65rem; font-weight: bold; text-align: center; cursor: pointer;
             width: 100%; text-transform: uppercase; font-style: italic; box-sizing: border-box;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); margin-top: 6px;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3); margin-top: 3px;
         }
 
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
-        .collapsible-content.show { max-height: 3800px; transition: max-height 0.5s ease-in; }
+        .collapsible-content.show { max-height: 3500px; transition: max-height 0.5s ease-in; }
 
+        /* GRILLA DE 2 COLUMNAS VERTICALES PARA LOS EFECTOS (TIPO MINI BOTONES ESTÉTICOS DE 1CM²) */
         .effects-grid-6 {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-top: 5px;
         }
         .effect-box {
-            background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 8px; padding: 8px; text-align: center;
+            background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 6px; padding: 5px; text-align: center;
         }
         .effect-box-title {
-            font-size: 0.65rem; color: var(--accent-secondary); font-weight: bold; font-style: italic; margin-bottom: 6px; min-height: 22px;
+            font-size: 0.55rem; color: var(--accent-secondary); font-weight: bold; font-style: italic; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
         .play-effect-btn {
-            width: 100%; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4);
-            color: #fff; padding: 6px; border-radius: 4px; font-size: 0.65rem; font-weight: bold;
-            cursor: pointer; text-transform: uppercase; font-style: italic; margin-bottom: 4px;
+            width: 100%; background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(6, 182, 212, 0.3)); border: 1px solid rgba(59, 130, 246, 0.5);
+            color: #fff; padding: 4px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; font-style: italic; margin-bottom: 2px;
         }
         .upload-effect-label {
-            display: block; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5);
-            color: #67e8f9; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold;
+            display: block; background: rgba(6, 182, 212, 0.1); border: 1px dashed rgba(6, 182, 212, 0.4);
+            color: #67e8f9; padding: 2px; border-radius: 3px; font-size: 0.48rem; font-weight: bold;
             cursor: pointer; font-style: italic; text-align: center;
         }
 
         .voice-row {
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(59, 130, 246, 0.03); border: 1px solid rgba(59, 130, 246, 0.15);
-            padding: 6px 10px; border-radius: 6px; margin-bottom: 5px; font-size: 0.75rem; font-style: italic;
+            padding: 4px 7px; border-radius: 5px; margin-bottom: 3px; font-size: 0.65rem; font-style: italic;
         }
         .test-btn {
             background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.4);
-            color: var(--accent-secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.6rem;
+            color: var(--accent-secondary); padding: 2px 5px; border-radius: 3px; font-size: 0.5rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
         .toggle-btn {
             background: rgba(148, 163, 184, 0.2); border: 1px solid rgba(148, 163, 184, 0.4);
-            color: var(--text-muted); padding: 4px 10px; border-radius: 4px; font-size: 0.6rem;
+            color: var(--text-muted); padding: 2px 6px; border-radius: 3px; font-size: 0.5rem;
             font-weight: bold; cursor: pointer; text-transform: uppercase; font-style: italic;
         }
         .toggle-btn.active-on {
             background: rgba(6, 182, 212, 0.3); border-color: var(--accent-secondary);
-            color: var(--accent-secondary); box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+            color: var(--accent-secondary); box-shadow: 0 0 6px rgba(6, 182, 212, 0.4);
         }
 
         .action-button {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            color: #fff; border: none; border-radius: 8px; padding: 12px;
-            font-size: 0.9rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); text-transform: uppercase; margin-top: 10px;
+            color: #fff; border: none; border-radius: 6px; padding: 7px;
+            font-size: 0.65rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); text-transform: uppercase; margin-top: 5px;
             font-style: italic; width: 100%; box-sizing: border-box;
         }
-        .save-notice { font-size: 0.65rem; color: var(--accent-secondary); text-align: center; font-style: italic; margin-top: 4px; display: none; }
-        .paywall-alert { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; margin-top: 8px; text-align: center; display: none; }
+        .save-notice { font-size: 0.55rem; color: var(--accent-secondary); text-align: center; font-style: italic; margin-top: 2px; display: none; }
+        .paywall-alert { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 6px; padding: 6px; margin-top: 5px; text-align: center; display: none; }
 
-        /* CLASE PARA OCULTAR TODA LA INTERFAZ AL TOCAR EL LÁPIZ */
+        /* INTERFAZ OCULTA AL TOCAR EL LÁPIZ */
         .ocultar-interfaz-total {
             opacity: 0 !important;
             visibility: hidden !important;
@@ -275,19 +225,18 @@
             transition: opacity 0.3s ease;
         }
         
-        /* ESTILO DEL BOTÓN DE LÁPIZ FLOTANTE QUE REEMPLAZÓ AL DE CAPTURAR */
         .boton-lapiz-flotante {
             background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #fff; border: none; border-radius: 8px; padding: 10px;
-            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); text-transform: uppercase;
+            color: #fff; border: none; border-radius: 6px; padding: 7px;
+            font-size: 0.6rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); text-transform: uppercase;
             font-style: italic; width: 100%; box-sizing: border-box; margin-top: 0;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
         }
     </style>
 </head>
 <body id="main-body-container">
-    <!-- ELEMENTOS QUE SE OCULTARÁN AL ACTIVAR EL LÁPIZ -->
+    <!-- ELEMENTOS QUE SE OCULTAN CON EL LÁPIZ PARA DEJAR LA MITAD DE PANTALLA LIMPIA -->
     <div id="wrapper-elementos-visibles" style="width: 100%; display: flex; flex-direction: column; align-items: center; transition: opacity 0.3s ease;">
         <header id="main-header-area" style="width: 100%;">
             <div class="stage-area">
@@ -303,7 +252,7 @@
                 </div>
             </div>
 
-            <div class="mascot-status-tag" id="mascot-status-text">🟢 SOFIUL ZEN &amp; TAPEUTIC VIVO</div>
+            <div class="mascot-status-tag" id="mascot-status-text">🟢 SOFIUL ZEN &amp; VIVO</div>
         </header>
 
         <div class="container">
@@ -311,216 +260,216 @@
             <!-- FASE 1: CONFIGURACIÓN & LICENCIA -->
             <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
                 <div class="card-title" style="color: var(--accent-secondary);">
-                    <span>🛠️ FASE 1: CONFIGURACIÓN &amp; LICENCIA (72H)</span>
+                    <span>🛠️ CONFIGURACIÓN &amp; LICENCIA (72H)</span>
                     <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">ACCESO</span>
                 </div>
                 
                 <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
-                    ⚙️ ABRIR ACCESO (GMAIL, TIKTOK &amp; LICENCIA)
+                    ⚙️ ABRIR CONFIGURACIÓN
                 </button>
 
                 <div class="collapsible-content" id="config-content">
-                    <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                    <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 5px; background: rgba(0,0,0,0.3);">
                         <div class="card-title" style="color: var(--accent-secondary);">
-                            <span>VINCULACIÓN TIKTOK &amp; VALIDACIÓN</span>
+                            <span>VINCULACIÓN TIKTOK</span>
                         </div>
                         <div class="input-group" style="margin-bottom: 4px;">
-                            <label>Correo Electr&oacute;nico (Gmail de Registro):</label>
-                            <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
+                            <label>Correo Electr&oacute;nico (Gmail):</label>
+                            <input type="email" id="user-email" class="neon-input" placeholder="Tu email...">
                         </div>
                         <div class="input-group" style="margin-bottom: 4px;">
-                            <label>Tu Usuario P&uacute;blico (@TikTok):</label>
-                            <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
+                            <label>Usuario (@TikTok):</label>
+                            <input type="text" id="tiktok-user" class="neon-input" placeholder="@tu_usuario">
                         </div>
                         
-                        <button class="action-button" id="main-action-btn" style="margin-top: 8px;">REGISTRAR Y ACTIVAR LICENCIA</button>
-                        <div class="save-notice" id="save-notice">✅ ¡Licencia registrada! Tienes 72 horas de acceso garantizado.</div>
+                        <button class="action-button" id="main-action-btn" style="margin-top: 5px; padding: 6px; font-size: 0.6rem;">REGISTRAR Y ACTIVAR</button>
+                        <div class="save-notice" id="save-notice">✅ ¡Licencia registrada! 72h activas.</div>
 
                         <div class="paywall-alert" id="paywall-alert">
-                            <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 4px;">⚠️ PERIODO DE PRUEBA EXPIRADO (72H)</div>
-                            <div style="font-size: 0.6rem; color: var(--text-muted); margin-bottom: 8px;">Para continuar conectando tu cuenta de TikTok y usando el bot inteligente, activa tu acceso comercial.</div>
-                            <a href="https://pay.hotmart.com/TU_ENLACE_DE_COBRO" target="_blank" style="display: block; background: #ef4444; color: #fff; padding: 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-decoration: none; text-transform: uppercase;">💳 ACTIVAR LICENCIA MENSUAL (ENLACE DE PAGO)</a>
+                            <div style="font-size: 0.6rem; color: #ef4444; font-weight: bold; margin-bottom: 2px;">⚠️ PRUEBA EXPIRADA (72H)</div>
+                            <a href="https://pay.hotmart.com/TU_ENLACE_DE_COBRO" target="_blank" style="display: block; background: #ef4444; color: #fff; padding: 5px; border-radius: 4px; font-size: 0.55rem; font-weight: bold; text-decoration: none; text-transform: uppercase;">💳 ACTIVAR LICENCIA</a>
                         </div>
                     </div>
 
-                    <!-- Banco de Voces HD Previo -->
-                    <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                    <!-- Banco de Voces HD -->
+                    <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 5px; background: rgba(0,0,0,0.3);">
                         <div class="card-title" style="color: var(--accent-secondary);">
-                            <span>BANCO DE VOCES HD &amp; TEXT-TO-SPEECH</span>
+                            <span>BANCO DE VOCES HD</span>
                         </div>
                         
                         <div class="voice-row">
-                            <span>1. ♀ Norah (Cálida)</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
+                            <span>1. ♀ Norah</span>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
                             </div>
                         </div>
                         <div class="voice-row">
-                            <span>2. ♀ Valentina (Dulce)</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
+                            <span>2. ♀ Valentina</span>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
                             </div>
                         </div>
                         <div class="voice-row">
-                            <span>3. ♀ Sueño (Sueñitos)</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
+                            <span>3. ♀ Sueño</span>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
                             </div>
                         </div>
                         <div class="voice-row">
-                            <span>4. ♂ Mateo Pro</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
+                            <span>4. ♂ Mateo</span>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
                             </div>
                         </div>
                         <div class="voice-row">
                             <span>5. ♂ Lucas</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
                             </div>
                         </div>
                         <div class="voice-row">
                             <span>6. ♂ Thiago</span>
-                            <div style="display:flex; gap:4px;">
-                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
+                            <div style="display:flex; gap:3px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶</button>
                                 <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
                             </div>
                         </div>
 
-                        <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
-                            <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
-                            <div style="display: flex; gap: 6px; align-items: center;">
-                                <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
-                                    📁 Subir Voz Propia (MP3)
+                        <div class="input-group" style="margin-top: 5px; margin-bottom: 0;">
+                            <label style="font-size:0.55rem;">--- VOZ PROPIA (MP3) ---</label>
+                            <div style="display: flex; gap: 4px; align-items: center;">
+                                <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 5px; border-radius: 4px; text-align: center; font-size: 0.55rem; font-weight: bold; cursor: pointer; font-style: italic;">
+                                    📁 Subir Voz
                                     <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
                                 </label>
-                                <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
+                                <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 5px 8px;">OFF</button>
                             </div>
-                            <div id="voice-file-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
+                            <div id="voice-file-name" style="font-size: 0.5rem; color: #67e8f9; font-style: italic; margin-top: 2px;">Ningún archivo seleccionado</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
+            <!-- FASE 2: PANEL EN VIVO (2 COLUMNAS VERTICALES, BOTONES COMPACTOS DE 1CM²) -->
             <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
                 <div class="card-title" style="color: var(--accent-secondary);">
-                    <span>🚀 FASE 2: PANEL DE COMANDOS EN VIVO</span>
+                    <span>🚀 PANEL EN VIVO (MINI-CONTROLES)</span>
                     <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
                 </div>
 
-                <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 14px; font-size: 0.8rem;">
-                    🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)
+                <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 8px; font-size: 0.65rem;">
+                    🎛️ ABRIR CAJA DE EFECTOS
                 </button>
                 
                 <div class="collapsible-content" id="transmission-content">
-                    <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
+                    <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 5px; border-color: rgba(59, 130, 246, 0.4); padding: 6px;">
                         
-                        <button class="action-button" onclick="triggerVictoryEffect()" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                            🎉 SIMULAR TRIUNFO (LLUVIA DE CONFETI)
+                        <button class="action-button" onclick="triggerVictoryEffect()" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #fff; margin-bottom: 4px; padding: 5px; font-size: 0.6rem;">
+                            🎉 TRIUNFO (CONFETI)
                         </button>
 
-                        <button class="action-button" onclick="triggerDefeatEffect()" style="background: linear-gradient(135deg, #64748b, #ef4444); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                            💧 SIMULAR DERROTA (LLUVIA DE LÁGRIMAS)
+                        <button class="action-button" onclick="triggerDefeatEffect()" style="background: linear-gradient(135deg, #64748b, #ef4444); color: #fff; margin-bottom: 4px; padding: 5px; font-size: 0.6rem;">
+                            💧 DERROTA (LÁGRIMAS)
                         </button>
 
-                        <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                            🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP
+                        <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 4px; padding: 5px; font-size: 0.6rem;">
+                            🏆 TOP 3 MVP
                         </button>
 
-                        <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                            🤖 PROBAR SALUDO INTELIGENTE DE CHAT
+                        <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 4px; padding: 5px; font-size: 0.6rem;">
+                            🤖 SALUDO BOT CHAT
                         </button>
 
-                        <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                            ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
+                        <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 4px; padding: 5px; font-size: 0.6rem;">
+                            ⚔️ MODO BATALLA
                         </button>
 
-                        <!-- CAMBIO: BOTÓN DE LÁPIZ (OCULTAR/MOSTRAR) Y SÉPTIMO BOTÓN DE SONIDO MP3 -->
-                        <div style="display: flex; gap: 6px; margin-bottom: 10px; margin-top: 8px;">
-                            <button class="boton-lapiz-flotante" onclick="toggleOcultarInterfazGeneral()" style="flex:1;">
+                        <!-- LÁPIZ Y 7° SONIDO EN DOS COLUMNAS -->
+                        <div style="display: flex; gap: 4px; margin-bottom: 5px; margin-top: 3px;">
+                            <button class="boton-lapiz-flotante" onclick="toggleOcultarInterfazGeneral()" style="flex:1; padding: 5px; font-size: 0.55rem;">
                                 ✏️ LÁPIZ (OCULTAR)
                             </button>
                             
-                            <label class="action-button" style="flex:1; margin-top:0; padding:10px; font-size:0.7rem; background: linear-gradient(135deg, #8b5cf6, var(--accent-secondary)); text-align:center; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-                                🎵 7° SONIDO MP3
+                            <label class="action-button" style="flex:1; margin-top:0; padding:5px; font-size:0.55rem; background: linear-gradient(135deg, #8b5cf6, var(--accent-secondary)); text-align:center; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                                🎵 7° MP3 EXTRA
                                 <input type="file" id="seventh-sound-file" accept="audio/mp3,audio/*" onchange="playSeventhCustomSound(this)" style="display:none;">
                             </label>
                         </div>
 
-                        <div style="font-size: 0.65rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 4px; font-weight: bold;">
-                            🎮 Banco de 6 Efectos de Sonido (MP3):
+                        <div style="font-size: 0.55rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 2px; font-weight: bold;">
+                            🎮 6 Efectos Temáticos (Sube tus MP3 aquí antes del live):
                         </div>
 
+                        <!-- 6 BOTONES EN DOS COLUMNAS VERTICALES ORDENADAS -->
                         <div class="effects-grid-6">
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 1</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
+                                <div class="effect-box-title">🤣 Risa Burlona</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Risa Burlona')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Risa Burlona')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 2</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
+                                <div class="effect-box-title">🔥 Grito Guerra</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Grito Guerra')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Grito Guerra')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 3</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
+                                <div class="effect-box-title">⚡ Susto/Impacto</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Susto/Impacto')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Susto/Impacto')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 4</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
+                                <div class="effect-box-title">🎉 ¡Victoria!</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('¡Victoria!')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, '¡Victoria!')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 5</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
+                                <div class="effect-box-title">💀 ¡Ay No!</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('¡Ay No!')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, '¡Ay No!')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
-                                <div class="effect-box-title">🎧 Efecto 6</div>
-                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
+                                <div class="effect-box-title">🚀 ¡Imparable!</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('¡Imparable!')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, '¡Imparable!')" style="display:none;"></label>
                             </div>
                         </div>
 
-                        <div style="font-size: 0.65rem; color: #10b981; font-style: italic; margin-top: 12px; font-weight: bold;">
-                            🎵 Playlist Ambiental &amp; Control DJ:
+                        <div style="font-size: 0.55rem; color: #10b981; font-style: italic; margin-top: 6px; font-weight: bold;">
+                            🎵 Playlist &amp; Control DJ:
                         </div>
 
-                        <div style="font-size: 0.6rem; color: var(--text-muted); font-style: italic; margin-top: 4px; display: flex; justify-content: space-between;">
-                            <span>Volumen de Fondo:</span>
+                        <div style="font-size: 0.5rem; color: var(--text-muted); font-style: italic; margin-top: 2px; display: flex; justify-content: space-between;">
+                            <span>Volumen:</span>
                             <span id="vol-label" style="color: var(--accent-secondary);">80%</span>
                         </div>
 
-                        <div style="margin-top: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                            <span style="font-size: 0.55rem; color: var(--text-muted);">🔈</span>
+                        <div style="margin-top: 2px; margin-bottom: 5px; display: flex; align-items: center; gap: 4px;">
+                            <span style="font-size: 0.45rem; color: var(--text-muted);">🔈</span>
                             <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
-                            <span style="font-size: 0.55rem; color: var(--text-muted);">🔊</span>
+                            <span style="font-size: 0.45rem; color: var(--text-muted);">🔊</span>
                         </div>
 
-                        <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                            <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
-                            <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
+                        <div style="display: flex; gap: 4px; margin-bottom: 4px;">
+                            <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:3px; font-size:0.5rem;">Spotify</button>
+                            <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:3px; font-size:0.5rem;">📁 MP3</button>
                         </div>
 
-                        <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
-                            <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        <div id="spotify-container" style="margin-top: 4px; border-radius: 4px; overflow: hidden; background: #000;">
+                            <iframe id="spotify-player" style="border-radius:4px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="55" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                         </div>
 
-                        <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
-                            <label class="upload-effect-label" style="margin-bottom: 4px;">
-                                📁 Subir Archivo de Música (MP3)
+                        <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 5px; border-radius: 4px; border: 1px dashed rgba(6,182,212,0.3);">
+                            <label class="upload-effect-label" style="margin-bottom: 2px;">
+                                📁 Subir Música MP3
                                 <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
                             </label>
-                            <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
-                            <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
+                            <div id="local-music-name" style="font-size: 0.48rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo</div>
+                            <audio id="local-audio-element" loop style="width: 100%; margin-top: 3px; display: none;"></audio>
                         </div>
 
                     </div>
@@ -530,17 +479,16 @@
         </div>
     </div>
 
-    <!-- BOTÓN DE LÁPIZ FLOTANTE PERMANENTE PARA RECUPERAR/MOSTRAR LA INTERFAZ CUANDO ESTÉ OCULTA -->
-    <button id="btn-flotante-restaurar" onclick="toggleOcultarInterfazGeneral()" style="position: fixed; bottom: 15px; right: 15px; z-index: 99999; background: #f59e0b; color: #000; border: 2px solid #fff; border-radius: 50px; padding: 10px 16px; font-size: 0.75rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: none; font-style: italic;">
+    <!-- BOTÓN FLOTANTE PERMANENTE PARA RECUPERAR LA INTERFAZ -->
+    <button id="btn-flotante-restaurar" onclick="toggleOcultarInterfazGeneral()" style="position: fixed; bottom: 10px; right: 10px; z-index: 99999; background: #f59e0b; color: #000; border: 2px solid #fff; border-radius: 30px; padding: 5px 10px; font-size: 0.6rem; font-weight: bold; cursor: pointer; box-shadow: 0 3px 8px rgba(0,0,0,0.6); display: none; font-style: italic;">
         ✏️ MOSTRAR INTERFAZ
     </button>
 
     <script>
-        // REGISTRO DE SERVICE WORKER PARA HABILITAR PWA (INSTALACIÓN)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('data:text/javascript;base64,')
-                .then(reg => console.log('SOFIUL PWA Registrada con éxito'))
+                .then(reg => console.log('SOFIUL PWA Registrada'))
                 .catch(err => console.log('Error PWA: ', err));
             });
         }
@@ -567,14 +515,14 @@
             const coConfig = document.getElementById("config-content");
             trConfig.addEventListener("click", function() {
                 coConfig.classList.toggle("show");
-                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR ACCESO" : "⚙️ ABRIR ACCESO (GMAIL, TIKTOK & LICENCIA)";
+                trConfig.innerText = coConfig.classList.contains("show") ? "⚙️ CERRAR CONFIGURACIÓN" : "⚙️ ABRIR CONFIGURACIÓN";
             });
 
             const triggerTrans = document.getElementById("toggle-transmission-btn");
             const contentTrans = document.getElementById("transmission-content");
             triggerTrans.addEventListener("click", function() {
                 contentTrans.classList.toggle("show");
-                triggerTrans.innerText = contentTrans.classList.contains("show") ? "🎛️ CERRAR CAJA DE SONIDOS &amp; EFECTOS" : "🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)";
+                triggerTrans.innerText = contentTrans.classList.contains("show") ? "🎛️ CERRAR CAJA DE EFECTOS" : "🎛️ ABRIR CAJA DE EFECTOS";
             });
 
             const customVoiceInput = document.getElementById("custom-voice-file");
@@ -591,10 +539,7 @@
                 const email = document.getElementById("user-email").value;
                 const tiktok = document.getElementById("tiktok-user").value;
                 
-                if(!email) {
-                    alert("⚠️ Ingresa un correo electrónico válido.");
-                    return;
-                }
+                if(!email) { alert("⚠️ Ingresa un correo electrónico válido."); return; }
 
                 const registerDate = new Date().getTime();
                 localStorage.setItem("sofiul_email", email);
@@ -603,14 +548,10 @@
 
                 const n = document.getElementById("save-notice");
                 n.style.display = "block";
-                setTimeout(() => {
-                    n.style.display = "none";
-                    checkLicenseStatus();
-                }, 2000);
+                setTimeout(() => { n.style.display = "none"; checkLicenseStatus(); }, 2000);
             });
         });
 
-        // FUNCIÓN DEL LÁPIZ: OCULTAR O MOSTRAR TODA LA INTERFAZ Y LA MASCOTA
         function toggleOcultarInterfazGeneral() {
             interfazOculta = !interfazOculta;
             const wrapper = document.getElementById("wrapper-elementos-visibles");
@@ -625,7 +566,6 @@
             }
         }
 
-        // FUNCIÓN DEL SÉPTIMO BOTÓN DE SONIDO MP3
         function playSeventhCustomSound(input) {
             if (input.files && input.files[0]) {
                 const soundUrl = URL.createObjectURL(input.files[0]);
@@ -639,138 +579,93 @@
         function checkLicenseStatus() {
             const regDate = localStorage.getItem("sofiul_reg_date");
             const email = localStorage.getItem("sofiul_email");
-            
             if(email) document.getElementById("user-email").value = email;
             if(localStorage.getItem("sofiul_tiktok")) document.getElementById("tiktok-user").value = localStorage.getItem("sofiul_tiktok");
 
-            if (!regDate) {
-                localStorage.setItem("sofiul_reg_date", new Date().getTime());
-                return;
-            }
+            if (!regDate) { localStorage.setItem("sofiul_reg_date", new Date().getTime()); return; }
 
             const now = new Date().getTime();
             const elapsedHours = (now - parseInt(regDate)) / (1000 * 60 * 60);
 
             if (elapsedHours > 72) {
                 document.getElementById("paywall-alert").style.display = "block";
-                if(statusText) {
-                    statusText.innerText = "🔴 LICENCIA EXPIRADA - ACCESO BLOQUEADO";
-                    statusText.style.color = "#ef4444";
-                }
+                if(statusText) { statusText.innerText = "🔴 LICENCIA EXPIRADA"; statusText.style.color = "#ef4444"; }
             } else {
                 const hoursLeft = Math.round(72 - elapsedHours);
-                if(statusText) {
-                    statusText.innerText = `🟢 LICENCIA ACTIVA (${hoursLeft}H RESTANTES)`;
-                    statusText.style.color = "#06b6d4";
-                }
+                if(statusText) { statusText.innerText = `🟢 LICENCIA ACTIVA (${hoursLeft}H)`; statusText.style.color = "#06b6d4"; }
             }
         }
 
         function triggerVictoryEffect() {
             mascotContainer.className = "neon-mascot-container victory-mode";
-            if(statusText) {
-                statusText.innerText = "🎉 ¡BATALLA GANADA! ¡VICTORIA FAMILIA FÉNIX!";
-                statusText.style.color = "#22c55e";
-            }
-            startParticles(["🎉", "✨", "🎊", "⭐", "💎"], 30);
-            
+            if(statusText) { statusText.innerText = "🎉 ¡VICTORIA FAMILIA FÉNIX!"; statusText.style.color = "#22c55e"; }
+            startParticles(["🎉", "✨", "🎊", "⭐", "💎"], 25);
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance("¡Impresionante! ¡Batalla ganada familia! ¡Gracias a todos por su apoyo!");
+                const utterance = new SpeechSynthesisUtterance("¡Impresionante! ¡Batalla ganada familia!");
                 utterance.lang = 'es-ES'; utterance.pitch = 1.3; utterance.rate = 1.1;
                 window.speechSynthesis.speak(utterance);
             }
-
-            setTimeout(() => resetMascotState(), 6000);
+            setTimeout(() => resetMascotState(), 5000);
         }
 
         function triggerDefeatEffect() {
             mascotContainer.className = "neon-mascot-container defeat-mode";
-            if(statusText) {
-                statusText.innerText = "💧 ¡CERCA PERO A SEGUIR LUCHANDO!";
-                statusText.style.color = "#64748b";
-            }
-            startParticles(["💧", "🌧️", "💙", "🥺"], 25);
-
+            if(statusText) { statusText.innerText = "💧 ¡A SEGUIR LUCHANDO!"; statusText.style.color = "#64748b"; }
+            startParticles(["💧", "🌧️", "💙", "🥺"], 20);
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance("¡Estuvo muy reñido! No pasa nada familia, en la revancha ganamos.");
+                const utterance = new SpeechSynthesisUtterance("¡Estuvo reñido! En la revancha ganamos.");
                 utterance.lang = 'es-ES'; utterance.pitch = 0.9; utterance.rate = 0.95;
                 window.speechSynthesis.speak(utterance);
             }
-
-            setTimeout(() => resetMascotState(), 6000);
+            setTimeout(() => resetMascotState(), 5000);
         }
 
         function startParticles(emojis, count) {
             particleLayer.innerHTML = "";
             particleLayer.style.display = "block";
-            
             for(let i=0; i<count; i++) {
                 const p = document.createElement("div");
                 p.className = "particle";
                 p.innerText = emojis[Math.floor(Math.random() * emojis.length)];
                 p.style.left = Math.random() * 100 + "%";
-                p.style.top = (Math.random() * 40 - 20) + "px";
-                p.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
-                p.style.animationDelay = (Math.random() * 0.8) + "s";
+                p.style.top = (Math.random() * 30 - 15) + "px";
+                p.style.animationDuration = (1.2 + Math.random() * 1.2) + "s";
+                p.style.animationDelay = (Math.random() * 0.5) + "s";
                 particleLayer.appendChild(p);
             }
-
-            setTimeout(() => {
-                particleLayer.innerHTML = "";
-                particleLayer.style.display = "none";
-            }, 6000);
+            setTimeout(() => { particleLayer.innerHTML = ""; particleLayer.style.display = "none"; }, 5000);
         }
 
         function simulateSmartBotGreeting() {
-            const sampleNames = ["Carlos_Live", "Mariana_99", "AlexPro", "Valeria_Dance"];
+            const sampleNames = ["Carlos", "Mariana", "Alex", "Valeria"];
             const randomName = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-            const phrases = [
-                `¡Ey, ${randomName}! Bienvenido a la nave, acomódate en la primera fila.`,
-                `¡Hola ${randomName}! Me encanta cómo me tocas... ¡los efectos del panel, claro!`,
-                `¡Un saludo gigante para ${randomName} que acaba de entrar! ¡Escribe algo en el chat!`
-            ];
-            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-
-            triggerMascotActivation("Saludando a " + randomName);
-            
+            const phrases = [`¡Bienvenido ${randomName} a la nave!`, `¡Hola ${randomName}!`, `¡Un saludo gigante a ${randomName}!`];
+            triggerMascotActivation("Saludando");
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(randomPhrase);
+                const utterance = new SpeechSynthesisUtterance(phrases[Math.floor(Math.random() * phrases.length)]);
                 utterance.lang = 'es-ES'; utterance.rate = 1.05; utterance.pitch = 1.2;
                 window.speechSynthesis.speak(utterance);
                 utterance.onend = () => resetMascotState();
-            } else {
-                setTimeout(() => resetMascotState(), 3000);
-            }
+            } else { setTimeout(() => resetMascotState(), 2500); }
         }
 
         function simulateMvpAnnouncement() {
-            const mvps = ["KingDavid_77", "Estrellita_Pro", "Dragon_Rojo"];
-            const mvpText = `¡Atención absoluta en la arena! El Top 3 de guerreros dominando la batalla son: en primer lugar ${mvps[0]}, seguido de ${mvps[1]} y en tercer lugar ${mvps[2]}. ¡Imparables!`;
-
-            triggerMascotActivation("Anunciando Top 3 MVP 🏆");
-            
+            triggerMascotActivation("Top MVP 🏆");
             if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(mvpText);
+                const utterance = new SpeechSynthesisUtterance("¡Atención al Top 3 de guerreros dominando la batalla!");
                 utterance.lang = 'es-ES'; utterance.rate = 1.1; utterance.pitch = 1.3;
                 window.speechSynthesis.speak(utterance);
                 utterance.onend = () => resetMascotState();
-            } else {
-                setTimeout(() => resetMascotState(), 4000);
-            }
+            } else { setTimeout(() => resetMascotState(), 3500); }
         }
 
         function updatePingPong() {
             if (!mascotStage || !mascotContainer || isBattleMode || isDragging) return;
             const sW = mascotStage.clientWidth, sH = mascotStage.clientHeight;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
-
             posX += speedX; posY += speedY;
-
-            if (posX <= 0) { posX = 0; speedX *= -1; }
-            else if (posX >= sW - mW) { posX = sW - mW; speedX *= -1; }
-            if (posY <= 0) { posY = 0; speedY *= -1; }
-            else if (posY >= sH - mH) { posY = sH - mH; speedY *= -1; }
-
+            if (posX <= 0) { posX = 0; speedX *= -1; } else if (posX >= sW - mW) { posX = sW - mW; speedX *= -1; }
+            if (posY <= 0) { posY = 0; speedY *= -1; } else if (posY >= sH - mH) { posY = sH - mH; speedY *= -1; }
             mascotContainer.style.left = posX + 'px';
             mascotContainer.style.top = posY + 'px';
             requestAnimationFrame(updatePingPong);
@@ -785,21 +680,14 @@
             mascotContainer.setPointerCapture(e.pointerId);
             e.preventDefault();
         });
-
         mascotContainer.addEventListener("pointermove", function(e) {
             if (!isDragging || !isBattleMode || !mascotStage) return;
             const mW = mascotContainer.clientWidth, mH = mascotContainer.clientHeight;
-
-            let newX = e.clientX - startX;
-            let newY = e.clientY - startY;
-
-            posX = Math.max(0, Math.min(newX, mascotStage.clientWidth - mW));
-            posY = Math.max(0, Math.min(newY, mascotStage.clientHeight - mH));
-
+            posX = Math.max(0, Math.min(e.clientX - startX, mascotStage.clientWidth - mW));
+            posY = Math.max(0, Math.min(e.clientY - startY, mascotStage.clientHeight - mH));
             mascotContainer.style.left = posX + 'px';
             mascotContainer.style.top = posY + 'px';
         });
-
         mascotContainer.addEventListener("pointerup", function(e) {
             if (!isBattleMode) return;
             isDragging = false;
@@ -807,8 +695,7 @@
         });
 
         function adjustBgVolume(val) {
-            const pct = Math.round(val * 100);
-            document.getElementById("vol-label").innerText = pct + "%";
+            document.getElementById("vol-label").innerText = Math.round(val * 100) + "%";
             const localAudio = document.getElementById("local-audio-element");
             if(localAudio) localAudio.volume = val;
         }
@@ -821,25 +708,20 @@
             const localAudio = document.getElementById("local-audio-element");
 
             if(source === 'spotify') {
-                btnSpot.classList.add("active-on");
-                btnLocal.classList.remove("active-on");
-                spotCont.style.display = "block";
-                localCont.style.display = "none";
+                btnSpot.classList.add("active-on"); btnLocal.classList.remove("active-on");
+                spotCont.style.display = "block"; localCont.style.display = "none";
                 if(localAudio) localAudio.pause();
             } else {
-                btnLocal.classList.add("active-on");
-                btnSpot.classList.remove("active-on");
-                spotCont.style.display = "none";
-                localCont.style.display = "block";
+                btnLocal.classList.add("active-on"); btnSpot.classList.remove("active-on");
+                spotCont.style.display = "none"; localCont.style.display = "block";
             }
         }
 
         function loadLocalMusic(input) {
             if(input.files && input.files[0]) {
-                const file = input.files[0];
-                document.getElementById("local-music-name").innerText = "📁 Cargado: " + file.name;
+                document.getElementById("local-music-name").innerText = "📁 " + input.files[0].name;
                 const localAudio = document.getElementById("local-audio-element");
-                localAudio.src = URL.createObjectURL(file);
+                localAudio.src = URL.createObjectURL(input.files[0]);
                 localAudio.style.display = "block";
                 localAudio.play().catch(e => console.log(e));
             }
@@ -861,7 +743,6 @@
             }
             const customBtn = document.getElementById("btn-voice-custom");
             if(customBtn) { customBtn.innerText="OFF"; customBtn.classList.remove("active-on"); }
-
             const active = document.getElementById("btn-voice-" + index);
             if(active) { active.innerText="ON"; active.classList.add("active-on"); }
             playAudioWithMascot(url, "Voz Activa");
@@ -879,49 +760,37 @@
             playAudioWithMascot(customVoiceUrl, "Voz Propia");
         }
 
-        function toggleTestMascot() {
-            mascotContainer.classList.toggle("speaking");
-            const active = mascotContainer.classList.contains("speaking");
-            if(statusText) {
-                statusText.innerText = active ? "🔴 MASCOTA ACTIVA (PRUEBA)" : (isBattleMode ? "⚔️ MODO BATALLA" : "🟢 SOFIUL ZEN & TAPEUTIC VIVO");
-                statusText.style.color = active ? "#3b82f6" : "#06b6d4";
-            }
-        }
-
         function toggleBattleMode() {
             isBattleMode = !isBattleMode;
             const btn = document.getElementById("battle-toggle-btn");
             if (isBattleMode) {
                 mascotContainer.className = "neon-mascot-container battle-mode";
-                btn.innerText = "⚔️ SALIR DE BATALLA (VOLVER A ZEN)";
-                if(statusText) statusText.innerText = "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!";
+                btn.innerText = "⚔️ SALIR DE BATALLA";
+                if(statusText) statusText.innerText = "⚔️ MODO BATALLA";
             } else {
                 mascotContainer.className = "neon-mascot-container";
-                btn.innerText = "⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)";
-                if(statusText) statusText.innerText = "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
+                btn.innerText = "⚔️ MODO BATALLA";
+                if(statusText) statusText.innerText = "🟢 SOFIUL ZEN";
                 requestAnimationFrame(updatePingPong);
             }
         }
 
         function triggerMascotActivation(label) {
             mascotContainer.classList.add("speaking");
-            if(statusText) { statusText.innerText = "🔴 Mascota: " + label; statusText.style.color = "#ec4899"; }
+            if(statusText) { statusText.innerText = "🔴 " + label; statusText.style.color = "#ec4899"; }
         }
 
         function resetMascotState() {
             mascotContainer.className = "neon-mascot-container" + (isBattleMode ? " battle-mode" : "");
             if(statusText) {
-                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA: ¡ADRENALINA TOTAL!" : "🟢 SOFIUL ZEN & TAPEUTIC VIVO";
+                statusText.innerText = isBattleMode ? "⚔️ MODO BATALLA" : "🟢 SOFIUL ZEN";
                 statusText.style.color = isBattleMode ? "#ec4899" : "#06b6d4";
             }
         }
 
         function playCustomEffect(label) {
             let urlToPlay = customEffectUrls[label] || currentActiveVoiceUrl;
-            if (!urlToPlay) {
-                setTimeout(() => resetMascotState(), 2000);
-                return;
-            }
+            if (!urlToPlay) { setTimeout(() => resetMascotState(), 1500); return; }
             triggerMascotActivation(label);
             const audio = new Audio(urlToPlay);
             audio.play().catch(e => console.log(e));
@@ -931,7 +800,7 @@
         function loadCustomEffect(input, label) {
             if(input.files && input.files[0]) {
                 customEffectUrls[label] = URL.createObjectURL(input.files[0]);
-                alert(`✅ Archivo para '${label}' cargado.`);
+                alert(`✅ Audio para '${label}' cargado con éxito.`);
             }
         }
     </script>
