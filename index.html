@@ -266,245 +266,274 @@
         }
         .save-notice { font-size: 0.65rem; color: var(--accent-secondary); text-align: center; font-style: italic; margin-top: 4px; display: none; }
         .paywall-alert { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 10px; margin-top: 8px; text-align: center; display: none; }
+
+        /* CLASE PARA OCULTAR TODA LA INTERFAZ AL TOCAR EL LÁPIZ */
+        .ocultar-interfaz-total {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* ESTILO DEL BOTÓN DE LÁPIZ FLOTANTE QUE REEMPLAZÓ AL DE CAPTURAR */
+        .boton-lapiz-flotante {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #fff; border: none; border-radius: 8px; padding: 10px;
+            font-size: 0.75rem; font-weight: bold; text-align: center; cursor: pointer;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); text-transform: uppercase;
+            font-style: italic; width: 100%; box-sizing: border-box; margin-top: 0;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+        }
     </style>
 </head>
-<body>
-    <header>
-        <div class="stage-area">
-            <div class="logo-container">
-                <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="Logo de Aplicación">
+<body id="main-body-container">
+    <!-- ELEMENTOS QUE SE OCULTARÁN AL ACTIVAR EL LÁPIZ -->
+    <div id="wrapper-elementos-visibles" style="width: 100%; display: flex; flex-direction: column; align-items: center; transition: opacity 0.3s ease;">
+        <header id="main-header-area" style="width: 100%;">
+            <div class="stage-area">
+                <div class="logo-container">
+                    <img id="logo-fixed" src="https://i.ibb.co/PqLknBx/1000731214.png" alt="Logo de Aplicación">
+                </div>
             </div>
-        </div>
 
-        <div class="stage-mascot-area" id="mascot-stage">
-            <div id="particle-layer"></div>
-            <div class="neon-mascot-container" id="mascot-frame">
-                <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="Mascota Virtual">
+            <div class="stage-mascot-area" id="mascot-stage">
+                <div id="particle-layer"></div>
+                <div class="neon-mascot-container" id="mascot-frame">
+                    <img id="avatar-layer" src="https://i.ibb.co/S4Yq8R0K/1000731133.png" alt="Mascota Virtual">
+                </div>
             </div>
-        </div>
 
-        <div class="mascot-status-tag" id="mascot-status-text">🟢 SOFIUL ZEN &amp; TAPEUTIC VIVO</div>
-    </header>
+            <div class="mascot-status-tag" id="mascot-status-text">🟢 SOFIUL ZEN &amp; TAPEUTIC VIVO</div>
+        </header>
 
-    <div class="container">
-        
-        <!-- FASE 1: CONFIGURACIÓN & LICENCIA -->
-        <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
-            <div class="card-title" style="color: var(--accent-secondary);">
-                <span>🛠️ FASE 1: CONFIGURACIÓN &amp; LICENCIA (72H)</span>
-                <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">ACCESO</span>
-            </div>
+        <div class="container">
             
-            <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
-                ⚙️ ABRIR ACCESO (GMAIL, TIKTOK &amp; LICENCIA)
-            </button>
+            <!-- FASE 1: CONFIGURACIÓN & LICENCIA -->
+            <div class="card" style="border-color: rgba(59, 130, 246, 0.4); background: rgba(59, 130, 246, 0.03);">
+                <div class="card-title" style="color: var(--accent-secondary);">
+                    <span>🛠️ FASE 1: CONFIGURACIÓN &amp; LICENCIA (72H)</span>
+                    <span class="status-badge" style="background:rgba(59,130,246,0.2); color:var(--accent-secondary);">ACCESO</span>
+                </div>
+                
+                <button class="dropdown-trigger-btn" id="toggle-config-btn" style="background: linear-gradient(135deg, #1e293b, #3b82f6);">
+                    ⚙️ ABRIR ACCESO (GMAIL, TIKTOK &amp; LICENCIA)
+                </button>
 
-            <div class="collapsible-content" id="config-content">
-                <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>VINCULACIÓN TIKTOK &amp; VALIDACIÓN</span>
-                    </div>
-                    <div class="input-group" style="margin-bottom: 4px;">
-                        <label>Correo Electr&oacute;nico (Gmail de Registro):</label>
-                        <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 4px;">
-                        <label>Tu Usuario P&uacute;blico (@TikTok):</label>
-                        <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
-                    </div>
-                    
-                    <button class="action-button" id="main-action-btn" style="margin-top: 8px;">REGISTRAR Y ACTIVAR LICENCIA</button>
-                    <div class="save-notice" id="save-notice">✅ ¡Licencia registrada! Tienes 72 horas de acceso garantizado.</div>
+                <div class="collapsible-content" id="config-content">
+                    <div class="card" style="border-color: rgba(59, 130, 246, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                        <div class="card-title" style="color: var(--accent-secondary);">
+                            <span>VINCULACIÓN TIKTOK &amp; VALIDACIÓN</span>
+                        </div>
+                        <div class="input-group" style="margin-bottom: 4px;">
+                            <label>Correo Electr&oacute;nico (Gmail de Registro):</label>
+                            <input type="email" id="user-email" class="neon-input" placeholder="Ingresa tu email...">
+                        </div>
+                        <div class="input-group" style="margin-bottom: 4px;">
+                            <label>Tu Usuario P&uacute;blico (@TikTok):</label>
+                            <input type="text" id="tiktok-user" class="neon-input" placeholder="Ej: @tu_usuario">
+                        </div>
+                        
+                        <button class="action-button" id="main-action-btn" style="margin-top: 8px;">REGISTRAR Y ACTIVAR LICENCIA</button>
+                        <div class="save-notice" id="save-notice">✅ ¡Licencia registrada! Tienes 72 horas de acceso garantizado.</div>
 
-                    <div class="paywall-alert" id="paywall-alert">
-                        <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 4px;">⚠️ PERIODO DE PRUEBA EXPIRADO (72H)</div>
-                        <div style="font-size: 0.6rem; color: var(--text-muted); margin-bottom: 8px;">Para continuar conectando tu cuenta de TikTok y usando el bot inteligente, activa tu acceso comercial.</div>
-                        <a href="https://pay.hotmart.com/TU_ENLACE_DE_COBRO" target="_blank" style="display: block; background: #ef4444; color: #fff; padding: 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-decoration: none; text-transform: uppercase;">💳 ACTIVAR LICENCIA MENSUAL (ENLACE DE PAGO)</a>
+                        <div class="paywall-alert" id="paywall-alert">
+                            <div style="font-size: 0.7rem; color: #ef4444; font-weight: bold; margin-bottom: 4px;">⚠️ PERIODO DE PRUEBA EXPIRADO (72H)</div>
+                            <div style="font-size: 0.6rem; color: var(--text-muted); margin-bottom: 8px;">Para continuar conectando tu cuenta de TikTok y usando el bot inteligente, activa tu acceso comercial.</div>
+                            <a href="https://pay.hotmart.com/TU_ENLACE_DE_COBRO" target="_blank" style="display: block; background: #ef4444; color: #fff; padding: 8px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; text-decoration: none; text-transform: uppercase;">💳 ACTIVAR LICENCIA MENSUAL (ENLACE DE PAGO)</a>
+                        </div>
+                    </div>
+
+                    <!-- Banco de Voces HD Previo -->
+                    <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
+                        <div class="card-title" style="color: var(--accent-secondary);">
+                            <span>BANCO DE VOCES HD &amp; TEXT-TO-SPEECH</span>
+                        </div>
+                        
+                        <div class="voice-row">
+                            <span>1. ♀ Norah (Cálida)</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
+                            </div>
+                        </div>
+                        <div class="voice-row">
+                            <span>2. ♀ Valentina (Dulce)</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
+                            </div>
+                        </div>
+                        <div class="voice-row">
+                            <span>3. ♀ Sueño (Sueñitos)</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
+                            </div>
+                        </div>
+                        <div class="voice-row">
+                            <span>4. ♂ Mateo Pro</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
+                            </div>
+                        </div>
+                        <div class="voice-row">
+                            <span>5. ♂ Lucas</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
+                            </div>
+                        </div>
+                        <div class="voice-row">
+                            <span>6. ♂ Thiago</span>
+                            <div style="display:flex; gap:4px;">
+                                <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
+                                <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
+                            </div>
+                        </div>
+
+                        <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
+                            <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
+                            <div style="display: flex; gap: 6px; align-items: center;">
+                                <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
+                                    📁 Subir Voz Propia (MP3)
+                                    <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
+                                </label>
+                                <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
+                            </div>
+                            <div id="voice-file-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Banco de Voces HD Previo -->
-                <div class="card" style="border-color: rgba(6, 182, 212, 0.3); margin-top: 8px; background: rgba(0,0,0,0.3);">
-                    <div class="card-title" style="color: var(--accent-secondary);">
-                        <span>BANCO DE VOCES HD &amp; TEXT-TO-SPEECH</span>
-                    </div>
-                    
-                    <div class="voice-row">
-                        <span>1. ♀ Norah (Cálida)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/smawzc.mp3', 'Norah')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-0" onclick="setVoiceActive('https://files.catbox.moe/smawzc.mp3', 0)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>2. ♀ Valentina (Dulce)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/xt4fcl.mp3', 'Valentina')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-1" onclick="setVoiceActive('https://files.catbox.moe/xt4fcl.mp3', 1)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>3. ♀ Sueño (Sueñitos)</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/36b8b6.mp3', 'Sueño')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-2" onclick="setVoiceActive('https://files.catbox.moe/36b8b6.mp3', 2)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>4. ♂ Mateo Pro</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/ds5rw4.mp3', 'Mateo')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-3" onclick="setVoiceActive('https://files.catbox.moe/ds5rw4.mp3', 3)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>5. ♂ Lucas</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/7b84x7.mp3', 'Lucas')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-4" onclick="setVoiceActive('https://files.catbox.moe/7b84x7.mp3', 4)">OFF</button>
-                        </div>
-                    </div>
-                    <div class="voice-row">
-                        <span>6. ♂ Thiago</span>
-                        <div style="display:flex; gap:4px;">
-                            <button class="test-btn" onclick="playAudioWithMascot('https://files.catbox.moe/1jd2uu.mp3', 'Thiago')">▶ Probar</button>
-                            <button class="toggle-btn" id="btn-voice-5" onclick="setVoiceActive('https://files.catbox.moe/1jd2uu.mp3', 5)">OFF</button>
-                        </div>
-                    </div>
+            <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
+            <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
+                <div class="card-title" style="color: var(--accent-secondary);">
+                    <span>🚀 FASE 2: PANEL DE COMANDOS EN VIVO</span>
+                    <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
+                </div>
 
-                    <div class="input-group" style="margin-top: 10px; margin-bottom: 0;">
-                        <label>--- O SUBIR TU PROPIA VOZ PERSONALIZADA ---</label>
-                        <div style="display: flex; gap: 6px; align-items: center;">
-                            <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
-                                📁 Subir Voz Propia (MP3)
-                                <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
+                <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 14px; font-size: 0.8rem;">
+                    🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)
+                </button>
+                
+                <div class="collapsible-content" id="transmission-content">
+                    <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
+                        
+                        <button class="action-button" onclick="triggerVictoryEffect()" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                            🎉 SIMULAR TRIUNFO (LLUVIA DE CONFETI)
+                        </button>
+
+                        <button class="action-button" onclick="triggerDefeatEffect()" style="background: linear-gradient(135deg, #64748b, #ef4444); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                            💧 SIMULAR DERROTA (LLUVIA DE LÁGRIMAS)
+                        </button>
+
+                        <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                            🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP
+                        </button>
+
+                        <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                            🤖 PROBAR SALUDO INTELIGENTE DE CHAT
+                        </button>
+
+                        <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
+                            ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
+                        </button>
+
+                        <!-- CAMBIO: BOTÓN DE LÁPIZ (OCULTAR/MOSTRAR) Y SÉPTIMO BOTÓN DE SONIDO MP3 -->
+                        <div style="display: flex; gap: 6px; margin-bottom: 10px; margin-top: 8px;">
+                            <button class="boton-lapiz-flotante" onclick="toggleOcultarInterfazGeneral()" style="flex:1;">
+                                ✏️ LÁPIZ (OCULTAR)
+                            </button>
+                            
+                            <label class="action-button" style="flex:1; margin-top:0; padding:10px; font-size:0.7rem; background: linear-gradient(135deg, #8b5cf6, var(--accent-secondary)); text-align:center; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+                                🎵 7° SONIDO MP3
+                                <input type="file" id="seventh-sound-file" accept="audio/mp3,audio/*" onchange="playSeventhCustomSound(this)" style="display:none;">
                             </label>
-                            <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
                         </div>
-                        <div id="voice-file-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; margin-top: 3px;">Ningún archivo seleccionado</div>
+
+                        <div style="font-size: 0.65rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 4px; font-weight: bold;">
+                            🎮 Banco de 6 Efectos de Sonido (MP3):
+                        </div>
+
+                        <div class="effects-grid-6">
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 1</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 2</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 3</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 4</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 5</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
+                            </div>
+                            <div class="effect-box">
+                                <div class="effect-box-title">🎧 Efecto 6</div>
+                                <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
+                            </div>
+                        </div>
+
+                        <div style="font-size: 0.65rem; color: #10b981; font-style: italic; margin-top: 12px; font-weight: bold;">
+                            🎵 Playlist Ambiental &amp; Control DJ:
+                        </div>
+
+                        <div style="font-size: 0.6rem; color: var(--text-muted); font-style: italic; margin-top: 4px; display: flex; justify-content: space-between;">
+                            <span>Volumen de Fondo:</span>
+                            <span id="vol-label" style="color: var(--accent-secondary);">80%</span>
+                        </div>
+
+                        <div style="margin-top: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 0.55rem; color: var(--text-muted);">🔈</span>
+                            <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
+                            <span style="font-size: 0.55rem; color: var(--text-muted);">🔊</span>
+                        </div>
+
+                        <div style="display: flex; gap: 6px; margin-bottom: 6px;">
+                            <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
+                            <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
+                        </div>
+
+                        <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
+                            <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+
+                        <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
+                            <label class="upload-effect-label" style="margin-bottom: 4px;">
+                                📁 Subir Archivo de Música (MP3)
+                                <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
+                            </label>
+                            <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
+                            <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
-        </div>
-
-        <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
-        <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
-            <div class="card-title" style="color: var(--accent-secondary);">
-                <span>🚀 FASE 2: PANEL DE COMANDOS EN VIVO</span>
-                <span class="status-badge" style="background:rgba(6,182,212,0.2); color:var(--accent-secondary);">ACTIVO</span>
-            </div>
-
-            <button class="dropdown-trigger-btn" id="toggle-transmission-btn" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); margin-top: 0; padding: 14px; font-size: 0.8rem;">
-                🎛️ ABRIR CAJA DE SONIDOS &amp; EFECTOS (EN VIVO)
-            </button>
-            
-            <div class="collapsible-content" id="transmission-content">
-                <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
-                    
-                    <button class="action-button" onclick="triggerVictoryEffect()" style="background: linear-gradient(135deg, #22c55e, #10b981); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        🎉 SIMULAR TRIUNFO (LLUVIA DE CONFETI)
-                    </button>
-
-                    <button class="action-button" onclick="triggerDefeatEffect()" style="background: linear-gradient(135deg, #64748b, #ef4444); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        💧 SIMULAR DERROTA (LLUVIA DE LÁGRIMAS)
-                    </button>
-
-                    <button class="action-button" onclick="simulateMvpAnnouncement()" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: #fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        🏆 ANUNCIAR AUTOMÁTICAMENTE TOP 3 MVP
-                    </button>
-
-                    <button class="action-button" onclick="simulateSmartBotGreeting()" style="background: linear-gradient(135deg, #10b981, #06b6d4); color: #000; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        🤖 PROBAR SALUDO INTELIGENTE DE CHAT
-                    </button>
-
-                    <button class="action-button" id="battle-toggle-btn" onclick="toggleBattleMode()" style="background: linear-gradient(135deg, #3b82f6, #06b6d4); color:#fff; margin-bottom: 8px; padding: 10px; font-size: 0.75rem;">
-                        ⚔️ ACTIVAR MODO BATALLA (BURBUJA LIBRE)
-                    </button>
-
-                    <div style="display: flex; gap: 6px; margin-bottom: 10px; margin-top: 8px;">
-                        <button class="action-button" onclick="takeCleanScreenshot()" style="flex:1; background: linear-gradient(135deg, #059669, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
-                            📸 CAPTURA FOTO
-                        </button>
-                        <button class="action-button" id="record-video-btn" onclick="toggleRecordVideo()" style="flex:1; background: linear-gradient(135deg, #2563eb, var(--accent-secondary)); color: #fff; margin-top: 0; padding: 10px; font-size: 0.7rem;">
-                            🔴 GRABAR VIDEO
-                        </button>
-                    </div>
-
-                    <div style="font-size: 0.65rem; color: var(--accent-secondary); font-style: italic; margin-bottom: 4px; font-weight: bold;">
-                        🎮 Banco de 6 Efectos de Sonido (MP3):
-                    </div>
-
-                    <div class="effects-grid-6">
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 1</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 2</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 3</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 4</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 5</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
-                        </div>
-                        <div class="effect-box">
-                            <div class="effect-box-title">🎧 Efecto 6</div>
-                            <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
-                            <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
-                        </div>
-                    </div>
-
-                    <div style="font-size: 0.65rem; color: #10b981; font-style: italic; margin-top: 12px; font-weight: bold;">
-                        🎵 Playlist Ambiental &amp; Control DJ:
-                    </div>
-
-                    <div style="font-size: 0.6rem; color: var(--text-muted); font-style: italic; margin-top: 4px; display: flex; justify-content: space-between;">
-                        <span>Volumen de Fondo:</span>
-                        <span id="vol-label" style="color: var(--accent-secondary);">80%</span>
-                    </div>
-
-                    <div style="margin-top: 2px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-                        <span style="font-size: 0.55rem; color: var(--text-muted);">🔈</span>
-                        <input type="range" id="bg-volume-slider" min="0" max="1" step="0.05" value="0.8" style="flex: 1; accent-color: var(--accent-secondary); cursor: pointer;" oninput="adjustBgVolume(this.value)">
-                        <span style="font-size: 0.55rem; color: var(--text-muted);">🔊</span>
-                    </div>
-
-                    <div style="display: flex; gap: 6px; margin-bottom: 6px;">
-                        <button class="toggle-btn active-on" id="btn-src-spotify" onclick="switchMusicSource('spotify')" style="flex:1; padding:6px; font-size:0.6rem;">Spotify</button>
-                        <button class="toggle-btn" id="btn-src-local" onclick="switchMusicSource('local')" style="flex:1; padding:6px; font-size:0.6rem;">📁 Archivo MP3</button>
-                    </div>
-
-                    <div id="spotify-container" style="margin-top: 4px; border-radius: 6px; overflow: hidden; background: #000;">
-                        <iframe id="spotify-player" style="border-radius:8px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-
-                    <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
-                        <label class="upload-effect-label" style="margin-bottom: 4px;">
-                            📁 Subir Archivo de Música (MP3)
-                            <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
-                        </label>
-                        <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
-                        <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </div>
+
+    <!-- BOTÓN DE LÁPIZ FLOTANTE PERMANENTE PARA RECUPERAR/MOSTRAR LA INTERFAZ CUANDO ESTÉ OCULTA -->
+    <button id="btn-flotante-restaurar" onclick="toggleOcultarInterfazGeneral()" style="position: fixed; bottom: 15px; right: 15px; z-index: 99999; background: #f59e0b; color: #000; border: 2px solid #fff; border-radius: 50px; padding: 10px 16px; font-size: 0.75rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.6); display: none; font-style: italic;">
+        ✏️ MOSTRAR INTERFAZ
+    </button>
 
     <script>
         // REGISTRO DE SERVICE WORKER PARA HABILITAR PWA (INSTALACIÓN)
@@ -529,9 +558,7 @@
         let customEffectUrls = {};
         let currentActiveVoiceUrl = "";
         let customVoiceUrl = "";
-        let mediaRecorder;
-        let recordedChunks = [];
-        let isRecording = false;
+        let interfazOculta = false;
 
         document.addEventListener("DOMContentLoaded", function() {
             checkLicenseStatus();
@@ -582,6 +609,32 @@
                 }, 2000);
             });
         });
+
+        // FUNCIÓN DEL LÁPIZ: OCULTAR O MOSTRAR TODA LA INTERFAZ Y LA MASCOTA
+        function toggleOcultarInterfazGeneral() {
+            interfazOculta = !interfazOculta;
+            const wrapper = document.getElementById("wrapper-elementos-visibles");
+            const btnRestaurar = document.getElementById("btn-flotante-restaurar");
+
+            if (interfazOculta) {
+                wrapper.classList.add("ocultar-interfaz-total");
+                btnRestaurar.style.display = "block";
+            } else {
+                wrapper.classList.remove("ocultar-interfaz-total");
+                btnRestaurar.style.display = "none";
+            }
+        }
+
+        // FUNCIÓN DEL SÉPTIMO BOTÓN DE SONIDO MP3
+        function playSeventhCustomSound(input) {
+            if (input.files && input.files[0]) {
+                const soundUrl = URL.createObjectURL(input.files[0]);
+                triggerMascotActivation("7° Sonido MP3");
+                const audio = new Audio(soundUrl);
+                audio.play().catch(e => console.log(e));
+                audio.onended = () => resetMascotState();
+            }
+        }
 
         function checkLicenseStatus() {
             const regDate = localStorage.getItem("sofiul_reg_date");
@@ -824,52 +877,6 @@
             const customBtn = document.getElementById("btn-voice-custom");
             if(customBtn) { customBtn.innerText="ON"; customBtn.classList.add("active-on"); }
             playAudioWithMascot(customVoiceUrl, "Voz Propia");
-        }
-
-        function takeCleanScreenshot() {
-            const canvas = document.createElement('canvas');
-            canvas.width = 1080; canvas.height = 1920;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#0b0f19'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            const link = document.createElement('a');
-            link.download = 'SOFIUL_CapturaLimpia.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        }
-
-        async function toggleRecordVideo() {
-            const recBtn = document.getElementById("record-video-btn");
-            if (!isRecording) {
-                try {
-                    const stream = await navigator.mediaDevices.getDisplayMedia({ video: { mediaSource: "screen" }, audio: true });
-                    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
-                    recordedChunks = [];
-                    mediaRecorder.ondataavailable = e => { if (e.data.size > 0) recordedChunks.push(e.data); };
-                    mediaRecorder.onstop = () => {
-                        const blob = new Blob(recordedChunks, { type: 'video/webm' });
-                        const url = URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.style.display = 'none'; a.href = url; a.download = 'SOFIUL_VideoLimpio.webm';
-                        document.body.appendChild(a); a.click();
-                        setTimeout(() => { document.body.removeChild(a); window.URL.revokeObjectURL(url); }, 100);
-                    };
-                    mediaRecorder.start();
-                    isRecording = true;
-                    recBtn.innerText = "⏹️ DETENER VIDEO";
-                    recBtn.style.background = "linear-gradient(135deg, #059669, #10b981)";
-                } catch (err) {
-                    alert("⚠️ Grabación cancelada o no disponible.");
-                }
-            } else {
-                if (mediaRecorder) {
-                    mediaRecorder.stop();
-                    mediaRecorder.stream.getTracks().forEach(t => t.stop());
-                }
-                isRecording = false;
-                recBtn.innerText = "🔴 GRABAR VIDEO";
-                recBtn.style.background = "linear-gradient(135deg, #2563eb, var(--accent-secondary))";
-            }
         }
 
         function toggleTestMascot() {
