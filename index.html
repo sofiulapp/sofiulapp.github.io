@@ -158,7 +158,6 @@
         .collapsible-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
         .collapsible-content.show { max-height: 4000px; transition: max-height 0.5s ease-in; }
 
-        /* 🔥 NUEVA GRILLA EN 2 COLUMNAS COMPACTAS PARA LOS BOTONES 🔥 */
         .grid-2col-compact {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -359,6 +358,7 @@
                             <div style="display: flex; gap: 6px; align-items: center;">
                                 <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
                                     📁 Subir Voz Propia (MP3)
+                                    <!-- CORREGIDO A accept="audio/*" PARA EVITAR BLOQUEOS EN ANDROID -->
                                     <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
                                 </label>
                                 <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
@@ -369,7 +369,7 @@
                 </div>
             </div>
 
-            <!-- FASE 2: PANEL DE COMANDOS EN VIVO (CON BOTONES COMPACTOS EN 2 COLUMNAS) -->
+            <!-- FASE 2: PANEL DE COMANDOS EN VIVO -->
             <div class="card" style="border-color: var(--accent-secondary); background: rgba(6, 182, 212, 0.03);">
                 <div class="card-title" style="color: var(--accent-secondary);">
                     <span>🚀 FASE 2: PANEL DE COMANDOS EN VIVO</span>
@@ -383,7 +383,6 @@
                 <div class="collapsible-content" id="transmission-content">
                     <div class="card" style="background: rgba(0,0,0,0.4); margin-top: 10px; border-color: rgba(59, 130, 246, 0.4);">
                         
-                        <!-- 🚀 TODOS LOS BOTONES PRINCIPALES EN 2 COLUMNAS COMPACTAS (~1CM²) -->
                         <div class="grid-2col-compact" style="margin-bottom: 6px;">
                             <button class="mini-control-btn" style="background: linear-gradient(135deg, #22c55e, #10b981);" onclick="triggerVictoryEffect()">🎉 Triunfo</button>
                             <button class="mini-control-btn" style="background: linear-gradient(135deg, #64748b, #ef4444);" onclick="triggerDefeatEffect()">💧 Derrota</button>
@@ -395,7 +394,8 @@
                             
                             <label class="mini-control-btn" style="background: linear-gradient(135deg, #8b5cf6, var(--accent-secondary)); cursor:pointer; color:#fff;">
                                 🎵 7° MP3 Extra
-                                <input type="file" id="seventh-sound-file" accept="audio/mp3,audio/*" onchange="playSeventhCustomSound(this)" style="display:none;">
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <input type="file" id="seventh-sound-file" accept="audio/*" onchange="playSeventhCustomSound(this)" style="display:none;">
                             </label>
                         </div>
 
@@ -407,32 +407,38 @@
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 1</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 2</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 3</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 4</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 5</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 6</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
-                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/mp3" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
                             </div>
                         </div>
 
@@ -463,7 +469,8 @@
                         <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
                             <label class="upload-effect-label" style="margin-bottom: 4px;">
                                 📁 Subir Archivo de Música (MP3)
-                                <input type="file" id="local-music-file" accept="audio/mp3,audio/*" onchange="loadLocalMusic(this)" style="display:none;">
+                                <!-- CORREGIDO A accept="audio/*" -->
+                                <input type="file" id="local-music-file" accept="audio/*" onchange="loadLocalMusic(this)" style="display:none;">
                             </label>
                             <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
                             <audio id="local-audio-element" loop style="width: 100%; margin-top: 6px; display: none;"></audio>
