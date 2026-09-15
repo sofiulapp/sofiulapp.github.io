@@ -358,7 +358,6 @@
                             <div style="display: flex; gap: 6px; align-items: center;">
                                 <label class="file-upload-btn" style="flex: 1; margin: 0; background: rgba(6, 182, 212, 0.15); border: 1px dashed rgba(6, 182, 212, 0.5); color: #67e8f9; padding: 8px; border-radius: 6px; text-align: center; font-size: 0.7rem; font-weight: bold; cursor: pointer; font-style: italic;">
                                     📁 Subir Voz Propia (MP3)
-                                    <!-- CORREGIDO A accept="audio/*" PARA EVITAR BLOQUEOS EN ANDROID -->
                                     <input type="file" id="custom-voice-file" style="display: none;" accept="audio/*">
                                 </label>
                                 <button class="toggle-btn" id="btn-voice-custom" onclick="setCustomVoiceActive()" style="padding: 8px 12px;">OFF</button>
@@ -394,7 +393,6 @@
                             
                             <label class="mini-control-btn" style="background: linear-gradient(135deg, #8b5cf6, var(--accent-secondary)); cursor:pointer; color:#fff;">
                                 🎵 7° MP3 Extra
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <input type="file" id="seventh-sound-file" accept="audio/*" onchange="playSeventhCustomSound(this)" style="display:none;">
                             </label>
                         </div>
@@ -407,37 +405,31 @@
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 1</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 1')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 1')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 2</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 2')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 2')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 3</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 3')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 3')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 4</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 4')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 4')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 5</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 5')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 5')" style="display:none;"></label>
                             </div>
                             <div class="effect-box">
                                 <div class="effect-box-title">🎧 Efecto 6</div>
                                 <button class="play-effect-btn" onclick="playCustomEffect('Efecto 6')">▶ Tocar</button>
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <label class="upload-effect-label">📁 Subir MP3<input type="file" accept="audio/*" onchange="loadCustomEffect(this, 'Efecto 6')" style="display:none;"></label>
                             </div>
                         </div>
@@ -469,7 +461,6 @@
                         <div id="local-music-container" style="display: none; margin-top: 4px; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed rgba(6,182,212,0.3);">
                             <label class="upload-effect-label" style="margin-bottom: 4px;">
                                 📁 Subir Archivo de Música (MP3)
-                                <!-- CORREGIDO A accept="audio/*" -->
                                 <input type="file" id="local-music-file" accept="audio/*" onchange="loadLocalMusic(this)" style="display:none;">
                             </label>
                             <div id="local-music-name" style="font-size: 0.6rem; color: #67e8f9; font-style: italic; text-align: center;">Ningún archivo de música cargado</div>
@@ -795,17 +786,24 @@
 
         function playCustomEffect(label) {
             let urlToPlay = customEffectUrls[label] || currentActiveVoiceUrl;
-            if (!urlToPlay) { setTimeout(() => resetMascotState(), 2000); return; }
+            if (!urlToPlay) { 
+                alert(`⚠️ Primero debes subir un MP3 en el casillero de '${label}'.`);
+                resetMascotState(); 
+                return; 
+            }
             triggerMascotActivation(label);
             const audio = new Audio(urlToPlay);
-            audio.play().catch(e => console.log(e));
+            audio.play().catch(e => {
+                console.log(e);
+                alert("⚠️ Toca primero un botón de voz del sistema para activar el audio del navegador.");
+            });
             audio.onended = () => resetMascotState();
         }
 
         function loadCustomEffect(input, label) {
             if(input.files && input.files[0]) {
                 customEffectUrls[label] = URL.createObjectURL(input.files[0]);
-                alert(`✅ Archivo '${label}' cargado.`);
+                alert(`✅ Archivo '${label}' cargado y listo.`);
             }
         }
     </script>
